@@ -1,6 +1,6 @@
 # main.py
 #
-# Copyright 2026 vmdesktop
+# Copyright 2026 akizip
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -55,12 +55,12 @@ class AkizipApplication(Adw.Application):
         """Callback for the app.about action."""
         about = Adw.AboutDialog(application_name='Akizip',
                                 application_icon='top.akizip.akizip',
-                                developer_name='vmdesktop',
+                                developer_name='akizip',
                                 version='0.1.0',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
                                 translator_credits = _('translator-credits'),
-                                developers=['vmdesktop'],
-                                copyright='© 2026 vmdesktop')
+                                developers=['akizip'],
+                                copyright='© 2026 akizip')
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):

@@ -59,8 +59,9 @@ class AkizipApplication(Adw.Application):
                                 version='0.1.0',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
                                 translator_credits = _('translator-credits'),
-                                developers=['akizip'],
-                                copyright='© 2026 akizip')
+                                developers=['ckappgit','HungryNeko'],
+                                copyright='© 2026 akizip',
+                                license_type=Gtk.License.GPL_3_0)
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, _):

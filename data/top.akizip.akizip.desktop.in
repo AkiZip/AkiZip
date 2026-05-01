@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Akizip
+Exec=akizip
+Icon=top.akizip.akizip
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

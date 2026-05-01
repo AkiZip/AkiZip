@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/top.akizip.akizip.desktop.in
+data/top.akizip.akizip.metainfo.xml.in
+data/top.akizip.akizip.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

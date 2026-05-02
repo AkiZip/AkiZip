@@ -1,0 +1,102 @@
+# Chinese translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-02 12:59+0800\n"
+"PO-Revision-Date: 2026-05-02 12:59+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/top.akizip.akizip.desktop.in:2
+msgid "Akizip"
+msgstr ""
+
+#: data/top.akizip.akizip.desktop.in:8
+msgid "GTK;"
+msgstr ""
+
+#: data/top.akizip.akizip.metainfo.xml.in:8
+msgid "Keep the summary shorter, between 10 and 35 characters"
+msgstr ""
+
+#: data/top.akizip.akizip.metainfo.xml.in:10
+msgid "No description"
+msgstr ""
+
+#: data/top.akizip.akizip.metainfo.xml.in:14
+msgid "Developer name"
+msgstr ""
+
+#: data/top.akizip.akizip.metainfo.xml.in:52
+#: data/top.akizip.akizip.metainfo.xml.in:56
+msgid "A caption"
+msgstr ""
+
+#: src/main.py:64
+msgid "translator-credits"
+msgstr ""
+
+#: src/window.py:51
+msgid "Restart the application to apply the new language."
+msgstr "重启应用以应用新的语言设置。"
+
+#: src/window.ui:19
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: src/window.ui:40
+msgid "Add"
+msgstr "添加"
+
+#: src/window.ui:47
+msgid "Extract"
+msgstr "提取"
+
+#: src/window.ui:53
+msgid "Test"
+msgstr "测试"
+
+#: src/window.ui:59
+msgid "Copy"
+msgstr "复制"
+
+#: src/window.ui:65
+msgid "Move"
+msgstr "移动"
+
+#: src/window.ui:71
+msgid "Delete"
+msgstr "删除"
+
+#: src/window.ui:77
+msgid "Info"
+msgstr "信息"
+
+#: src/window.ui:93
+msgid "_Language"
+msgstr "语言(_L)"
+
+#: src/window.ui:96
+msgid "System Default"
+msgstr "跟随系统"
+
+#: src/window.ui:122
+msgid "_Preferences"
+msgstr "首选项(_P)"
+
+#: src/window.ui:126
+msgid "_Keyboard Shortcuts"
+msgstr "键盘快捷键(_K)"
+
+#: src/window.ui:130
+msgid "_About Akizip"
+msgstr "关于 Akizip(_A)"

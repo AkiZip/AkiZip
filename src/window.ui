@@ -24,7 +24,7 @@
             </child>
             <property name="content">
               <object class="GtkBox">
-                <property name="orientation">vertical</property>
+                <property name="orientation">horizontal</property>
                 <property name="spacing">10</property>
                 <property name="margin-start">10</property>
                 <property name="margin-end">10</property>
@@ -32,173 +32,296 @@
                 <property name="margin-bottom">10</property>
                 <child>
                   <object class="GtkBox">
-                    <property name="orientation">horizontal</property>
+                    <property name="orientation">vertical</property>
+                    <property name="hexpand">true</property>
+                    <property name="vexpand">true</property>
                     <property name="spacing">10</property>
                     <child>
-                      <object class="GtkButton" id="add_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Add</property>
-                        <signal name="clicked" handler="butadd"></signal>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">list-add-symbolic</property>
-                                <property name="pixel-size">24</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Add</property>
-                              </object>
-                            </child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">8</property>
+                        <child>
+                          <object class="GtkEntry" id="file_entry">
+                            <property name="hexpand">true</property>
+                            <property name="placeholder-text" translatable="yes">File path</property>
+                            <signal name="activate" handler="on_file_entry_activate"></signal>
                           </object>
-                        </property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="choose_button">
+                            <property name="tooltip-text" translatable="yes">Select File or Archive</property>
+                            <signal name="clicked" handler="on_choose_file"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">folder-open-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">File</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="choose_folder_button">
+                            <property name="tooltip-text" translatable="yes">Select Folder</property>
+                            <signal name="clicked" handler="on_choose_folder"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">folder-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Folder</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkButton" id="extract_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Extract</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">list-remove-symbolic</property>
-                                <property name="pixel-size">24</property>
-                              </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Extract</property>
-                              </object>
-                            </child>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">8</property>
+                        <child>
+                          <object class="GtkEntry" id="destination_entry">
+                            <property name="hexpand">true</property>
+                            <property name="placeholder-text" translatable="yes">Destination folder</property>
+                            <signal name="activate" handler="on_destination_entry_activate"></signal>
                           </object>
-                        </property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="choose_destination_button">
+                            <property name="tooltip-text" translatable="yes">Select Destination Folder</property>
+                            <signal name="clicked" handler="on_choose_destination"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">horizontal</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">folder-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Destination</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
-                      <object class="GtkButton" id="test_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Test</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">media-playback-start-symbolic</property>
-                                <property name="pixel-size">24</property>
+                      <object class="GtkBox">
+                        <property name="orientation">horizontal</property>
+                        <property name="spacing">10</property>
+                        <child>
+                          <object class="GtkButton" id="add_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Compress</property>
+                            <signal name="clicked" handler="butadd"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">list-add-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Compress</property>
+                                  </object>
+                                </child>
                               </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Test</property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
-                        </property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="copy_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Copy</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">edit-copy-symbolic</property>
-                                <property name="pixel-size">24</property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="extract_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Extract</property>
+                            <signal name="clicked" handler="butextract"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">list-remove-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Extract</property>
+                                  </object>
+                                </child>
                               </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Copy</property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
-                        </property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="move_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Move</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">go-next-symbolic</property>
-                                <property name="pixel-size">24</property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="test_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Test</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">media-playback-start-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Test</property>
+                                  </object>
+                                </child>
                               </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Move</property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
-                        </property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="delete_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Delete</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">edit-delete-symbolic</property>
-                                <property name="pixel-size">24</property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="copy_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Copy</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">edit-copy-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Copy</property>
+                                  </object>
+                                </child>
                               </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Delete</property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
-                        </property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkButton" id="info_button">
-                        <property name="width-request">70</property>
-                        <property name="tooltip-text" translatable="yes">Info</property>
-                        <property name="child">
-                          <object class="GtkBox">
-                            <property name="orientation">vertical</property>
-                            <property name="spacing">4</property>
-                            <child>
-                              <object class="GtkImage">
-                                <property name="icon-name">dialog-information-symbolic</property>
-                                <property name="pixel-size">24</property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="move_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Move</property>
+                            <signal name="clicked" handler="butmove"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">go-next-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Move</property>
+                                  </object>
+                                </child>
                               </object>
-                            </child>
-                            <child>
-                              <object class="GtkLabel">
-                                <property name="label" translatable="yes">Info</property>
-                              </object>
-                            </child>
+                            </property>
                           </object>
-                        </property>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="delete_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Delete</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">edit-delete-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Delete</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="info_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Info</property>
+                            <signal name="clicked" handler="butinfo"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">dialog-information-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Info</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
                       </object>
                     </child>
                   </object>
                 </child>
-
+                <child>
+                  <object class="GtkSeparator">
+                    <property name="orientation">vertical</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkScrolledWindow" id="log_scroller">
+                    <property name="width-request">380</property>
+                    <property name="hexpand">false</property>
+                    <property name="vexpand">true</property>
+                    <property name="child">
+                      <object class="GtkListBox" id="log_list">
+                        <property name="selection-mode">none</property>
+                        <property name="margin-start">6</property>
+                        <property name="margin-end">6</property>
+                        <property name="margin-top">6</property>
+                        <property name="margin-bottom">6</property>
+                      </object>
+                    </property>
+                  </object>
+                </child>
               </object>
             </property>
           </object>

@@ -1,0 +1,294 @@
+# Chinese translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-01 03:28-0700\n"
+"PO-Revision-Date: 2026-05-02 12:59+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/top.akizip.akizip.desktop.in:2
+msgid "Akizip"
+msgstr "Akizip"
+
+#: data/top.akizip.akizip.desktop.in:8
+msgid "GTK;"
+msgstr "GTK;"
+
+#: data/top.akizip.akizip.metainfo.xml.in:8
+msgid "Keep the summary shorter, between 10 and 35 characters"
+msgstr "请将摘要控制在 10 到 35 个字符之间"
+
+#: data/top.akizip.akizip.metainfo.xml.in:10
+msgid "No description"
+msgstr "无描述"
+
+#: data/top.akizip.akizip.metainfo.xml.in:14
+msgid "Developer name"
+msgstr "开发者名称"
+
+#: data/top.akizip.akizip.metainfo.xml.in:52
+#: data/top.akizip.akizip.metainfo.xml.in:56
+msgid "A caption"
+msgstr "说明文字"
+
+#: src/window.py:65
+msgid "Extract failed"
+msgstr "提取失败"
+
+#: src/window.py:65
+msgid "Selected path is not an archive."
+msgstr "所选路径不是压缩包。"
+
+#: src/window.py:77
+msgid "Select File"
+msgstr "选择文件"
+
+#: src/window.py:80 src/window.py:92
+msgid "_Open"
+msgstr "打开(_O)"
+
+#: src/window.py:81 src/window.py:93
+msgid "_Cancel"
+msgstr "取消(_C)"
+
+#: src/window.py:89
+msgid "Select Folder"
+msgstr "选择文件夹"
+
+#: src/window.py:124
+msgid "No file selected"
+msgstr "未选择文件"
+
+#: src/window.py:133
+msgid "System state not found"
+msgstr "未找到系统状态"
+
+#: src/window.py:139
+msgid "Select failed"
+msgstr "选择失败"
+
+#: src/window.py:142
+msgid "Selected "
+msgstr "已选择 "
+
+#: src/window.py:149
+msgid "Language changed"
+msgstr "语言已更改"
+
+#: src/window.py:150
+msgid "Restart the application to apply the new language."
+msgstr "重启应用以应用新的语言设置。"
+
+#: src/window.py:157
+msgid "Command not found"
+msgstr "未找到命令"
+
+#: src/window.py:162
+msgid "Job queue not found"
+msgstr "未找到任务队列"
+
+#: src/window.py:267
+msgid "Cancel"
+msgstr "取消"
+
+#: src/window.py:276
+msgid "Cancelling..."
+msgstr "正在取消..."
+
+#: src/window.py:280
+msgid "Running"
+msgstr "运行中"
+
+#: src/window.py:281
+msgid "Done"
+msgstr "完成"
+
+#: src/window.py:282
+msgid "Warning"
+msgstr "警告"
+
+#: src/window.py:283
+msgid "Timeout"
+msgstr "超时"
+
+#: src/window.py:284
+msgid "Error"
+msgstr "错误"
+
+#: src/window.py:285
+msgid "Cancelled"
+msgstr "已取消"
+
+#: src/window.py:286
+msgid "Pending"
+msgstr "等待中"
+
+#: src/window.py:305 src/window.py:353
+msgid "file"
+msgstr "文件"
+
+#: src/window.py:308 src/window.py:310
+msgid "Compress "
+msgstr "压缩 "
+
+#: src/window.py:312
+msgid "Compressed "
+msgstr "已压缩 "
+
+#: src/window.py:314
+msgid "Compress timed out: "
+msgstr "压缩超时："
+
+#: src/window.py:316
+msgid "Compress cancelled: "
+msgstr "压缩已取消："
+
+#: src/window.py:317
+msgid "Compress failed: "
+msgstr "压缩失败："
+
+#: src/window.py:320 src/window.py:334 src/window.py:351 src/window.py:357
+#: src/window.py:361
+msgid "archive"
+msgstr "压缩包"
+
+#: src/window.py:322 src/window.py:324
+msgid "Open "
+msgstr "打开 "
+
+#: src/window.py:326
+msgid "Opened "
+msgstr "已打开 "
+
+#: src/window.py:328
+msgid "Open timed out: "
+msgstr "打开超时："
+
+#: src/window.py:330
+msgid "Open cancelled: "
+msgstr "打开已取消："
+
+#: src/window.py:331
+msgid "Open failed: "
+msgstr "打开失败："
+
+#: src/window.py:336 src/window.py:338 src/window.py:363
+msgid "Extract "
+msgstr "提取 "
+
+#: src/window.py:340
+msgid "Extracted "
+msgstr "已提取 "
+
+#: src/window.py:342
+msgid "Extract timed out: "
+msgstr "提取超时："
+
+#: src/window.py:344
+msgid "Extract cancelled: "
+msgstr "提取已取消："
+
+#: src/window.py:345
+msgid "Extract failed: "
+msgstr "提取失败："
+
+#: src/window.py:354
+msgid "Create "
+msgstr "创建 "
+
+#: src/window.py:354
+msgid " from "
+msgstr "，来源 "
+
+#: src/window.py:358
+msgid "Read archive information from "
+msgstr "读取压缩包信息："
+
+#: src/window.py:362
+msgid "folder"
+msgstr "文件夹"
+
+#: src/window.py:363
+msgid " to "
+msgstr " 到 "
+
+#: src/window.ui:19
+msgid "Main Menu"
+msgstr "主菜单"
+
+#: src/window.ui:46
+msgid "File path"
+msgstr "文件路径"
+
+#: src/window.ui:52
+msgid "Select File or Archive"
+msgstr "选择文件或压缩包"
+
+#: src/window.ui:65
+msgid "File"
+msgstr "文件"
+
+#: src/window.ui:87
+msgid "Folder"
+msgstr "文件夹"
+
+#: src/window.ui:103 src/window.ui:117
+msgid "Compress"
+msgstr "压缩"
+
+#: src/window.ui:127 src/window.ui:141
+msgid "Extract"
+msgstr "提取"
+
+#: src/window.ui:151 src/window.ui:164
+msgid "Test"
+msgstr "测试"
+
+#: src/window.ui:174 src/window.ui:187
+msgid "Copy"
+msgstr "复制"
+
+#: src/window.ui:197 src/window.ui:210
+msgid "Move"
+msgstr "移动"
+
+#: src/window.ui:220 src/window.ui:233
+msgid "Delete"
+msgstr "删除"
+
+#: src/window.ui:243 src/window.ui:257
+msgid "Info"
+msgstr "信息"
+
+#: src/window.ui:299
+msgid "_Language"
+msgstr "语言(_L)"
+
+#: src/window.ui:302
+msgid "System Default"
+msgstr "跟随系统"
+
+#: src/window.ui:328
+msgid "_Preferences"
+msgstr "首选项(_P)"
+
+#: src/window.ui:332
+msgid "_Keyboard Shortcuts"
+msgstr "键盘快捷键(_K)"
+
+#: src/window.ui:336
+msgid "_About Akizip"
+msgstr "关于 Akizip(_A)"
+
+#~ msgid "Add"
+#~ msgstr "添加"

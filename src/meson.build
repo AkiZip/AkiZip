@@ -28,8 +28,12 @@ configure_file(
 
 akizip_sources = [
   '__init__.py',
+  'job_queue.py',
   'main.py',
   'window.py',
+  'AkizipApplication.py',
 ]
 
 install_data(akizip_sources, install_dir: moduledir)
+install_subdir('plugins', install_dir: moduledir)
+install_subdir('ui', install_dir: moduledir)

@@ -4,5 +4,8 @@ data/top.akizip.akizip.desktop.in
 data/top.akizip.akizip.metainfo.xml.in
 data/top.akizip.akizip.gschema.xml
 src/main.py
+src/ui/info_dialog.py
+src/ui/log_panel.py
+src/ui/window.py
 src/window.py
 src/window.ui

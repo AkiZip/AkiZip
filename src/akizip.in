@@ -46,6 +46,16 @@ try:
             locale.setlocale(locale.LC_ALL, _lang + '.UTF-8')
         except locale.Error:
             pass
+    else:
+        # Auto mode: in flatpak sandboxes LC_ALL is sometimes pinned to
+        # en_US even when LANG reflects the user's actual language. Since
+        # LC_ALL outranks LANG in gettext, the UI ends up English. Promote
+        # LANG to LANGUAGE (which outranks LC_ALL for message lookups) so
+        # the system language wins.
+        if not os.environ.get('LANGUAGE'):
+            _system_lang = (os.environ.get('LANG') or '').split('.')[0]
+            if _system_lang and _system_lang not in ('C', 'POSIX'):
+                os.environ['LANGUAGE'] = _system_lang
 except Exception:
     pass
 

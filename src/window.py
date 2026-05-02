@@ -17,6 +17,8 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import subprocess
+
 from gi.repository import Adw
 from gi.repository import Gtk
 
@@ -28,7 +30,9 @@ class AkizipWindow(Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butadd(self,button):
-        print("addbutton")
+        result = subprocess.run(['/app/bin/7zz'], capture_output=True, text=True, check=False)
+        output = (result.stdout + result.stderr).strip()
+        print(output.split('\n')[0] if output else '7zz output empty')
 
 
 

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="akizip">
 	<schema id="top.akizip.akizip" path="/top/akizip/akizip/">
+		<key name="language" type="s">
+			<default>"auto"</default>
+			<summary>Application language</summary>
+			<description>
+				Language code used by the application. Use "auto" to follow the system
+				locale, or a gettext language code such as "en", "zh_CN" or "zh_HK".
+			</description>
+		</key>
 	</schema>
 </schemalist>

@@ -31,6 +31,24 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
+
+# Apply user-selected language before initializing gettext so that
+# both Python _() calls and GtkBuilder translation pick it up.
+try:
+    import gi
+    from gi.repository import Gio
+    _settings = Gio.Settings.new('top.akizip.akizip')
+    _lang = _settings.get_string('language')
+    if _lang and _lang != 'auto':
+        os.environ['LANGUAGE'] = _lang
+        os.environ['LANG'] = _lang + '.UTF-8'
+        try:
+            locale.setlocale(locale.LC_ALL, _lang + '.UTF-8')
+        except locale.Error:
+            pass
+except Exception:
+    pass
+
 locale.bindtextdomain('akizip', localedir)
 locale.textdomain('akizip')
 gettext.bindtextdomain('akizip', localedir)

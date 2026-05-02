@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
-  <requires lib="gtk" version="4.0"/>
-  <requires lib="Adw" version="1.0"/>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
   <template class="AkizipWindow" parent="AdwApplicationWindow">
     <property name="title" translatable="yes">Akizip</property>
     <property name="default-width">800</property>
@@ -21,11 +21,63 @@
           </object>
         </child>
         <property name="content">
-          <object class="GtkLabel" id="label">
-            <property name="label" translatable="yes">Hello, World!</property>
-            <style>
-              <class name="title-1"/>
-            </style>
+          <object class="GtkBox">
+            <property name="orientation">vertical</property>
+            <property name="spacing">10</property>
+            <property name="margin-start">10</property>
+            <property name="margin-end">10</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">10</property>
+                <child>
+                  <object class="GtkButton" id="add_button">
+                    <property name="icon-name">list-add</property>
+                    <property name="tooltip-text">添加</property>
+                    <signal name="clicked" handler="butadd"></signal>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="extract_button">
+                    <property name="icon-name">document-open</property>
+                    <property name="tooltip-text">提取</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="test_button">
+                    <property name="icon-name">media-playback-start</property>
+                    <property name="tooltip-text">测试</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="copy_button">
+                    <property name="icon-name">edit-copy</property>
+                    <property name="tooltip-text">复制</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="move_button">
+                    <property name="icon-name">go-next</property>
+                    <property name="tooltip-text">移动</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="delete_button">
+                    <property name="icon-name">edit-delete</property>
+                    <property name="tooltip-text">删除</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="info_button">
+                    <property name="icon-name">dialog-information</property>
+                    <property name="tooltip-text">信息</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
           </object>
         </property>
       </object>

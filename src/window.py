@@ -24,7 +24,13 @@ from gi.repository import Gtk
 class AkizipWindow(Adw.ApplicationWindow):
     __gtype_name__ = 'AkizipWindow'
 
-    label = Gtk.Template.Child()
+    add_button =Gtk.Template.Child()
+
+    @Gtk.Template.Callback()
+    def butadd(self,button):
+        print("addbutton")
+
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

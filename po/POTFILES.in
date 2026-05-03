@@ -11,3 +11,4 @@ src/window.py
 src/window.ui
 src/compress-dialog.ui
 src/extract-dialog.ui
+src/preferences.ui

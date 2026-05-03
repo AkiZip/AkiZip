@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
+  <object class="AdwPreferencesPage" id="page">
+    <child>
+      <object class="AdwPreferencesGroup" id="compression_group">
+        <property name="title" translatable="yes">Compression</property>
+        <child>
+          <object class="AdwActionRow" id="recommend_row">
+            <property name="title" translatable="yes">Use compression recommendations</property>
+            <property name="subtitle" translatable="yes">Automatically choose 7-Zip parameters before compressing.</property>
+            <property name="activatable-widget">recommend_switch</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="recommend_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="depth_row">
+            <property name="title" translatable="yes">Scan depth</property>
+            <property name="subtitle" translatable="yes">Maximum folder levels to scan for recommendations.</property>
+            <property name="activatable-widget">depth_spin</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="depth_spin">
+                <property name="valign">center</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">10</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="default_group">
+        <property name="title" translatable="yes">Default compression parameters</property>
+        <property name="description" translatable="yes">Used for normal compression and recommendation fallback.</property>
+        <child>
+          <object class="AdwActionRow" id="format_row">
+            <property name="title" translatable="yes">Format</property>
+            <property name="activatable-widget">format_combo</property>
+            <child type="suffix">
+              <object class="GtkComboBoxText" id="format_combo">
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="no" id="7z">7z</item>
+                  <item translatable="no" id="zip">zip</item>
+                </items>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="level_row">
+            <property name="title" translatable="yes">Compression level</property>
+            <property name="activatable-widget">level_combo</property>
+            <child type="suffix">
+              <object class="GtkComboBoxText" id="level_combo">
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes" id="0">Store</item>
+                  <item translatable="yes" id="1">Fastest</item>
+                  <item translatable="yes" id="3">Fast</item>
+                  <item translatable="yes" id="5">Normal</item>
+                  <item translatable="yes" id="7">Maximum</item>
+                  <item translatable="yes" id="9">Ultra</item>
+                </items>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="method_row">
+            <property name="title" translatable="yes">Algorithm</property>
+            <property name="activatable-widget">method_combo</property>
+            <child type="suffix">
+              <object class="GtkComboBoxText" id="method_combo">
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes" id="default">Default</item>
+                  <item translatable="no" id="LZMA">LZMA</item>
+                  <item translatable="no" id="PPMd">PPMd</item>
+                  <item translatable="no" id="BZip2">BZip2</item>
+                </items>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="dictionary_row">
+            <property name="title" translatable="yes">Dictionary size (MB)</property>
+            <property name="subtitle" translatable="yes">0 uses the 7-Zip default.</property>
+            <property name="activatable-widget">dictionary_spin</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="dictionary_spin">
+                <property name="valign">center</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">1024</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
+          <object class="AdwActionRow" id="threads_row">
+            <property name="title" translatable="yes">Threads</property>
+            <property name="subtitle" translatable="yes">0 uses the 7-Zip default.</property>
+            <property name="activatable-widget">threads_spin</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="threads_spin">
+                <property name="valign">center</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">64</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

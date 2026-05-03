@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 21:42+0800\n"
+"POT-Creation-Date: 2026-05-03 22:08+0800\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -265,33 +265,27 @@ msgstr "壓縮"
 
 #: src/ui/window.py:418
 msgid "Source items ({})"
-msgstr ""
+msgstr "來源項目 ({})"
 
 #: src/ui/window.py:436
-#, fuzzy
-#| msgid "Select File"
 msgid "Select Files"
 msgstr "選擇檔案"
 
 #: src/ui/window.py:439 src/ui/window.py:461
 msgid "_Add"
-msgstr ""
+msgstr "添加(_A)"
 
 #: src/ui/window.py:458
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select Folders"
 msgstr "選擇資料夾"
 
 #: src/ui/window.py:489
-#, fuzzy
-#| msgid "Archive size"
 msgid "Save Archive As"
-msgstr "壓縮檔大小"
+msgstr "另存壓縮檔為"
 
 #: src/ui/window.py:492
 msgid "_Save"
-msgstr ""
+msgstr "保存(_S)"
 
 #: src/ui/window.py:557 src/ui/window.py:560
 msgid "Extract"
@@ -331,7 +325,7 @@ msgstr "找不到工作佇列"
 
 #: src/ui/window.py:971 src/ui/window.py:1038
 msgid "{} items"
-msgstr ""
+msgstr "{} 個項目"
 
 #: src/ui/window.py:975 src/ui/window.py:1018 src/ui/window.py:1040
 #: src/ui/window.py:1057
@@ -484,117 +478,90 @@ msgstr "鍵盤快捷鍵(_K)"
 msgid "_About Akizip"
 msgstr "關於 Akizip(_A)"
 
-#~ msgid "Destination folder"
-#~ msgstr "目標資料夾"
+#: src/compress-dialog.ui:12
+msgid "Output archive"
+msgstr "輸出壓縮檔"
 
-#~ msgid "Preferences"
-#~ msgstr "偏好設定"
+#: src/compress-dialog.ui:24
+msgid "Select output archive path"
+msgstr "選擇輸出壓縮檔路徑"
 
-#~ msgid "Compression"
-#~ msgstr "壓縮"
+#: src/compress-dialog.ui:30
+msgid "Select Output Archive"
+msgstr "選擇輸出壓縮檔"
 
-#~ msgid "Use compression recommendations"
-#~ msgstr "使用壓縮參數推薦"
+#: src/compress-dialog.ui:42
+msgid "Source items"
+msgstr "來源項目"
 
-#~ msgid "Automatically choose 7-Zip parameters before compressing."
-#~ msgstr "壓縮前自動選擇 7-Zip 參數。"
+#: src/compress-dialog.ui:69
+msgid "Add Files"
+msgstr "添加檔案"
 
-#~ msgid "Default compression format"
-#~ msgstr "預設壓縮格式"
+#: src/compress-dialog.ui:74
+msgid "Add Folders"
+msgstr "添加資料夾"
 
-#~ msgid "Used for normal compression and recommendation fallback."
-#~ msgstr "用於普通壓縮和推薦參數備用值。"
+#: src/compress-dialog.ui:79
+msgid "Remove"
+msgstr "移除"
 
-#~ msgid "Scan depth"
-#~ msgstr "掃描深度"
+#: src/compress-dialog.ui:88
+msgid "Advanced options"
+msgstr "進階選項"
 
-#~ msgid "Maximum folder levels to scan for recommendations."
-#~ msgstr "為推薦參數最多掃描的資料夾層數。"
+#: src/compress-dialog.ui:104
+msgid "Format"
+msgstr "格式"
 
-#~ msgid "Compress dialog failed"
-#~ msgstr "壓縮對話框開啟失敗"
+#: src/compress-dialog.ui:129
+msgid "Compression level"
+msgstr "壓縮等級"
 
-#~ msgid "File or folder to compress"
-#~ msgstr "要壓縮的檔案或資料夾"
+#: src/compress-dialog.ui:142
+msgid "Store"
+msgstr "僅儲存"
 
-#~ msgid "Use recommended compression parameters"
-#~ msgstr "使用推薦壓縮參數"
+#: src/compress-dialog.ui:143
+msgid "Fastest"
+msgstr "最快"
 
-#~ msgid "Compression scan depth"
-#~ msgstr "壓縮掃描深度"
+#: src/compress-dialog.ui:144
+msgid "Fast"
+msgstr "快速"
 
-#~ msgid "Default compression parameters"
-#~ msgstr "預設壓縮參數"
+#: src/compress-dialog.ui:145
+msgid "Normal"
+msgstr "一般"
 
-#~ msgid ""
-#~ "Archive format used when compressing without manual advanced options."
-#~ msgstr "未使用手動進階選項壓縮時使用的壓縮檔格式。"
+#: src/compress-dialog.ui:146
+msgid "Maximum"
+msgstr "最大"
 
-#~ msgid "Default compression level"
-#~ msgstr "預設壓縮等級"
+#: src/compress-dialog.ui:147
+msgid "Ultra"
+msgstr "極限"
 
-#~ msgid "Compression level used by default compression."
-#~ msgstr "預設壓縮使用的壓縮等級。"
+#: src/compress-dialog.ui:158
+msgid "Algorithm"
+msgstr "演算法"
 
-#~ msgid "Default compression algorithm"
-#~ msgstr "預設壓縮演算法"
+#: src/compress-dialog.ui:171
+msgid "Default"
+msgstr "預設"
 
-#~ msgid "Compression algorithm used by default compression."
-#~ msgstr "預設壓縮使用的壓縮演算法。"
+#: src/compress-dialog.ui:185
+msgid "Dictionary size (MB)"
+msgstr "字典大小 (MB)"
 
-#~ msgid "Default dictionary size"
-#~ msgstr "預設字典大小"
+#: src/compress-dialog.ui:197 src/compress-dialog.ui:226
+msgid "0 uses the 7-Zip default."
+msgstr "0 使用 7-Zip 預設值。"
 
-#~ msgid ""
-#~ "Dictionary size in MB used by default compression. Use 0 for the 7-Zip "
-#~ "default."
-#~ msgstr "預設壓縮使用的字典大小，單位為 MB。0 表示使用 7-Zip 預設值。"
+#: src/compress-dialog.ui:214
+msgid "Threads"
+msgstr "執行緒數"
 
-#~ msgid "Default compression threads"
-#~ msgstr "預設壓縮執行緒數"
-
-#~ msgid ""
-#~ "Thread count used by default compression. Use 0 for the 7-Zip default."
-#~ msgstr "預設壓縮使用的執行緒數。0 表示使用 7-Zip 預設值。"
-
-#~ msgid "Advanced options"
-#~ msgstr "進階選項"
-
-#~ msgid "Store"
-#~ msgstr "僅儲存"
-
-#~ msgid "Fastest"
-#~ msgstr "最快"
-
-#~ msgid "Fast"
-#~ msgstr "快速"
-
-#~ msgid "Normal"
-#~ msgstr "一般"
-
-#~ msgid "Maximum"
-#~ msgstr "最大"
-
-#~ msgid "Ultra"
-#~ msgstr "極限"
-
-#~ msgid "Default"
-#~ msgstr "預設"
-
-#~ msgid "0 uses the 7-Zip default."
-#~ msgstr "0 使用 7-Zip 預設值。"
-
-#~ msgid "Format"
-#~ msgstr "格式"
-
-#~ msgid "Compression level"
-#~ msgstr "壓縮等級"
-
-#~ msgid "Algorithm"
-#~ msgstr "演算法"
-
-#~ msgid "Dictionary size (MB)"
-#~ msgstr "字典大小 (MB)"
-
-#~ msgid "Threads"
-#~ msgstr "執行緒數"
+#: src/extract-dialog.ui:10
+msgid "Destination folder"
+msgstr "目標資料夾"

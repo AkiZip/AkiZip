@@ -1,13 +1,8 @@
 
 import sys
 import gi
-import gettext
 
-try:
-    _translation = gettext.translation('akizip', fallback=True)
-    _ = _translation.gettext
-except Exception:
-    _ = lambda s: s
+from gettext import gettext as _
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')

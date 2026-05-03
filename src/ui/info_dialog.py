@@ -1,10 +1,4 @@
-import gettext
-
-try:
-    _translation = gettext.translation('akizip', fallback=True)
-    _ = _translation.gettext
-except Exception:
-    _ = lambda s: s
+from gettext import gettext as _
 
 from gi.repository import Gtk
 

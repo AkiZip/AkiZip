@@ -17,6 +17,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+import os
 from pathlib import Path
 
 from gettext import gettext as _
@@ -29,6 +30,20 @@ from gi.repository import Pango
 from ..plugins.status import _status
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
+
+
+_HOST_PATH_XATTR = 'user.document-portal.host-path'
+_IS_FLATPAK = os.path.exists('/.flatpak-info')
+
+
+def _host_path(path):
+    if not path:
+        return ''
+    try:
+        value = os.getxattr(os.fsencode(str(path)), _HOST_PATH_XATTR)
+    except OSError:
+        return str(path)
+    return os.fsdecode(value) or str(path)
 
 
 class ArchiveEntry(GObject.Object):
@@ -157,7 +172,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._update_title()
             self._sync_address_bar()
 
-    def _open_folder_chooser_for_entry(self, entry):
+    def _open_folder_chooser_for_entry(self, entry, on_picked=None):
         chooser = Gtk.FileChooserNative.new(
             _('Select Destination Folder'),
             self,
@@ -170,10 +185,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if response == Gtk.ResponseType.ACCEPT:
                 file = c.get_file()
                 if file is not None:
-                    path = file.get_path()
-                    display_path = file.get_parse_name()
-                    if path is not None:
-                        entry.set_text(display_path or path)
+                    op = file.get_path()
+                    if op is not None:
+                        display = _host_path(op)
+                        entry.set_text(display)
+                        if on_picked is not None:
+                            on_picked(display, op)
             c.destroy()
 
         chooser.connect('response', chooser_response)
@@ -183,6 +200,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_placeholder_text(_('Destination folder'))
+        entry.set_editable(not _IS_FLATPAK)
 
         browse_button = Gtk.Button()
         browse_button.set_icon_name('folder-symbolic')
@@ -200,13 +218,24 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_default_response('confirm')
         dialog.set_close_response('cancel')
 
-        browse_button.connect('clicked', lambda _btn: self._open_folder_chooser_for_entry(entry))
+        last = {'display': None, 'op': None}
+
+        def on_picked(display, op):
+            last['display'] = display
+            last['op'] = op
+
+        browse_button.connect('clicked',
+            lambda _btn: self._open_folder_chooser_for_entry(entry, on_picked=on_picked))
         entry.connect('activate', lambda _e: dialog.response('confirm'))
 
         def on_response(_d, response):
             if response == 'confirm':
                 text = entry.get_text().strip()
-                if text:
+                if not text:
+                    return
+                if last['display'] == text and last['op']:
+                    on_chosen(Path(last['op']))
+                else:
                     on_chosen(Path(text).expanduser())
 
         dialog.connect('response', on_response)
@@ -216,6 +245,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = Gtk.Entry()
         entry.set_hexpand(True)
         entry.set_placeholder_text(_('Destination folder'))
+        entry.set_editable(not _IS_FLATPAK)
 
         browse_button = Gtk.Button()
         browse_button.set_icon_name('folder-symbolic')
@@ -233,13 +263,24 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_default_response('confirm')
         dialog.set_close_response('cancel')
 
-        browse_button.connect('clicked', lambda _btn: self._open_folder_chooser_for_entry(entry))
+        last = {'display': None, 'op': None}
+
+        def on_picked(display, op):
+            last['display'] = display
+            last['op'] = op
+
+        browse_button.connect('clicked',
+            lambda _btn: self._open_folder_chooser_for_entry(entry, on_picked=on_picked))
         entry.connect('activate', lambda _e: dialog.response('confirm'))
 
         def on_response(_d, response):
             if response == 'confirm':
                 text = entry.get_text().strip()
-                if text:
+                if not text:
+                    return
+                if last['display'] == text and last['op']:
+                    on_chosen(Path(last['op']))
+                else:
                     on_chosen(Path(text).expanduser())
 
         dialog.connect('response', on_response)
@@ -474,6 +515,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             app.settings.connect('changed::language', self._on_language_changed)
 
         self._build_file_list()
+        self.address_entry.set_editable(not _IS_FLATPAK)
         self.file_list_stack.set_visible_child_name('empty')
         self._sync_address_bar()
         self._update_title()
@@ -483,8 +525,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             file = dialog.get_file()
             if file is not None:
                 path = file.get_path()
-                display_path = file.get_parse_name()
                 if path is not None:
+                    display_path = _host_path(path)
                     if self._select_path(path, display_path):
                         self._refresh_file_list()
                         self._update_title()

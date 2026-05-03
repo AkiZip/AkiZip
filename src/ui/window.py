@@ -101,21 +101,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butadd(self, button):
-        selected = self._selected_path_from_input()
-        if selected is None:
-            return
-        self._present_compress_dialog(
-            lambda dest: self._run_compress(selected, dest)
-        )
+        self._present_compress_dialog()
 
-    def _run_compress(self, selected, destination):
+    def _run_compress_multi(self, output_path, source_paths):
         app = self.get_application()
         if (app is None or not hasattr(app, 'settings')
                 or not app.settings.get_boolean('use-compress-recommendation')):
             self._run_command(
                 'archive.compress',
-                destination / f'{selected.name}.7z',
-                [selected],
+                output_path,
+                source_paths,
             )
             return
 
@@ -125,16 +120,62 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if scan is None or suggest is None:
                 raise RuntimeError(_('Command not found'))
             depth = app.settings.get_int('compress-scan-depth')
-            file_count = scan(selected, depth)
-            suggestion = suggest(file_count)
+
+            merged = {
+                'root': 'multiple',
+                'max_depth': depth,
+                'total': 0,
+                'files': 0,
+                'folders': 0,
+                'total_size': 0,
+                'largest_file': {'path': '', 'size': 0},
+                'extensions': {},
+                'categories': {
+                    'compressed': {'count': 0, 'size': 0},
+                    'media': {'count': 0, 'size': 0},
+                    'documents': {'count': 0, 'size': 0},
+                    'code': {'count': 0, 'size': 0},
+                    'other': {'count': 0, 'size': 0},
+                },
+                'size_buckets': {
+                    'small': {'count': 0, 'size': 0},
+                    'medium': {'count': 0, 'size': 0},
+                    'large': {'count': 0, 'size': 0},
+                    'huge': {'count': 0, 'size': 0},
+                },
+                'errors': [],
+            }
+            for src in source_paths:
+                result = scan(str(src), depth)
+                merged['files'] += result.get('files', 0)
+                merged['folders'] += result.get('folders', 0)
+                merged['total'] = merged['files'] + merged['folders']
+                merged['total_size'] += result.get('total_size', 0)
+                merged['errors'].extend(result.get('errors', []))
+                if result.get('largest_file', {}).get('size', 0) > merged['largest_file']['size']:
+                    merged['largest_file'] = result['largest_file']
+                for key, val in result.get('extensions', {}).items():
+                    bucket = merged['extensions'].setdefault(key, {'count': 0, 'size': 0})
+                    bucket['count'] += val.get('count', 0)
+                    bucket['size'] += val.get('size', 0)
+                for key, val in result.get('categories', {}).items():
+                    bucket = merged['categories'].setdefault(key, {'count': 0, 'size': 0})
+                    bucket['count'] += val.get('count', 0)
+                    bucket['size'] += val.get('size', 0)
+                for key, val in result.get('size_buckets', {}).items():
+                    bucket = merged['size_buckets'].setdefault(key, {'count': 0, 'size': 0})
+                    bucket['count'] += val.get('count', 0)
+                    bucket['size'] += val.get('size', 0)
+
+            suggestion = suggest(merged)
             archive_format = suggestion.get('format', '7z')
             sevenzip_args = suggestion.get('sevenzip_args', [])
         except Exception as error:
             self._append_log(_('Compression recommendation failed'), str(error), _status.WARNING)
             self._run_command(
                 'archive.compress',
-                destination / f'{selected.name}.7z',
-                [selected],
+                output_path,
+                source_paths,
             )
             return
 
@@ -145,8 +186,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         )
         self._run_command(
             'archive.compress_advance',
-            destination / f'{selected.name}.{archive_format}',
-            [selected],
+            output_path,
+            source_paths,
             sevenzip_args,
         )
 
@@ -251,47 +292,201 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         chooser.connect('response', chooser_response)
         chooser.show()
 
-    def _present_compress_dialog(self, on_chosen):
-        entry = Gtk.Entry()
-        entry.set_hexpand(True)
-        entry.set_placeholder_text(_('Destination folder'))
-        entry.set_editable(not _IS_FLATPAK)
+    def _present_compress_dialog(self):
+        source_paths = []
+        last_output = {'display': None, 'op': None}
 
-        browse_button = Gtk.Button()
-        browse_button.set_icon_name('folder-symbolic')
-        browse_button.set_tooltip_text(_('Select Destination Folder'))
+        content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        content.set_margin_top(6)
+        content.set_margin_bottom(6)
 
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        box.append(entry)
-        box.append(browse_button)
+        output_label = Gtk.Label()
+        output_label.set_label(_('Output archive'))
+        output_label.set_xalign(0)
+        content.append(output_label)
+
+        output_entry = Gtk.Entry()
+        output_entry.set_hexpand(True)
+        output_entry.set_placeholder_text(_('Select output archive path'))
+        output_entry.set_editable(not _IS_FLATPAK)
+
+        output_browse = Gtk.Button()
+        output_browse.set_icon_name('document-save-symbolic')
+        output_browse.set_tooltip_text(_('Select Output Archive'))
+
+        output_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        output_box.append(output_entry)
+        output_box.append(output_browse)
+        content.append(output_box)
+
+        content.append(Gtk.Separator())
+
+        source_label = Gtk.Label()
+        source_label.set_label(_('Source items'))
+        source_label.set_xalign(0)
+        content.append(source_label)
+
+        source_list = Gtk.ListBox()
+        source_list.set_selection_mode(Gtk.SelectionMode.SINGLE)
+        source_list.set_css_classes(['navigation-sidebar'])
+
+        source_scrolled = Gtk.ScrolledWindow()
+        source_scrolled.set_child(source_list)
+        source_scrolled.set_max_content_height(150)
+        source_scrolled.set_propagate_natural_height(True)
+        source_scrolled.set_vexpand(True)
+        content.append(source_scrolled)
+
+        add_files_btn = Gtk.Button()
+        add_files_btn.set_label(_('Add Files'))
+        add_folders_btn = Gtk.Button()
+        add_folders_btn.set_label(_('Add Folders'))
+        remove_btn = Gtk.Button()
+        remove_btn.set_label(_('Remove'))
+        remove_btn.set_sensitive(False)
+
+        btn_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        btn_box.append(add_files_btn)
+        btn_box.append(add_folders_btn)
+        btn_box.append(remove_btn)
+        content.append(btn_box)
 
         dialog = Adw.AlertDialog.new(_('Compress'), None)
-        dialog.set_extra_child(box)
+        dialog.set_extra_child(content)
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('confirm', _('Compress'))
         dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
         dialog.set_default_response('confirm')
         dialog.set_close_response('cancel')
 
-        last = {'display': None, 'op': None}
+        def update_source_list():
+            while True:
+                row = source_list.get_first_child()
+                if row is None:
+                    break
+                source_list.remove(row)
+            for path in source_paths:
+                label = Gtk.Label()
+                label.set_label(str(path))
+                label.set_xalign(0)
+                label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
+                label.set_margin_start(6)
+                label.set_margin_end(6)
+                label.set_margin_top(4)
+                label.set_margin_bottom(4)
+                source_list.append(label)
+            source_label.set_label(_('Source items ({})').format(len(source_paths)))
+            remove_btn.set_sensitive(False)
+            confirm_sensitive = len(source_paths) > 0 and output_entry.get_text().strip()
+            dialog.set_response_enabled('confirm', confirm_sensitive)
 
-        def on_picked(display, op):
-            last['display'] = display
-            last['op'] = op
+        def on_output_changed(_entry):
+            confirm_sensitive = len(source_paths) > 0 and output_entry.get_text().strip()
+            dialog.set_response_enabled('confirm', confirm_sensitive)
 
-        browse_button.connect('clicked',
-            lambda _btn: self._open_folder_chooser_for_entry(entry, on_picked=on_picked))
-        entry.connect('activate', lambda _e: dialog.response('confirm'))
+        output_entry.connect('changed', on_output_changed)
+
+        def on_source_selected(_list, row):
+            remove_btn.set_sensitive(row is not None)
+
+        source_list.connect('row-selected', on_source_selected)
+
+        def on_add_files(_btn):
+            chooser = Gtk.FileChooserNative.new(
+                _('Select Files'),
+                self,
+                Gtk.FileChooserAction.OPEN,
+                _('_Add'),
+                _('_Cancel'),
+            )
+            chooser.set_select_multiple(True)
+
+            def on_response(c, response):
+                if response == Gtk.ResponseType.ACCEPT:
+                    for file in chooser.get_files():
+                        path = file.get_path()
+                        if path and path not in source_paths:
+                            source_paths.append(path)
+                    update_source_list()
+                c.destroy()
+
+            chooser.connect('response', on_response)
+            chooser.show()
+
+        def on_add_folders(_btn):
+            chooser = Gtk.FileChooserNative.new(
+                _('Select Folders'),
+                self,
+                Gtk.FileChooserAction.SELECT_FOLDER,
+                _('_Add'),
+                _('_Cancel'),
+            )
+            chooser.set_select_multiple(True)
+
+            def on_response(c, response):
+                if response == Gtk.ResponseType.ACCEPT:
+                    for file in chooser.get_files():
+                        path = file.get_path()
+                        if path and path not in source_paths:
+                            source_paths.append(path)
+                    update_source_list()
+                c.destroy()
+
+            chooser.connect('response', on_response)
+            chooser.show()
+
+        def on_remove(_btn):
+            row = source_list.get_selected_row()
+            if row is None:
+                return
+            idx = row.get_index()
+            if 0 <= idx < len(source_paths):
+                source_paths.pop(idx)
+                update_source_list()
+
+        def on_browse_output(_btn):
+            chooser = Gtk.FileChooserNative.new(
+                _('Save Archive As'),
+                self,
+                Gtk.FileChooserAction.SAVE,
+                _('_Save'),
+                _('_Cancel'),
+            )
+            if source_paths:
+                default_name = Path(source_paths[0]).name + '.7z'
+                chooser.set_current_name(default_name)
+
+            def on_response(c, response):
+                if response == Gtk.ResponseType.ACCEPT:
+                    file = c.get_file()
+                    if file is not None:
+                        op = file.get_path()
+                        if op is not None:
+                            display = _host_path(op)
+                            output_entry.set_text(display)
+                            last_output['display'] = display
+                            last_output['op'] = op
+                c.destroy()
+
+            chooser.connect('response', on_response)
+            chooser.show()
+
+        add_files_btn.connect('clicked', on_add_files)
+        add_folders_btn.connect('clicked', on_add_folders)
+        remove_btn.connect('clicked', on_remove)
+        output_browse.connect('clicked', on_browse_output)
+        output_entry.connect('activate', lambda _e: dialog.response('confirm'))
 
         def on_response(_d, response):
             if response == 'confirm':
-                text = entry.get_text().strip()
-                if not text:
+                text = output_entry.get_text().strip()
+                if not text or not source_paths:
                     return
-                if last['display'] == text and last['op']:
-                    on_chosen(Path(last['op']))
+                if last_output['display'] == text and last_output['op']:
+                    output_path = Path(last_output['op'])
                 else:
-                    on_chosen(Path(text).expanduser())
+                    output_path = Path(text).expanduser()
+                self._run_compress_multi(output_path, [Path(p) for p in source_paths])
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -723,7 +918,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _command_summary(self, name, args, state):
         if name == 'archive.compress' or name == 'archive.compress_advance':
             source_paths = args[1] if len(args) > 1 else []
-            if source_paths:
+            if len(source_paths) > 1:
+                target = _('{} items').format(len(source_paths))
+            elif source_paths:
                 target = Path(source_paths[0]).name
             else:
                 target = Path(args[0]).name if args else _('file')
@@ -788,7 +985,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if name == 'archive.compress' or name == 'archive.compress_advance':
             output = Path(args[0]).name if args else _('archive')
             source_paths = args[1] if len(args) > 1 else []
-            source = Path(source_paths[0]).name if source_paths else _('file')
+            if len(source_paths) > 1:
+                source = _('{} items').format(len(source_paths))
+            else:
+                source = Path(source_paths[0]).name if source_paths else _('file')
             preview = _('Create ') + output + _(' from ') + source
             if name == 'archive.compress_advance' and len(args) > 2 and args[2]:
                 preview = preview + '\n' + _('Parameters: ') + ' '.join(args[2])

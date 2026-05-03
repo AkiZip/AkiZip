@@ -51,13 +51,21 @@ class InfoDialogMixin:
 
         title = Gtk.Label(label=info['name'] or _('Info'))
         title.set_xalign(0)
+        title.set_wrap(True)
+        title.set_max_width_chars(50)
         title.add_css_class('title-3')
         root.append(title)
 
         grid = Gtk.Grid(column_spacing=12, row_spacing=8)
         grid._akizip_next_row = 0
         grid.set_vexpand(True)
-        root.append(grid)
+
+        scroller = Gtk.ScrolledWindow()
+        scroller.set_hexpand(True)
+        scroller.set_vexpand(True)
+        scroller.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        scroller.set_child(grid)
+        root.append(scroller)
 
         close_button = Gtk.Button(label=_('Close'))
         close_button.set_halign(Gtk.Align.END)
@@ -87,28 +95,13 @@ class InfoDialogMixin:
         value_label = Gtk.Label(label=str(value))
         value_label.set_xalign(0)
         value_label.set_wrap(True)
+        value_label.set_max_width_chars(50)
         value_label.set_selectable(True)
         value_label.set_hexpand(True)
 
-        copy_button = Gtk.Button(icon_name='edit-copy-symbolic')
-        copy_button.set_tooltip_text(_('Copy'))
-        copy_button.connect('clicked', self._copy_info_value, str(value))
-
-        value_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        value_box.set_hexpand(True)
-        value_box.append(value_label)
-        value_box.append(copy_button)
-
         grid.attach(name_label, 0, row, 1, 1)
-        grid.attach(value_box, 1, row, 1, 1)
+        grid.attach(value_label, 1, row, 1, 1)
         return value_label
-
-    def _copy_info_value(self, button, value):
-        clipboard = self.get_clipboard()
-        try:
-            clipboard.set_text(value)
-        except AttributeError:
-            clipboard.set(value)
 
     def _update_info_row(self, value_label, value):
         value_label.set_text(str(value))

@@ -54,6 +54,10 @@ def archive_info(archive_path, timeout=-1, cancel_event=None):
     return _run_7zip(['l', '-slt', str(archive_path)], timeout, cancel_event)
 
 
+def archive_list(archive_path, timeout=-1, cancel_event=None):
+    return _run_7zip(['l', '-slt', '-ba', str(archive_path)], timeout, cancel_event)
+
+
 def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None):
     if isinstance(source_paths, (str, Path)):
         source_paths = [source_paths]
@@ -76,5 +80,6 @@ def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None):
 
 def register(commands):
     commands['archive.info'] = archive_info
+    commands['archive.list'] = archive_list
     commands['archive.compress'] = archive_compress
     commands['archive.extract'] = archive_extract

@@ -186,6 +186,56 @@
                         </child>
                       </object>
                     </child>
+                <child>
+                  <object class="GtkEntry" id="address_entry">
+                    <property name="hexpand">true</property>
+                    <property name="placeholder-text" translatable="yes">Path or archive</property>
+                    <property name="primary-icon-name">folder-symbolic</property>
+                    <signal name="activate" handler="on_address_activate"></signal>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkStack" id="file_list_stack">
+                    <property name="vexpand">true</property>
+                    <property name="hexpand">true</property>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">empty</property>
+                        <property name="child">
+                          <object class="AdwStatusPage">
+                            <property name="icon-name">folder-symbolic</property>
+                            <property name="title" translatable="yes">Open an archive to view its contents</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">loading</property>
+                        <property name="child">
+                          <object class="GtkSpinner">
+                            <property name="spinning">true</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <property name="width-request">48</property>
+                            <property name="height-request">48</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkStackPage">
+                        <property name="name">list</property>
+                        <property name="child">
+                          <object class="GtkScrolledWindow" id="file_list_scroller">
+                            <property name="vexpand">true</property>
+                            <property name="hexpand">true</property>
+                          </object>
+                        </property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
             </property>
           </object>

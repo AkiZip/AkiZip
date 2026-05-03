@@ -12,6 +12,13 @@
           <object class="AdwToolbarView">
             <child type="top">
               <object class="AdwHeaderBar">
+                <child type="start">
+                  <object class="GtkButton" id="choose_button">
+                    <property name="label" translatable="yes">Open</property>
+                    <property name="tooltip-text" translatable="yes">Open File</property>
+                    <signal name="clicked" handler="on_choose_file"></signal>
+                  </object>
+                </child>
                 <child type="end">
                   <object class="GtkMenuButton">
                     <property name="primary">True</property>
@@ -33,63 +40,6 @@
                 <property name="margin-top">10</property>
                 <property name="margin-bottom">10</property>
                 <child>
-                      <object class="GtkBox">
-                        <property name="orientation">horizontal</property>
-                        <property name="spacing">8</property>
-                        <child>
-                          <object class="GtkEntry" id="file_entry">
-                            <property name="hexpand">true</property>
-                            <property name="placeholder-text" translatable="yes">File path</property>
-                            <signal name="activate" handler="on_file_entry_activate"></signal>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="choose_button">
-                            <property name="tooltip-text" translatable="yes">Select File or Archive</property>
-                            <signal name="clicked" handler="on_choose_file"></signal>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="orientation">horizontal</property>
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon-name">folder-open-symbolic</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">File</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="choose_folder_button">
-                            <property name="tooltip-text" translatable="yes">Select Folder</property>
-                            <signal name="clicked" handler="on_choose_folder"></signal>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="orientation">horizontal</property>
-                                <property name="spacing">6</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon-name">folder-symbolic</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Folder</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkBox">
                         <property name="orientation">horizontal</property>
                         <property name="spacing">8</property>

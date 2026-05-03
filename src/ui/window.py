@@ -34,10 +34,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     add_button = Gtk.Template.Child()
     choose_button = Gtk.Template.Child()
     choose_destination_button = Gtk.Template.Child()
-    choose_folder_button = Gtk.Template.Child()
     destination_entry = Gtk.Template.Child()
     extract_button = Gtk.Template.Child()
-    file_entry = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
 
@@ -85,10 +83,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._run_command('system.move', selected, destination)
 
     @Gtk.Template.Callback()
-    def on_file_entry_activate(self, entry):
-        self._selected_path_from_input()
-
-    @Gtk.Template.Callback()
     def on_destination_entry_activate(self, entry):
         self._destination_path_from_input()
 
@@ -98,18 +92,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             _('Select File'),
             self,
             Gtk.FileChooserAction.OPEN,
-            _('_Open'),
-            _('_Cancel'),
-        )
-        dialog.connect('response', self._on_choose_file_response)
-        dialog.show()
-
-    @Gtk.Template.Callback()
-    def on_choose_folder(self, button):
-        dialog = Gtk.FileChooserNative.new(
-            _('Select Folder'),
-            self,
-            Gtk.FileChooserAction.SELECT_FOLDER,
             _('_Open'),
             _('_Cancel'),
         )
@@ -139,8 +121,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             app.settings.connect('changed::language', self._on_language_changed)
 
         if app is not None and hasattr(app, 'system'):
-            self.file_entry.set_text(app.system.selected_path())
             self.destination_entry.set_text(app.system.destination_path())
+        self._update_title()
 
     def _on_choose_file_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
@@ -149,8 +131,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 path = file.get_path()
                 display_path = file.get_parse_name()
                 if path is not None:
-                    self.file_entry.set_text(display_path or path)
-                    self._select_path(path, display_path)
+                    if self._select_path(path, display_path):
+                        self._update_title()
         dialog.destroy()
 
     def _on_choose_destination_response(self, dialog, response):
@@ -165,19 +147,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.destroy()
 
     def _selected_path_from_input(self):
-        path = self.file_entry.get_text().strip()
-        if not path:
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.has_selected():
             self._append_log(_('No file selected'), None, _status.ERROR)
             return None
-
-        app = self.get_application()
-        if app is not None and hasattr(app, 'system'):
-            if app.system.has_selected() and path == app.system.selected_path():
-                return Path(app.system.operation_path())
-
-        if not self._select_path(path):
-            return None
-        return Path(path).expanduser()
+        return Path(app.system.operation_path())
 
     def _destination_path_from_input(self):
         path = self.destination_entry.get_text().strip()
@@ -399,4 +373,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         moved_path = Path(destination) / Path(source).name
         app.system.select_by_input(moved_path)
         if app.system.has_selected():
-            self.file_entry.set_text(app.system.selected_path())
+            self._update_title()
+
+    def _update_title(self):
+        app = self.get_application()
+        if app is not None and hasattr(app, 'system') and app.system.has_selected():
+            self.set_title(app.system.selected_path())
+        else:
+            self.set_title('Akizip')

@@ -384,7 +384,15 @@ msgstr ""
 msgid " to "
 msgstr ""
 
+#: src/window.ui:18
+msgid "Open File"
+msgstr ""
+
 #: src/window.ui:19
+msgid "Open"
+msgstr ""
+
+#: src/window.ui:20
 msgid "Main Menu"
 msgstr ""
 

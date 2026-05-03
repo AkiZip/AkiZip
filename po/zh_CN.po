@@ -383,7 +383,15 @@ msgstr "文件夹"
 msgid " to "
 msgstr " 到 "
 
+#: src/window.ui:18
+msgid "Open File"
+msgstr "打开文件"
+
 #: src/window.ui:19
+msgid "Open"
+msgstr "打开"
+
+#: src/window.ui:20
 msgid "Main Menu"
 msgstr "主菜单"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 22:08+0800\n"
+"POT-Creation-Date: 2026-05-03 22:09+0800\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -510,58 +510,87 @@ msgstr "移除"
 msgid "Advanced options"
 msgstr "進階選項"
 
-#: src/compress-dialog.ui:104
+#: src/compress-dialog.ui:104 src/preferences.ui:48
 msgid "Format"
 msgstr "格式"
 
-#: src/compress-dialog.ui:129
+#: src/compress-dialog.ui:129 src/preferences.ui:63
 msgid "Compression level"
 msgstr "壓縮等級"
 
-#: src/compress-dialog.ui:142
+#: src/compress-dialog.ui:142 src/preferences.ui:69
 msgid "Store"
 msgstr "僅儲存"
 
-#: src/compress-dialog.ui:143
+#: src/compress-dialog.ui:143 src/preferences.ui:70
 msgid "Fastest"
 msgstr "最快"
 
-#: src/compress-dialog.ui:144
+#: src/compress-dialog.ui:144 src/preferences.ui:71
 msgid "Fast"
 msgstr "快速"
 
-#: src/compress-dialog.ui:145
+#: src/compress-dialog.ui:145 src/preferences.ui:72
 msgid "Normal"
 msgstr "一般"
 
-#: src/compress-dialog.ui:146
+#: src/compress-dialog.ui:146 src/preferences.ui:73
 msgid "Maximum"
 msgstr "最大"
 
-#: src/compress-dialog.ui:147
+#: src/compress-dialog.ui:147 src/preferences.ui:74
 msgid "Ultra"
 msgstr "極限"
 
-#: src/compress-dialog.ui:158
+#: src/compress-dialog.ui:158 src/preferences.ui:82
 msgid "Algorithm"
 msgstr "演算法"
 
-#: src/compress-dialog.ui:171
+#: src/compress-dialog.ui:171 src/preferences.ui:88
 msgid "Default"
 msgstr "預設"
 
-#: src/compress-dialog.ui:185
+#: src/compress-dialog.ui:185 src/preferences.ui:99
 msgid "Dictionary size (MB)"
 msgstr "字典大小 (MB)"
 
-#: src/compress-dialog.ui:197 src/compress-dialog.ui:226
+#: src/compress-dialog.ui:197 src/compress-dialog.ui:226 src/preferences.ui:100
+#: src/preferences.ui:119
 msgid "0 uses the 7-Zip default."
 msgstr "0 使用 7-Zip 預設值。"
 
-#: src/compress-dialog.ui:214
+#: src/compress-dialog.ui:214 src/preferences.ui:118
 msgid "Threads"
 msgstr "執行緒數"
 
 #: src/extract-dialog.ui:10
 msgid "Destination folder"
 msgstr "目標資料夾"
+
+#: src/preferences.ui:8
+msgid "Compression"
+msgstr "壓縮"
+
+#: src/preferences.ui:11
+msgid "Use compression recommendations"
+msgstr "使用壓縮參數推薦"
+
+#: src/preferences.ui:12
+msgid "Automatically choose 7-Zip parameters before compressing."
+msgstr "在壓縮前自動選擇 7-Zip 參數。"
+
+#: src/preferences.ui:23
+msgid "Scan depth"
+msgstr "掃描深度"
+
+#: src/preferences.ui:24
+msgid "Maximum folder levels to scan for recommendations."
+msgstr "掃描推薦的最大資料夾層級。"
+
+#: src/preferences.ui:44
+msgid "Default compression parameters"
+msgstr "預設壓縮參數"
+
+#: src/preferences.ui:45
+msgid "Used for normal compression and recommendation fallback."
+msgstr "用於普通壓縮和推薦回退。"

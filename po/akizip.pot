@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 22:09+0800\n"
+"POT-Creation-Date: 2026-05-03 22:59+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -42,380 +42,380 @@ msgstr ""
 msgid "A caption"
 msgstr ""
 
-#: src/ui/info_dialog.py:18 src/ui/window.py:871
+#: src/ui/info_dialog.py:12 src/ui/window.py:866
 msgid "System state not found"
 msgstr ""
 
-#: src/ui/info_dialog.py:31 src/ui/info_dialog.py:34
+#: src/ui/info_dialog.py:25 src/ui/info_dialog.py:28
 msgid "Archive"
 msgstr ""
 
-#: src/ui/info_dialog.py:31
+#: src/ui/info_dialog.py:25
 msgid "Archive information is unavailable."
 msgstr ""
 
-#: src/ui/info_dialog.py:34
+#: src/ui/info_dialog.py:28
 msgid "Reading..."
 msgstr ""
 
-#: src/ui/info_dialog.py:42 src/ui/window.py:1048
+#: src/ui/info_dialog.py:36 src/ui/window.py:1043
 msgid "Read archive information from "
 msgstr ""
 
-#: src/ui/info_dialog.py:47 src/ui/info_dialog.py:58
+#: src/ui/info_dialog.py:41 src/ui/info_dialog.py:52
 msgid "Info"
 msgstr ""
 
-#: src/ui/info_dialog.py:76
+#: src/ui/info_dialog.py:70
 msgid "Close"
 msgstr ""
 
-#: src/ui/info_dialog.py:83
+#: src/ui/info_dialog.py:77
 msgid "Name"
 msgstr ""
 
-#: src/ui/info_dialog.py:84 src/ui/window.py:597
+#: src/ui/info_dialog.py:78 src/ui/window.py:592
 msgid "Path"
 msgstr ""
 
-#: src/ui/info_dialog.py:85
+#: src/ui/info_dialog.py:79
 msgid "Type"
 msgstr ""
 
-#: src/ui/info_dialog.py:87 src/ui/window.py:598
+#: src/ui/info_dialog.py:81 src/ui/window.py:593
 msgid "Size"
 msgstr ""
 
-#: src/ui/info_dialog.py:88
+#: src/ui/info_dialog.py:82
 msgid "Can compress"
 msgstr ""
 
-#: src/ui/info_dialog.py:89
+#: src/ui/info_dialog.py:83
 msgid "Can extract"
 msgstr ""
 
-#: src/ui/info_dialog.py:115
+#: src/ui/info_dialog.py:109
 msgid "Copy"
 msgstr ""
 
-#: src/ui/info_dialog.py:127
+#: src/ui/info_dialog.py:121
 msgid "Copied to clipboard"
 msgstr ""
 
-#: src/ui/info_dialog.py:135
+#: src/ui/info_dialog.py:129
 msgid "No archive information found."
 msgstr ""
 
-#: src/ui/info_dialog.py:138
+#: src/ui/info_dialog.py:132
 msgid "Loaded"
 msgstr ""
 
-#: src/ui/info_dialog.py:140
+#: src/ui/info_dialog.py:134
 msgid "Archive type"
 msgstr ""
 
-#: src/ui/info_dialog.py:141
+#: src/ui/info_dialog.py:135
 msgid "Archive size"
 msgstr ""
 
-#: src/ui/info_dialog.py:142
+#: src/ui/info_dialog.py:136
 msgid "Headers size"
 msgstr ""
 
-#: src/ui/info_dialog.py:143
+#: src/ui/info_dialog.py:137
 msgid "Method"
 msgstr ""
 
-#: src/ui/info_dialog.py:144
+#: src/ui/info_dialog.py:138
 msgid "Solid"
 msgstr ""
 
-#: src/ui/info_dialog.py:145
+#: src/ui/info_dialog.py:139
 msgid "Blocks"
 msgstr ""
 
-#: src/ui/info_dialog.py:169
+#: src/ui/info_dialog.py:163
 msgid "Archive file"
 msgstr ""
 
-#: src/ui/info_dialog.py:171
+#: src/ui/info_dialog.py:165
 msgid "Folder"
 msgstr ""
 
-#: src/ui/info_dialog.py:173
+#: src/ui/info_dialog.py:167
 msgid "File"
 msgstr ""
 
-#: src/ui/info_dialog.py:174
+#: src/ui/info_dialog.py:168
 msgid "Unknown"
 msgstr ""
 
-#: src/ui/info_dialog.py:177
+#: src/ui/info_dialog.py:171
 msgid "B"
 msgstr ""
 
-#: src/ui/info_dialog.py:177
+#: src/ui/info_dialog.py:171
 msgid "KB"
 msgstr ""
 
-#: src/ui/info_dialog.py:177
+#: src/ui/info_dialog.py:171
 msgid "MB"
 msgstr ""
 
-#: src/ui/info_dialog.py:177
+#: src/ui/info_dialog.py:171
 msgid "GB"
 msgstr ""
 
-#: src/ui/info_dialog.py:188
+#: src/ui/info_dialog.py:182
 msgid "Yes"
 msgstr ""
 
-#: src/ui/info_dialog.py:188
+#: src/ui/info_dialog.py:182
 msgid "No"
 msgstr ""
 
-#: src/ui/log_panel.py:38
+#: src/ui/log_panel.py:32
 msgid "Logs"
 msgstr ""
 
-#: src/ui/log_panel.py:102
+#: src/ui/log_panel.py:96
 msgid "Cancel"
 msgstr ""
 
-#: src/ui/log_panel.py:111
+#: src/ui/log_panel.py:105
 msgid "Cancelling..."
 msgstr ""
 
-#: src/ui/log_panel.py:115
+#: src/ui/log_panel.py:109
 msgid "Running"
 msgstr ""
 
-#: src/ui/log_panel.py:116
+#: src/ui/log_panel.py:110
 msgid "Done"
 msgstr ""
 
-#: src/ui/log_panel.py:117
+#: src/ui/log_panel.py:111
 msgid "Warning"
 msgstr ""
 
-#: src/ui/log_panel.py:118
+#: src/ui/log_panel.py:112
 msgid "Timeout"
 msgstr ""
 
-#: src/ui/log_panel.py:119
+#: src/ui/log_panel.py:113
 msgid "Error"
 msgstr ""
 
-#: src/ui/log_panel.py:120
+#: src/ui/log_panel.py:114
 msgid "Cancelled"
 msgstr ""
 
-#: src/ui/log_panel.py:121
+#: src/ui/log_panel.py:115
 msgid "Pending"
 msgstr ""
 
-#: src/ui/window.py:117 src/ui/window.py:898
+#: src/ui/window.py:112 src/ui/window.py:893
 msgid "Command not found"
 msgstr ""
 
-#: src/ui/window.py:172
+#: src/ui/window.py:167
 msgid "Compression recommendation failed"
 msgstr ""
 
-#: src/ui/window.py:177
+#: src/ui/window.py:172
 msgid "Compression recommendation"
 msgstr ""
 
-#: src/ui/window.py:178
+#: src/ui/window.py:173
 msgid "Default parameters"
 msgstr ""
 
-#: src/ui/window.py:279
+#: src/ui/window.py:274
 msgid "Extract failed"
 msgstr ""
 
-#: src/ui/window.py:279
+#: src/ui/window.py:274
 msgid "Selected path is not an archive."
 msgstr ""
 
-#: src/ui/window.py:297 src/ui/window.py:863 src/ui/window.py:864
+#: src/ui/window.py:292 src/ui/window.py:858 src/ui/window.py:859
 msgid "No file selected"
 msgstr ""
 
-#: src/ui/window.py:304
+#: src/ui/window.py:299
 msgid "Select File"
 msgstr ""
 
-#: src/ui/window.py:307 src/ui/window.py:346
+#: src/ui/window.py:302 src/ui/window.py:341
 msgid "_Open"
 msgstr ""
 
-#: src/ui/window.py:308 src/ui/window.py:347 src/ui/window.py:396
-#: src/ui/window.py:440 src/ui/window.py:462 src/ui/window.py:493
-#: src/ui/window.py:559
+#: src/ui/window.py:303 src/ui/window.py:342 src/ui/window.py:391
+#: src/ui/window.py:435 src/ui/window.py:457 src/ui/window.py:488
+#: src/ui/window.py:554
 msgid "_Cancel"
 msgstr ""
 
-#: src/ui/window.py:343
+#: src/ui/window.py:338
 msgid "Select Destination Folder"
 msgstr ""
 
-#: src/ui/window.py:394 src/ui/window.py:397
+#: src/ui/window.py:389 src/ui/window.py:392
 msgid "Compress"
 msgstr ""
 
-#: src/ui/window.py:418
+#: src/ui/window.py:413
 msgid "Source items ({})"
 msgstr ""
 
-#: src/ui/window.py:436
+#: src/ui/window.py:431
 msgid "Select Files"
 msgstr ""
 
-#: src/ui/window.py:439 src/ui/window.py:461
+#: src/ui/window.py:434 src/ui/window.py:456
 msgid "_Add"
 msgstr ""
 
-#: src/ui/window.py:458
+#: src/ui/window.py:453
 msgid "Select Folders"
 msgstr ""
 
-#: src/ui/window.py:489
+#: src/ui/window.py:484
 msgid "Save Archive As"
 msgstr ""
 
-#: src/ui/window.py:492
+#: src/ui/window.py:487
 msgid "_Save"
 msgstr ""
 
-#: src/ui/window.py:557 src/ui/window.py:560
+#: src/ui/window.py:552 src/ui/window.py:555
 msgid "Extract"
 msgstr ""
 
-#: src/ui/window.py:599
+#: src/ui/window.py:594
 msgid "Modified"
 msgstr ""
 
-#: src/ui/window.py:713
+#: src/ui/window.py:708
 msgid "List "
 msgstr ""
 
-#: src/ui/window.py:813
+#: src/ui/window.py:808
 msgid "List failed"
 msgstr ""
 
-#: src/ui/window.py:880
+#: src/ui/window.py:875
 msgid "Select failed"
 msgstr ""
 
-#: src/ui/window.py:883
+#: src/ui/window.py:878
 msgid "Selected "
 msgstr ""
 
-#: src/ui/window.py:890
+#: src/ui/window.py:885
 msgid "Language changed"
 msgstr ""
 
-#: src/ui/window.py:891
+#: src/ui/window.py:886
 msgid "Restart the application to apply the new language."
 msgstr ""
 
-#: src/ui/window.py:903
+#: src/ui/window.py:898
 msgid "Job queue not found"
 msgstr ""
 
-#: src/ui/window.py:971 src/ui/window.py:1038
+#: src/ui/window.py:966 src/ui/window.py:1033
 msgid "{} items"
 msgstr ""
 
-#: src/ui/window.py:975 src/ui/window.py:1018 src/ui/window.py:1040
-#: src/ui/window.py:1057
+#: src/ui/window.py:970 src/ui/window.py:1013 src/ui/window.py:1035
+#: src/ui/window.py:1052
 msgid "file"
 msgstr ""
 
-#: src/ui/window.py:978 src/ui/window.py:980
+#: src/ui/window.py:973 src/ui/window.py:975
 msgid "Compress "
 msgstr ""
 
-#: src/ui/window.py:982
+#: src/ui/window.py:977
 msgid "Compressed "
 msgstr ""
 
-#: src/ui/window.py:984
+#: src/ui/window.py:979
 msgid "Compress timed out: "
 msgstr ""
 
-#: src/ui/window.py:986
+#: src/ui/window.py:981
 msgid "Compress cancelled: "
 msgstr ""
 
-#: src/ui/window.py:987
+#: src/ui/window.py:982
 msgid "Compress failed: "
 msgstr ""
 
-#: src/ui/window.py:990 src/ui/window.py:1004 src/ui/window.py:1035
-#: src/ui/window.py:1047 src/ui/window.py:1051 src/ui/window.py:1056
+#: src/ui/window.py:985 src/ui/window.py:999 src/ui/window.py:1030
+#: src/ui/window.py:1042 src/ui/window.py:1046 src/ui/window.py:1051
 msgid "archive"
 msgstr ""
 
-#: src/ui/window.py:992 src/ui/window.py:994
+#: src/ui/window.py:987 src/ui/window.py:989
 msgid "Open "
 msgstr ""
 
-#: src/ui/window.py:996
+#: src/ui/window.py:991
 msgid "Opened "
 msgstr ""
 
-#: src/ui/window.py:998
+#: src/ui/window.py:993
 msgid "Open timed out: "
 msgstr ""
 
-#: src/ui/window.py:1000
+#: src/ui/window.py:995
 msgid "Open cancelled: "
 msgstr ""
 
-#: src/ui/window.py:1001
+#: src/ui/window.py:996
 msgid "Open failed: "
 msgstr ""
 
-#: src/ui/window.py:1006 src/ui/window.py:1008 src/ui/window.py:1020
-#: src/ui/window.py:1022 src/ui/window.py:1053 src/ui/window.py:1059
+#: src/ui/window.py:1001 src/ui/window.py:1003 src/ui/window.py:1015
+#: src/ui/window.py:1017 src/ui/window.py:1048 src/ui/window.py:1054
 msgid "Extract "
 msgstr ""
 
-#: src/ui/window.py:1010 src/ui/window.py:1024
+#: src/ui/window.py:1005 src/ui/window.py:1019
 msgid "Extracted "
 msgstr ""
 
-#: src/ui/window.py:1012 src/ui/window.py:1026
+#: src/ui/window.py:1007 src/ui/window.py:1021
 msgid "Extract timed out: "
 msgstr ""
 
-#: src/ui/window.py:1014 src/ui/window.py:1028
+#: src/ui/window.py:1009 src/ui/window.py:1023
 msgid "Extract cancelled: "
 msgstr ""
 
-#: src/ui/window.py:1015 src/ui/window.py:1029
+#: src/ui/window.py:1010 src/ui/window.py:1024
 msgid "Extract failed: "
 msgstr ""
 
-#: src/ui/window.py:1041
+#: src/ui/window.py:1036
 msgid "Create "
 msgstr ""
 
-#: src/ui/window.py:1041 src/ui/window.py:1059
+#: src/ui/window.py:1036 src/ui/window.py:1054
 msgid " from "
 msgstr ""
 
-#: src/ui/window.py:1043
+#: src/ui/window.py:1038
 msgid "Parameters: "
 msgstr ""
 
-#: src/ui/window.py:1052 src/ui/window.py:1058
+#: src/ui/window.py:1047 src/ui/window.py:1053
 msgid "folder"
 msgstr ""
 
-#: src/ui/window.py:1053 src/ui/window.py:1059
+#: src/ui/window.py:1048 src/ui/window.py:1054
 msgid " to "
 msgstr ""
 

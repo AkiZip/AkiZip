@@ -33,8 +33,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     add_button = Gtk.Template.Child()
     choose_button = Gtk.Template.Child()
-    choose_destination_button = Gtk.Template.Child()
-    destination_entry = Gtk.Template.Child()
     extract_button = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
@@ -44,10 +42,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         selected = self._selected_path_from_input()
         if selected is None:
             return
-        destination = self._destination_path_from_input()
-        if destination is None:
-            return
-        self._run_command('archive.compress', destination / f'{selected.name}.7z', [selected])
+        self._present_compress_dialog(
+            lambda dest: self._run_command(
+                'archive.compress',
+                dest / f'{selected.name}.7z',
+                [selected],
+            )
+        )
 
     @Gtk.Template.Callback()
     def butinfo(self, button):
@@ -67,24 +68,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Extract failed'), _('Selected path is not an archive.'), _status.ERROR)
             return
 
-        destination = self._destination_path_from_input()
-        if destination is None:
-            return
-        self._run_command('archive.extract', selected, destination / selected.stem)
-
-    @Gtk.Template.Callback()
-    def butmove(self, button):
-        selected = self._selected_path_from_input()
-        if selected is None:
-            return
-        destination = self._destination_path_from_input()
-        if destination is None:
-            return
-        self._run_command('system.move', selected, destination)
-
-    @Gtk.Template.Callback()
-    def on_destination_entry_activate(self, entry):
-        self._destination_path_from_input()
+        self._present_extract_dialog(
+            lambda dest: self._run_command(
+                'archive.extract',
+                selected,
+                dest / selected.stem,
+            )
+        )
 
     @Gtk.Template.Callback()
     def on_choose_file(self, button):
@@ -98,17 +88,93 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', self._on_choose_file_response)
         dialog.show()
 
-    @Gtk.Template.Callback()
-    def on_choose_destination(self, button):
-        dialog = Gtk.FileChooserNative.new(
+    def _open_folder_chooser_for_entry(self, entry):
+        chooser = Gtk.FileChooserNative.new(
             _('Select Destination Folder'),
             self,
             Gtk.FileChooserAction.SELECT_FOLDER,
             _('_Open'),
             _('_Cancel'),
         )
-        dialog.connect('response', self._on_choose_destination_response)
-        dialog.show()
+
+        def chooser_response(c, response):
+            if response == Gtk.ResponseType.ACCEPT:
+                file = c.get_file()
+                if file is not None:
+                    path = file.get_path()
+                    display_path = file.get_parse_name()
+                    if path is not None:
+                        entry.set_text(display_path or path)
+            c.destroy()
+
+        chooser.connect('response', chooser_response)
+        chooser.show()
+
+    def _present_compress_dialog(self, on_chosen):
+        entry = Gtk.Entry()
+        entry.set_hexpand(True)
+        entry.set_placeholder_text(_('Destination folder'))
+
+        browse_button = Gtk.Button()
+        browse_button.set_icon_name('folder-symbolic')
+        browse_button.set_tooltip_text(_('Select Destination Folder'))
+
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        box.append(entry)
+        box.append(browse_button)
+
+        dialog = Adw.AlertDialog.new(_('Compress'), None)
+        dialog.set_extra_child(box)
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('Compress'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+        dialog.set_close_response('cancel')
+
+        browse_button.connect('clicked', lambda _btn: self._open_folder_chooser_for_entry(entry))
+        entry.connect('activate', lambda _e: dialog.response('confirm'))
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                text = entry.get_text().strip()
+                if text:
+                    on_chosen(Path(text).expanduser())
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+    def _present_extract_dialog(self, on_chosen):
+        entry = Gtk.Entry()
+        entry.set_hexpand(True)
+        entry.set_placeholder_text(_('Destination folder'))
+
+        browse_button = Gtk.Button()
+        browse_button.set_icon_name('folder-symbolic')
+        browse_button.set_tooltip_text(_('Select Destination Folder'))
+
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        box.append(entry)
+        box.append(browse_button)
+
+        dialog = Adw.AlertDialog.new(_('Extract'), None)
+        dialog.set_extra_child(box)
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('Extract'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+        dialog.set_close_response('cancel')
+
+        browse_button.connect('clicked', lambda _btn: self._open_folder_chooser_for_entry(entry))
+        entry.connect('activate', lambda _e: dialog.response('confirm'))
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                text = entry.get_text().strip()
+                if text:
+                    on_chosen(Path(text).expanduser())
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -120,8 +186,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._initial_language = app.settings.get_string('language')
             app.settings.connect('changed::language', self._on_language_changed)
 
-        if app is not None and hasattr(app, 'system'):
-            self.destination_entry.set_text(app.system.destination_path())
         self._update_title()
 
     def _on_choose_file_response(self, dialog, response):
@@ -135,38 +199,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                         self._update_title()
         dialog.destroy()
 
-    def _on_choose_destination_response(self, dialog, response):
-        if response == Gtk.ResponseType.ACCEPT:
-            file = dialog.get_file()
-            if file is not None:
-                path = file.get_path()
-                display_path = file.get_parse_name()
-                if path is not None:
-                    self.destination_entry.set_text(display_path or path)
-                    self._select_destination(path, display_path)
-        dialog.destroy()
-
     def _selected_path_from_input(self):
         app = self.get_application()
         if app is None or not hasattr(app, 'system') or not app.system.has_selected():
             self._append_log(_('No file selected'), None, _status.ERROR)
+            self.toast_overlay.add_toast(Adw.Toast.new(_('No file selected')))
             return None
         return Path(app.system.operation_path())
-
-    def _destination_path_from_input(self):
-        path = self.destination_entry.get_text().strip()
-        if not path:
-            self._append_log(_('No destination selected'), None, _status.ERROR)
-            return None
-
-        app = self.get_application()
-        if app is not None and hasattr(app, 'system'):
-            if app.system.has_destination() and path == app.system.destination_path():
-                return Path(app.system.destination_operation_path())
-
-        if not self._select_destination(path):
-            return None
-        return Path(path).expanduser()
 
     def _select_path(self, path, display_path=None):
         app = self.get_application()
@@ -184,25 +223,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return False
 
         self._append_log(_('Selected ') + info['name'], info['path'], _status.FINISHED)
-        return True
-
-    def _select_destination(self, path, display_path=None):
-        app = self.get_application()
-        if app is None or not hasattr(app, 'system'):
-            self._append_log(_('System state not found'), str(path), _status.ERROR)
-            return False
-
-        if display_path is None:
-            app.system.select_destination_by_input(path)
-        else:
-            app.system.select_destination_by_fileview(path, display_path)
-        info = app.system.info()
-        if not info['success']:
-            self._append_log(_('Select destination failed'), info['msg'], _status.ERROR)
-            return False
-
-        destination = Path(info['destination_operation_path']).name
-        self._append_log(_('Destination ') + destination, info['destination_path'], _status.FINISHED)
         return True
 
     def _on_language_changed(self, settings, key):
@@ -269,8 +289,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         print(output)
         if not self._remove_pending_log(log_id):
             return
-        if name == 'system.move' and len(args) > 1:
-            self._update_moved_selection(args[0], args[1])
         self._append_log(self._command_summary(name, args, _status.FINISHED), output, _status.FINISHED)
 
     def _on_command_error(self, log_id, name, args, error):
@@ -327,20 +345,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Extract cancelled: ') + target
             return _('Extract failed: ') + target
 
-        if name == 'system.move':
-            target = Path(args[0]).name if args else _('file')
-            if state == _status.PENDING:
-                return _('Move ') + target
-            if state == _status.WORKING:
-                return _('Move ') + target
-            if state == _status.FINISHED:
-                return _('Moved ') + target
-            if state == _status.TIMEOUT:
-                return _('Move timed out: ') + target
-            if state == _status.CANCELLED:
-                return _('Move cancelled: ') + target
-            return _('Move failed: ') + target
-
         return name
 
     def _command_preview(self, name, args):
@@ -359,21 +363,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             output = Path(args[1]).name if len(args) > 1 else _('folder')
             return _('Extract ') + archive + _(' to ') + output
 
-        if name == 'system.move':
-            source = Path(args[0]).name if args else _('file')
-            destination = Path(args[1]).name if len(args) > 1 else _('folder')
-            return _('Move ') + source + _(' to ') + destination
-
         return name
-
-    def _update_moved_selection(self, source, destination):
-        app = self.get_application()
-        if app is None or not hasattr(app, 'system'):
-            return
-        moved_path = Path(destination) / Path(source).name
-        app.system.select_by_input(moved_path)
-        if app.system.has_selected():
-            self._update_title()
 
     def _update_title(self):
         app = self.get_application()

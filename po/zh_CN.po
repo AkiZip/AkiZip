@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-03 09:04+0800\n"
+"POT-Creation-Date: 2026-05-03 10:06+0800\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -41,7 +41,7 @@ msgstr "开发者名称"
 msgid "A caption"
 msgstr "说明文字"
 
-#: src/ui/info_dialog.py:12 src/ui/window.py:200 src/ui/window.py:218
+#: src/ui/info_dialog.py:12 src/ui/window.py:213
 msgid "System state not found"
 msgstr "未找到系统状态"
 
@@ -57,7 +57,7 @@ msgstr "压缩包信息不可用。"
 msgid "Reading..."
 msgstr "正在读取..."
 
-#: src/ui/info_dialog.py:36 src/ui/window.py:381
+#: src/ui/info_dialog.py:36 src/ui/window.py:359
 msgid "Read archive information from "
 msgstr "读取压缩包信息："
 
@@ -209,251 +209,238 @@ msgstr "已取消"
 msgid "Pending"
 msgstr "等待中"
 
-#: src/ui/window.py:69
+#: src/ui/window.py:68
 msgid "Extract failed"
 msgstr "提取失败"
 
-#: src/ui/window.py:69
+#: src/ui/window.py:68
 msgid "Selected path is not an archive."
 msgstr "所选路径不是压缩包。"
 
-#: src/ui/window.py:98
+#: src/ui/window.py:82
 msgid "Select File"
 msgstr "选择文件"
 
-#: src/ui/window.py:101 src/ui/window.py:113 src/ui/window.py:125
+#: src/ui/window.py:85 src/ui/window.py:96
 msgid "_Open"
 msgstr "打开(_O)"
 
-#: src/ui/window.py:102 src/ui/window.py:114 src/ui/window.py:126
+#: src/ui/window.py:86 src/ui/window.py:97 src/ui/window.py:128
+#: src/ui/window.py:161
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/ui/window.py:110
-msgid "Select Folder"
-msgstr "选择文件夹"
-
-#: src/ui/window.py:122
+#: src/ui/window.py:93 src/ui/window.py:120 src/ui/window.py:153
 msgid "Select Destination Folder"
 msgstr "选择目标文件夹"
 
-#: src/ui/window.py:170
+#: src/ui/window.py:116 src/ui/window.py:149
+msgid "Destination folder"
+msgstr "目标文件夹"
+
+#: src/ui/window.py:126 src/ui/window.py:129
+msgid "Compress"
+msgstr "压缩"
+
+#: src/ui/window.py:159 src/ui/window.py:162
+msgid "Extract"
+msgstr "提取"
+
+#: src/ui/window.py:205 src/ui/window.py:206
 msgid "No file selected"
 msgstr "未选择文件"
 
-#: src/ui/window.py:185
-msgid "No destination selected"
-msgstr "未选择目标文件夹"
-
-#: src/ui/window.py:209
+#: src/ui/window.py:222
 msgid "Select failed"
 msgstr "选择失败"
 
-#: src/ui/window.py:212
+#: src/ui/window.py:225
 msgid "Selected "
 msgstr "已选择 "
 
-#: src/ui/window.py:227
-msgid "Select destination failed"
-msgstr "选择目标文件夹失败"
-
-#: src/ui/window.py:231
-msgid "Destination "
-msgstr "目标 "
-
-#: src/ui/window.py:238
+#: src/ui/window.py:232
 msgid "Language changed"
 msgstr "语言已更改"
 
-#: src/ui/window.py:239
+#: src/ui/window.py:233
 msgid "Restart the application to apply the new language."
 msgstr "重启应用以应用新的语言设置。"
 
-#: src/ui/window.py:246
+#: src/ui/window.py:240
 msgid "Command not found"
 msgstr "未找到命令"
 
-#: src/ui/window.py:251
+#: src/ui/window.py:245
 msgid "Job queue not found"
 msgstr "未找到任务队列"
 
-#: src/ui/window.py:314 src/ui/window.py:357 src/ui/window.py:376
-#: src/ui/window.py:389
+#: src/ui/window.py:306 src/ui/window.py:354
 msgid "file"
 msgstr "文件"
 
-#: src/ui/window.py:317 src/ui/window.py:319
+#: src/ui/window.py:309 src/ui/window.py:311
 msgid "Compress "
 msgstr "压缩 "
 
-#: src/ui/window.py:321
+#: src/ui/window.py:313
 msgid "Compressed "
 msgstr "已压缩 "
 
-#: src/ui/window.py:323
+#: src/ui/window.py:315
 msgid "Compress timed out: "
 msgstr "压缩超时："
 
-#: src/ui/window.py:325
+#: src/ui/window.py:317
 msgid "Compress cancelled: "
 msgstr "压缩已取消："
 
-#: src/ui/window.py:326
+#: src/ui/window.py:318
 msgid "Compress failed: "
 msgstr "压缩失败："
 
-#: src/ui/window.py:329 src/ui/window.py:343 src/ui/window.py:374
-#: src/ui/window.py:380 src/ui/window.py:384
+#: src/ui/window.py:321 src/ui/window.py:335 src/ui/window.py:352
+#: src/ui/window.py:358 src/ui/window.py:362
 msgid "archive"
 msgstr "压缩包"
 
-#: src/ui/window.py:331 src/ui/window.py:333
+#: src/ui/window.py:323 src/ui/window.py:325
 msgid "Open "
 msgstr "打开 "
 
-#: src/ui/window.py:335
+#: src/ui/window.py:327
 msgid "Opened "
 msgstr "已打开 "
 
-#: src/ui/window.py:337
+#: src/ui/window.py:329
 msgid "Open timed out: "
 msgstr "打开超时："
 
-#: src/ui/window.py:339
+#: src/ui/window.py:331
 msgid "Open cancelled: "
 msgstr "打开已取消："
 
-#: src/ui/window.py:340
+#: src/ui/window.py:332
 msgid "Open failed: "
 msgstr "打开失败："
 
-#: src/ui/window.py:345 src/ui/window.py:347 src/ui/window.py:386
+#: src/ui/window.py:337 src/ui/window.py:339 src/ui/window.py:364
 msgid "Extract "
 msgstr "提取 "
 
-#: src/ui/window.py:349
+#: src/ui/window.py:341
 msgid "Extracted "
 msgstr "已提取 "
 
-#: src/ui/window.py:351
+#: src/ui/window.py:343
 msgid "Extract timed out: "
 msgstr "提取超时："
 
-#: src/ui/window.py:353
+#: src/ui/window.py:345
 msgid "Extract cancelled: "
 msgstr "提取已取消："
 
-#: src/ui/window.py:354
+#: src/ui/window.py:346
 msgid "Extract failed: "
 msgstr "提取失败："
 
-#: src/ui/window.py:359 src/ui/window.py:361 src/ui/window.py:391
-msgid "Move "
-msgstr "移动 "
-
-#: src/ui/window.py:363
-msgid "Moved "
-msgstr "已移动 "
-
-#: src/ui/window.py:365
-msgid "Move timed out: "
-msgstr "移动超时："
-
-#: src/ui/window.py:367
-msgid "Move cancelled: "
-msgstr "移动已取消："
-
-#: src/ui/window.py:368
-msgid "Move failed: "
-msgstr "移动失败："
-
-#: src/ui/window.py:377
+#: src/ui/window.py:355
 msgid "Create "
 msgstr "创建 "
 
-#: src/ui/window.py:377
+#: src/ui/window.py:355
 msgid " from "
 msgstr "，来源 "
 
-#: src/ui/window.py:385 src/ui/window.py:390
+#: src/ui/window.py:363
 msgid "folder"
 msgstr "文件夹"
 
-#: src/ui/window.py:386 src/ui/window.py:391
+#: src/ui/window.py:364
 msgid " to "
 msgstr " 到 "
+
+#: src/window.ui:17
+msgid "Open"
+msgstr "打开"
 
 #: src/window.ui:18
 msgid "Open File"
 msgstr "打开文件"
 
-#: src/window.ui:19
-msgid "Open"
-msgstr "打开"
-
-#: src/window.ui:20
+#: src/window.ui:26
 msgid "Main Menu"
 msgstr "主菜单"
 
-#: src/window.ui:42
-msgid "File path"
-msgstr "文件路径"
-
-#: src/window.ui:48
-msgid "Select File or Archive"
-msgstr "选择文件或压缩包"
-
-#: src/window.ui:99
-msgid "Destination folder"
-msgstr "目标文件夹"
-
-#: src/window.ui:118
-msgid "Destination"
-msgstr "目标"
-
-#: src/window.ui:134 src/window.ui:148
-msgid "Compress"
-msgstr "压缩"
-
-#: src/window.ui:158 src/window.ui:172
-msgid "Extract"
-msgstr "提取"
-
-#: src/window.ui:182 src/window.ui:195
+#: src/window.ui:97 src/window.ui:110
 msgid "Test"
 msgstr "测试"
 
-#: src/window.ui:228 src/window.ui:242
-msgid "Move"
-msgstr "移动"
-
-#: src/window.ui:252 src/window.ui:265
+#: src/window.ui:143 src/window.ui:156
 msgid "Delete"
 msgstr "删除"
 
-#: src/window.ui:308
+#: src/window.ui:199
 msgid "_Language"
 msgstr "语言(_L)"
 
-#: src/window.ui:311
+#: src/window.ui:202
 msgid "System Default"
 msgstr "跟随系统"
 
-#: src/window.ui:337
+#: src/window.ui:228
 msgid "Show _Logs"
 msgstr "显示日志(_L)"
 
-#: src/window.ui:343
+#: src/window.ui:234
 msgid "_Preferences"
 msgstr "首选项(_P)"
 
-#: src/window.ui:347
+#: src/window.ui:238
 msgid "_Keyboard Shortcuts"
 msgstr "键盘快捷键(_K)"
 
-#: src/window.ui:351
+#: src/window.ui:242
 msgid "_About Akizip"
 msgstr "关于 Akizip(_A)"
+
+#~ msgid "Select Folder"
+#~ msgstr "选择文件夹"
+
+#~ msgid "No destination selected"
+#~ msgstr "未选择目标文件夹"
+
+#~ msgid "Select destination failed"
+#~ msgstr "选择目标文件夹失败"
+
+#~ msgid "Destination "
+#~ msgstr "目标 "
+
+#~ msgid "Move "
+#~ msgstr "移动 "
+
+#~ msgid "Moved "
+#~ msgstr "已移动 "
+
+#~ msgid "Move timed out: "
+#~ msgstr "移动超时："
+
+#~ msgid "Move cancelled: "
+#~ msgstr "移动已取消："
+
+#~ msgid "Move failed: "
+#~ msgstr "移动失败："
+
+#~ msgid "File path"
+#~ msgstr "文件路径"
+
+#~ msgid "Select File or Archive"
+#~ msgstr "选择文件或压缩包"
+
+#~ msgid "Destination"
+#~ msgstr "目标"
+
+#~ msgid "Move"
+#~ msgstr "移动"
 
 #~ msgid "Application language"
 #~ msgstr "应用语言"

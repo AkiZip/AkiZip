@@ -9,9 +9,7 @@
     <property name="content">
       <object class="AdwToastOverlay" id="toast_overlay">
         <child>
-          <object class="GtkOverlay">
-            <child>
-              <object class="AdwToolbarView">
+          <object class="AdwToolbarView">
                 <child type="top">
                   <object class="AdwHeaderBar">
                     <child type="end">
@@ -105,6 +103,30 @@
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="label" translatable="yes">Extract All</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="extract_one_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Extract Selected</property>
+                            <signal name="clicked" handler="butextract_one"></signal>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">document-save-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Extract Selected</property>
                                   </object>
                                 </child>
                               </object>
@@ -259,20 +281,6 @@
                   </object>
                 </property>
               </object>
-            </child>
-            <child type="overlay">
-              <object class="GtkBox" id="notification_stack">
-                <property name="orientation">vertical</property>
-                <property name="spacing">8</property>
-                <property name="halign">center</property>
-                <property name="valign">end</property>
-                <property name="margin-start">18</property>
-                <property name="margin-end">18</property>
-                <property name="margin-bottom">18</property>
-                <property name="can-target">false</property>
-              </object>
-            </child>
-          </object>
         </child>
       </object>
     </property>

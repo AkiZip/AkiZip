@@ -25,7 +25,6 @@ from gettext import gettext as _
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import Gio
-from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Pango
 from ..plugins.status import _status
@@ -88,9 +87,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     add_button = Gtk.Template.Child()
     choose_button = Gtk.Template.Child()
     extract_button = Gtk.Template.Child()
+    extract_one_button = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
-    notification_stack = Gtk.Template.Child()
     address_entry = Gtk.Template.Child()
     file_list_stack = Gtk.Template.Child()
     file_list_scroller = Gtk.Template.Child()
@@ -133,6 +132,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 dest / selected.stem,
             )
         )
+
+    @Gtk.Template.Callback()
+    def butextract_one(self, button):
+        selection = getattr(self, '_file_list_selection', None)
+        if selection is None:
+            return
+        item = selection.get_selected_item()
+        if item is None:
+            self._show_notification(_('No file selected'), _status.ERROR)
+            return
+        self._on_extract_entry_clicked(item)
 
     @Gtk.Template.Callback()
     def on_choose_file(self, button):
@@ -300,7 +310,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             (_('Path'), self._on_path_setup, self._on_path_bind, True),
             (_('Size'), self._on_text_setup, self._on_size_bind, False),
             (_('Modified'), self._on_text_setup, self._on_modified_bind, False),
-            ('', self._on_extract_action_setup, self._on_extract_action_bind, False),
         )
         for title, setup, bind, expand in columns:
             factory = Gtk.SignalListItemFactory()
@@ -313,6 +322,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         self.file_list_scroller.set_child(view)
         self._file_list_view = view
+        self._file_list_selection = selection
 
     def _on_path_setup(self, factory, list_item):
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
@@ -352,26 +362,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         list_item.set_child(label)
 
     def _on_size_bind(self, factory, list_item):
-        list_item.get_child().set_text(list_item.get_item().size)
+        size = list_item.get_item().size
+        text = ''
+        if size:
+            try:
+                text = self._format_size(int(size))
+            except (TypeError, ValueError):
+                text = size
+        list_item.get_child().set_text(text)
 
     def _on_modified_bind(self, factory, list_item):
         list_item.get_child().set_text(list_item.get_item().modified)
-
-    def _on_extract_action_setup(self, factory, list_item):
-        button = Gtk.Button()
-        button.set_icon_name('list-remove-symbolic')
-        button.set_tooltip_text(_('Extract'))
-        button.set_margin_start(6)
-        button.set_margin_end(6)
-        button.set_margin_top(2)
-        button.set_margin_bottom(2)
-        button.connect('clicked', lambda _button: self._on_extract_entry_clicked(list_item.get_item()))
-        list_item.set_child(button)
-
-    def _on_extract_action_bind(self, factory, list_item):
-        item = list_item.get_item()
-        button = list_item.get_child()
-        button.set_visible(item.path != '..')
 
     def _on_extract_entry_clicked(self, item):
         if item is None or item.path == '..':
@@ -670,61 +671,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._show_notification(summary, state)
 
     def _show_notification(self, message, state=_status.FINISHED):
-        if self.notification_stack is None:
+        if self.toast_overlay is None:
             return
-
-        revealer = Gtk.Revealer()
-        revealer.set_transition_type(Gtk.RevealerTransitionType.SLIDE_UP)
-        revealer.set_transition_duration(220)
-
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        box.set_margin_start(12)
-        box.set_margin_end(12)
-        box.set_margin_top(8)
-        box.set_margin_bottom(8)
-        box.add_css_class('osd')
-
-        image = Gtk.Image.new_from_icon_name(self._notification_icon_name(state))
-        image.set_pixel_size(18)
-        box.append(image)
-
-        label = Gtk.Label(label=message)
-        label.set_xalign(0)
-        label.set_wrap(True)
-        label.set_wrap_mode(Pango.WrapMode.WORD_CHAR)
-        label.set_max_width_chars(52)
-        box.append(label)
-
-        revealer.set_child(box)
-        self.notification_stack.append(revealer)
-
-        GLib.idle_add(self._reveal_notification, revealer)
-        GLib.timeout_add_seconds(4, self._hide_notification, revealer)
-
-    def _notification_icon_name(self, state):
-        icons = {
-            _status.FINISHED: 'emblem-ok-symbolic',
-            _status.WARNING: 'dialog-warning-symbolic',
-            _status.TIMEOUT: 'dialog-warning-symbolic',
-            _status.ERROR: 'dialog-error-symbolic',
-            _status.CANCELLED: 'process-stop-symbolic',
-        }
-        return icons.get(state, 'dialog-information-symbolic')
-
-    def _reveal_notification(self, revealer):
-        revealer.set_reveal_child(True)
-        return GLib.SOURCE_REMOVE
-
-    def _hide_notification(self, revealer):
-        revealer.set_reveal_child(False)
-        GLib.timeout_add(260, self._remove_notification, revealer)
-        return GLib.SOURCE_REMOVE
-
-    def _remove_notification(self, revealer):
-        parent = revealer.get_parent()
-        if parent is not None:
-            parent.remove(revealer)
-        return GLib.SOURCE_REMOVE
+        toast = Adw.Toast.new(message)
+        toast.set_timeout(4)
+        self.toast_overlay.add_toast(toast)
 
     def _command_summary(self, name, args, state):
         if name == 'archive.compress':

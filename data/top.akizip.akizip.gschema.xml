@@ -17,6 +17,44 @@
 				recommended 7-Zip parameters.
 			</description>
 		</key>
+		<key name="default-compress-format" type="s">
+			<default>"7z"</default>
+			<summary>Default compression format</summary>
+			<description>
+				Archive format used when compressing without manual advanced options.
+			</description>
+		</key>
+		<key name="default-compress-level" type="i">
+			<default>5</default>
+			<range min="0" max="9"/>
+			<summary>Default compression level</summary>
+			<description>
+				Compression level used by default compression.
+			</description>
+		</key>
+		<key name="default-compress-method" type="s">
+			<default>"default"</default>
+			<summary>Default compression algorithm</summary>
+			<description>
+				Compression algorithm used by default compression.
+			</description>
+		</key>
+		<key name="default-compress-dictionary-size" type="i">
+			<default>0</default>
+			<range min="0" max="1024"/>
+			<summary>Default dictionary size</summary>
+			<description>
+				Dictionary size in MB used by default compression. Use 0 for the 7-Zip default.
+			</description>
+		</key>
+		<key name="default-compress-threads" type="i">
+			<default>0</default>
+			<range min="0" max="64"/>
+			<summary>Default compression threads</summary>
+			<description>
+				Thread count used by default compression. Use 0 for the 7-Zip default.
+			</description>
+		</key>
 		<key name="compress-scan-depth" type="i">
 			<default>3</default>
 			<range min="0" max="10"/>

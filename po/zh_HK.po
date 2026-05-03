@@ -449,6 +449,12 @@ msgstr "使用壓縮參數推薦"
 msgid "Automatically choose 7-Zip parameters before compressing."
 msgstr "壓縮前自動選擇 7-Zip 參數。"
 
+msgid "Default compression format"
+msgstr "預設壓縮格式"
+
+msgid "Used for normal compression and recommendation fallback."
+msgstr "用於普通壓縮和推薦參數備用值。"
+
 msgid "Scan depth"
 msgstr "掃描深度"
 
@@ -461,6 +467,15 @@ msgstr "壓縮參數推薦失敗"
 msgid "Compression recommendation"
 msgstr "壓縮參數推薦"
 
+msgid "Compress dialog failed"
+msgstr "壓縮對話框開啟失敗"
+
+msgid "File or folder to compress"
+msgstr "要壓縮的檔案或資料夾"
+
+msgid "Select Folder"
+msgstr "選擇資料夾"
+
 msgid "Default parameters"
 msgstr "預設參數"
 
@@ -472,3 +487,75 @@ msgstr "使用推薦壓縮參數"
 
 msgid "Compression scan depth"
 msgstr "壓縮掃描深度"
+
+msgid "Default compression parameters"
+msgstr "預設壓縮參數"
+
+msgid "Archive format used when compressing without manual advanced options."
+msgstr "未使用手動進階選項壓縮時使用的壓縮檔格式。"
+
+msgid "Default compression level"
+msgstr "預設壓縮等級"
+
+msgid "Compression level used by default compression."
+msgstr "預設壓縮使用的壓縮等級。"
+
+msgid "Default compression algorithm"
+msgstr "預設壓縮演算法"
+
+msgid "Compression algorithm used by default compression."
+msgstr "預設壓縮使用的壓縮演算法。"
+
+msgid "Default dictionary size"
+msgstr "預設字典大小"
+
+msgid "Dictionary size in MB used by default compression. Use 0 for the 7-Zip default."
+msgstr "預設壓縮使用的字典大小，單位為 MB。0 表示使用 7-Zip 預設值。"
+
+msgid "Default compression threads"
+msgstr "預設壓縮執行緒數"
+
+msgid "Thread count used by default compression. Use 0 for the 7-Zip default."
+msgstr "預設壓縮使用的執行緒數。0 表示使用 7-Zip 預設值。"
+
+msgid "Advanced options"
+msgstr "進階選項"
+
+msgid "Store"
+msgstr "僅儲存"
+
+msgid "Fastest"
+msgstr "最快"
+
+msgid "Fast"
+msgstr "快速"
+
+msgid "Normal"
+msgstr "一般"
+
+msgid "Maximum"
+msgstr "最大"
+
+msgid "Ultra"
+msgstr "極限"
+
+msgid "Default"
+msgstr "預設"
+
+msgid "0 uses the 7-Zip default."
+msgstr "0 使用 7-Zip 預設值。"
+
+msgid "Format"
+msgstr "格式"
+
+msgid "Compression level"
+msgstr "壓縮等級"
+
+msgid "Algorithm"
+msgstr "演算法"
+
+msgid "Dictionary size (MB)"
+msgstr "字典大小 (MB)"
+
+msgid "Threads"
+msgstr "執行緒數"

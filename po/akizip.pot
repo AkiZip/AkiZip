@@ -450,6 +450,12 @@ msgstr ""
 msgid "Automatically choose 7-Zip parameters before compressing."
 msgstr ""
 
+msgid "Default compression format"
+msgstr ""
+
+msgid "Used for normal compression and recommendation fallback."
+msgstr ""
+
 msgid "Scan depth"
 msgstr ""
 
@@ -462,6 +468,15 @@ msgstr ""
 msgid "Compression recommendation"
 msgstr ""
 
+msgid "Compress dialog failed"
+msgstr ""
+
+msgid "File or folder to compress"
+msgstr ""
+
+msgid "Select Folder"
+msgstr ""
+
 msgid "Default parameters"
 msgstr ""
 
@@ -472,4 +487,76 @@ msgid "Use recommended compression parameters"
 msgstr ""
 
 msgid "Compression scan depth"
+msgstr ""
+
+msgid "Default compression parameters"
+msgstr ""
+
+msgid "Archive format used when compressing without manual advanced options."
+msgstr ""
+
+msgid "Default compression level"
+msgstr ""
+
+msgid "Compression level used by default compression."
+msgstr ""
+
+msgid "Default compression algorithm"
+msgstr ""
+
+msgid "Compression algorithm used by default compression."
+msgstr ""
+
+msgid "Default dictionary size"
+msgstr ""
+
+msgid "Dictionary size in MB used by default compression. Use 0 for the 7-Zip default."
+msgstr ""
+
+msgid "Default compression threads"
+msgstr ""
+
+msgid "Thread count used by default compression. Use 0 for the 7-Zip default."
+msgstr ""
+
+msgid "Advanced options"
+msgstr ""
+
+msgid "Store"
+msgstr ""
+
+msgid "Fastest"
+msgstr ""
+
+msgid "Fast"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Maximum"
+msgstr ""
+
+msgid "Ultra"
+msgstr ""
+
+msgid "Default"
+msgstr ""
+
+msgid "0 uses the 7-Zip default."
+msgstr ""
+
+msgid "Format"
+msgstr ""
+
+msgid "Compression level"
+msgstr ""
+
+msgid "Algorithm"
+msgstr ""
+
+msgid "Dictionary size (MB)"
+msgstr ""
+
+msgid "Threads"
 msgstr ""

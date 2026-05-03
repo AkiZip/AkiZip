@@ -107,11 +107,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if (app is None or not hasattr(app, 'settings')
                 or not app.settings.get_boolean('use-compress-recommendation')):
-            self._run_command(
-                'archive.compress',
-                output_path,
-                source_paths,
-            )
+            self._run_default_compress_multi(output_path, source_paths)
             return
 
         try:
@@ -168,15 +164,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     bucket['size'] += val.get('size', 0)
 
             suggestion = suggest(merged)
-            archive_format = suggestion.get('format', '7z')
+            archive_format = suggestion.get('format', self._default_compress_format())
+            if archive_format not in ('7z', 'zip'):
+                archive_format = self._default_compress_format()
             sevenzip_args = suggestion.get('sevenzip_args', [])
         except Exception as error:
             self._append_log(_('Compression recommendation failed'), str(error), _status.WARNING)
-            self._run_command(
-                'archive.compress',
-                output_path,
-                source_paths,
-            )
+            self._run_default_compress_multi(output_path, source_paths)
             return
 
         self._append_log(
@@ -190,6 +184,82 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             source_paths,
             sevenzip_args,
         )
+
+    def _default_compress_format(self):
+        return self._default_compress_options()['format']
+
+    def _default_compress_options(self):
+        options = {
+            'format': '7z',
+            'level': 5,
+            'method': 'default',
+            'dictionary_size': 0,
+            'threads': 0,
+        }
+        app = self.get_application()
+        if app is None or not hasattr(app, 'settings'):
+            return options
+
+        archive_format = self._settings_get_string('default-compress-format', options['format'])
+        method = self._settings_get_string('default-compress-method', options['method'])
+        options['format'] = archive_format if archive_format in ('7z', 'zip') else '7z'
+        level = self._settings_get_int('default-compress-level', options['level'])
+        options['level'] = level if level in (0, 1, 3, 5, 7, 9) else 5
+        options['method'] = method if method in ('default', 'LZMA', 'PPMd', 'BZip2') else 'default'
+        options['dictionary_size'] = self._settings_get_int('default-compress-dictionary-size', options['dictionary_size'])
+        options['threads'] = self._settings_get_int('default-compress-threads', options['threads'])
+        return options
+
+    def _settings_get_string(self, key, fallback):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'settings'):
+            return fallback
+        try:
+            return app.settings.get_string(key)
+        except Exception:
+            return fallback
+
+    def _settings_get_int(self, key, fallback):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'settings'):
+            return fallback
+        try:
+            return app.settings.get_int(key)
+        except Exception:
+            return fallback
+
+    def _run_default_compress_multi(self, output_path, source_paths):
+        options = self._default_compress_options()
+        self._run_command(
+            'archive.compress_advance',
+            output_path,
+            source_paths,
+            self._advanced_compress_args(options),
+        )
+
+    def _run_advanced_compress_multi(self, output_path, source_paths, options):
+        self._run_command(
+            'archive.compress_advance',
+            output_path,
+            source_paths,
+            self._advanced_compress_args(options),
+        )
+
+    def _advanced_compress_args(self, options):
+        args = [
+            f"-t{options['format']}",
+            f"-mx={options['level']}",
+        ]
+        if options['method'] != 'default':
+            if options['format'] == 'zip':
+                args.append(f"-mm={options['method']}")
+            else:
+                args.append(f"-m0={options['method']}")
+        if options['dictionary_size'] > 0:
+            args.append(f"-md={options['dictionary_size']}m")
+        if options['threads'] > 0:
+            args.append(f"-mmt={options['threads']}")
+        return args
 
     @Gtk.Template.Callback()
     def butinfo(self, button):
@@ -295,6 +365,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _present_compress_dialog(self):
         source_paths = []
         last_output = {'display': None, 'op': None}
+        default_options = self._default_compress_options()
 
         content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         content.set_margin_top(6)
@@ -350,6 +421,72 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         btn_box.append(add_folders_btn)
         btn_box.append(remove_btn)
         content.append(btn_box)
+
+        advanced_check = Gtk.CheckButton()
+        advanced_check.set_label(_('Advanced options'))
+        advanced_check.set_margin_top(6)
+        content.append(advanced_check)
+
+        format_combo = Gtk.ComboBoxText()
+        format_combo.append('7z', '7z')
+        format_combo.append('zip', 'zip')
+        format_combo.set_active_id(default_options['format'])
+
+        level_combo = Gtk.ComboBoxText()
+        for value, label in (
+                ('0', _('Store')),
+                ('1', _('Fastest')),
+                ('3', _('Fast')),
+                ('5', _('Normal')),
+                ('7', _('Maximum')),
+                ('9', _('Ultra'))):
+            level_combo.append(value, label)
+        level_combo.set_active_id(str(default_options['level']))
+
+        method_combo = Gtk.ComboBoxText()
+        for value, label in (
+                ('default', _('Default')),
+                ('LZMA', 'LZMA'),
+                ('PPMd', 'PPMd'),
+                ('BZip2', 'BZip2')):
+            method_combo.append(value, label)
+        method_combo.set_active_id(default_options['method'])
+
+        dictionary_spin = Gtk.SpinButton.new_with_range(0, 1024, 1)
+        dictionary_spin.set_value(default_options['dictionary_size'])
+        dictionary_spin.set_tooltip_text(_('0 uses the 7-Zip default.'))
+
+        threads_spin = Gtk.SpinButton.new_with_range(0, 64, 1)
+        threads_spin.set_value(default_options['threads'])
+        threads_spin.set_tooltip_text(_('0 uses the 7-Zip default.'))
+
+        form = Gtk.Grid()
+        form.set_column_spacing(12)
+        form.set_row_spacing(10)
+        form.set_margin_start(6)
+        form.set_margin_end(6)
+
+        controls = (
+            (_('Format'), format_combo),
+            (_('Compression level'), level_combo),
+            (_('Algorithm'), method_combo),
+            (_('Dictionary size (MB)'), dictionary_spin),
+            (_('Threads'), threads_spin),
+        )
+        for row, (label_text, control) in enumerate(controls):
+            label = Gtk.Label(label=label_text, xalign=0)
+            label.set_valign(Gtk.Align.CENTER)
+            control.set_hexpand(True)
+            form.attach(label, 0, row, 1, 1)
+            form.attach(control, 1, row, 1, 1)
+
+        revealer = Gtk.Revealer()
+        revealer.set_child(form)
+        advanced_check.connect(
+            'toggled',
+            lambda check: revealer.set_reveal_child(check.get_active()),
+        )
+        content.append(revealer)
 
         dialog = Adw.AlertDialog.new(_('Compress'), None)
         dialog.set_extra_child(content)
@@ -453,7 +590,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 _('_Cancel'),
             )
             if source_paths:
-                default_name = Path(source_paths[0]).name + '.7z'
+                archive_format = format_combo.get_active_id() or self._default_compress_format()
+                default_name = Path(source_paths[0]).name + f'.{archive_format}'
                 chooser.set_current_name(default_name)
 
             def on_response(c, response):
@@ -486,7 +624,18 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     output_path = Path(last_output['op'])
                 else:
                     output_path = Path(text).expanduser()
-                self._run_compress_multi(output_path, [Path(p) for p in source_paths])
+                paths = [Path(p) for p in source_paths]
+                if advanced_check.get_active():
+                    options = {
+                        'format': format_combo.get_active_id() or '7z',
+                        'level': int(level_combo.get_active_id() or '5'),
+                        'method': method_combo.get_active_id() or 'default',
+                        'dictionary_size': dictionary_spin.get_value_as_int(),
+                        'threads': threads_spin.get_value_as_int(),
+                    }
+                    self._run_advanced_compress_multi(output_path, paths, options)
+                else:
+                    self._run_compress_multi(output_path, paths)
 
         dialog.connect('response', on_response)
         dialog.present(self)

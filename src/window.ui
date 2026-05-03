@@ -24,19 +24,15 @@
             </child>
             <property name="content">
               <object class="GtkBox">
-                <property name="orientation">horizontal</property>
+                <property name="orientation">vertical</property>
+                <property name="hexpand">true</property>
+                <property name="vexpand">true</property>
                 <property name="spacing">10</property>
                 <property name="margin-start">10</property>
                 <property name="margin-end">10</property>
                 <property name="margin-top">10</property>
                 <property name="margin-bottom">10</property>
                 <child>
-                  <object class="GtkBox">
-                    <property name="orientation">vertical</property>
-                    <property name="hexpand">true</property>
-                    <property name="vexpand">true</property>
-                    <property name="spacing">10</property>
-                    <child>
                       <object class="GtkBox">
                         <property name="orientation">horizontal</property>
                         <property name="spacing">8</property>
@@ -299,29 +295,6 @@
                         </child>
                       </object>
                     </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkSeparator">
-                    <property name="orientation">vertical</property>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkScrolledWindow" id="log_scroller">
-                    <property name="width-request">380</property>
-                    <property name="hexpand">false</property>
-                    <property name="vexpand">true</property>
-                    <property name="child">
-                      <object class="GtkListBox" id="log_list">
-                        <property name="selection-mode">none</property>
-                        <property name="margin-start">6</property>
-                        <property name="margin-end">6</property>
-                        <property name="margin-top">6</property>
-                        <property name="margin-bottom">6</property>
-                      </object>
-                    </property>
-                  </object>
-                </child>
               </object>
             </property>
           </object>
@@ -358,6 +331,12 @@
           </item>
         </section>
       </submenu>
+    </section>
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Show _Logs</attribute>
+        <attribute name="action">app.logs</attribute>
+      </item>
     </section>
     <section>
       <item>

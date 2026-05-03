@@ -1,5 +1,6 @@
 from gettext import gettext as _
 
+from gi.repository import Adw
 from gi.repository import GLib
 from gi.repository import Gtk
 
@@ -7,7 +8,42 @@ from ..plugins.status import _status
 
 
 class LogPanelMixin:
+    def _ensure_log_window(self):
+        if getattr(self, 'log_window', None) is not None:
+            return
+
+        self.log_list = Gtk.ListBox()
+        self.log_list.set_selection_mode(Gtk.SelectionMode.NONE)
+        self.log_list.set_margin_start(6)
+        self.log_list.set_margin_end(6)
+        self.log_list.set_margin_top(6)
+        self.log_list.set_margin_bottom(6)
+
+        self.log_scroller = Gtk.ScrolledWindow()
+        self.log_scroller.set_hexpand(True)
+        self.log_scroller.set_vexpand(True)
+        self.log_scroller.set_child(self.log_list)
+
+        toolbar_view = Adw.ToolbarView()
+        toolbar_view.add_top_bar(Adw.HeaderBar())
+        toolbar_view.set_content(self.log_scroller)
+
+        self.log_window = Adw.Window()
+        self.log_window.set_title(_('Logs'))
+        self.log_window.set_transient_for(self)
+        self.log_window.set_modal(False)
+        self.log_window.set_destroy_with_parent(True)
+        self.log_window.set_default_size(420, 520)
+        self.log_window.set_hide_on_close(True)
+        self.log_window.set_content(toolbar_view)
+
+    def _show_log_window(self):
+        self._ensure_log_window()
+        self.log_window.present()
+
     def _append_log(self, summary, content=None, state=_status.PENDING, handle=None):
+        self._ensure_log_window()
+
         expander = Gtk.Expander()
         expander.set_margin_top(8)
         expander.set_margin_bottom(8)

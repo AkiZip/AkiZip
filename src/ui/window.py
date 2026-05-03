@@ -39,8 +39,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     extract_button = Gtk.Template.Child()
     file_entry = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
-    log_list = Gtk.Template.Child()
-    log_scroller = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
 
     @Gtk.Template.Callback()

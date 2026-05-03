@@ -78,6 +78,9 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
+msgid "Copied to clipboard"
+msgstr ""
+
 #: src/ui/info_dialog.py:79
 msgid "Type"
 msgstr ""
@@ -241,6 +244,9 @@ msgstr ""
 
 #: src/ui/window.py:228 src/ui/window.py:231
 msgid "Extract"
+msgstr ""
+
+msgid "Extract All"
 msgstr ""
 
 #: src/ui/window.py:259

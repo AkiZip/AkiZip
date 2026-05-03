@@ -25,6 +25,7 @@ from gettext import gettext as _
 from gi.repository import Adw
 from gi.repository import Gtk
 from gi.repository import Gio
+from gi.repository import GLib
 from gi.repository import GObject
 from gi.repository import Pango
 from ..plugins.status import _status
@@ -89,6 +90,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     extract_button = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
+    notification_stack = Gtk.Template.Child()
     address_entry = Gtk.Template.Child()
     file_list_stack = Gtk.Template.Child()
     file_list_scroller = Gtk.Template.Child()
@@ -298,6 +300,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             (_('Path'), self._on_path_setup, self._on_path_bind, True),
             (_('Size'), self._on_text_setup, self._on_size_bind, False),
             (_('Modified'), self._on_text_setup, self._on_modified_bind, False),
+            ('', self._on_extract_action_setup, self._on_extract_action_bind, False),
         )
         for title, setup, bind, expand in columns:
             factory = Gtk.SignalListItemFactory()
@@ -353,6 +356,39 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _on_modified_bind(self, factory, list_item):
         list_item.get_child().set_text(list_item.get_item().modified)
+
+    def _on_extract_action_setup(self, factory, list_item):
+        button = Gtk.Button()
+        button.set_icon_name('list-remove-symbolic')
+        button.set_tooltip_text(_('Extract'))
+        button.set_margin_start(6)
+        button.set_margin_end(6)
+        button.set_margin_top(2)
+        button.set_margin_bottom(2)
+        button.connect('clicked', lambda _button: self._on_extract_entry_clicked(list_item.get_item()))
+        list_item.set_child(button)
+
+    def _on_extract_action_bind(self, factory, list_item):
+        item = list_item.get_item()
+        button = list_item.get_child()
+        button.set_visible(item.path != '..')
+
+    def _on_extract_entry_clicked(self, item):
+        if item is None or item.path == '..':
+            return
+
+        selected = self._selected_path_from_input()
+        if selected is None:
+            return
+
+        self._present_extract_dialog(
+            lambda dest: self._run_command(
+                'archive.extract_file',
+                selected,
+                item.full_path.rstrip('/') if item.is_folder else item.full_path,
+                dest,
+            )
+        )
 
     def _on_row_activate(self, view, position):
         item = self._file_list_store.get_item(position)
@@ -537,7 +573,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if app is None or not hasattr(app, 'system') or not app.system.has_selected():
             self._append_log(_('No file selected'), None, _status.ERROR)
-            self.toast_overlay.add_toast(Adw.Toast.new(_('No file selected')))
+            self._show_notification(_('No file selected'), _status.ERROR)
             return None
         return Path(app.system.operation_path())
 
@@ -613,23 +649,82 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         if task_status.status == _status.CANCELLED:
             self._remove_pending_log(log_id)
-            self._append_log(
-                self._command_summary(name, args, _status.CANCELLED),
-                task_status.msg,
-                _status.CANCELLED,
-            )
+            summary = self._command_summary(name, args, _status.CANCELLED)
+            self._append_log(summary, task_status.msg, _status.CANCELLED)
+            self._show_notification(summary, _status.CANCELLED)
 
     def _on_command_success(self, log_id, name, args, output):
         print(output)
         if not self._remove_pending_log(log_id):
             return
-        self._append_log(self._command_summary(name, args, _status.FINISHED), output, _status.FINISHED)
+        summary = self._command_summary(name, args, _status.FINISHED)
+        self._append_log(summary, output, _status.FINISHED)
+        self._show_notification(summary, _status.FINISHED)
 
     def _on_command_error(self, log_id, name, args, error):
         if not self._remove_pending_log(log_id):
             return
         state = _status.TIMEOUT if isinstance(error, TimeoutError) else _status.ERROR
-        self._append_log(self._command_summary(name, args, state), str(error), state)
+        summary = self._command_summary(name, args, state)
+        self._append_log(summary, str(error), state)
+        self._show_notification(summary, state)
+
+    def _show_notification(self, message, state=_status.FINISHED):
+        if self.notification_stack is None:
+            return
+
+        revealer = Gtk.Revealer()
+        revealer.set_transition_type(Gtk.RevealerTransitionType.SLIDE_UP)
+        revealer.set_transition_duration(220)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
+        box.set_margin_start(12)
+        box.set_margin_end(12)
+        box.set_margin_top(8)
+        box.set_margin_bottom(8)
+        box.add_css_class('osd')
+
+        image = Gtk.Image.new_from_icon_name(self._notification_icon_name(state))
+        image.set_pixel_size(18)
+        box.append(image)
+
+        label = Gtk.Label(label=message)
+        label.set_xalign(0)
+        label.set_wrap(True)
+        label.set_wrap_mode(Pango.WrapMode.WORD_CHAR)
+        label.set_max_width_chars(52)
+        box.append(label)
+
+        revealer.set_child(box)
+        self.notification_stack.append(revealer)
+
+        GLib.idle_add(self._reveal_notification, revealer)
+        GLib.timeout_add_seconds(4, self._hide_notification, revealer)
+
+    def _notification_icon_name(self, state):
+        icons = {
+            _status.FINISHED: 'emblem-ok-symbolic',
+            _status.WARNING: 'dialog-warning-symbolic',
+            _status.TIMEOUT: 'dialog-warning-symbolic',
+            _status.ERROR: 'dialog-error-symbolic',
+            _status.CANCELLED: 'process-stop-symbolic',
+        }
+        return icons.get(state, 'dialog-information-symbolic')
+
+    def _reveal_notification(self, revealer):
+        revealer.set_reveal_child(True)
+        return GLib.SOURCE_REMOVE
+
+    def _hide_notification(self, revealer):
+        revealer.set_reveal_child(False)
+        GLib.timeout_add(260, self._remove_notification, revealer)
+        return GLib.SOURCE_REMOVE
+
+    def _remove_notification(self, revealer):
+        parent = revealer.get_parent()
+        if parent is not None:
+            parent.remove(revealer)
+        return GLib.SOURCE_REMOVE
 
     def _command_summary(self, name, args, state):
         if name == 'archive.compress':
@@ -679,6 +774,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Extract cancelled: ') + target
             return _('Extract failed: ') + target
 
+        if name == 'archive.extract_file':
+            target = Path(args[1]).name if len(args) > 1 else _('file')
+            if state == _status.PENDING:
+                return _('Extract ') + target
+            if state == _status.WORKING:
+                return _('Extract ') + target
+            if state == _status.FINISHED:
+                return _('Extracted ') + target
+            if state == _status.TIMEOUT:
+                return _('Extract timed out: ') + target
+            if state == _status.CANCELLED:
+                return _('Extract cancelled: ') + target
+            return _('Extract failed: ') + target
+
         return name
 
     def _command_preview(self, name, args):
@@ -696,6 +805,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             archive = Path(args[0]).name if args else _('archive')
             output = Path(args[1]).name if len(args) > 1 else _('folder')
             return _('Extract ') + archive + _(' to ') + output
+
+        if name == 'archive.extract_file':
+            archive = Path(args[0]).name if args else _('archive')
+            file_name = Path(args[1]).name if len(args) > 1 else _('file')
+            output = Path(args[2]).name if len(args) > 2 else _('folder')
+            return _('Extract ') + file_name + _(' from ') + archive + _(' to ') + output
 
         return name
 

@@ -77,6 +77,9 @@ msgstr "名称"
 msgid "Path"
 msgstr "路径"
 
+msgid "Copied to clipboard"
+msgstr "已复制到剪贴板"
+
 #: src/ui/info_dialog.py:79
 msgid "Type"
 msgstr "类型"
@@ -241,6 +244,9 @@ msgstr "压缩"
 #: src/ui/window.py:228 src/ui/window.py:231
 msgid "Extract"
 msgstr "提取"
+
+msgid "Extract All"
+msgstr "全部提取"
 
 #: src/ui/window.py:259
 msgid "Modified"

@@ -77,9 +77,20 @@ def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None):
         '-y',
     ], timeout, cancel_event)
 
+def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, cancel_event=None):
+    return _run_7zip([
+        'x',
+        str(archive_path),
+        f'-o{output_dir}',
+        '-y',
+        '--',
+        str(file_name),
+    ], timeout, cancel_event)
+
 
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
     commands['archive.compress'] = archive_compress
     commands['archive.extract'] = archive_extract
+    commands['archive.extract_file'] = archive_extract_FileInZip

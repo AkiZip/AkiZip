@@ -1,2 +1,7 @@
 po/zh_CN.po~
 po/zh_HK.po~
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*$py.class

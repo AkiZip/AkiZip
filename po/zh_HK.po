@@ -77,6 +77,9 @@ msgstr "名稱"
 msgid "Path"
 msgstr "路徑"
 
+msgid "Copied to clipboard"
+msgstr "已複製到剪貼簿"
+
 #: src/ui/info_dialog.py:79
 msgid "Type"
 msgstr "類型"
@@ -241,6 +244,9 @@ msgstr "壓縮"
 #: src/ui/window.py:228 src/ui/window.py:231
 msgid "Extract"
 msgstr "解壓縮"
+
+msgid "Extract All"
+msgstr "全部解壓縮"
 
 #: src/ui/window.py:259
 msgid "Modified"

@@ -74,8 +74,8 @@ class InfoDialogMixin:
 
         dialog.set_child(root)
 
-        self._add_info_row(grid, _('Name'), info['name'])
-        self._add_info_row(grid, _('Path'), info['path'])
+        self._add_info_row(grid, _('Name'), info['name'], copy_value=info['name'])
+        self._add_info_row(grid, _('Path'), info['path'], copy_value=info['path'])
         self._add_info_row(grid, _('Type'), self._system_kind_label(info))
         if info['is_file']:
             self._add_info_row(grid, _('Size'), self._format_size(info['size']))
@@ -84,7 +84,7 @@ class InfoDialogMixin:
 
         return dialog, grid
 
-    def _add_info_row(self, grid, name, value):
+    def _add_info_row(self, grid, name, value, copy_value=None):
         row = grid._akizip_next_row
         grid._akizip_next_row += 1
 
@@ -99,9 +99,26 @@ class InfoDialogMixin:
         value_label.set_selectable(True)
         value_label.set_hexpand(True)
 
+        value_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        value_box.set_hexpand(True)
+        value_box.append(value_label)
+
+        if copy_value is not None:
+            copy_button = Gtk.Button()
+            copy_button.set_icon_name('edit-copy-symbolic')
+            copy_button.set_tooltip_text(_('Copy'))
+            copy_button.set_valign(Gtk.Align.CENTER)
+            copy_button.connect('clicked', lambda *_: self._copy_info_value(copy_value))
+            value_box.append(copy_button)
+
         grid.attach(name_label, 0, row, 1, 1)
-        grid.attach(value_label, 1, row, 1, 1)
+        grid.attach(value_box, 1, row, 1, 1)
         return value_label
+
+    def _copy_info_value(self, value):
+        self.get_clipboard().set(str(value))
+        if hasattr(self, '_show_notification'):
+            self._show_notification(_('Copied to clipboard'), _status.FINISHED)
 
     def _update_info_row(self, value_label, value):
         value_label.set_text(str(value))

@@ -69,6 +69,22 @@ def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None
     ], timeout, cancel_event)
 
 
+def archive_compress_advance(output_archive, source_paths, args, timeout=-1, cancel_event=None):
+    if isinstance(source_paths, (str, Path)):
+        source_paths = [source_paths]
+    if args is None:
+        args = []
+    if isinstance(args, dict):
+        args = args.get('sevenzip_args', [])
+
+    return _run_7zip([
+        'a',
+        *[str(arg) for arg in args],
+        str(output_archive),
+        *[str(path) for path in source_paths],
+    ], timeout, cancel_event)
+
+
 def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None):
     return _run_7zip([
         'x',
@@ -87,10 +103,10 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, c
         str(file_name),
     ], timeout, cancel_event)
 
-
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
     commands['archive.compress'] = archive_compress
+    commands['archive.compress_advance'] = archive_compress_advance
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip

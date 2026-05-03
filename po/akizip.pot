@@ -437,3 +437,39 @@ msgstr ""
 #: src/window.ui:334
 msgid "_About Akizip"
 msgstr ""
+
+msgid "Preferences"
+msgstr ""
+
+msgid "Compression"
+msgstr ""
+
+msgid "Use compression recommendations"
+msgstr ""
+
+msgid "Automatically choose 7-Zip parameters before compressing."
+msgstr ""
+
+msgid "Scan depth"
+msgstr ""
+
+msgid "Maximum folder levels to scan for recommendations."
+msgstr ""
+
+msgid "Compression recommendation failed"
+msgstr ""
+
+msgid "Compression recommendation"
+msgstr ""
+
+msgid "Default parameters"
+msgstr ""
+
+msgid "Parameters: "
+msgstr ""
+
+msgid "Use recommended compression parameters"
+msgstr ""
+
+msgid "Compression scan depth"
+msgstr ""

@@ -1,8 +1,13 @@
 
 import sys
 import gi
+import gettext
 
-from gettext import gettext as _
+try:
+    _translation = gettext.translation('akizip', fallback=True)
+    _ = _translation.gettext
+except Exception:
+    _ = lambda s: s
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
@@ -50,9 +55,62 @@ class AkizipApplication(Adw.Application):
                                 license_type=Gtk.License.GPL_3_0)
         about.present(self.props.active_window)
 
-    def on_preferences_action(self, widget, _):
+    def on_preferences_action(self, widget, parameter):
         """Callback for the app.preferences action."""
-        print('app.preferences action activated')
+        if getattr(self, '_preferences_window', None) is not None:
+            self._preferences_window.present()
+            return
+
+        window = Adw.PreferencesWindow()
+        window.set_title(_('Preferences'))
+        active = self.props.active_window
+        if active is not None:
+            window.set_transient_for(active)
+        window.set_modal(True)
+        window.connect('close-request', self._on_preferences_closed)
+
+        page = Adw.PreferencesPage()
+        group = Adw.PreferencesGroup()
+        group.set_title(_('Compression'))
+
+        recommend_row = Adw.ActionRow()
+        recommend_row.set_title(_('Use compression recommendations'))
+        recommend_row.set_subtitle(_('Automatically choose 7-Zip parameters before compressing.'))
+        recommend_switch = Gtk.Switch()
+        recommend_switch.set_valign(Gtk.Align.CENTER)
+        self.settings.bind(
+            'use-compress-recommendation',
+            recommend_switch,
+            'active',
+            Gio.SettingsBindFlags.DEFAULT,
+        )
+        recommend_row.add_suffix(recommend_switch)
+        recommend_row.set_activatable_widget(recommend_switch)
+
+        depth_row = Adw.ActionRow()
+        depth_row.set_title(_('Scan depth'))
+        depth_row.set_subtitle(_('Maximum folder levels to scan for recommendations.'))
+        depth_spin = Gtk.SpinButton.new_with_range(0, 10, 1)
+        depth_spin.set_valign(Gtk.Align.CENTER)
+        depth_spin.set_value(self.settings.get_int('compress-scan-depth'))
+        depth_spin.connect(
+            'value-changed',
+            lambda spin: self.settings.set_int('compress-scan-depth', spin.get_value_as_int()),
+        )
+        depth_row.add_suffix(depth_spin)
+        depth_row.set_activatable_widget(depth_spin)
+
+        group.add(recommend_row)
+        group.add(depth_row)
+        page.add(group)
+        window.add(page)
+
+        self._preferences_window = window
+        window.present()
+
+    def _on_preferences_closed(self, window):
+        self._preferences_window = None
+        return False
 
     def on_logs_action(self, *args):
         """Callback for the app.logs action."""
@@ -74,4 +132,3 @@ class AkizipApplication(Adw.Application):
         self.add_action(action)
         if shortcuts:
             self.set_accels_for_action(f"app.{name}", shortcuts)
-

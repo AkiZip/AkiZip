@@ -9,5 +9,22 @@
 				locale, or a gettext language code such as "en", "zh_CN" or "zh_HK".
 			</description>
 		</key>
+		<key name="use-compress-recommendation" type="b">
+			<default>false</default>
+			<summary>Use recommended compression parameters</summary>
+			<description>
+				When enabled, compression scans the selected file or folder and uses
+				recommended 7-Zip parameters.
+			</description>
+		</key>
+		<key name="compress-scan-depth" type="i">
+			<default>3</default>
+			<range min="0" max="10"/>
+			<summary>Compression scan depth</summary>
+			<description>
+				Maximum number of folder levels to scan when recommending compression
+				parameters.
+			</description>
+		</key>
 	</schema>
 </schemalist>

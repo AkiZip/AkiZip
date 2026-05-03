@@ -436,3 +436,39 @@ msgstr "鍵盤快捷鍵(_K)"
 #: src/window.ui:334
 msgid "_About Akizip"
 msgstr "關於 Akizip(_A)"
+
+msgid "Preferences"
+msgstr "偏好設定"
+
+msgid "Compression"
+msgstr "壓縮"
+
+msgid "Use compression recommendations"
+msgstr "使用壓縮參數推薦"
+
+msgid "Automatically choose 7-Zip parameters before compressing."
+msgstr "壓縮前自動選擇 7-Zip 參數。"
+
+msgid "Scan depth"
+msgstr "掃描深度"
+
+msgid "Maximum folder levels to scan for recommendations."
+msgstr "為推薦參數最多掃描的資料夾層數。"
+
+msgid "Compression recommendation failed"
+msgstr "壓縮參數推薦失敗"
+
+msgid "Compression recommendation"
+msgstr "壓縮參數推薦"
+
+msgid "Default parameters"
+msgstr "預設參數"
+
+msgid "Parameters: "
+msgstr "參數："
+
+msgid "Use recommended compression parameters"
+msgstr "使用推薦壓縮參數"
+
+msgid "Compression scan depth"
+msgstr "壓縮掃描深度"

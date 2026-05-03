@@ -19,8 +19,13 @@
 
 import os
 from pathlib import Path
+import gettext
 
-from gettext import gettext as _
+try:
+    _translation = gettext.translation('akizip', fallback=True)
+    _ = _translation.gettext
+except Exception:
+    _ = lambda s: s
 
 from gi.repository import Adw
 from gi.repository import Gtk
@@ -100,11 +105,49 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if selected is None:
             return
         self._present_compress_dialog(
-            lambda dest: self._run_command(
+            lambda dest: self._run_compress(selected, dest)
+        )
+
+    def _run_compress(self, selected, destination):
+        app = self.get_application()
+        if (app is None or not hasattr(app, 'settings')
+                or not app.settings.get_boolean('use-compress-recommendation')):
+            self._run_command(
                 'archive.compress',
-                dest / f'{selected.name}.7z',
+                destination / f'{selected.name}.7z',
                 [selected],
             )
+            return
+
+        try:
+            scan = getattr(app, 'commands', {}).get('system.scan')
+            suggest = getattr(app, 'commands', {}).get('system.suggest_zip_paramiters')
+            if scan is None or suggest is None:
+                raise RuntimeError(_('Command not found'))
+            depth = app.settings.get_int('compress-scan-depth')
+            file_count = scan(selected, depth)
+            suggestion = suggest(file_count)
+            archive_format = suggestion.get('format', '7z')
+            sevenzip_args = suggestion.get('sevenzip_args', [])
+        except Exception as error:
+            self._append_log(_('Compression recommendation failed'), str(error), _status.WARNING)
+            self._run_command(
+                'archive.compress',
+                destination / f'{selected.name}.7z',
+                [selected],
+            )
+            return
+
+        self._append_log(
+            _('Compression recommendation'),
+            ' '.join(sevenzip_args) if sevenzip_args else _('Default parameters'),
+            _status.FINISHED,
+        )
+        self._run_command(
+            'archive.compress_advance',
+            destination / f'{selected.name}.{archive_format}',
+            [selected],
+            sevenzip_args,
         )
 
     @Gtk.Template.Callback()
@@ -678,7 +721,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.toast_overlay.add_toast(toast)
 
     def _command_summary(self, name, args, state):
-        if name == 'archive.compress':
+        if name == 'archive.compress' or name == 'archive.compress_advance':
             source_paths = args[1] if len(args) > 1 else []
             if source_paths:
                 target = Path(source_paths[0]).name
@@ -742,11 +785,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         return name
 
     def _command_preview(self, name, args):
-        if name == 'archive.compress':
+        if name == 'archive.compress' or name == 'archive.compress_advance':
             output = Path(args[0]).name if args else _('archive')
             source_paths = args[1] if len(args) > 1 else []
             source = Path(source_paths[0]).name if source_paths else _('file')
-            return _('Create ') + output + _(' from ') + source
+            preview = _('Create ') + output + _(' from ') + source
+            if name == 'archive.compress_advance' and len(args) > 2 and args[2]:
+                preview = preview + '\n' + _('Parameters: ') + ' '.join(args[2])
+            return preview
 
         if name == 'archive.info':
             archive = Path(args[0]).name if args else _('archive')

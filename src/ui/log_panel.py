@@ -1,4 +1,10 @@
-from gettext import gettext as _
+import gettext
+
+try:
+    _translation = gettext.translation('akizip', fallback=True)
+    _ = _translation.gettext
+except Exception:
+    _ = lambda s: s
 
 from gi.repository import Adw
 from gi.repository import GLib

@@ -9,3 +9,5 @@ src/ui/log_panel.py
 src/ui/window.py
 src/window.py
 src/window.ui
+src/compress-dialog.ui
+src/extract-dialog.ui

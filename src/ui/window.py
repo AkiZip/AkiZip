@@ -367,126 +367,29 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         last_output = {'display': None, 'op': None}
         default_options = self._default_compress_options()
 
-        content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
-        content.set_margin_top(6)
-        content.set_margin_bottom(6)
-
-        output_label = Gtk.Label()
-        output_label.set_label(_('Output archive'))
-        output_label.set_xalign(0)
-        content.append(output_label)
-
-        output_entry = Gtk.Entry()
-        output_entry.set_hexpand(True)
-        output_entry.set_placeholder_text(_('Select output archive path'))
+        builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/compress-dialog.ui')
+        content = builder.get_object('content')
+        output_entry = builder.get_object('output_entry')
         output_entry.set_editable(not _IS_FLATPAK)
+        output_browse = builder.get_object('output_browse')
+        source_label = builder.get_object('source_label')
+        source_list = builder.get_object('source_list')
+        add_files_btn = builder.get_object('add_files_btn')
+        add_folders_btn = builder.get_object('add_folders_btn')
+        remove_btn = builder.get_object('remove_btn')
+        advanced_check = builder.get_object('advanced_check')
+        format_combo = builder.get_object('format_combo')
+        level_combo = builder.get_object('level_combo')
+        method_combo = builder.get_object('method_combo')
+        dictionary_spin = builder.get_object('dictionary_spin')
+        threads_spin = builder.get_object('threads_spin')
+        revealer = builder.get_object('revealer')
 
-        output_browse = Gtk.Button()
-        output_browse.set_icon_name('document-save-symbolic')
-        output_browse.set_tooltip_text(_('Select Output Archive'))
-
-        output_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        output_box.append(output_entry)
-        output_box.append(output_browse)
-        content.append(output_box)
-
-        content.append(Gtk.Separator())
-
-        source_label = Gtk.Label()
-        source_label.set_label(_('Source items'))
-        source_label.set_xalign(0)
-        content.append(source_label)
-
-        source_list = Gtk.ListBox()
-        source_list.set_selection_mode(Gtk.SelectionMode.SINGLE)
-        source_list.set_css_classes(['navigation-sidebar'])
-
-        source_scrolled = Gtk.ScrolledWindow()
-        source_scrolled.set_child(source_list)
-        source_scrolled.set_max_content_height(150)
-        source_scrolled.set_propagate_natural_height(True)
-        source_scrolled.set_vexpand(True)
-        content.append(source_scrolled)
-
-        add_files_btn = Gtk.Button()
-        add_files_btn.set_label(_('Add Files'))
-        add_folders_btn = Gtk.Button()
-        add_folders_btn.set_label(_('Add Folders'))
-        remove_btn = Gtk.Button()
-        remove_btn.set_label(_('Remove'))
-        remove_btn.set_sensitive(False)
-
-        btn_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        btn_box.append(add_files_btn)
-        btn_box.append(add_folders_btn)
-        btn_box.append(remove_btn)
-        content.append(btn_box)
-
-        advanced_check = Gtk.CheckButton()
-        advanced_check.set_label(_('Advanced options'))
-        advanced_check.set_margin_top(6)
-        content.append(advanced_check)
-
-        format_combo = Gtk.ComboBoxText()
-        format_combo.append('7z', '7z')
-        format_combo.append('zip', 'zip')
         format_combo.set_active_id(default_options['format'])
-
-        level_combo = Gtk.ComboBoxText()
-        for value, label in (
-                ('0', _('Store')),
-                ('1', _('Fastest')),
-                ('3', _('Fast')),
-                ('5', _('Normal')),
-                ('7', _('Maximum')),
-                ('9', _('Ultra'))):
-            level_combo.append(value, label)
         level_combo.set_active_id(str(default_options['level']))
-
-        method_combo = Gtk.ComboBoxText()
-        for value, label in (
-                ('default', _('Default')),
-                ('LZMA', 'LZMA'),
-                ('PPMd', 'PPMd'),
-                ('BZip2', 'BZip2')):
-            method_combo.append(value, label)
         method_combo.set_active_id(default_options['method'])
-
-        dictionary_spin = Gtk.SpinButton.new_with_range(0, 1024, 1)
         dictionary_spin.set_value(default_options['dictionary_size'])
-        dictionary_spin.set_tooltip_text(_('0 uses the 7-Zip default.'))
-
-        threads_spin = Gtk.SpinButton.new_with_range(0, 64, 1)
         threads_spin.set_value(default_options['threads'])
-        threads_spin.set_tooltip_text(_('0 uses the 7-Zip default.'))
-
-        form = Gtk.Grid()
-        form.set_column_spacing(12)
-        form.set_row_spacing(10)
-        form.set_margin_start(6)
-        form.set_margin_end(6)
-
-        controls = (
-            (_('Format'), format_combo),
-            (_('Compression level'), level_combo),
-            (_('Algorithm'), method_combo),
-            (_('Dictionary size (MB)'), dictionary_spin),
-            (_('Threads'), threads_spin),
-        )
-        for row, (label_text, control) in enumerate(controls):
-            label = Gtk.Label(label=label_text, xalign=0)
-            label.set_valign(Gtk.Align.CENTER)
-            control.set_hexpand(True)
-            form.attach(label, 0, row, 1, 1)
-            form.attach(control, 1, row, 1, 1)
-
-        revealer = Gtk.Revealer()
-        revealer.set_child(form)
-        advanced_check.connect(
-            'toggled',
-            lambda check: revealer.set_reveal_child(check.get_active()),
-        )
-        content.append(revealer)
 
         dialog = Adw.AlertDialog.new(_('Compress'), None)
         dialog.set_extra_child(content)
@@ -614,6 +517,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         remove_btn.connect('clicked', on_remove)
         output_browse.connect('clicked', on_browse_output)
         output_entry.connect('activate', lambda _e: dialog.response('confirm'))
+        advanced_check.connect(
+            'toggled',
+            lambda check: revealer.set_reveal_child(check.get_active()),
+        )
 
         def on_response(_d, response):
             if response == 'confirm':
@@ -641,18 +548,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
     def _present_extract_dialog(self, on_chosen):
-        entry = Gtk.Entry()
-        entry.set_hexpand(True)
-        entry.set_placeholder_text(_('Destination folder'))
+        builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/extract-dialog.ui')
+        box = builder.get_object('content')
+        entry = builder.get_object('entry')
         entry.set_editable(not _IS_FLATPAK)
-
-        browse_button = Gtk.Button()
-        browse_button.set_icon_name('folder-symbolic')
-        browse_button.set_tooltip_text(_('Select Destination Folder'))
-
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        box.append(entry)
-        box.append(browse_button)
+        browse_button = builder.get_object('browse_button')
 
         dialog = Adw.AlertDialog.new(_('Extract'), None)
         dialog.set_extra_child(box)

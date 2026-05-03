@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <object class="GtkBox" id="content">
+    <property name="orientation">horizontal</property>
+    <property name="spacing">6</property>
+    <child>
+      <object class="GtkEntry" id="entry">
+        <property name="hexpand">true</property>
+        <property name="placeholder-text" translatable="yes">Destination folder</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkButton" id="browse_button">
+        <property name="icon-name">folder-symbolic</property>
+        <property name="tooltip-text" translatable="yes">Select Destination Folder</property>
+      </object>
+    </child>
+  </object>
+</interface>

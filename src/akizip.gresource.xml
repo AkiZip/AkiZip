@@ -3,5 +3,7 @@
   <gresource prefix="/top/akizip/akizip">
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">shortcuts-dialog.ui</file>
+    <file preprocess="xml-stripblanks">compress-dialog.ui</file>
+    <file preprocess="xml-stripblanks">extract-dialog.ui</file>
   </gresource>
 </gresources>

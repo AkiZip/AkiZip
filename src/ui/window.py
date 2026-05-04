@@ -94,8 +94,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     add_button = Gtk.Template.Child()
     choose_button = Gtk.Template.Child()
-    extract_button = Gtk.Template.Child()
-    extract_one_button = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     address_entry = Gtk.Template.Child()
@@ -272,7 +270,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             )
         )
 
-    @Gtk.Template.Callback()
     def butextract_one(self, button):
         selection = getattr(self, '_file_list_selection', None)
         if selection is None:
@@ -983,6 +980,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if app is not None and hasattr(app, 'settings'):
             self._initial_language = app.settings.get_string('language')
             app.settings.connect('changed::language', self._on_language_changed)
+
+        action = Gio.SimpleAction.new('extract-selected', None)
+        action.connect('activate', lambda _a, _p: self.butextract_one(None))
+        self.add_action(action)
 
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)

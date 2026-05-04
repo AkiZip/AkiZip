@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-04 12:55+0800\n"
+"POT-Creation-Date: 2026-05-04 13:04+0800\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -41,7 +41,7 @@ msgstr "開發者名稱"
 msgid "A caption"
 msgstr "說明文字"
 
-#: src/ui/info_dialog.py:12 src/ui/window.py:1017
+#: src/ui/info_dialog.py:12 src/ui/window.py:1018
 msgid "System state not found"
 msgstr "找不到系統狀態"
 
@@ -57,7 +57,7 @@ msgstr "壓縮檔資訊無法使用。"
 msgid "Reading..."
 msgstr "正在讀取..."
 
-#: src/ui/info_dialog.py:36 src/ui/window.py:1228
+#: src/ui/info_dialog.py:36 src/ui/window.py:1229
 msgid "Read archive information from "
 msgstr "讀取壓縮檔資訊："
 
@@ -73,7 +73,7 @@ msgstr "關閉"
 msgid "Name"
 msgstr "名稱"
 
-#: src/ui/info_dialog.py:78 src/ui/window.py:743
+#: src/ui/info_dialog.py:78 src/ui/window.py:740
 msgid "Path"
 msgstr "路徑"
 
@@ -81,7 +81,7 @@ msgstr "路徑"
 msgid "Type"
 msgstr "類型"
 
-#: src/ui/info_dialog.py:81 src/ui/window.py:744
+#: src/ui/info_dialog.py:81 src/ui/window.py:741
 msgid "Size"
 msgstr "大小"
 
@@ -213,286 +213,286 @@ msgstr "已取消"
 msgid "Pending"
 msgstr "等候中"
 
-#: src/ui/window.py:211
+#: src/ui/window.py:209
 msgid "Test failed"
 msgstr "測試失敗"
 
-#: src/ui/window.py:211 src/ui/window.py:224 src/ui/window.py:264
+#: src/ui/window.py:209 src/ui/window.py:222 src/ui/window.py:262
 msgid "Selected path is not an archive."
 msgstr "所選路徑不是壓縮檔。"
 
-#: src/ui/window.py:224
+#: src/ui/window.py:222
 msgid "Delete failed"
 msgstr "刪除失敗"
 
-#: src/ui/window.py:232 src/ui/window.py:282 src/ui/window.py:1009
-#: src/ui/window.py:1010
+#: src/ui/window.py:230 src/ui/window.py:279 src/ui/window.py:1010
+#: src/ui/window.py:1011
 msgid "No file selected"
 msgstr "未選擇檔案"
 
-#: src/ui/window.py:236
+#: src/ui/window.py:234
 msgid "Delete"
 msgstr "刪除"
 
-#: src/ui/window.py:236
+#: src/ui/window.py:234
 msgid "Are you sure you want to delete \"{}\"?"
 msgstr "確定要刪除\"{}\"嗎？"
 
-#: src/ui/window.py:237 src/ui/window.py:293 src/ui/window.py:332
-#: src/ui/window.py:397 src/ui/window.py:445 src/ui/window.py:467
-#: src/ui/window.py:498 src/ui/window.py:705
+#: src/ui/window.py:235 src/ui/window.py:290 src/ui/window.py:329
+#: src/ui/window.py:394 src/ui/window.py:442 src/ui/window.py:464
+#: src/ui/window.py:495 src/ui/window.py:702
 msgid "_Cancel"
 msgstr "取消(_C)"
 
-#: src/ui/window.py:238
+#: src/ui/window.py:236
 msgid "_Delete"
 msgstr "刪除(_D)"
 
-#: src/ui/window.py:264
+#: src/ui/window.py:262
 msgid "Extract failed"
 msgstr "解壓縮失敗"
 
-#: src/ui/window.py:289
+#: src/ui/window.py:286
 msgid "Select File"
 msgstr "選擇檔案"
 
-#: src/ui/window.py:292 src/ui/window.py:331
+#: src/ui/window.py:289 src/ui/window.py:328
 msgid "_Open"
 msgstr "開啟(_O)"
 
-#: src/ui/window.py:328
+#: src/ui/window.py:325
 msgid "Select Destination Folder"
 msgstr "選擇目標資料夾"
 
-#: src/ui/window.py:373
+#: src/ui/window.py:370
 msgid "Default"
 msgstr "預設"
 
-#: src/ui/window.py:395 src/ui/window.py:398
+#: src/ui/window.py:392 src/ui/window.py:395
 msgid "Compress"
 msgstr "壓縮"
 
-#: src/ui/window.py:419
+#: src/ui/window.py:416
 msgid "Source items ({})"
 msgstr "來源項目 ({})"
 
-#: src/ui/window.py:441
+#: src/ui/window.py:438
 msgid "Select Files"
 msgstr "選擇檔案"
 
-#: src/ui/window.py:444 src/ui/window.py:466
+#: src/ui/window.py:441 src/ui/window.py:463
 msgid "_Add"
 msgstr "添加(_A)"
 
-#: src/ui/window.py:463
+#: src/ui/window.py:460
 msgid "Select Folders"
 msgstr "選擇資料夾"
 
-#: src/ui/window.py:494
+#: src/ui/window.py:491
 msgid "Save Archive As"
 msgstr "另存壓縮檔為"
 
-#: src/ui/window.py:497
+#: src/ui/window.py:494
 msgid "_Save"
 msgstr "保存(_S)"
 
-#: src/ui/window.py:549
+#: src/ui/window.py:546
 msgid "No source items to analyze"
 msgstr "沒有可分析的源項目"
 
-#: src/ui/window.py:556
+#: src/ui/window.py:553
 msgid "Recommendation not available"
 msgstr "推薦功能無法使用"
 
-#: src/ui/window.py:609
+#: src/ui/window.py:606
 msgid "Recommendation failed"
 msgstr "壓縮參數推薦失敗"
 
-#: src/ui/window.py:610
+#: src/ui/window.py:607
 msgid "Compression recommendation failed"
 msgstr "壓縮參數推薦失敗"
 
-#: src/ui/window.py:660
+#: src/ui/window.py:657
 msgid "Compression recommendation"
 msgstr "壓縮參數推薦"
 
-#: src/ui/window.py:665
+#: src/ui/window.py:662
 msgid "Recommendation reason"
 msgstr "推薦原因"
 
-#: src/ui/window.py:703 src/ui/window.py:706
+#: src/ui/window.py:700 src/ui/window.py:703
 msgid "Extract"
 msgstr "解壓縮"
 
-#: src/ui/window.py:745
+#: src/ui/window.py:742
 msgid "Modified"
 msgstr "修改時間"
 
-#: src/ui/window.py:859
+#: src/ui/window.py:856
 msgid "List "
 msgstr "列出 "
 
-#: src/ui/window.py:959
+#: src/ui/window.py:956
 msgid "List failed"
 msgstr "列出失敗"
 
-#: src/ui/window.py:1026
+#: src/ui/window.py:1027
 msgid "Select failed"
 msgstr "選擇失敗"
 
-#: src/ui/window.py:1029
+#: src/ui/window.py:1030
 msgid "Selected "
 msgstr "已選擇 "
 
-#: src/ui/window.py:1036
+#: src/ui/window.py:1037
 msgid "Language changed"
 msgstr "語言已變更"
 
-#: src/ui/window.py:1037
+#: src/ui/window.py:1038
 msgid "Restart the application to apply the new language."
 msgstr "請重新啟動應用程式以套用新的語言設定。"
 
-#: src/ui/window.py:1044
+#: src/ui/window.py:1045
 msgid "Command not found"
 msgstr "找不到指令"
 
-#: src/ui/window.py:1049
+#: src/ui/window.py:1050
 msgid "Job queue not found"
 msgstr "找不到工作佇列"
 
-#: src/ui/window.py:1123 src/ui/window.py:1218
+#: src/ui/window.py:1124 src/ui/window.py:1219
 msgid "{} items"
 msgstr "{} 個項目"
 
-#: src/ui/window.py:1127 src/ui/window.py:1184 src/ui/window.py:1198
-#: src/ui/window.py:1220 src/ui/window.py:1241 src/ui/window.py:1247
+#: src/ui/window.py:1128 src/ui/window.py:1185 src/ui/window.py:1199
+#: src/ui/window.py:1221 src/ui/window.py:1242 src/ui/window.py:1248
 msgid "file"
 msgstr "檔案"
 
-#: src/ui/window.py:1130 src/ui/window.py:1132
+#: src/ui/window.py:1131 src/ui/window.py:1133
 msgid "Compress "
 msgstr "壓縮 "
 
-#: src/ui/window.py:1134
+#: src/ui/window.py:1135
 msgid "Compressed "
 msgstr "已壓縮 "
 
-#: src/ui/window.py:1136
+#: src/ui/window.py:1137
 msgid "Compress timed out: "
 msgstr "壓縮逾時："
 
-#: src/ui/window.py:1138
+#: src/ui/window.py:1139
 msgid "Compress cancelled: "
 msgstr "壓縮已取消："
 
-#: src/ui/window.py:1139
+#: src/ui/window.py:1140
 msgid "Compress failed: "
 msgstr "壓縮失敗："
 
-#: src/ui/window.py:1142 src/ui/window.py:1156 src/ui/window.py:1170
-#: src/ui/window.py:1215 src/ui/window.py:1227 src/ui/window.py:1231
-#: src/ui/window.py:1236 src/ui/window.py:1240 src/ui/window.py:1246
+#: src/ui/window.py:1143 src/ui/window.py:1157 src/ui/window.py:1171
+#: src/ui/window.py:1216 src/ui/window.py:1228 src/ui/window.py:1232
+#: src/ui/window.py:1237 src/ui/window.py:1241 src/ui/window.py:1247
 msgid "archive"
 msgstr "壓縮檔"
 
-#: src/ui/window.py:1144 src/ui/window.py:1146
+#: src/ui/window.py:1145 src/ui/window.py:1147
 msgid "Open "
 msgstr "開啟 "
 
-#: src/ui/window.py:1148
+#: src/ui/window.py:1149
 msgid "Opened "
 msgstr "已開啟 "
 
-#: src/ui/window.py:1150
+#: src/ui/window.py:1151
 msgid "Open timed out: "
 msgstr "開啟逾時："
 
-#: src/ui/window.py:1152
+#: src/ui/window.py:1153
 msgid "Open cancelled: "
 msgstr "開啟已取消："
 
-#: src/ui/window.py:1153
+#: src/ui/window.py:1154
 msgid "Open failed: "
 msgstr "開啟失敗："
 
-#: src/ui/window.py:1158 src/ui/window.py:1160 src/ui/window.py:1186
-#: src/ui/window.py:1188 src/ui/window.py:1233 src/ui/window.py:1243
+#: src/ui/window.py:1159 src/ui/window.py:1161 src/ui/window.py:1187
+#: src/ui/window.py:1189 src/ui/window.py:1234 src/ui/window.py:1244
 msgid "Extract "
 msgstr "解壓縮 "
 
-#: src/ui/window.py:1162 src/ui/window.py:1190
+#: src/ui/window.py:1163 src/ui/window.py:1191
 msgid "Extracted "
 msgstr "已解壓縮 "
 
-#: src/ui/window.py:1164 src/ui/window.py:1192
+#: src/ui/window.py:1165 src/ui/window.py:1193
 msgid "Extract timed out: "
 msgstr "解壓縮逾時："
 
-#: src/ui/window.py:1166 src/ui/window.py:1194
+#: src/ui/window.py:1167 src/ui/window.py:1195
 msgid "Extract cancelled: "
 msgstr "解壓縮已取消："
 
-#: src/ui/window.py:1167 src/ui/window.py:1195
+#: src/ui/window.py:1168 src/ui/window.py:1196
 msgid "Extract failed: "
 msgstr "解壓縮失敗："
 
-#: src/ui/window.py:1172 src/ui/window.py:1174 src/ui/window.py:1237
+#: src/ui/window.py:1173 src/ui/window.py:1175 src/ui/window.py:1238
 msgid "Test "
 msgstr "測試 "
 
-#: src/ui/window.py:1176
+#: src/ui/window.py:1177
 msgid "Tested "
 msgstr "已測試 "
 
-#: src/ui/window.py:1178
+#: src/ui/window.py:1179
 msgid "Test timed out: "
 msgstr "測試逾時："
 
-#: src/ui/window.py:1180
+#: src/ui/window.py:1181
 msgid "Test cancelled: "
 msgstr "測試已取消："
 
-#: src/ui/window.py:1181
+#: src/ui/window.py:1182
 msgid "Test failed: "
 msgstr "測試失敗："
 
-#: src/ui/window.py:1200 src/ui/window.py:1202 src/ui/window.py:1248
+#: src/ui/window.py:1201 src/ui/window.py:1203 src/ui/window.py:1249
 msgid "Delete "
 msgstr "刪除 "
 
-#: src/ui/window.py:1204
+#: src/ui/window.py:1205
 msgid "Deleted "
 msgstr "已刪除 "
 
-#: src/ui/window.py:1206
+#: src/ui/window.py:1207
 msgid "Delete timed out: "
 msgstr "刪除逾時："
 
-#: src/ui/window.py:1208
+#: src/ui/window.py:1209
 msgid "Delete cancelled: "
 msgstr "刪除已取消："
 
-#: src/ui/window.py:1209
+#: src/ui/window.py:1210
 msgid "Delete failed: "
 msgstr "刪除失敗："
 
-#: src/ui/window.py:1221
+#: src/ui/window.py:1222
 msgid "Create "
 msgstr "建立 "
 
-#: src/ui/window.py:1221 src/ui/window.py:1243 src/ui/window.py:1248
+#: src/ui/window.py:1222 src/ui/window.py:1244 src/ui/window.py:1249
 msgid " from "
 msgstr "，來源 "
 
-#: src/ui/window.py:1223
+#: src/ui/window.py:1224
 msgid "Parameters: "
 msgstr "參數："
 
-#: src/ui/window.py:1232 src/ui/window.py:1242
+#: src/ui/window.py:1233 src/ui/window.py:1243
 msgid "folder"
 msgstr "資料夾"
 
-#: src/ui/window.py:1233 src/ui/window.py:1243
+#: src/ui/window.py:1234 src/ui/window.py:1244
 msgid " to "
 msgstr " 到 "
 
@@ -508,49 +508,49 @@ msgstr "開啟檔案"
 msgid "Open"
 msgstr "開啟"
 
-#: src/window.ui:91 src/window.ui:105
+#: src/window.ui:91 src/window.ui:106
 msgid "Extract All"
 msgstr "全部解壓縮"
 
-#: src/window.ui:115 src/window.ui:129
-msgid "Extract Selected"
-msgstr "解壓縮所選"
-
-#: src/window.ui:139 src/window.ui:153
+#: src/window.ui:116 src/window.ui:130
 msgid "Test"
 msgstr "測試"
 
-#: src/window.ui:236
+#: src/window.ui:213
 msgid "Path or archive"
 msgstr "路徑或壓縮檔"
 
-#: src/window.ui:251
+#: src/window.ui:228
 msgid "Open an archive to view its contents"
 msgstr "開啟壓縮檔以檢視其內容"
 
-#: src/window.ui:293
+#: src/window.ui:270
 msgid "_Language"
 msgstr "語言(_L)"
 
-#: src/window.ui:296
+#: src/window.ui:273
 msgid "System Default"
 msgstr "跟隨系統"
 
-#: src/window.ui:322
+#: src/window.ui:299
 msgid "Show _Logs"
 msgstr "顯示日誌(_L)"
 
-#: src/window.ui:328
+#: src/window.ui:305
 msgid "_Preferences"
 msgstr "偏好設定(_P)"
 
-#: src/window.ui:332
+#: src/window.ui:309
 msgid "_Keyboard Shortcuts"
 msgstr "鍵盤快捷鍵(_K)"
 
-#: src/window.ui:336
+#: src/window.ui:313
 msgid "_About Akizip"
 msgstr "關於 Akizip(_A)"
+
+#: src/window.ui:321
+msgid "Extract Selected"
+msgstr "解壓縮所選"
 
 #: src/compress-dialog.ui:12
 msgid "Output archive"

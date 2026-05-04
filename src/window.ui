@@ -86,10 +86,11 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkButton" id="extract_button">
+                          <object class="AdwSplitButton" id="extract_split_button">
                             <property name="width-request">70</property>
                             <property name="tooltip-text" translatable="yes">Extract All</property>
-                            <signal name="clicked" handler="butextract"></signal>
+                            <signal name="clicked" handler="butextract"/>
+                            <property name="menu-model">extract_menu</property>
                             <property name="child">
                               <object class="GtkBox">
                                 <property name="orientation">vertical</property>
@@ -103,30 +104,6 @@
                                 <child>
                                   <object class="GtkLabel">
                                     <property name="label" translatable="yes">Extract All</property>
-                                  </object>
-                                </child>
-                              </object>
-                            </property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="extract_one_button">
-                            <property name="width-request">70</property>
-                            <property name="tooltip-text" translatable="yes">Extract Selected</property>
-                            <signal name="clicked" handler="butextract_one"></signal>
-                            <property name="child">
-                              <object class="GtkBox">
-                                <property name="orientation">vertical</property>
-                                <property name="spacing">4</property>
-                                <child>
-                                  <object class="GtkImage">
-                                    <property name="icon-name">document-save-symbolic</property>
-                                    <property name="pixel-size">24</property>
-                                  </object>
-                                </child>
-                                <child>
-                                  <object class="GtkLabel">
-                                    <property name="label" translatable="yes">Extract Selected</property>
                                   </object>
                                 </child>
                               </object>
@@ -335,6 +312,14 @@
       <item>
         <attribute name="label" translatable="yes">_About Akizip</attribute>
         <attribute name="action">app.about</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="extract_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Extract Selected</attribute>
+        <attribute name="action">win.extract-selected</attribute>
       </item>
     </section>
   </menu>

@@ -7,18 +7,6 @@
       <object class="AdwPreferencesGroup" id="compression_group">
         <property name="title" translatable="yes">Compression</property>
         <child>
-          <object class="AdwActionRow" id="recommend_row">
-            <property name="title" translatable="yes">Use compression recommendations</property>
-            <property name="subtitle" translatable="yes">Automatically choose 7-Zip parameters before compressing.</property>
-            <property name="activatable-widget">recommend_switch</property>
-            <child type="suffix">
-              <object class="GtkSwitch" id="recommend_switch">
-                <property name="valign">center</property>
-              </object>
-            </child>
-          </object>
-        </child>
-        <child>
           <object class="AdwActionRow" id="depth_row">
             <property name="title" translatable="yes">Scan depth</property>
             <property name="subtitle" translatable="yes">Maximum folder levels to scan for recommendations.</property>

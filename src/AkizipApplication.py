@@ -66,20 +66,12 @@ class AkizipApplication(Adw.Application):
 
         builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/preferences.ui')
         page = builder.get_object('page')
-        recommend_switch = builder.get_object('recommend_switch')
         depth_spin = builder.get_object('depth_spin')
         format_combo = builder.get_object('format_combo')
         level_combo = builder.get_object('level_combo')
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
-
-        self.settings.bind(
-            'use-compress-recommendation',
-            recommend_switch,
-            'active',
-            Gio.SettingsBindFlags.DEFAULT,
-        )
 
         depth_spin.set_value(self.settings.get_int('compress-scan-depth'))
         depth_spin.connect(

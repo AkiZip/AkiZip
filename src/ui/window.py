@@ -524,6 +524,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     if file is not None:
                         op = file.get_path()
                         if op is not None:
+                            op_path = Path(op)
+                            suffix = op_path.suffix.lstrip('.').lower()
+                            if suffix not in ('7z', 'tar', 'wim', 'zip'):
+                                op = str(op_path.with_suffix('.7z'))
                             display = _host_path(op)
                             output_entry.set_text(display)
                             last_output['display'] = display

@@ -123,6 +123,15 @@ def archive_test(archive_path, timeout=-1, cancel_event=None):
     return output
 
 
+def archive_move(archive_path, src_name, dst_name, timeout=-1, cancel_event=None):
+    return _run_7zip([
+        'rn',
+        str(archive_path),
+        str(src_name),
+        str(dst_name),
+    ], timeout, cancel_event)
+
+
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
@@ -132,3 +141,4 @@ def register(commands):
     commands['archive.extract_file'] = archive_extract_FileInZip
     commands['archive.delete'] = archive_delete
     commands['archive.test'] = archive_test
+    commands['archive.move'] = archive_move

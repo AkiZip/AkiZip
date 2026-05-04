@@ -212,6 +212,54 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._run_command('archive.test', selected)
 
     @Gtk.Template.Callback()
+    def butmove(self, button):
+        selected = self._selected_path_from_input()
+        if selected is None:
+            return
+
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.can_extract():
+            self._append_log(_('Move failed'), _('Selected path is not an archive.'), _status.ERROR)
+            return
+
+        selection = getattr(self, '_file_list_selection', None)
+        if selection is None:
+            return
+        item = selection.get_selected_item()
+        if item is None or item.path == '..':
+            self._show_notification(_('No file selected'), _status.ERROR)
+            return
+
+        target_name = item.path
+        dialog = Adw.AlertDialog.new(_('Move'), _('Move "{}" to:').format(target_name))
+        entry = Gtk.Entry()
+        entry.set_text(item.full_path.rstrip('/') if item.is_folder else item.full_path)
+        entry.set_activates_default(True)
+        dialog.set_extra_child(entry)
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('_Move'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+        dialog.set_close_response('cancel')
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                dst_path = entry.get_text().strip().lstrip('/')
+                if not dst_path:
+                    dst_path = item.path
+                src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+                self._run_command(
+                    'archive.move',
+                    selected,
+                    src_path,
+                    dst_path,
+                    on_success_extra=lambda _output: self._refresh_file_list(),
+                )
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+    @Gtk.Template.Callback()
     def butdelete(self, button):
         selected = self._selected_path_from_input()
         if selected is None:
@@ -1209,6 +1257,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Delete cancelled: ') + target
             return _('Delete failed: ') + target
 
+        if name == 'archive.move':
+            target = Path(args[1]).name if len(args) > 1 else _('file')
+            if state == _status.PENDING:
+                return _('Move ') + target
+            if state == _status.WORKING:
+                return _('Move ') + target
+            if state == _status.FINISHED:
+                return _('Moved ') + target
+            if state == _status.TIMEOUT:
+                return _('Move timed out: ') + target
+            if state == _status.CANCELLED:
+                return _('Move cancelled: ') + target
+            return _('Move failed: ') + target
+
         return name
 
     def _command_preview(self, name, args):
@@ -1247,6 +1309,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             archive = Path(args[0]).name if args else _('archive')
             file_name = Path(args[1][0]).name if len(args) > 1 and args[1] else _('file')
             return _('Delete ') + file_name + _(' from ') + archive
+
+        if name == 'archive.move':
+            archive = Path(args[0]).name if args else _('archive')
+            file_name = Path(args[1]).name if len(args) > 1 else _('file')
+            dst = Path(args[2]).name if len(args) > 2 else _('destination')
+            return _('Move ') + file_name + _(' to ') + dst + _(' in ') + archive
 
         return name
 

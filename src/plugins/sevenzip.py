@@ -103,6 +103,16 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, c
         str(file_name),
     ], timeout, cancel_event)
 
+def archive_delete(archive_path, file_names, timeout=-1, cancel_event=None):
+    if isinstance(file_names, (str, Path)):
+        file_names = [file_names]
+    return _run_7zip([
+        'd',
+        str(archive_path),
+        *[str(name) for name in file_names],
+    ], timeout, cancel_event)
+
+
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
@@ -110,3 +120,4 @@ def register(commands):
     commands['archive.compress_advance'] = archive_compress_advance
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip
+    commands['archive.delete'] = archive_delete

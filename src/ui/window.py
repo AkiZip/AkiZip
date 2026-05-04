@@ -201,6 +201,46 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._show_info_dialog(selected)
 
     @Gtk.Template.Callback()
+    def butdelete(self, button):
+        selected = self._selected_path_from_input()
+        if selected is None:
+            return
+
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.can_extract():
+            self._append_log(_('Delete failed'), _('Selected path is not an archive.'), _status.ERROR)
+            return
+
+        selection = getattr(self, '_file_list_selection', None)
+        if selection is None:
+            return
+        item = selection.get_selected_item()
+        if item is None or item.path == '..':
+            self._show_notification(_('No file selected'), _status.ERROR)
+            return
+
+        target_name = item.path
+        dialog = Adw.AlertDialog.new(_('Delete'), _('Are you sure you want to delete "{}"?').format(target_name))
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('_Delete'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.set_default_response('cancel')
+        dialog.set_close_response('cancel')
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+                self._run_command(
+                    'archive.delete',
+                    selected,
+                    [file_name],
+                    on_success_extra=lambda _output: self._refresh_file_list(),
+                )
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+    @Gtk.Template.Callback()
     def butextract(self, button):
         selected = self._selected_path_from_input()
         if selected is None:
@@ -984,7 +1024,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             _('Restart the application to apply the new language.'),
         )
 
-    def _run_command(self, name, *args):
+    def _run_command(self, name, *args, on_success_extra=None):
         app = self.get_application()
         command = getattr(app, 'commands', {}).get(name)
         if command is None:
@@ -998,10 +1038,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         log_id = object()
         summary = self._command_summary(name, args, _status.PENDING)
+
+        def on_success(output):
+            self._on_command_success(log_id, name, args, output)
+            if on_success_extra is not None:
+                on_success_extra(output)
+
         handle = job_queue.submit(
             command,
             args,
-            on_success=lambda output: self._on_command_success(log_id, name, args, output),
+            on_success=on_success,
             on_error=lambda error: self._on_command_error(log_id, name, args, error),
             timeout=60,
             task_id=name,
@@ -1121,6 +1167,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Extract cancelled: ') + target
             return _('Extract failed: ') + target
 
+        if name == 'archive.delete':
+            target = Path(args[1][0]).name if len(args) > 1 and args[1] else _('file')
+            if state == _status.PENDING:
+                return _('Delete ') + target
+            if state == _status.WORKING:
+                return _('Delete ') + target
+            if state == _status.FINISHED:
+                return _('Deleted ') + target
+            if state == _status.TIMEOUT:
+                return _('Delete timed out: ') + target
+            if state == _status.CANCELLED:
+                return _('Delete cancelled: ') + target
+            return _('Delete failed: ') + target
+
         return name
 
     def _command_preview(self, name, args):
@@ -1150,6 +1210,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             file_name = Path(args[1]).name if len(args) > 1 else _('file')
             output = Path(args[2]).name if len(args) > 2 else _('folder')
             return _('Extract ') + file_name + _(' from ') + archive + _(' to ') + output
+
+        if name == 'archive.delete':
+            archive = Path(args[0]).name if args else _('archive')
+            file_name = Path(args[1][0]).name if len(args) > 1 and args[1] else _('file')
+            return _('Delete ') + file_name + _(' from ') + archive
 
         return name
 

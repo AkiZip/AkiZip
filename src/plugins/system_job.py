@@ -276,6 +276,21 @@ def suggest_zip_paramiters(fileCount):
         })
         return suggestion
 
+    if already_packed_ratio >= 0.90 and files < 50:
+        suggestion.update({
+            "format": "tar",
+            "level": 0,
+            "method": "store",
+            "dictionary": "none",
+            "threads": "on",
+            "sevenzip_args": ["-ttar"],
+            "reason": [
+                "Most data is already compressed and the file count is small.",
+                "Tar store mode packages files without recompression.",
+            ],
+        })
+        return suggestion
+
     if already_packed_ratio >= 0.70:
         suggestion.update({
             "format": "zip",
@@ -287,6 +302,26 @@ def suggest_zip_paramiters(fileCount):
             "reason": [
                 "Most data is already compressed media or archive content.",
                 "Store mode avoids wasting time recompressing files with little size gain.",
+            ],
+        })
+        return suggestion
+
+    extensions = fileCount.get("extensions", {})
+    windows_binary_count = sum(
+        extensions.get(ext, {}).get("count", 0)
+        for ext in (".exe", ".dll", ".sys", ".msi", ".cab")
+    )
+    if windows_binary_count > 100:
+        suggestion.update({
+            "format": "wim",
+            "level": 3,
+            "method": "default",
+            "dictionary": "none",
+            "threads": "on",
+            "sevenzip_args": ["-twim", "-mx=3", "-mmt=on"],
+            "reason": [
+                "Many Windows binary files detected.",
+                "WIM format is optimized for Windows image storage.",
             ],
         })
         return suggestion

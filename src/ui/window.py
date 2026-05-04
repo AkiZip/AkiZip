@@ -197,7 +197,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         archive_format = self._settings_get_string('default-compress-format', options['format'])
         method = self._settings_get_string('default-compress-method', options['method'])
-        options['format'] = archive_format if archive_format in ('7z', 'zip') else '7z'
+        _VALID_FORMATS = ('7z', 'tar', 'wim', 'zip')
+        options['format'] = archive_format if archive_format in _VALID_FORMATS else '7z'
         level = self._settings_get_int('default-compress-level', options['level'])
         options['level'] = level if level in (0, 1, 3, 5, 7, 9) else 5
         options['method'] = method if method in ('default', 'LZMA', 'PPMd', 'BZip2') else 'default'
@@ -241,12 +242,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         )
 
     def _advanced_compress_args(self, options):
-        args = [
-            f"-t{options['format']}",
-            f"-mx={options['level']}",
-        ]
+        fmt = options['format']
+        args = [f"-t{fmt}"]
+        if fmt == 'tar':
+            return args
+        args.append(f"-mx={options['level']}")
         if options['method'] != 'default':
-            if options['format'] == 'zip':
+            if fmt == 'zip':
                 args.append(f"-mm={options['method']}")
             else:
                 args.append(f"-m0={options['method']}")
@@ -372,13 +374,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         add_files_btn = builder.get_object('add_files_btn')
         add_folders_btn = builder.get_object('add_folders_btn')
         remove_btn = builder.get_object('remove_btn')
-        advanced_check = builder.get_object('advanced_check')
         format_combo = builder.get_object('format_combo')
         level_combo = builder.get_object('level_combo')
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
-        revealer = builder.get_object('revealer')
+        suggest_btn = builder.get_object('suggest_btn')
 
         format_combo.set_active_id(default_options['format'])
         level_combo.set_active_id(str(default_options['level']))
@@ -507,15 +508,133 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             chooser.connect('response', on_response)
             chooser.show()
 
+        def on_format_changed(combo):
+            fmt = combo.get_active_id() or '7z'
+            is_tar = (fmt == 'tar')
+            method_combo.set_sensitive(not is_tar)
+            dictionary_spin.set_sensitive(not is_tar)
+
+        format_combo.connect('changed', on_format_changed)
+        on_format_changed(format_combo)
+
+        def on_suggest(_btn):
+            if not source_paths:
+                self._show_notification(_('No source items to analyze'), _status.WARNING)
+                return
+
+            app = self.get_application()
+            scan = getattr(app, 'commands', {}).get('system.scan')
+            suggest = getattr(app, 'commands', {}).get('system.suggest_zip_paramiters')
+            if scan is None or suggest is None:
+                self._show_notification(_('Recommendation not available'), _status.ERROR)
+                return
+
+            try:
+                depth = app.settings.get_int('compress-scan-depth') if (app is not None and hasattr(app, 'settings')) else 3
+                merged = {
+                    'root': 'multiple',
+                    'max_depth': depth,
+                    'total': 0,
+                    'files': 0,
+                    'folders': 0,
+                    'total_size': 0,
+                    'largest_file': {'path': '', 'size': 0},
+                    'extensions': {},
+                    'categories': {
+                        'compressed': {'count': 0, 'size': 0},
+                        'media': {'count': 0, 'size': 0},
+                        'documents': {'count': 0, 'size': 0},
+                        'code': {'count': 0, 'size': 0},
+                        'other': {'count': 0, 'size': 0},
+                    },
+                    'size_buckets': {
+                        'small': {'count': 0, 'size': 0},
+                        'medium': {'count': 0, 'size': 0},
+                        'large': {'count': 0, 'size': 0},
+                        'huge': {'count': 0, 'size': 0},
+                    },
+                    'errors': [],
+                }
+                for src in source_paths:
+                    result = scan(str(src), depth)
+                    merged['files'] += result.get('files', 0)
+                    merged['folders'] += result.get('folders', 0)
+                    merged['total'] = merged['files'] + merged['folders']
+                    merged['total_size'] += result.get('total_size', 0)
+                    merged['errors'].extend(result.get('errors', []))
+                    if result.get('largest_file', {}).get('size', 0) > merged['largest_file']['size']:
+                        merged['largest_file'] = result['largest_file']
+                    for key, val in result.get('extensions', {}).items():
+                        bucket = merged['extensions'].setdefault(key, {'count': 0, 'size': 0})
+                        bucket['count'] += val.get('count', 0)
+                        bucket['size'] += val.get('size', 0)
+                    for key, val in result.get('categories', {}).items():
+                        bucket = merged['categories'].setdefault(key, {'count': 0, 'size': 0})
+                        bucket['count'] += val.get('count', 0)
+                        bucket['size'] += val.get('size', 0)
+                    for key, val in result.get('size_buckets', {}).items():
+                        bucket = merged['size_buckets'].setdefault(key, {'count': 0, 'size': 0})
+                        bucket['count'] += val.get('count', 0)
+                        bucket['size'] += val.get('size', 0)
+
+                suggestion = suggest(merged)
+            except Exception as error:
+                self._show_notification(_('Recommendation failed'), _status.ERROR)
+                self._append_log(_('Compression recommendation failed'), str(error), _status.WARNING)
+                return
+
+            fmt = suggestion.get('format', '7z')
+            if fmt in ('7z', 'tar', 'wim', 'zip'):
+                format_combo.set_active_id(fmt)
+
+            level = suggestion.get('level')
+            if level is not None and str(level) in ('0', '1', '3', '5', '7', '9'):
+                level_combo.set_active_id(str(level))
+
+            method = suggestion.get('method', 'default')
+            if method == 'store':
+                method = 'default'
+            if method in ('default', 'LZMA', 'LZMA2', 'PPMd', 'BZip2'):
+                method_combo.set_active_id(method)
+
+            dictionary = suggestion.get('dictionary', '0')
+            if isinstance(dictionary, str) and dictionary.endswith('m'):
+                try:
+                    dictionary_spin.set_value(int(dictionary[:-1]))
+                except ValueError:
+                    dictionary_spin.set_value(0)
+            elif isinstance(dictionary, int):
+                dictionary_spin.set_value(dictionary)
+            else:
+                dictionary_spin.set_value(0)
+
+            threads = suggestion.get('threads', '0')
+            if threads == 'on':
+                threads_spin.set_value(0)
+            else:
+                try:
+                    threads_spin.set_value(int(threads))
+                except (ValueError, TypeError):
+                    threads_spin.set_value(0)
+
+            on_format_changed(format_combo)
+
+            reasons = suggestion.get('reason', [])
+            if reasons:
+                self._append_log(
+                    _('Compression recommendation'),
+                    ' '.join(suggestion.get('sevenzip_args', [])),
+                    _status.FINISHED,
+                )
+                for r in reasons:
+                    self._append_log(_('Recommendation reason'), r, _status.FINISHED)
+
         add_files_btn.connect('clicked', on_add_files)
         add_folders_btn.connect('clicked', on_add_folders)
         remove_btn.connect('clicked', on_remove)
         output_browse.connect('clicked', on_browse_output)
         output_entry.connect('activate', lambda _e: dialog.response('confirm'))
-        advanced_check.connect(
-            'toggled',
-            lambda check: revealer.set_reveal_child(check.get_active()),
-        )
+        suggest_btn.connect('clicked', on_suggest)
 
         def on_response(_d, response):
             if response == 'confirm':
@@ -527,17 +646,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 else:
                     output_path = Path(text).expanduser()
                 paths = [Path(p) for p in source_paths]
-                if advanced_check.get_active():
-                    options = {
-                        'format': format_combo.get_active_id() or '7z',
-                        'level': int(level_combo.get_active_id() or '5'),
-                        'method': method_combo.get_active_id() or 'default',
-                        'dictionary_size': dictionary_spin.get_value_as_int(),
-                        'threads': threads_spin.get_value_as_int(),
-                    }
-                    self._run_advanced_compress_multi(output_path, paths, options)
-                else:
-                    self._run_compress_multi(output_path, paths)
+                options = {
+                    'format': format_combo.get_active_id() or '7z',
+                    'level': int(level_combo.get_active_id() or '5'),
+                    'method': method_combo.get_active_id() or 'default',
+                    'dictionary_size': dictionary_spin.get_value_as_int(),
+                    'threads': threads_spin.get_value_as_int(),
+                }
+                self._run_advanced_compress_multi(output_path, paths, options)
 
         dialog.connect('response', on_response)
         dialog.present(self)

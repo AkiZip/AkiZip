@@ -88,7 +88,8 @@ class AkizipApplication(Adw.Application):
         )
 
         default_format = self._settings_get_string('default-compress-format', '7z')
-        format_combo.set_active_id(default_format if default_format in ('7z', 'zip') else '7z')
+        _VALID_FORMATS = ('7z', 'tar', 'wim', 'zip')
+        format_combo.set_active_id(default_format if default_format in _VALID_FORMATS else '7z')
         format_combo.connect(
             'changed',
             lambda combo: self._settings_set_string(

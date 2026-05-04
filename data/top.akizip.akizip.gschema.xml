@@ -9,14 +9,6 @@
 				locale, or a gettext language code such as "en", "zh_CN" or "zh_HK".
 			</description>
 		</key>
-		<key name="use-compress-recommendation" type="b">
-			<default>false</default>
-			<summary>Use recommended compression parameters</summary>
-			<description>
-				When enabled, compression scans the selected file or folder and uses
-				recommended 7-Zip parameters.
-			</description>
-		</key>
 		<key name="default-compress-format" type="s">
 			<default>"7z"</default>
 			<summary>Default compression format</summary>

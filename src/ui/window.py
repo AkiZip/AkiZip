@@ -39,11 +39,19 @@ _IS_FLATPAK = os.path.exists('/.flatpak-info')
 def _host_path(path):
     if not path:
         return ''
+    p = Path(path)
     try:
-        value = os.getxattr(os.fsencode(str(path)), _HOST_PATH_XATTR)
+        value = os.getxattr(os.fsencode(str(p)), _HOST_PATH_XATTR)
+        return os.fsdecode(value) or str(p)
     except OSError:
-        return str(path)
-    return os.fsdecode(value) or str(path)
+        for parent in p.parents:
+            try:
+                value = os.getxattr(os.fsencode(str(parent)), _HOST_PATH_XATTR)
+                host_parent = os.fsdecode(value) or str(parent)
+                return str(Path(host_parent) / p.relative_to(parent))
+            except OSError:
+                continue
+        return str(p)
 
 
 class ArchiveEntry(GObject.Object):
@@ -347,7 +355,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 source_list.remove(row)
             for path in source_paths:
                 label = Gtk.Label()
-                label.set_label(str(path))
+                label.set_label(_host_path(path))
                 label.set_xalign(0)
                 label.set_ellipsize(Pango.EllipsizeMode.MIDDLE)
                 label.set_margin_start(6)
@@ -361,8 +369,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dialog.set_response_enabled('confirm', confirm_sensitive)
 
         def on_output_changed(_entry):
-            confirm_sensitive = len(source_paths) > 0 and output_entry.get_text().strip()
+            text = output_entry.get_text().strip()
+            confirm_sensitive = len(source_paths) > 0 and text
             dialog.set_response_enabled('confirm', confirm_sensitive)
+            suffix = Path(text).suffix.lstrip('.').lower()
+            if suffix in ('7z', 'tar', 'wim', 'zip') and format_combo.get_active_id() != suffix:
+                format_combo.set_active_id(suffix)
 
         output_entry.connect('changed', on_output_changed)
 
@@ -443,11 +455,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     if file is not None:
                         op = file.get_path()
                         if op is not None:
-                            op_path = Path(op)
-                            suffix = op_path.suffix.lstrip('.').lower()
-                            if suffix not in ('7z', 'tar', 'wim', 'zip'):
-                                op = str(op_path.with_suffix('.7z'))
                             display = _host_path(op)
+                            display_path = Path(display)
+                            suffix = display_path.suffix.lstrip('.').lower()
+                            if suffix not in ('7z', 'tar', 'wim', 'zip'):
+                                op = str(Path(op).with_suffix('.7z'))
+                                display = str(display_path.with_suffix('.7z'))
                             output_entry.set_text(display)
                             last_output['display'] = display
                             last_output['op'] = op
@@ -464,6 +477,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
             dictionary_spin.set_sensitive(fmt == '7z')
             threads_spin.set_sensitive(fmt in ('7z', 'zip'))
+            text = output_entry.get_text().strip()
+            if text:
+                op_path = Path(text)
+                suffix = op_path.suffix.lstrip('.').lower()
+                if suffix in ('7z', 'tar', 'wim', 'zip') and suffix != fmt:
+                    new_text = str(op_path.with_suffix(f'.{fmt}'))
+                    output_entry.set_text(new_text)
+                    if last_output['display'] == text and last_output['op']:
+                        last_output['display'] = new_text
+                        last_output['op'] = str(Path(last_output['op']).with_suffix(f'.{fmt}'))
 
         format_combo.connect('changed', on_format_changed)
         on_format_changed(format_combo)

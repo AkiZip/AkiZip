@@ -201,6 +201,19 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._show_info_dialog(selected)
 
     @Gtk.Template.Callback()
+    def buttest(self, button):
+        selected = self._selected_path_from_input()
+        if selected is None:
+            return
+
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.can_extract():
+            self._append_log(_('Test failed'), _('Selected path is not an archive.'), _status.ERROR)
+            return
+
+        self._run_command('archive.test', selected)
+
+    @Gtk.Template.Callback()
     def butdelete(self, button):
         selected = self._selected_path_from_input()
         if selected is None:
@@ -1153,6 +1166,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Extract cancelled: ') + target
             return _('Extract failed: ') + target
 
+        if name == 'archive.test':
+            target = Path(args[0]).name if args else _('archive')
+            if state == _status.PENDING:
+                return _('Test ') + target
+            if state == _status.WORKING:
+                return _('Test ') + target
+            if state == _status.FINISHED:
+                return _('Tested ') + target
+            if state == _status.TIMEOUT:
+                return _('Test timed out: ') + target
+            if state == _status.CANCELLED:
+                return _('Test cancelled: ') + target
+            return _('Test failed: ') + target
+
         if name == 'archive.extract_file':
             target = Path(args[1]).name if len(args) > 1 else _('file')
             if state == _status.PENDING:
@@ -1204,6 +1231,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             archive = Path(args[0]).name if args else _('archive')
             output = Path(args[1]).name if len(args) > 1 else _('folder')
             return _('Extract ') + archive + _(' to ') + output
+
+        if name == 'archive.test':
+            archive = Path(args[0]).name if args else _('archive')
+            return _('Test ') + archive
 
         if name == 'archive.extract_file':
             archive = Path(args[0]).name if args else _('archive')

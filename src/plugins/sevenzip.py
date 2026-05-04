@@ -113,6 +113,16 @@ def archive_delete(archive_path, file_names, timeout=-1, cancel_event=None):
     ], timeout, cancel_event)
 
 
+def archive_test(archive_path, timeout=-1, cancel_event=None):
+    output = _run_7zip([
+        't',
+        str(archive_path),
+    ], timeout, cancel_event)
+    if 'Everything is Ok' not in output:
+        raise RuntimeError(output or 'Test failed')
+    return output
+
+
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
@@ -121,3 +131,4 @@ def register(commands):
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip
     commands['archive.delete'] = archive_delete
+    commands['archive.test'] = archive_test

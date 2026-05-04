@@ -306,26 +306,6 @@ def suggest_zip_paramiters(fileCount):
         })
         return suggestion
 
-    extensions = fileCount.get("extensions", {})
-    windows_binary_count = sum(
-        extensions.get(ext, {}).get("count", 0)
-        for ext in (".exe", ".dll", ".sys", ".msi", ".cab")
-    )
-    if windows_binary_count > 100:
-        suggestion.update({
-            "format": "wim",
-            "level": 3,
-            "method": "default",
-            "dictionary": "none",
-            "threads": "on",
-            "sevenzip_args": ["-twim", "-mx=3", "-mmt=on"],
-            "reason": [
-                "Many Windows binary files detected.",
-                "WIM format is optimized for Windows image storage.",
-            ],
-        })
-        return suggestion
-
     if text_like_ratio >= 0.60:
         dictionary = "64m" if total_size < 1024 * 1024 * 1024 else "128m"
         suggestion.update({

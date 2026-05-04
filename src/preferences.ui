@@ -41,7 +41,6 @@
                 <items>
                   <item translatable="no" id="7z">7z</item>
                   <item translatable="no" id="tar">tar</item>
-                  <item translatable="no" id="wim">wim</item>
                   <item translatable="no" id="zip">zip</item>
                 </items>
               </object>

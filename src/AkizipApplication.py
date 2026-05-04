@@ -108,7 +108,7 @@ class AkizipApplication(Adw.Application):
             threads_spin.set_sensitive(fmt in ('7z', 'zip'))
 
         default_format = self._settings_get_string('default-compress-format', '7z')
-        _VALID_FORMATS = ('7z', 'tar', 'wim', 'zip')
+        _VALID_FORMATS = ('7z', 'tar', 'zip')
         format_combo.set_active_id(default_format if default_format in _VALID_FORMATS else '7z')
         format_combo.connect('changed', on_prefs_format_changed)
 
@@ -129,7 +129,6 @@ class AkizipApplication(Adw.Application):
             '7z': ('default', 'LZMA2', 'LZMA', 'PPMd', 'BZip2'),
             'tar': ('GNU', 'POSIX'),
             'zip': ('Deflate', 'Deflate64', 'BZip2', 'LZMA', 'PPMd'),
-            'wim': (),
         }
         if default_method in valid_methods.get(fmt, ()):
             method_combo.set_active_id(default_method)

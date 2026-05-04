@@ -13,7 +13,7 @@
 			<default>"7z"</default>
 			<summary>Default compression format</summary>
 			<description>
-				Archive format used when compressing. Supported: 7z, tar, wim, zip.
+				Archive format used when compressing. Supported: 7z, tar, zip.
 			</description>
 		</key>
 		<key name="default-compress-level" type="i">

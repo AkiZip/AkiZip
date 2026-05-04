@@ -122,7 +122,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         archive_format = self._settings_get_string('default-compress-format', options['format'])
         method = self._settings_get_string('default-compress-method', options['method'])
-        _VALID_FORMATS = ('7z', 'tar', 'wim', 'zip')
+        _VALID_FORMATS = ('7z', 'tar', 'zip')
         options['format'] = archive_format if archive_format in _VALID_FORMATS else '7z'
         level = self._settings_get_int('default-compress-level', options['level'])
         options['level'] = level if level in (0, 1, 3, 5, 7, 9) else 5
@@ -133,8 +133,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             options['method'] = method if method in ('GNU', 'POSIX') else 'GNU'
         elif fmt == 'zip':
             options['method'] = method if method in ('Deflate', 'Deflate64', 'BZip2', 'LZMA', 'PPMd') else 'Deflate'
-        elif fmt == 'wim':
-            options['method'] = 'default'
         options['dictionary_size'] = self._settings_get_int('default-compress-dictionary-size', options['dictionary_size'])
         options['threads'] = self._settings_get_int('default-compress-threads', options['threads'])
         return options
@@ -177,7 +175,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _advanced_compress_args(self, options):
         fmt = options['format']
         args = [f"-t{fmt}"]
-        if fmt in ('tar', 'wim'):
+        if fmt == 'tar':
             return args
         args.append(f"-mx={options['level']}")
         if options['method'] != 'default':
@@ -418,7 +416,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             '7z': [('default', _('Default')), ('LZMA2', 'LZMA2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd'), ('BZip2', 'BZip2')],
             'tar': [('GNU', 'GNU'), ('POSIX', 'POSIX')],
             'zip': [('Deflate', 'Deflate'), ('Deflate64', 'Deflate64'), ('BZip2', 'BZip2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd')],
-            'wim': [],
         }
 
         def _populate_method_combo(fmt, select_id=None):
@@ -471,7 +468,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             confirm_sensitive = len(source_paths) > 0 and text
             dialog.set_response_enabled('confirm', confirm_sensitive)
             suffix = Path(text).suffix.lstrip('.').lower()
-            if suffix in ('7z', 'tar', 'wim', 'zip') and format_combo.get_active_id() != suffix:
+            if suffix in ('7z', 'tar', 'zip') and format_combo.get_active_id() != suffix:
                 format_combo.set_active_id(suffix)
 
         output_entry.connect('changed', on_output_changed)
@@ -556,7 +553,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                             display = _host_path(op)
                             display_path = Path(display)
                             suffix = display_path.suffix.lstrip('.').lower()
-                            if suffix not in ('7z', 'tar', 'wim', 'zip'):
+                            if suffix not in ('7z', 'tar', 'zip'):
                                 op = str(Path(op).with_suffix('.7z'))
                                 display = str(display_path.with_suffix('.7z'))
                             output_entry.set_text(display)
@@ -579,7 +576,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if text:
                 op_path = Path(text)
                 suffix = op_path.suffix.lstrip('.').lower()
-                if suffix in ('7z', 'tar', 'wim', 'zip') and suffix != fmt:
+                if suffix in ('7z', 'tar', 'zip') and suffix != fmt:
                     new_text = str(op_path.with_suffix(f'.{fmt}'))
                     output_entry.set_text(new_text)
                     if last_output['display'] == text and last_output['op']:
@@ -656,7 +653,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return
 
             fmt = suggestion.get('format', '7z')
-            if fmt in ('7z', 'tar', 'wim', 'zip'):
+            if fmt in ('7z', 'tar', 'zip'):
                 format_combo.set_active_id(fmt)
 
             level = suggestion.get('level')

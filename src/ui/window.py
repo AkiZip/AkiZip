@@ -1078,10 +1078,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _on_language_changed(self, settings, key):
         if settings.get_string(key) == self._initial_language:
             return
-        self._append_log(
+        dialog = Adw.AlertDialog.new(
             _('Language changed'),
             _('Restart the application to apply the new language.'),
         )
+        dialog.add_response('ok', _('_OK'))
+        dialog.set_default_response('ok')
+        dialog.set_close_response('ok')
+        dialog.present(self)
 
     def _run_command(self, name, *args, on_success_extra=None):
         app = self.get_application()

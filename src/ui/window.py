@@ -160,7 +160,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
             suggestion = suggest(merged)
             archive_format = suggestion.get('format', self._default_compress_format())
-            if archive_format not in ('7z', 'zip'):
+            if archive_format not in ('7z', 'tar', 'wim', 'zip'):
                 archive_format = self._default_compress_format()
             sevenzip_args = suggestion.get('sevenzip_args', [])
         except Exception as error:
@@ -201,7 +201,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         options['format'] = archive_format if archive_format in _VALID_FORMATS else '7z'
         level = self._settings_get_int('default-compress-level', options['level'])
         options['level'] = level if level in (0, 1, 3, 5, 7, 9) else 5
-        options['method'] = method if method in ('default', 'LZMA', 'PPMd', 'BZip2') else 'default'
+        fmt = options['format']
+        if fmt == '7z':
+            options['method'] = method if method in ('default', 'LZMA2', 'LZMA', 'PPMd', 'BZip2') else 'default'
+        elif fmt == 'tar':
+            options['method'] = method if method in ('GNU', 'POSIX') else 'GNU'
+        elif fmt == 'zip':
+            options['method'] = method if method in ('Deflate', 'Deflate64', 'BZip2', 'LZMA', 'PPMd') else 'Deflate'
+        elif fmt == 'wim':
+            options['method'] = 'default'
         options['dictionary_size'] = self._settings_get_int('default-compress-dictionary-size', options['dictionary_size'])
         options['threads'] = self._settings_get_int('default-compress-threads', options['threads'])
         return options
@@ -244,7 +252,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _advanced_compress_args(self, options):
         fmt = options['format']
         args = [f"-t{fmt}"]
-        if fmt == 'tar':
+        if fmt in ('tar', 'wim'):
             return args
         args.append(f"-mx={options['level']}")
         if options['method'] != 'default':
@@ -252,7 +260,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 args.append(f"-mm={options['method']}")
             else:
                 args.append(f"-m0={options['method']}")
-        if options['dictionary_size'] > 0:
+        if fmt == '7z' and options['dictionary_size'] > 0:
             args.append(f"-md={options['dictionary_size']}m")
         if options['threads'] > 0:
             args.append(f"-mmt={options['threads']}")
@@ -381,9 +389,26 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         threads_spin = builder.get_object('threads_spin')
         suggest_btn = builder.get_object('suggest_btn')
 
+        _METHOD_ITEMS = {
+            '7z': [('default', _('Default')), ('LZMA2', 'LZMA2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd'), ('BZip2', 'BZip2')],
+            'tar': [('GNU', 'GNU'), ('POSIX', 'POSIX')],
+            'zip': [('Deflate', 'Deflate'), ('Deflate64', 'Deflate64'), ('BZip2', 'BZip2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd')],
+            'wim': [],
+        }
+
+        def _populate_method_combo(fmt, select_id=None):
+            method_combo.remove_all()
+            items = _METHOD_ITEMS.get(fmt, [])
+            for item_id, label in items:
+                method_combo.append(item_id, label)
+            if select_id and any(i[0] == select_id for i in items):
+                method_combo.set_active_id(select_id)
+            elif items:
+                method_combo.set_active_id(items[0][0])
+
         format_combo.set_active_id(default_options['format'])
         level_combo.set_active_id(str(default_options['level']))
-        method_combo.set_active_id(default_options['method'])
+        _populate_method_combo(default_options['format'], default_options['method'])
         dictionary_spin.set_value(default_options['dictionary_size'])
         threads_spin.set_value(default_options['threads'])
 
@@ -510,9 +535,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def on_format_changed(combo):
             fmt = combo.get_active_id() or '7z'
-            is_tar = (fmt == 'tar')
-            method_combo.set_sensitive(not is_tar)
-            dictionary_spin.set_sensitive(not is_tar)
+            current_id = method_combo.get_active_id()
+            _populate_method_combo(fmt, current_id)
+            level_combo.set_sensitive(fmt in ('7z', 'zip'))
+            method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
+            dictionary_spin.set_sensitive(fmt == '7z')
+            threads_spin.set_sensitive(fmt in ('7z', 'zip'))
 
         format_combo.connect('changed', on_format_changed)
         on_format_changed(format_combo)
@@ -593,9 +621,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
             method = suggestion.get('method', 'default')
             if method == 'store':
-                method = 'default'
-            if method in ('default', 'LZMA', 'LZMA2', 'PPMd', 'BZip2'):
+                if fmt == 'tar':
+                    method = 'GNU'
+                elif fmt == 'zip':
+                    method = 'Deflate'
+                else:
+                    method = 'default'
+            valid_methods = [item[0] for item in _METHOD_ITEMS.get(fmt, [])]
+            if method in valid_methods:
                 method_combo.set_active_id(method)
+            elif valid_methods:
+                method_combo.set_active_id(valid_methods[0])
 
             dictionary = suggestion.get('dictionary', '0')
             if isinstance(dictionary, str) and dictionary.endswith('m'):

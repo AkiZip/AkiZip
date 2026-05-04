@@ -87,16 +87,38 @@ class AkizipApplication(Adw.Application):
             lambda spin: self.settings.set_int('compress-scan-depth', spin.get_value_as_int()),
         )
 
+        def _update_prefs_method_combo(fmt, method_combo):
+            method_combo.remove_all()
+            if fmt == '7z':
+                items = [('default', _('Default')), ('LZMA2', 'LZMA2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd'), ('BZip2', 'BZip2')]
+            elif fmt == 'tar':
+                items = [('GNU', 'GNU'), ('POSIX', 'POSIX')]
+            elif fmt == 'zip':
+                items = [('Deflate', 'Deflate'), ('Deflate64', 'Deflate64'), ('BZip2', 'BZip2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd')]
+            else:
+                items = []
+            for item_id, label in items:
+                method_combo.append(item_id, label)
+            return items
+
+        def on_prefs_format_changed(combo):
+            fmt = combo.get_active_id() or '7z'
+            self._settings_set_string('default-compress-format', fmt)
+            current_id = method_combo.get_active_id()
+            items = _update_prefs_method_combo(fmt, method_combo)
+            if current_id and any(i[0] == current_id for i in items):
+                method_combo.set_active_id(current_id)
+            elif items:
+                method_combo.set_active_id(items[0][0])
+            level_combo.set_sensitive(fmt in ('7z', 'zip'))
+            method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
+            dictionary_spin.set_sensitive(fmt == '7z')
+            threads_spin.set_sensitive(fmt in ('7z', 'zip'))
+
         default_format = self._settings_get_string('default-compress-format', '7z')
         _VALID_FORMATS = ('7z', 'tar', 'wim', 'zip')
         format_combo.set_active_id(default_format if default_format in _VALID_FORMATS else '7z')
-        format_combo.connect(
-            'changed',
-            lambda combo: self._settings_set_string(
-                'default-compress-format',
-                combo.get_active_id() or '7z',
-            ),
-        )
+        format_combo.connect('changed', on_prefs_format_changed)
 
         default_level = str(self._settings_get_int('default-compress-level', 5))
         level_combo.set_active_id(default_level if default_level in ('0', '1', '3', '5', '7', '9') else '5')
@@ -108,8 +130,17 @@ class AkizipApplication(Adw.Application):
             ),
         )
 
+        on_prefs_format_changed(format_combo)
         default_method = self._settings_get_string('default-compress-method', 'default')
-        method_combo.set_active_id(default_method if default_method in ('default', 'LZMA', 'PPMd', 'BZip2') else 'default')
+        fmt = format_combo.get_active_id() or '7z'
+        valid_methods = {
+            '7z': ('default', 'LZMA2', 'LZMA', 'PPMd', 'BZip2'),
+            'tar': ('GNU', 'POSIX'),
+            'zip': ('Deflate', 'Deflate64', 'BZip2', 'LZMA', 'PPMd'),
+            'wim': (),
+        }
+        if default_method in valid_methods.get(fmt, ()):
+            method_combo.set_active_id(default_method)
         method_combo.connect(
             'changed',
             lambda combo: self._settings_set_string(

@@ -31,7 +31,7 @@ Akizip is a **front-end**, not a library — it shells out to the bundled `7zz` 
 ## Features
 
 - **Native GNOME experience** — built with GTK 4 and libadwaita, following the GNOME Human Interface Guidelines.
-- **Wide format support** — leverages 7-Zip for `.7z`, `.zip`, `.tar`, `.tar.gz`, `.gz`, `.bz2`, `.xz`, `.rar` (read-only), and many more.
+- **Wide format support** — leverages 7-Zip for `.7z`, `.zip`, `.tar`, `.tar.gz`, `.gz`, `.rar` (read-only), and many more.
 - **Compression and extraction** — create new archives or unpack existing ones with progress reporting.
 - **Archive inspection** — view archive metadata and contents without extracting.
 - **Cancellable, non-blocking jobs** — long-running operations run on a background worker thread and can be cancelled at any time.
@@ -50,7 +50,6 @@ flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.j
 flatpak run top.akizip.akizip
 ```
 
-> **Note:** the `top.akizip.akizip.json` manifest pulls source from `file:///home/vmdesktop/Projects` by default. Update that URL to point at your own checkout (or a public Git remote) before building.
 
 ## Building from source
 

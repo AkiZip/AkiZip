@@ -1,3 +1,4 @@
+import shutil
 import time
 from pathlib import Path
 
@@ -32,6 +33,8 @@ class sysop:
         self.msg = ""
         self.success = False
         self.updated_at = time.time()
+        self.is_nested = False
+        self._temp_dirs = []
 
     def _select_path(self, path, display_path=None):
         if path is None or str(path).strip() == "":
@@ -56,6 +59,11 @@ class sysop:
     def select_by_fileview(self, path=None, display_path=None):
         if path is None:
             return self._failed("File view did not return a path")
+        return self._select_path(path, display_path)
+
+    def select_nested(self, path, temp_dir, display_path=None):
+        self._temp_dirs.append(str(temp_dir))
+        self.is_nested = True
         return self._select_path(path, display_path)
 
     def _select_destination(self, path, display_path=None):
@@ -83,9 +91,19 @@ class sysop:
             return self._failed("File view did not return a destination")
         return self._select_destination(path, display_path)
 
+    def cleanup_temp_dirs(self):
+        for temp_dir in self._temp_dirs:
+            try:
+                shutil.rmtree(temp_dir, ignore_errors=True)
+            except Exception:
+                pass
+        self._temp_dirs.clear()
+
     def clear_selected(self):
+        self.cleanup_temp_dirs()
         self.selected = None
         self.display_path = ""
+        self.is_nested = False
         self.success = False
         self.msg = "Selection cleared"
         self.updated_at = time.time()
@@ -140,6 +158,8 @@ class sysop:
     def format_category(self):
         if not self.is_archive():
             return None
+        if self.is_nested:
+            return 'nested'
         suffix = self.selected.suffix.lower()
         if suffix in FULL_FEATURE_SUFFIXES:
             return 'full'
@@ -148,7 +168,7 @@ class sysop:
         return 'unverified'
 
     def can_modify(self):
-        return self.is_archive() and self.selected.suffix.lower() in FULL_FEATURE_SUFFIXES
+        return self.is_archive() and not self.is_nested and self.selected.suffix.lower() in FULL_FEATURE_SUFFIXES
 
     def is_zip(self):
         return self.is_file() and self.selected.suffix.lower() == ".zip"
@@ -180,6 +200,7 @@ class sysop:
                 "can_extract": False,
                 "format_category": None,
                 "can_modify": False,
+                "is_nested": False,
                 "msg": self.msg,
                 "success": self.success,
                 "updated_at": self.updated_at,
@@ -206,6 +227,7 @@ class sysop:
             "can_extract": self.can_extract(),
             "format_category": self.format_category(),
             "can_modify": self.can_modify(),
+            "is_nested": self.is_nested,
             "msg": self.msg,
             "success": self.success,
             "updated_at": self.updated_at,

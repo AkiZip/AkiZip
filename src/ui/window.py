@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import os
+import tempfile
 from pathlib import Path
 
 from gettext import gettext as _
@@ -28,6 +29,7 @@ from gi.repository import Gio
 from gi.repository import GObject
 from gi.repository import Pango
 from ..plugins.status import _status
+from ..plugins.system import ARCHIVE_SUFFIXES
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
 
@@ -876,10 +878,60 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _on_row_activate(self, view, position):
         item = self._file_list_store.get_item(position)
-        if item is None or not item.is_folder:
+        if item is None:
             return
-        self._current_internal_path = item.full_path
-        self._render_current_folder()
+        if item.is_folder:
+            self._current_internal_path = item.full_path
+            self._render_current_folder()
+            return
+        if item.path != '..' and Path(item.path).suffix.lower() in ARCHIVE_SUFFIXES:
+            self._open_nested_archive(item)
+
+    def _open_nested_archive(self, item):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.has_selected():
+            return
+
+        selected = Path(app.system.operation_path())
+        job_queue = getattr(app, 'job_queue', None)
+        if job_queue is None:
+            return
+
+        try:
+            temp_dir = tempfile.mkdtemp(prefix='akizip-nested-')
+        except Exception as error:
+            self._show_notification(_('Failed to create temporary directory'), _status.ERROR)
+            return
+
+        file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+        display_name = item.path.rstrip('/') if item.is_folder else item.path
+
+        def on_success(output):
+            extracted_path = Path(temp_dir) / display_name
+            if not extracted_path.exists():
+                self._show_notification(_('Extracted file not found'), _status.ERROR)
+                return
+            if self._select_path(str(extracted_path), display_name):
+                app.system.is_nested = True
+                app.system._temp_dirs.append(temp_dir)
+                self._update_archive_buttons()
+                self._refresh_file_list()
+                self._update_title()
+                self._sync_address_bar()
+
+        def on_error(error):
+            self._show_notification(str(error), _status.ERROR)
+
+        self.file_list_stack.set_visible_child_name('loading')
+        job_queue.submit(
+            app.commands['archive.extract_file'],
+            (selected, file_name, temp_dir),
+            on_success=on_success,
+            on_error=on_error,
+            timeout=60,
+            task_id='archive.extract_file',
+            msg=_('Extract ') + display_name,
+        )
 
     def _refresh_file_list(self):
         self._all_entries = []
@@ -1050,6 +1102,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._update_archive_buttons()
         self._sync_address_bar()
         self._update_title()
+        self.connect('destroy', self._on_destroy)
+
+    def _on_destroy(self, widget):
+        app = self.get_application()
+        if app is not None and hasattr(app, 'system'):
+            app.system.cleanup_temp_dirs()
 
     def _on_choose_file_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
@@ -1078,6 +1136,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('System state not found'), str(path), _status.ERROR)
             return False
 
+        app.system.cleanup_temp_dirs()
+        app.system.is_nested = False
+
         if display_path is None:
             app.system.select_by_input(path)
         else:
@@ -1093,6 +1154,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dialog = Adw.AlertDialog.new(
                 _('Format compatibility warning'),
                 _('This format has not been verified for compatibility. Move and delete operations are disabled.'),
+            )
+            dialog.add_response('ok', _('_OK'))
+            dialog.set_default_response('ok')
+            dialog.set_close_response('ok')
+            dialog.present(self)
+        elif info.get('format_category') == 'nested':
+            dialog = Adw.AlertDialog.new(
+                _('Nested archive opened'),
+                _('This archive was extracted from a parent archive. Move and delete operations are disabled.'),
             )
             dialog.add_response('ok', _('_OK'))
             dialog.set_default_response('ok')

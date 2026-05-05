@@ -7,7 +7,7 @@
   <name>Akizip</name>
   <summary>A modern front-end for 7-Zip on GNOME</summary>
   <description>
-    <p>Akizip is a graphical archive utility built with GTK 4 and libadwaita that brings the power of 7-Zip to the GNOME desktop. It supports creating and extracting archives in a wide range of formats, including 7z, ZIP, TAR, GZIP, BZIP2, XZ, and RAR (read-only).</p>
+    <p>Akizip is a graphical archive utility built with GTK 4 and libadwaita that brings the power of 7-Zip to the GNOME desktop. It supports creating and extracting archives in a wide range of formats, including 7z, ZIP, TAR, GZIP, and RAR (read-only).</p>
     <p>Features include archive inspection, cancellable background jobs with progress reporting, a dedicated logs panel, and multilingual support.</p>
   </description>
 

@@ -887,15 +887,21 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._current_internal_path = ''
         self._file_list_store.remove_all()
         app = self.get_application()
-        if app is None or not hasattr(app, 'system') or not app.system.is_archive():
+        if app is None or not hasattr(app, 'system'):
             self.file_list_stack.set_visible_child_name('empty')
+            return
+        if not app.system.has_selected():
+            self.file_list_stack.set_visible_child_name('empty')
+            return
+        if not app.system.is_archive():
+            self.file_list_stack.set_visible_child_name('not_archive')
             return
 
         selected = Path(app.system.operation_path())
         command = getattr(app, 'commands', {}).get('archive.list')
         job_queue = getattr(app, 'job_queue', None)
         if command is None or job_queue is None:
-            self.file_list_stack.set_visible_child_name('empty')
+            self.file_list_stack.set_visible_child_name('empty_archive')
             return
 
         self.file_list_stack.set_visible_child_name('loading')
@@ -996,7 +1002,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         for row in self._build_rows_for_folder(self._current_internal_path):
             self._file_list_store.append(row)
         if self._file_list_store.get_n_items() == 0:
-            self.file_list_stack.set_visible_child_name('empty')
+            self.file_list_stack.set_visible_child_name('empty_archive')
         else:
             self.file_list_stack.set_visible_child_name('list')
         self._sync_address_bar()
@@ -1007,7 +1013,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._folder_set = set()
         self._current_internal_path = ''
         self._append_log(_('List failed'), str(error), _status.ERROR)
-        self.file_list_stack.set_visible_child_name('empty')
+        self.file_list_stack.set_visible_child_name('empty_archive')
 
     def _sync_address_bar(self):
         app = self.get_application()

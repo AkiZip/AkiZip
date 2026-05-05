@@ -84,6 +84,8 @@ class JobQueue:
                 continue
 
             task_status.start(task_status.msg)
+            if on_status is not None:
+                task_status.set_on_progress(lambda _p: self._notify_status(on_status, task_status))
             self._notify_status(on_status, task_status)
             started_at = time.time()
 
@@ -128,6 +130,8 @@ class JobQueue:
             kwargs["timeout"] = task_status.timeout
         if accepts_kwargs or "cancel_event" in parameters:
             kwargs["cancel_event"] = handle.cancel_event
+        if accepts_kwargs or "task_status" in parameters:
+            kwargs["task_status"] = task_status
 
         return function(*args, **kwargs)
 

@@ -1193,6 +1193,42 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_close_response('ok')
         dialog.present(self)
 
+    def _create_progress_dialog(self, title, handle):
+        dialog = Adw.AlertDialog.new(title, '')
+        dialog.add_response('cancel', _('Cancel'))
+        dialog.set_close_response('cancel')
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        box.set_margin_top(12)
+        box.set_margin_bottom(12)
+        box.set_margin_start(12)
+        box.set_margin_end(12)
+
+        progress_bar = Gtk.ProgressBar()
+        progress_bar.set_show_text(True)
+        box.append(progress_bar)
+
+        dialog.set_extra_child(box)
+
+        def on_response(_d, response):
+            if response == 'cancel' and handle is not None:
+                handle.cancel()
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+        dialog._progress_bar = progress_bar
+        return dialog
+
+    def _update_progress_dialog(self, dialog, percent):
+        if dialog is None:
+            return
+        dialog._progress_bar.set_fraction(percent / 100.0)
+
+    def _close_progress_dialog(self, dialog):
+        if dialog is not None:
+            dialog.close()
+
     def _run_command(self, name, *args, on_success_extra=None):
         app = self.get_application()
         command = getattr(app, 'commands', {}).get(name)
@@ -1208,21 +1244,36 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         log_id = object()
         summary = self._command_summary(name, args, _status.PENDING)
 
+        has_progress = name in ('archive.compress', 'archive.compress_advance', 'archive.extract', 'archive.extract_file')
+        progress_dialog = None
+
         def on_success(output):
+            self._close_progress_dialog(progress_dialog)
             self._on_command_success(log_id, name, args, output)
             if on_success_extra is not None:
                 on_success_extra(output)
+
+        def on_error(error):
+            self._close_progress_dialog(progress_dialog)
+            self._on_command_error(log_id, name, args, error)
+
+        def on_status(task_status):
+            if has_progress and task_status.progress is not None:
+                self._update_progress_dialog(progress_dialog, task_status.progress)
+            self._on_command_status(log_id, name, args, task_status)
 
         handle = job_queue.submit(
             command,
             args,
             on_success=on_success,
-            on_error=lambda error: self._on_command_error(log_id, name, args, error),
+            on_error=on_error,
             timeout=60,
             task_id=name,
             msg=summary,
-            on_status=lambda task_status: self._on_command_status(log_id, name, args, task_status),
+            on_status=on_status,
         )
+        if has_progress:
+            progress_dialog = self._create_progress_dialog(summary, handle)
         self._pending_handles[log_id] = handle
         self._pending_logs[log_id] = self._append_log(
             summary,

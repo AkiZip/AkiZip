@@ -1,6 +1,8 @@
 import os
+import re
 import signal
 import subprocess
+import threading
 import time
 from pathlib import Path
 
@@ -8,7 +10,17 @@ from pathlib import Path
 SEVENZIP_PATH = '/app/bin/7zz'
 
 
-def _run_7zip(args, timeout=-1, cancel_event=None):
+def _parse_progress(line):
+    match = re.search(r'(\d+)%', line)
+    if match:
+        return int(match.group(1))
+    return None
+
+
+def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None):
+    if on_progress is not None:
+        args = list(args) + ['-bsp2']
+
     started_at = time.monotonic()
     process = subprocess.Popen(
         [SEVENZIP_PATH, *args],
@@ -18,26 +30,101 @@ def _run_7zip(args, timeout=-1, cancel_event=None):
         start_new_session=True,
     )
 
-    while True:
-        try:
-            stdout, stderr = process.communicate(timeout=0.1)
-            break
-        except subprocess.TimeoutExpired:
-            if cancel_event is not None and cancel_event.is_set():
-                _kill_process(process)
-                stdout, stderr = process.communicate()
-                output = (stdout + stderr).strip()
-                raise RuntimeError(output or 'Cancelled')
-
-            if timeout is not None and timeout >= 0:
-                elapsed = time.monotonic() - started_at
-                if elapsed >= timeout:
+    if on_progress is None:
+        while True:
+            try:
+                stdout, stderr = process.communicate(timeout=0.1)
+                break
+            except subprocess.TimeoutExpired:
+                if cancel_event is not None and cancel_event.is_set():
                     _kill_process(process)
                     stdout, stderr = process.communicate()
                     output = (stdout + stderr).strip()
-                    raise TimeoutError(output or f'7zz timed out after {timeout} seconds')
+                    raise RuntimeError(output or 'Cancelled')
 
-    output = (stdout + stderr).strip()
+                if timeout is not None and timeout >= 0:
+                    elapsed = time.monotonic() - started_at
+                    if elapsed >= timeout:
+                        _kill_process(process)
+                        stdout, stderr = process.communicate()
+                        output = (stdout + stderr).strip()
+                        raise TimeoutError(output or f'7zz timed out after {timeout} seconds')
+
+        output = (stdout + stderr).strip()
+        if process.returncode != 0:
+            raise RuntimeError(output or f'7zz exited with {process.returncode}')
+        return output
+
+    stderr_lines = []
+    stderr_current = ""
+    stderr_lock = threading.Lock()
+    last_percent = -1
+
+    def read_stderr():
+        nonlocal stderr_current, last_percent
+        while True:
+            try:
+                char = process.stderr.read(1)
+                if not char:
+                    break
+                with stderr_lock:
+                    if char == '\n':
+                        stderr_lines.append(stderr_current)
+                        stderr_current = ""
+                    elif char == '\x08':
+                        stderr_current = stderr_current[:-1]
+                    else:
+                        stderr_current += char
+                    percent = _parse_progress(stderr_current)
+                    if percent is not None and percent != last_percent:
+                        last_percent = percent
+                        on_progress(percent)
+            except Exception:
+                break
+
+    stderr_reader = threading.Thread(target=read_stderr, daemon=True)
+    stderr_reader.start()
+
+    stdout_lines = []
+
+    def read_stdout():
+        while True:
+            try:
+                line = process.stdout.readline()
+                if not line:
+                    break
+                stdout_lines.append(line)
+            except Exception:
+                break
+
+    stdout_reader = threading.Thread(target=read_stdout, daemon=True)
+    stdout_reader.start()
+
+    while process.poll() is None:
+        if cancel_event is not None and cancel_event.is_set():
+            _kill_process(process)
+            stderr_reader.join(timeout=1.0)
+            stdout_reader.join(timeout=1.0)
+            raise RuntimeError('Cancelled')
+
+        if timeout is not None and timeout >= 0:
+            elapsed = time.monotonic() - started_at
+            if elapsed >= timeout:
+                _kill_process(process)
+                stderr_reader.join(timeout=1.0)
+                stdout_reader.join(timeout=1.0)
+                raise TimeoutError(f'7zz timed out after {timeout} seconds')
+
+        time.sleep(0.1)
+
+    stderr_reader.join(timeout=1.0)
+    stdout_reader.join(timeout=1.0)
+
+    with stderr_lock:
+        stderr = '\n'.join(stderr_lines + [stderr_current])
+    stdout = ''.join(stdout_lines)
+
+    output = (stdout + '\n' + stderr).strip()
     if process.returncode != 0:
         raise RuntimeError(output or f'7zz exited with {process.returncode}')
     return output
@@ -58,18 +145,22 @@ def archive_list(archive_path, timeout=-1, cancel_event=None):
     return _run_7zip(['l', '-slt', '-ba', str(archive_path)], timeout, cancel_event)
 
 
-def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None):
+def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None, task_status=None):
     if isinstance(source_paths, (str, Path)):
         source_paths = [source_paths]
+
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
 
     return _run_7zip([
         'a',
         str(output_archive),
         *[str(path) for path in source_paths],
-    ], timeout, cancel_event)
+    ], timeout, cancel_event, on_progress)
 
 
-def archive_compress_advance(output_archive, source_paths, args, timeout=-1, cancel_event=None):
+def archive_compress_advance(output_archive, source_paths, args, timeout=-1, cancel_event=None, task_status=None):
     if isinstance(source_paths, (str, Path)):
         source_paths = [source_paths]
     if args is None:
@@ -77,23 +168,35 @@ def archive_compress_advance(output_archive, source_paths, args, timeout=-1, can
     if isinstance(args, dict):
         args = args.get('sevenzip_args', [])
 
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
+
     return _run_7zip([
         'a',
         *[str(arg) for arg in args],
         str(output_archive),
         *[str(path) for path in source_paths],
-    ], timeout, cancel_event)
+    ], timeout, cancel_event, on_progress)
 
 
-def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None):
+def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None, task_status=None):
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
+
     return _run_7zip([
         'x',
         str(archive_path),
         f'-o{output_dir}',
         '-y',
-    ], timeout, cancel_event)
+    ], timeout, cancel_event, on_progress)
 
-def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, cancel_event=None):
+def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, cancel_event=None, task_status=None):
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
+
     return _run_7zip([
         'x',
         str(archive_path),
@@ -101,7 +204,7 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, c
         '-y',
         '--',
         str(file_name),
-    ], timeout, cancel_event)
+    ], timeout, cancel_event, on_progress)
 
 def archive_delete(archive_path, file_names, timeout=-1, cancel_event=None):
     if isinstance(file_names, (str, Path)):

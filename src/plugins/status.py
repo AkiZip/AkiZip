@@ -22,6 +22,8 @@ class status:
         self.created_at = time.time()
         self.started_at = None
         self.finished_at = None
+        self.progress = None
+        self._on_progress = None
 
     def start(self, msg=None):
         if msg is not None:
@@ -30,6 +32,16 @@ class status:
         self.success = False
         self.started_at = time.time()
         self.finished_at = None
+        return self
+
+    def set_on_progress(self, callback):
+        self._on_progress = callback
+        return self
+
+    def set_progress(self, percent):
+        self.progress = percent
+        if self._on_progress is not None:
+            self._on_progress(percent)
         return self
 
     def failed(self, msg=None):

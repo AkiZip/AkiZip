@@ -12,8 +12,6 @@ FULL_FEATURE_SUFFIXES = {
 READ_ONLY_SUFFIXES = {
     ".rar",
     ".gz",
-    ".bz2",
-    ".xz",
 }
 
 # Additional archive formats 7-Zip can open but are not fully verified for modification.

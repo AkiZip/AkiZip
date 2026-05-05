@@ -1,3 +1,22 @@
+# #-#-#-#-#  desktop.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  python.pot (akizip 0.1.0)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the akizip package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
@@ -6,9 +25,43 @@
 #, fuzzy
 msgid ""
 msgstr ""
+"#-#-#-#-#  desktop.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-05 15:25+0800\n"
+"POT-Creation-Date: 2026-05-05 16:20+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-05 16:20+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  python.pot (akizip 0.1.0)  #-#-#-#-#\n"
+"Project-Id-Version: akizip 0.1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-05 16:20+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+"#-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-05 16:20+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +70,8 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/top.akizip.akizip.desktop.in:2
+#: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
+#: src/window.ui:6
 msgid "Akizip"
 msgstr ""
 
@@ -62,7 +116,8 @@ msgstr ""
 msgid "Read archive information from "
 msgstr ""
 
-#: src/ui/info_dialog.py:41 src/ui/info_dialog.py:52
+#: src/ui/info_dialog.py:41 src/ui/info_dialog.py:52 src/window.ui:188
+#: src/window.ui:202
 msgid "Info"
 msgstr ""
 
@@ -236,7 +291,7 @@ msgstr ""
 msgid "No file selected"
 msgstr ""
 
-#: src/ui/window.py:239
+#: src/ui/window.py:239 src/window.ui:140 src/window.ui:154
 msgid "Move"
 msgstr ""
 
@@ -258,7 +313,7 @@ msgstr ""
 msgid "Delete failed"
 msgstr ""
 
-#: src/ui/window.py:290
+#: src/ui/window.py:290 src/window.ui:164 src/window.ui:178
 msgid "Delete"
 msgstr ""
 
@@ -282,15 +337,15 @@ msgstr ""
 msgid "_Open"
 msgstr ""
 
-#: src/ui/window.py:381
+#: src/ui/window.py:381 src/extract-dialog.ui:16
 msgid "Select Destination Folder"
 msgstr ""
 
-#: src/ui/window.py:426
+#: src/ui/window.py:426 src/compress-dialog.ui:182 src/preferences.ui:77
 msgid "Default"
 msgstr ""
 
-#: src/ui/window.py:447 src/ui/window.py:450
+#: src/ui/window.py:447 src/ui/window.py:450 src/window.ui:67 src/window.ui:81
 msgid "Compress"
 msgstr ""
 

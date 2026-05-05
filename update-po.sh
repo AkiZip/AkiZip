@@ -49,7 +49,7 @@ done < po/POTFILES.in
         -o "$TMPDIR/metainfo.pot" "${METAINFO_FILES[@]}"
 
 # ========== 合并 ==========
-msgcat --use-first "$TMPDIR/"*.pot -o "$POT_FILE"
+msgcat "$TMPDIR/"*.pot -o "$POT_FILE"
 echo "已更新 $POT_FILE"
 
 # ========== 初始化 / 合并 zh_CN zh_HK ==========

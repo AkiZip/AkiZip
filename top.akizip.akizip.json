@@ -1,7 +1,7 @@
 {
     "id" : "top.akizip.akizip",
     "runtime" : "org.gnome.Platform",
-    "runtime-version" : "48",
+    "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",
     "command" : "akizip",
     "finish-args" : [
@@ -46,7 +46,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "url" : "file:///home/vmdesktop/Projects"
+                    "url" : "https://github.com/akizip/akizip"
                 }
             ]
         }

@@ -95,6 +95,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     add_button = Gtk.Template.Child()
     choose_button = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
+    move_button = Gtk.Template.Child()
+    delete_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     address_entry = Gtk.Template.Child()
     file_list_stack = Gtk.Template.Child()
@@ -219,6 +221,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if app is None or not hasattr(app, 'system') or not app.system.can_extract():
             self._append_log(_('Move failed'), _('Selected path is not an archive.'), _status.ERROR)
             return
+        if not app.system.can_modify():
+            self._append_log(_('Move failed'), _('This archive format does not support modification.'), _status.ERROR)
+            return
 
         selection = getattr(self, '_file_list_selection', None)
         if selection is None:
@@ -266,6 +271,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if app is None or not hasattr(app, 'system') or not app.system.can_extract():
             self._append_log(_('Delete failed'), _('Selected path is not an archive.'), _status.ERROR)
+            return
+        if not app.system.can_modify():
+            self._append_log(_('Delete failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
         selection = getattr(self, '_file_list_selection', None)
@@ -1033,6 +1041,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)
         self.file_list_stack.set_visible_child_name('empty')
+        self._update_archive_buttons()
         self._sync_address_bar()
         self._update_title()
 
@@ -1073,7 +1082,28 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return False
 
         self._append_log(_('Selected ') + info['name'], info['path'], _status.FINISHED)
+        self._update_archive_buttons()
+        if info.get('format_category') == 'unverified':
+            dialog = Adw.AlertDialog.new(
+                _('Format compatibility warning'),
+                _('This format has not been verified for compatibility. Move and delete operations are disabled.'),
+            )
+            dialog.add_response('ok', _('_OK'))
+            dialog.set_default_response('ok')
+            dialog.set_close_response('ok')
+            dialog.present(self)
         return True
+
+    def _update_archive_buttons(self):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system'):
+            can_modify = False
+        else:
+            can_modify = app.system.can_modify()
+        if self.move_button is not None:
+            self.move_button.set_sensitive(can_modify)
+        if self.delete_button is not None:
+            self.delete_button.set_sensitive(can_modify)
 
     def _on_language_changed(self, settings, key):
         if settings.get_string(key) == self._initial_language:

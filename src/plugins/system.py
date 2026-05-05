@@ -2,14 +2,24 @@ import time
 from pathlib import Path
 
 
-ARCHIVE_SUFFIXES = {
+FULL_FEATURE_SUFFIXES = {
     ".7z",
     ".zip",
-    ".rar",
     ".tar",
+}
+
+READ_ONLY_SUFFIXES = {
+    ".rar",
     ".gz",
     ".bz2",
     ".xz",
+}
+
+# Additional archive formats 7-Zip can open but are not fully verified for modification.
+ARCHIVE_SUFFIXES = {
+    ".7z", ".zip", ".rar", ".tar", ".gz", ".bz2", ".xz",
+    ".cab", ".iso", ".dmg", ".wim", ".swm", ".esd",
+    ".arj", ".z", ".taz", ".lzh", ".lha",
 }
 
 
@@ -127,6 +137,19 @@ class sysop:
     def is_archive(self):
         return self.is_file() and self.selected.suffix.lower() in ARCHIVE_SUFFIXES
 
+    def format_category(self):
+        if not self.is_archive():
+            return None
+        suffix = self.selected.suffix.lower()
+        if suffix in FULL_FEATURE_SUFFIXES:
+            return 'full'
+        if suffix in READ_ONLY_SUFFIXES:
+            return 'readonly'
+        return 'unverified'
+
+    def can_modify(self):
+        return self.is_archive() and self.selected.suffix.lower() in FULL_FEATURE_SUFFIXES
+
     def is_zip(self):
         return self.is_file() and self.selected.suffix.lower() == ".zip"
 
@@ -155,6 +178,8 @@ class sysop:
                 "is_zip": False,
                 "can_compress": False,
                 "can_extract": False,
+                "format_category": None,
+                "can_modify": False,
                 "msg": self.msg,
                 "success": self.success,
                 "updated_at": self.updated_at,
@@ -179,6 +204,8 @@ class sysop:
             "is_zip": self.is_zip(),
             "can_compress": self.can_compress(),
             "can_extract": self.can_extract(),
+            "format_category": self.format_category(),
+            "can_modify": self.can_modify(),
             "msg": self.msg,
             "success": self.success,
             "updated_at": self.updated_at,

@@ -4,7 +4,7 @@
 
 # Akizip
 
-A modern GTK 4 / libadwaita front-end for 7-Zip, designed for the GNOME desktop.
+A modern archive manager for GNOME, built with GTK 4 and libadwaita.
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
@@ -24,14 +24,14 @@ A modern GTK 4 / libadwaita front-end for 7-Zip, designed for the GNOME desktop.
 
 ## About
 
-**Akizip** is a graphical archive utility that brings the power of [7-Zip](https://www.7-zip.org/) to the GNOME desktop through a clean, native interface built with GTK 4 and libadwaita. It is distributed as a Flatpak (`top.akizip.akizip`) and ships with a bundled `7zz` binary so you do not need to install 7-Zip separately.
+**Akizip** is a graphical archive utility for the GNOME desktop, built with GTK 4 and libadwaita. It is distributed as a Flatpak (`top.akizip.akizip`) and ships with a bundled `7zz` binary for handling 7z and other archive formats.
 
-Akizip is a **front-end**, not a library — it shells out to the bundled `7zz` executable for all archive work, ensuring full compatibility with the formats supported by upstream 7-Zip.
+Akizip is a graphical application, not a library — it shells out to the bundled `7zz` executable for all archive work, supporting the formats provided by the upstream 7-Zip engine.
 
 ## Features
 
 - **Native GNOME experience** — built with GTK 4 and libadwaita, following the GNOME Human Interface Guidelines.
-- **Wide format support** — leverages 7-Zip for `.7z`, `.zip`, `.tar`, `.tar.gz`, `.gz`, `.rar` (read-only), and many more.
+- **Wide format support** — `.7z`, `.zip`, `.tar`, `.tar.gz`, `.gz`, `.rar` (read-only), and many more via the bundled 7-Zip engine.
 - **Compression and extraction** — create new archives or unpack existing ones with progress reporting.
 - **Archive inspection** — view archive metadata and contents without extracting.
 - **Cancellable, non-blocking jobs** — long-running operations run on a background worker thread and can be cancelled at any time.
@@ -114,10 +114,12 @@ For deeper guidance on extending the plugin system, see [`src/plugins/readme.md`
 
 Akizip is released under the **GNU General Public License v3.0 or later**. See [`COPYING`](COPYING) for the full text.
 
-The bundled `7zz` binary is provided by the upstream [7-Zip project](https://www.7-zip.org/) and is distributed under its own terms.
+The bundled `7zz` binary is provided by the upstream [7-Zip project](https://www.7-zip.org/) (www.7-zip.org). Portions of the software may use code licensed under the GNU LGPL.
 
 ## Acknowledgements
 
-- [7-Zip](https://www.7-zip.org/) — the archive engine that does the real work.
-- [GTK](https://www.gtk.org/) and [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — the toolkit and design library.
+- [7-Zip](https://www.7-zip.org/) — the open-source archive engine. 7-Zip is a trademark of Igor Pavlov. This project is not affiliated with or endorsed by the 7-Zip project.
+- [GTK](https://www.gtk.org/) and [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — the toolkit and design library. GTK is a trademark of the GNOME Foundation.
 - [PyGObject](https://pygobject.readthedocs.io/) — Python bindings for GTK and friends.
+
+*GNOME and the GNOME logo are trademarks of the GNOME Foundation.*

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-05 15:25+0800\n"
+"POT-Creation-Date: 2026-05-05 16:20+0800\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -16,7 +16,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: data/top.akizip.akizip.desktop.in:2
+#: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
+#: src/window.ui:6
 msgid "Akizip"
 msgstr "Akizip"
 
@@ -61,7 +62,8 @@ msgstr "正在讀取..."
 msgid "Read archive information from "
 msgstr "讀取壓縮檔資訊："
 
-#: src/ui/info_dialog.py:41 src/ui/info_dialog.py:52
+#: src/ui/info_dialog.py:41 src/ui/info_dialog.py:52 src/window.ui:188
+#: src/window.ui:202
 msgid "Info"
 msgstr "資訊"
 
@@ -235,13 +237,13 @@ msgstr "該壓縮包格式不支援修改。"
 msgid "No file selected"
 msgstr "未選擇檔案"
 
-#: src/ui/window.py:239
+#: src/ui/window.py:239 src/window.ui:140 src/window.ui:154
 msgid "Move"
-msgstr ""
+msgstr "移動"
 
 #: src/ui/window.py:239
 msgid "Move \"{}\" to:"
-msgstr ""
+msgstr "移動 \"{}\" 到："
 
 #: src/ui/window.py:244 src/ui/window.py:291 src/ui/window.py:346
 #: src/ui/window.py:385 src/ui/window.py:449 src/ui/window.py:497
@@ -251,13 +253,13 @@ msgstr "取消(_C)"
 
 #: src/ui/window.py:245
 msgid "_Move"
-msgstr ""
+msgstr "移動(_M)"
 
 #: src/ui/window.py:275 src/ui/window.py:278
 msgid "Delete failed"
 msgstr "刪除失敗"
 
-#: src/ui/window.py:290
+#: src/ui/window.py:290 src/window.ui:164 src/window.ui:178
 msgid "Delete"
 msgstr "刪除"
 
@@ -281,15 +283,15 @@ msgstr "選擇檔案"
 msgid "_Open"
 msgstr "開啟(_O)"
 
-#: src/ui/window.py:381
+#: src/ui/window.py:381 src/extract-dialog.ui:16
 msgid "Select Destination Folder"
 msgstr "選擇目標資料夾"
 
-#: src/ui/window.py:426
+#: src/ui/window.py:426 src/compress-dialog.ui:182 src/preferences.ui:77
 msgid "Default"
 msgstr "預設"
 
-#: src/ui/window.py:447 src/ui/window.py:450
+#: src/ui/window.py:447 src/ui/window.py:450 src/window.ui:67 src/window.ui:81
 msgid "Compress"
 msgstr "壓縮"
 

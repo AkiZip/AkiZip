@@ -2,6 +2,7 @@ from gettext import gettext as _
 
 from gi.repository import Gtk
 
+from ..plugins.password import is_password_error
 from ..plugins.status import _status
 
 
@@ -13,28 +14,55 @@ class InfoDialogMixin:
             return
 
         info = app.system.info()
-        dialog, grid = self._create_info_dialog(info)
-        dialog.present()
 
         if not info['is_archive']:
+            dialog, grid = self._create_info_dialog(info)
+            dialog.present()
             return
 
         command = getattr(app, 'commands', {}).get('archive.info')
         job_queue = getattr(app, 'job_queue', None)
         if command is None or job_queue is None:
+            dialog, grid = self._create_info_dialog(info)
             self._add_info_row(grid, _('Archive'), _('Archive information is unavailable.'))
+            dialog.present()
             return
 
-        loading_row = self._add_info_row(grid, _('Archive'), _('Reading...'))
-        job_queue.submit(
-            command,
-            (selected,),
-            on_success=lambda output: self._update_archive_info(grid, loading_row, output),
-            on_error=lambda error: self._update_info_row(loading_row, str(error)),
-            timeout=60,
-            task_id='archive.info',
-            msg=_('Read archive information from ') + selected.name,
-        )
+        def present_dialog(archive_output=None, error_msg=None):
+            dialog, grid = self._create_info_dialog(info)
+            if error_msg:
+                self._add_info_row(grid, _('Archive'), error_msg)
+            elif archive_output is not None:
+                self._update_archive_info(grid, None, archive_output)
+            dialog.present()
+
+        def run_info(password):
+            info_args = (selected,)
+            if password is not None:
+                info_args = (selected, password)
+
+            def on_error(error):
+                if is_password_error(error):
+                    if hasattr(self, '_present_password_dialog'):
+                        self._present_password_dialog(
+                            lambda new_password: run_info(new_password)
+                        )
+                    else:
+                        present_dialog(error_msg=str(error))
+                    return
+                present_dialog(error_msg=str(error))
+
+            job_queue.submit(
+                command,
+                info_args,
+                on_success=lambda output: present_dialog(archive_output=output),
+                on_error=on_error,
+                timeout=60,
+                task_id='archive.info',
+                msg=_('Read archive information from ') + selected.name,
+            )
+
+        run_info(None)
 
     def _create_info_dialog(self, info):
         dialog = Gtk.Window()
@@ -126,10 +154,12 @@ class InfoDialogMixin:
     def _update_archive_info(self, grid, loading_row, output):
         archive_info = self._parse_archive_info(output)
         if not archive_info:
-            self._update_info_row(loading_row, _('No archive information found.'))
+            if loading_row is not None:
+                self._update_info_row(loading_row, _('No archive information found.'))
             return
 
-        self._update_info_row(loading_row, _('Loaded'))
+        if loading_row is not None:
+            self._update_info_row(loading_row, _('Loaded'))
         for key, label in (
             ('Type', _('Archive type')),
             ('Physical Size', _('Archive size')),

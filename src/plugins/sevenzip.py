@@ -26,6 +26,7 @@ def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None):
         [SEVENZIP_PATH, *args],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
         text=True,
         start_new_session=True,
     )
@@ -137,12 +138,18 @@ def _kill_process(process):
         pass
 
 
-def archive_info(archive_path, timeout=-1, cancel_event=None):
-    return _run_7zip(['l', '-slt', str(archive_path)], timeout, cancel_event)
+def archive_info(archive_path, password=None, timeout=-1, cancel_event=None):
+    args = ['l', '-slt', str(archive_path)]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
-def archive_list(archive_path, timeout=-1, cancel_event=None):
-    return _run_7zip(['l', '-slt', '-ba', str(archive_path)], timeout, cancel_event)
+def archive_list(archive_path, password=None, timeout=-1, cancel_event=None):
+    args = ['l', '-slt', '-ba', str(archive_path)]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
 def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None, task_status=None):
@@ -180,59 +187,73 @@ def archive_compress_advance(output_archive, source_paths, args, timeout=-1, can
     ], timeout, cancel_event, on_progress)
 
 
-def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
 
-    return _run_7zip([
+    args = [
         'x',
         str(archive_path),
         f'-o{output_dir}',
         '-y',
-    ], timeout, cancel_event, on_progress)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
 
-    return _run_7zip([
+    args = [
         'x',
         str(archive_path),
         f'-o{output_dir}',
         '-y',
-        '--',
-        str(file_name),
-    ], timeout, cancel_event, on_progress)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    args.extend(['--', str(file_name)])
+    return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_delete(archive_path, file_names, timeout=-1, cancel_event=None):
+def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_event=None):
     if isinstance(file_names, (str, Path)):
         file_names = [file_names]
-    return _run_7zip([
+    args = [
         'd',
         str(archive_path),
         *[str(name) for name in file_names],
-    ], timeout, cancel_event)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
-def archive_test(archive_path, timeout=-1, cancel_event=None):
-    output = _run_7zip([
+def archive_test(archive_path, password=None, timeout=-1, cancel_event=None):
+    args = [
         't',
         str(archive_path),
-    ], timeout, cancel_event)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    output = _run_7zip(args, timeout, cancel_event)
     if 'Everything is Ok' not in output:
         raise RuntimeError(output or 'Test failed')
     return output
 
 
-def archive_move(archive_path, src_name, dst_name, timeout=-1, cancel_event=None):
-    return _run_7zip([
+def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, cancel_event=None):
+    args = [
         'rn',
         str(archive_path),
         str(src_name),
         str(dst_name),
-    ], timeout, cancel_event)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
 def register(commands):

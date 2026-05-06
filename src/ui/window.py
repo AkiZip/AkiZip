@@ -226,7 +226,23 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Test failed'), _('Selected path is not an archive.'), _status.ERROR)
             return
 
-        self._run_command('archive.test', selected)
+        def run_test(password):
+            def on_error(error):
+                if self._is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_test(new_password)
+                    )
+                    return True
+                return False
+
+            self._run_command(
+                'archive.test',
+                selected,
+                password,
+                on_error_extra=on_error,
+            )
+
+        run_test(None)
 
     @Gtk.Template.Callback()
     def butmove(self, button):
@@ -262,19 +278,32 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_default_response('confirm')
         dialog.set_close_response('cancel')
 
+        def run_move(password):
+            def on_error(error):
+                if self._is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_move(new_password)
+                    )
+                    return True
+                return False
+
+            dst_path = entry.get_text().strip().lstrip('/')
+            if not dst_path:
+                dst_path = item.path
+            src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+            self._run_command(
+                'archive.move',
+                selected,
+                src_path,
+                dst_path,
+                password,
+                on_success_extra=lambda _output: self._refresh_file_list(),
+                on_error_extra=on_error,
+            )
+
         def on_response(_d, response):
             if response == 'confirm':
-                dst_path = entry.get_text().strip().lstrip('/')
-                if not dst_path:
-                    dst_path = item.path
-                src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
-                self._run_command(
-                    'archive.move',
-                    selected,
-                    src_path,
-                    dst_path,
-                    on_success_extra=lambda _output: self._refresh_file_list(),
-                )
+                run_move(None)
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -309,15 +338,28 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_default_response('cancel')
         dialog.set_close_response('cancel')
 
+        def run_delete(password):
+            def on_error(error):
+                if self._is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_delete(new_password)
+                    )
+                    return True
+                return False
+
+            file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+            self._run_command(
+                'archive.delete',
+                selected,
+                [file_name],
+                password,
+                on_success_extra=lambda _output: self._refresh_file_list(),
+                on_error_extra=on_error,
+            )
+
         def on_response(_d, response):
             if response == 'confirm':
-                file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
-                self._run_command(
-                    'archive.delete',
-                    selected,
-                    [file_name],
-                    on_success_extra=lambda _output: self._refresh_file_list(),
-                )
+                run_delete(None)
 
         dialog.connect('response', on_response)
         dialog.present(self)

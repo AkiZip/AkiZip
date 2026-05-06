@@ -212,33 +212,42 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None
     args.extend(['--', str(file_name)])
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_delete(archive_path, file_names, timeout=-1, cancel_event=None):
+def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_event=None):
     if isinstance(file_names, (str, Path)):
         file_names = [file_names]
-    return _run_7zip([
+    args = [
         'd',
         str(archive_path),
         *[str(name) for name in file_names],
-    ], timeout, cancel_event)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
-def archive_test(archive_path, timeout=-1, cancel_event=None):
-    output = _run_7zip([
+def archive_test(archive_path, password=None, timeout=-1, cancel_event=None):
+    args = [
         't',
         str(archive_path),
-    ], timeout, cancel_event)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    output = _run_7zip(args, timeout, cancel_event)
     if 'Everything is Ok' not in output:
         raise RuntimeError(output or 'Test failed')
     return output
 
 
-def archive_move(archive_path, src_name, dst_name, timeout=-1, cancel_event=None):
-    return _run_7zip([
+def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, cancel_event=None):
+    args = [
         'rn',
         str(archive_path),
         str(src_name),
         str(dst_name),
-    ], timeout, cancel_event)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
 def register(commands):

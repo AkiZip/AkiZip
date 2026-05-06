@@ -2,6 +2,7 @@ from gettext import gettext as _
 
 from gi.repository import Gtk
 
+from ..plugins.password import is_password_error
 from ..plugins.status import _status
 
 
@@ -41,21 +42,15 @@ class InfoDialogMixin:
                 info_args = (selected, password)
 
             def on_error(error):
-                error_str = str(error)
-                if (
-                    'Wrong password' in error_str
-                    or 'Data Error in encrypted file' in error_str
-                    or 'Enter password' in error_str
-                    or 'Break signaled' in error_str
-                ):
+                if is_password_error(error):
                     if hasattr(self, '_present_password_dialog'):
                         self._present_password_dialog(
                             lambda new_password: run_info(new_password)
                         )
                     else:
-                        present_dialog(error_msg=error_str)
+                        present_dialog(error_msg=str(error))
                     return
-                present_dialog(error_msg=error_str)
+                present_dialog(error_msg=str(error))
 
             job_queue.submit(
                 command,

@@ -28,6 +28,7 @@ from gi.repository import Gtk
 from gi.repository import Gio
 from gi.repository import GObject
 from gi.repository import Pango
+from ..plugins.password import is_password_error
 from ..plugins.status import _status
 from ..plugins.system import ARCHIVE_SUFFIXES
 from .info_dialog import InfoDialogMixin
@@ -228,7 +229,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def run_test(password):
             def on_error(error):
-                if self._is_password_error(error):
+                if is_password_error(error):
                     self._present_password_dialog(
                         lambda new_password: run_test(new_password)
                     )
@@ -280,7 +281,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def run_move(password):
             def on_error(error):
-                if self._is_password_error(error):
+                if is_password_error(error):
                     self._present_password_dialog(
                         lambda new_password: run_move(new_password)
                     )
@@ -340,7 +341,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def run_delete(password):
             def on_error(error):
-                if self._is_password_error(error):
+                if is_password_error(error):
                     self._present_password_dialog(
                         lambda new_password: run_delete(new_password)
                     )
@@ -377,7 +378,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def run_extract(dest, password):
             def on_error(error):
-                if self._is_password_error(error):
+                if is_password_error(error):
                     self._present_password_dialog(
                         lambda new_password: run_extract(dest, new_password)
                     )
@@ -822,16 +823,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
-    @staticmethod
-    def _is_password_error(error):
-        error_str = str(error)
-        return (
-            'Wrong password' in error_str
-            or 'Data Error in encrypted file' in error_str
-            or 'Enter password' in error_str
-            or 'Break signaled' in error_str
-        )
-
     def _present_password_dialog(self, on_password_entered):
         dialog = Adw.AlertDialog.new(_('Password Required'), None)
         dialog.set_body(_('This archive is encrypted. Please enter the password.'))
@@ -980,7 +971,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def run_extract(dest, password):
             def on_error(error):
-                if self._is_password_error(error):
+                if is_password_error(error):
                     self._present_password_dialog(
                         lambda new_password: run_extract(dest, new_password)
                     )
@@ -1086,7 +1077,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 list_args = (selected, password)
 
             def on_error(error):
-                if self._is_password_error(error):
+                if is_password_error(error):
                     self._present_password_dialog(
                         lambda new_password: run_list(new_password)
                     )

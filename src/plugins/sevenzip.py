@@ -138,12 +138,18 @@ def _kill_process(process):
         pass
 
 
-def archive_info(archive_path, timeout=-1, cancel_event=None):
-    return _run_7zip(['l', '-slt', str(archive_path)], timeout, cancel_event)
+def archive_info(archive_path, password=None, timeout=-1, cancel_event=None):
+    args = ['l', '-slt', str(archive_path)]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
-def archive_list(archive_path, timeout=-1, cancel_event=None):
-    return _run_7zip(['l', '-slt', '-ba', str(archive_path)], timeout, cancel_event)
+def archive_list(archive_path, password=None, timeout=-1, cancel_event=None):
+    args = ['l', '-slt', '-ba', str(archive_path)]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event)
 
 
 def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None, task_status=None):

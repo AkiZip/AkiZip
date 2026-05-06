@@ -1079,15 +1079,31 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return
 
         self.file_list_stack.set_visible_child_name('loading')
-        job_queue.submit(
-            command,
-            (selected,),
-            on_success=lambda output: self._populate_file_list(output),
-            on_error=lambda error: self._on_file_list_error(error),
-            timeout=120,
-            task_id='archive.list',
-            msg=_('List ') + selected.name,
-        )
+
+        def run_list(password):
+            list_args = (selected,)
+            if password is not None:
+                list_args = (selected, password)
+
+            def on_error(error):
+                if self._is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_list(new_password)
+                    )
+                    return
+                self._on_file_list_error(error)
+
+            job_queue.submit(
+                command,
+                list_args,
+                on_success=lambda output: self._populate_file_list(output),
+                on_error=on_error,
+                timeout=120,
+                task_id='archive.list',
+                msg=_('List ') + selected.name,
+            )
+
+        run_list(None)
 
     def _populate_file_list(self, output):
         self._all_entries = parse_archive_entries(output)

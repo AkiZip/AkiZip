@@ -41,6 +41,14 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.0" date="2026-05-07">
+      <description translate="no">
+        <p>Support archive password</p>
+        <ul>
+          <li>Add password support for compressing and extracting archives</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2026-05-05">
       <description translate="no">
         <p>Initial release</p>

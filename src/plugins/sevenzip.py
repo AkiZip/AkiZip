@@ -26,6 +26,7 @@ def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None):
         [SEVENZIP_PATH, *args],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
         text=True,
         start_new_session=True,
     )
@@ -180,31 +181,36 @@ def archive_compress_advance(output_archive, source_paths, args, timeout=-1, can
     ], timeout, cancel_event, on_progress)
 
 
-def archive_extract(archive_path, output_dir, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
 
-    return _run_7zip([
+    args = [
         'x',
         str(archive_path),
         f'-o{output_dir}',
         '-y',
-    ], timeout, cancel_event, on_progress)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_extract_FileInZip(archive_path, file_name, output_dir, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
 
-    return _run_7zip([
+    args = [
         'x',
         str(archive_path),
         f'-o{output_dir}',
         '-y',
-        '--',
-        str(file_name),
-    ], timeout, cancel_event, on_progress)
+    ]
+    if password:
+        args.append(f'-p{password}')
+    args.extend(['--', str(file_name)])
+    return _run_7zip(args, timeout, cancel_event, on_progress)
 
 def archive_delete(archive_path, file_names, timeout=-1, cancel_event=None):
     if isinstance(file_names, (str, Path)):

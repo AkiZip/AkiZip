@@ -333,13 +333,24 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Extract failed'), _('Selected path is not an archive.'), _status.ERROR)
             return
 
-        self._present_extract_dialog(
-            lambda dest: self._run_command(
+        def run_extract(dest, password):
+            def on_error(error):
+                if self._is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_extract(dest, new_password)
+                    )
+                    return True
+                return False
+
+            self._run_command(
                 'archive.extract',
                 selected,
                 dest / selected.stem,
+                password,
+                on_error_extra=on_error,
             )
-        )
+
+        self._present_extract_dialog(run_extract)
 
     def butextract_one(self, button):
         selection = getattr(self, '_file_list_selection', None)
@@ -769,12 +780,47 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
+    @staticmethod
+    def _is_password_error(error):
+        error_str = str(error)
+        return (
+            'Wrong password' in error_str
+            or 'Data Error in encrypted file' in error_str
+            or 'Enter password' in error_str
+            or 'Break signaled' in error_str
+        )
+
+    def _present_password_dialog(self, on_password_entered):
+        dialog = Adw.AlertDialog.new(_('Password Required'), None)
+        dialog.set_body(_('This archive is encrypted. Please enter the password.'))
+
+        password_entry = Gtk.PasswordEntry()
+        password_entry.set_show_peek_icon(True)
+        password_entry.set_hexpand(True)
+        password_entry.set_margin_top(12)
+        password_entry.set_margin_bottom(12)
+        dialog.set_extra_child(password_entry)
+
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('_OK'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                password = password_entry.get_text()
+                on_password_entered(password)
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
     def _present_extract_dialog(self, on_chosen):
         builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/extract-dialog.ui')
         box = builder.get_object('content')
         entry = builder.get_object('entry')
         entry.set_editable(not _IS_FLATPAK)
         browse_button = builder.get_object('browse_button')
+        password_entry = builder.get_object('password_entry')
 
         dialog = Adw.AlertDialog.new(_('Extract'), None)
         dialog.set_extra_child(box)
@@ -799,10 +845,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 text = entry.get_text().strip()
                 if not text:
                     return
-                if last['display'] == text and last['op']:
-                    on_chosen(Path(last['op']))
-                else:
-                    on_chosen(Path(text).expanduser())
+                password = password_entry.get_text() or None
+                dest = Path(last['op']) if (last['display'] == text and last['op']) else Path(text).expanduser()
+                on_chosen(dest, password)
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -891,14 +936,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if selected is None:
             return
 
-        self._present_extract_dialog(
-            lambda dest: self._run_command(
+        def run_extract(dest, password):
+            def on_error(error):
+                if self._is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_extract(dest, new_password)
+                    )
+                    return True
+                return False
+
+            self._run_command(
                 'archive.extract_file',
                 selected,
                 item.full_path.rstrip('/') if item.is_folder else item.full_path,
                 dest,
+                password,
+                on_error_extra=on_error,
             )
-        )
+
+        self._present_extract_dialog(run_extract)
 
     def _on_row_activate(self, view, position):
         item = self._file_list_store.get_item(position)
@@ -1253,7 +1309,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if dialog is not None:
             dialog.close()
 
-    def _run_command(self, name, *args, on_success_extra=None):
+    def _run_command(self, name, *args, on_success_extra=None, on_error_extra=None):
         app = self.get_application()
         command = getattr(app, 'commands', {}).get(name)
         if command is None:
@@ -1279,6 +1335,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def on_error(error):
             self._close_progress_dialog(progress_dialog)
+            if on_error_extra is not None and on_error_extra(error):
+                return
             self._on_command_error(log_id, name, args, error)
 
         def on_status(task_status):

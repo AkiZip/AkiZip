@@ -2,19 +2,35 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <object class="GtkBox" id="content">
-    <property name="orientation">horizontal</property>
-    <property name="spacing">6</property>
+    <property name="orientation">vertical</property>
+    <property name="spacing">12</property>
+
     <child>
-      <object class="GtkEntry" id="entry">
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkEntry" id="entry">
+            <property name="hexpand">true</property>
+            <property name="placeholder-text" translatable="yes">Destination folder</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="browse_button">
+            <property name="icon-name">folder-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Select Destination Folder</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkPasswordEntry" id="password_entry">
         <property name="hexpand">true</property>
-        <property name="placeholder-text" translatable="yes">Destination folder</property>
+        <property name="show-peek-icon">true</property>
+        <property name="placeholder-text" translatable="yes">Leave empty if no password</property>
       </object>
     </child>
-    <child>
-      <object class="GtkButton" id="browse_button">
-        <property name="icon-name">folder-symbolic</property>
-        <property name="tooltip-text" translatable="yes">Select Destination Folder</property>
-      </object>
-    </child>
+
   </object>
 </interface>

@@ -1019,7 +1019,31 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
         display_name = item.path.rstrip('/') if item.is_folder else item.path
 
-        def on_success(output):
+        def run_extract(password):
+            extract_args = (selected, file_name, temp_dir)
+            if password is not None:
+                extract_args = (selected, file_name, temp_dir, password)
+
+            def on_error(error):
+                self.file_list_stack.set_visible_child_name('list')
+                if is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_extract(new_password)
+                    )
+                    return
+                self._show_notification(str(error), _status.ERROR)
+
+            job_queue.submit(
+                app.commands['archive.extract_file'],
+                extract_args,
+                on_success=lambda output: _on_extract_success(output),
+                on_error=on_error,
+                timeout=60,
+                task_id='archive.extract_file',
+                msg=_('Extract ') + display_name,
+            )
+
+        def _on_extract_success(output):
             extracted_path = Path(temp_dir) / display_name
             if not extracted_path.exists():
                 self._show_notification(_('Extracted file not found'), _status.ERROR)
@@ -1032,19 +1056,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 self._update_title()
                 self._sync_address_bar()
 
-        def on_error(error):
-            self._show_notification(str(error), _status.ERROR)
-
         self.file_list_stack.set_visible_child_name('loading')
-        job_queue.submit(
-            app.commands['archive.extract_file'],
-            (selected, file_name, temp_dir),
-            on_success=on_success,
-            on_error=on_error,
-            timeout=60,
-            task_id='archive.extract_file',
-            msg=_('Extract ') + display_name,
-        )
+        run_extract(None)
 
     def _refresh_file_list(self):
         self._all_entries = []

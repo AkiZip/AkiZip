@@ -72,6 +72,7 @@ class AkizipApplication(Adw.Application):
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
+        encrypt_names_switch = builder.get_object('encrypt_names_switch')
 
         depth_spin.set_value(self.settings.get_int('compress-scan-depth'))
         depth_spin.connect(
@@ -158,6 +159,15 @@ class AkizipApplication(Adw.Application):
             ),
         )
 
+        encrypt_names_switch.set_active(self._settings_get_boolean('default-compress-encrypt-names', False))
+        encrypt_names_switch.connect(
+            'notify::active',
+            lambda switch, pspec: self._settings_set_boolean(
+                'default-compress-encrypt-names',
+                switch.get_active(),
+            ),
+        )
+
         window.add(page)
 
         self._preferences_window = window
@@ -188,6 +198,18 @@ class AkizipApplication(Adw.Application):
     def _settings_set_int(self, key, value):
         try:
             self.settings.set_int(key, value)
+        except Exception:
+            pass
+
+    def _settings_get_boolean(self, key, fallback):
+        try:
+            return self.settings.get_boolean(key)
+        except Exception:
+            return fallback
+
+    def _settings_set_boolean(self, key, value):
+        try:
+            self.settings.set_boolean(key, value)
         except Exception:
             pass
 

@@ -47,6 +47,13 @@
 				Thread count used by default compression. Use 0 for the 7-Zip default.
 			</description>
 		</key>
+		<key name="default-compress-encrypt-names" type="b">
+			<default>false</default>
+			<summary>Default encrypt file names</summary>
+			<description>
+				Whether to encrypt file names when creating password-protected 7z archives.
+			</description>
+		</key>
 		<key name="compress-scan-depth" type="i">
 			<default>3</default>
 			<range min="0" max="10"/>

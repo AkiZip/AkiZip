@@ -121,6 +121,18 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwActionRow" id="encrypt_names_row">
+            <property name="title" translatable="yes">Encrypt file names</property>
+            <property name="subtitle" translatable="yes">Default for password-protected 7z archives.</property>
+            <property name="activatable-widget">encrypt_names_switch</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="encrypt_names_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
   </object>

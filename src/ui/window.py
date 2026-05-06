@@ -139,6 +139,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             options['method'] = method if method in ('Deflate', 'Deflate64', 'BZip2', 'LZMA', 'PPMd') else 'Deflate'
         options['dictionary_size'] = self._settings_get_int('default-compress-dictionary-size', options['dictionary_size'])
         options['threads'] = self._settings_get_int('default-compress-threads', options['threads'])
+        options['encrypt_names'] = self._settings_get_boolean('default-compress-encrypt-names', False)
         return options
 
     def _settings_get_string(self, key, fallback):
@@ -156,6 +157,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return fallback
         try:
             return app.settings.get_int(key)
+        except Exception:
+            return fallback
+
+    def _settings_get_boolean(self, key, fallback):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'settings'):
+            return fallback
+        try:
+            return app.settings.get_boolean(key)
         except Exception:
             return fallback
 
@@ -191,6 +201,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             args.append(f"-md={options['dictionary_size']}m")
         if options['threads'] > 0:
             args.append(f"-mmt={options['threads']}")
+        password = options.get('password', '')
+        if password:
+            args.append(f"-p{password}")
+            if fmt == '7z' and options.get('encrypt_names'):
+                args.append('-mhe=on')
         return args
 
     @Gtk.Template.Callback()
@@ -420,6 +435,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
+        password_entry = builder.get_object('password_entry')
+        encrypt_names_check = builder.get_object('encrypt_names_check')
         suggest_btn = builder.get_object('suggest_btn')
 
         _METHOD_ITEMS = {
@@ -443,6 +460,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         _populate_method_combo(default_options['format'], default_options['method'])
         dictionary_spin.set_value(default_options['dictionary_size'])
         threads_spin.set_value(default_options['threads'])
+        encrypt_names_check.set_active(default_options.get('encrypt_names', False))
 
         dialog = Adw.AlertDialog.new(_('Compress'), None)
         dialog.set_extra_child(content)
@@ -582,6 +600,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
             dictionary_spin.set_sensitive(fmt == '7z')
             threads_spin.set_sensitive(fmt in ('7z', 'zip'))
+            password_entry.set_sensitive(fmt != 'tar')
+            encrypt_names_check.set_sensitive(fmt == '7z')
+            if fmt != '7z':
+                encrypt_names_check.set_active(False)
             text = output_entry.get_text().strip()
             if text:
                 op_path = Path(text)
@@ -739,6 +761,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     'method': method_combo.get_active_id() or 'default',
                     'dictionary_size': dictionary_spin.get_value_as_int(),
                     'threads': threads_spin.get_value_as_int(),
+                    'password': password_entry.get_text(),
+                    'encrypt_names': encrypt_names_check.get_active(),
                 }
                 self._run_advanced_compress_multi(output_path, paths, options)
 

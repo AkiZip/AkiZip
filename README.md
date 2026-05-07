@@ -10,6 +10,8 @@ A modern archive manager for GNOME, built with GTK 4 and libadwaita.
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
 
+**Languages:** [English](README.md) | [简体中文](readmes/zh-CN.md) | [繁體中文](readmes/zh-TW.md) | [日本語](readmes/ja.md) | [한국어](readmes/ko.md) | [Español](readmes/es.md) | [Italiano](readmes/it.md)
+
 </div>
 
 ---

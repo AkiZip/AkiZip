@@ -1,0 +1,320 @@
+# Italian translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Automatically generated, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-05-06 14:35+0800\n"
+"PO-Revision-Date: 2026-05-06 20:10+0200\n"
+"Last-Translator: Albano Battistella\n"
+"Language-Team: Italian\n"
+"Language:it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
+#: src/window.ui:6
+msgid "Akizip"
+msgstr "Akizip"
+
+#: data/top.akizip.akizip.desktop.in:8
+msgid "GTK;"
+msgstr "GTK;"
+
+#: data/top.akizip.akizip.metainfo.xml.in:8
+msgid "A modern front-end for 7-Zip on GNOME"
+msgstr "Un front-end moderno per 7-Zip su GNOME"
+
+#: data/top.akizip.akizip.metainfo.xml.in:10
+msgid ""
+"Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
+"brings the power of 7-Zip to the GNOME desktop. It supports creating and "
+"extracting archives in a wide range of formats, including 7z, ZIP, TAR, "
+"GZIP, and RAR (read-only)."
+msgstr ""
+"Akizip è un'utilità grafica per archivi realizzata con GTK 4 e libadwaita che "
+"porta la potenza di 7-Zip sul desktop GNOME. Supporta la creazione e "
+"l'estrazione di archivi in una vasta gamma di formati, tra cui 7z, ZIP, TAR, "
+"GZIP e RAR (sola lettura)."
+
+#: data/top.akizip.akizip.metainfo.xml.in:11
+msgid ""
+"Features include archive inspection, cancellable background jobs with "
+"progress reporting, a dedicated logs panel, and multilingual support."
+msgstr ""
+"Le funzionalità includono l'ispezione degli archivi, processi in background annullabili con "
+"notifica dell'avanzamento, un pannello log dedicato e supporto multilingua."
+
+#: data/top.akizip.akizip.metainfo.xml.in:15
+msgid "ckappgit"
+msgstr "ckappgit"
+
+#: data/top.akizip.akizip.metainfo.xml.in:39
+msgid "Main window showing archive contents and toolbar"
+msgstr "Finestra principale che mostra il contenuto dell'archivio e la barra degli strumenti"
+
+#: src/ui/info_dialog.py:13 src/ui/window.py:1265
+msgid "System state not found"
+msgstr "Stato del sistema non trovato"
+
+#: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
+msgid "Archive"
+msgstr "Archivio"
+
+#: src/ui/info_dialog.py:27
+msgid "Archive information is unavailable."
+msgstr "Le informazioni sull'archivio non sono disponibili."
+
+#: src/ui/info_dialog.py:62 src/ui/window.py:1580
+msgid "Read archive information from "
+msgstr "Lettura informazioni archivio da "
+
+#: src/ui/info_dialog.py:69 src/ui/info_dialog.py:80 src/window.ui:188
+#: src/window.ui:202
+msgid "Info"
+msgstr "Informazioni"
+
+#: src/ui/info_dialog.py:98
+msgid "Close"
+msgstr "Chiudi"
+
+#: src/ui/info_dialog.py:105
+msgid "Name"
+msgstr "Nome"
+
+#: src/ui/info_dialog.py:106 src/ui/window.py:897
+msgid "Path"
+msgstr "Percorso"
+
+#: src/ui/info_dialog.py:107
+msgid "Type"
+msgstr "Tipo"
+
+#: src/ui/info_dialog.py:109 src/ui/window.py:898
+msgid "Size"
+msgstr "Dimensione"
+
+#: src/ui/info_dialog.py:110
+msgid "Can compress"
+msgstr "Comprimibile"
+
+#: src/ui/info_dialog.py:111
+msgid "Can extract"
+msgstr "Estraibile"
+
+#: src/ui/info_dialog.py:137
+msgid "Copy"
+msgstr "Copia"
+
+#: src/ui/info_dialog.py:149
+msgid "Copied to clipboard"
+msgstr "Copiato negli appunti"
+
+#: src/ui/info_dialog.py:158
+msgid "No archive information found."
+msgstr "Nessuna informazione sull'archivio trovata."
+
+#: src/ui/info_dialog.py:162
+msgid "Loaded"
+msgstr "Caricato"
+
+#: src/ui/info_dialog.py:164
+msgid "Archive type"
+msgstr "Tipo di archivio"
+
+#: src/ui/info_dialog.py:165
+msgid "Archive size"
+msgstr "Dimensione archivio"
+
+#: src/ui/info_dialog.py:166
+msgid "Headers size"
+msgstr "Dimensione intestazioni"
+
+#: src/ui/info_dialog.py:167
+msgid "Method"
+msgstr "Metodo"
+
+#: src/ui/info_dialog.py:168
+msgid "Solid"
+msgstr "Solido"
+
+#: src/ui/info_dialog.py:169
+msgid "Blocks"
+msgstr "Blocchi"
+
+#: src/ui/info_dialog.py:193
+msgid "Archive file"
+msgstr "File d'archivio"
+
+#: src/ui/info_dialog.py:195
+msgid "Folder"
+msgstr "Cartella"
+
+#: src/ui/info_dialog.py:197
+msgid "File"
+msgstr "File"
+
+#: src/ui/info_dialog.py:198
+msgid "Unknown"
+msgstr "Sconosciuto"
+
+#: src/ui/info_dialog.py:201
+msgid "B"
+msgstr "B"
+
+#: src/ui/info_dialog.py:201
+msgid "KB"
+msgstr "KB"
+
+#: src/ui/info_dialog.py:201
+msgid "MB"
+msgstr "MB"
+
+#: src/ui/info_dialog.py:201
+msgid "GB"
+msgstr "GB"
+
+#: src/ui/info_dialog.py:212
+msgid "Yes"
+msgstr "Sì"
+
+#: src/ui/info_dialog.py:212
+msgid "No"
+msgstr "No"
+
+#: src/ui/log_panel.py:32
+msgid "Logs"
+msgstr "Log"
+
+#: src/ui/log_panel.py:96 src/ui/window.py:1327
+msgid "Cancel"
+msgstr "Annulla"
+
+#: src/ui/log_panel.py:105
+msgid "Cancelling..."
+msgstr "Annullamento in corso..."
+
+#: src/ui/log_panel.py:109
+msgid "Running"
+msgstr "In esecuzione"
+
+#: src/ui/log_panel.py:110
+msgid "Done"
+msgstr "Completato"
+
+#: src/ui/log_panel.py:111
+msgid "Warning"
+msgstr "Avviso"
+
+#: src/ui/log_panel.py:112
+msgid "Timeout"
+msgstr "Tempo scaduto"
+
+#: src/ui/log_panel.py:113
+msgid "Error"
+msgstr "Errore"
+
+#: src/ui/log_panel.py:114
+msgid "Cancelled"
+msgstr "Annullato"
+
+#: src/ui/log_panel.py:115
+msgid "Pending"
+msgstr "In attesa"
+
+#: src/ui/window.py:227
+msgid "Test failed"
+msgstr "Test fallito"
+
+#: src/ui/window.py:227 src/ui/window.py:256 src/ui/window.py:320
+#: src/ui/window.py:376
+msgid "Selected path is not an archive."
+msgstr "Il percorso selezionato non è un archivio."
+
+#: src/ui/window.py:256 src/ui/window.py:259
+msgid "Move failed"
+msgstr "Spostamento fallito"
+
+#: src/ui/window.py:259 src/ui/window.py:323
+msgid "This archive format does not support modification."
+msgstr "Questo formato di archivio non supporta la modifica."
+
+#: src/ui/window.py:267 src/ui/window.py:331 src/ui/window.py:404
+#: src/ui/window.py:1257 src/ui/window.py:1258
+msgid "No file selected"
+msgstr "Nessun file selezionato"
+
+#: src/ui/window.py:271 src/window.ui:140 src/window.ui:154
+msgid "Move"
+msgstr "Sposta"
+
+#: src/ui/window.py:271
+msgid "Move \"{}\" to:"
+msgstr "Sposta \"{}\" in:"
+
+#: src/ui/window.py:276 src/ui/window.py:336 src/ui/window.py:415
+#: src/ui/window.py:454 src/ui/window.py:521 src/ui/window.py:569
+#: src/ui/window.py:591 src/ui/window.py:622 src/ui/window.py:837
+#: src/ui/window.py:860
+msgid "_Cancel"
+msgstr "_Annulla"
+
+#: src/ui/window.py:277
+msgid "_Move"
+msgstr "_Sposta"
+
+#: src/ui/window.py:320 src/ui/window.py:323
+msgid "Delete failed"
+msgstr "Eliminazione fallita"
+
+#: src/ui/window.py:335 src/window.ui:164 src/window.ui:178
+msgid "Delete"
+msgstr "Elimina"
+
+#: src/ui/window.py:335
+msgid "Are you sure you want to delete \"{}\"?"
+msgstr "Sei sicuro di voler eliminare \"{}\"?"
+
+#: src/ui/window.py:337
+msgid "_Delete"
+msgstr "_Elimina"
+
+#: src/ui/window.py:376
+msgid "Extract failed"
+msgstr "Estrazione fallita"
+
+#: src/ui/window.py:411
+msgid "Select File"
+msgstr "Seleziona file"
+
+#: src/ui/window.py:414 src/ui/window.py:453
+msgid "_Open"
+msgstr "_Apri"
+
+#: src/ui/window.py:450 src/extract-dialog.ui:21
+msgid "Select Destination Folder"
+msgstr "Seleziona cartella di destinazione"
+
+#: src/ui/window.py:497 src/compress-dialog.ui:182 src/preferences.ui:77
+msgid "Default"
+msgstr "Predefinito"
+
+#: src/ui/window.py:519 src/ui/window.py:522 src/window.ui:67 src/window.ui:81
+msgid "Compress"
+msgstr "Comprimi"
+
+#: src/ui/window.py:543
+msgid "Source items ({})"
+msgstr "Elementi sorgente ({})"
+
+#: src/ui/window.py:565
+msgid "Select Files"
+msgstr "Seleziona file"
+
+#: src/ui/window.py:568 src/ui/window.py:590
+msgid "_Add"
+msgstr "_Aggiungi"

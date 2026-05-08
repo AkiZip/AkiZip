@@ -9,7 +9,7 @@ trap 'rm -rf "$TMPDIR"' EXIT
 
 ITS_FILE="/usr/share/gettext/its/metainfo.its"
 
-# ========== 自动分类 POTFILES.in ==========
+# ========== Auto-classify POTFILES.in ==========
 PY_FILES=()
 UI_FILES=()
 DESKTOP_FILES=()
@@ -24,12 +24,12 @@ while IFS= read -r f; do
         *.desktop.in)  DESKTOP_FILES+=("$f") ;;
         *.metainfo.xml.in|*.appdata.xml.in)
                        METAINFO_FILES+=("$f") ;;
-        *.gschema.xml) SKIP_FILES+=("$f") ;;  # 运行时翻译，跳过提取
-        *) echo "警告: 未知文件类型，跳过: $f" >&2 ;;
+        *.gschema.xml) SKIP_FILES+=("$f") ;;  # Runtime translation, skip extraction
+        *) echo "Warning: unknown file type, skipping: $f" >&2 ;;
     esac
 done < po/POTFILES.in
 
-# ========== 按类型分别提取 ==========
+# ========== Extract by file type ==========
 [[ ${#PY_FILES[@]} -gt 0 ]] && \
     xgettext --from-code=UTF-8 --language=Python \
         --keyword=_ --keyword=N_ --keyword=C_:1c,2 --keyword=NC_:1c,2 \
@@ -48,30 +48,30 @@ done < po/POTFILES.in
     xgettext --its="$ITS_FILE" --from-code=UTF-8 \
         -o "$TMPDIR/metainfo.pot" "${METAINFO_FILES[@]}"
 
-# ========== 合并 ==========
+# ========== Merge ==========
 msgcat "$TMPDIR/"*.pot -o "$POT_FILE"
-echo "已更新 $POT_FILE"
+echo "Updated $POT_FILE"
 
-# ========== 初始化 / 合并 zh_CN zh_HK ==========
-for lang in zh_CN zh_HK; do
+# ========== Read languages from LINGUAS ==========
+LANGS=()
+while IFS= read -r line; do
+    [[ -z "$line" || "$line" == \#* ]] && continue
+    LANGS+=("$line")
+done < po/LINGUAS
+
+# ========== Init / merge PO files ==========
+for lang in "${LANGS[@]}"; do
     PO_FILE="po/$lang.po"
     if [[ -f "$PO_FILE" ]]; then
-        echo "合并 $lang.po ..."
+        echo "Merging $lang.po ..."
         msgmerge --update --previous "$PO_FILE" "$POT_FILE"
     else
-        echo "创建 $lang.po ..."
+        echo "Creating $lang.po ..."
         msginit --input="$POT_FILE" --locale="$lang" \
                 --output="$PO_FILE" --no-translator
     fi
-    # 确保字符集为 UTF-8，避免中文翻译报错
+    # Ensure charset is UTF-8
     sed -i 's/charset=ASCII/charset=UTF-8/' "$PO_FILE"
 done
 
-# ========== 更新 LINGUAS ==========
-cat > po/LINGUAS <<'EOF'
-# Please keep this file sorted alphabetically.
-zh_CN
-zh_HK
-EOF
-
-echo "完成。请编辑 po/zh_CN.po 和 po/zh_HK.po 填入翻译。"
+echo "Done. Please edit the PO files to add translations."

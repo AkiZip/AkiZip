@@ -314,6 +314,11 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">zh_HK</attribute>
           </item>
+          <item>
+            <attribute name="label">Italiano</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">it</attribute>
+          </item>
         </section>
       </submenu>
     </section>

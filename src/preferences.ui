@@ -4,6 +4,30 @@
   <requires lib="Adw" version="1.0" />
   <object class="AdwPreferencesPage" id="page">
     <child>
+      <object class="AdwPreferencesGroup" id="general_group">
+        <property name="title" translatable="yes">General</property>
+        <child>
+          <object class="AdwActionRow" id="timeout_row">
+            <property name="title" translatable="yes">Timeout (seconds)</property>
+            <property name="subtitle" translatable="yes">-1 means no timeout.</property>
+            <property name="activatable-widget">timeout_spin</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="timeout_spin">
+                <property name="valign">center</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">3600</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
       <object class="AdwPreferencesGroup" id="compression_group">
         <property name="title" translatable="yes">Compression</property>
         <child>

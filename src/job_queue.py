@@ -17,11 +17,20 @@ class JobHandle:
 
 
 class JobQueue:
-    def __init__(self, scheduler=None):
+    def __init__(self, scheduler=None, default_timeout=-1):
         self._queue = queue.Queue()
         self._scheduler = scheduler or self._schedule_on_main_thread
+        self._default_timeout = default_timeout
         self._stopped = False
         self._thread = threading.Thread(target=self._run, name='AkizipJobQueue')
+
+    @property
+    def default_timeout(self):
+        return self._default_timeout
+
+    @default_timeout.setter
+    def default_timeout(self, value):
+        self._default_timeout = value
 
     def start(self):
         self._thread.start()
@@ -47,7 +56,7 @@ class JobQueue:
             task_status = TaskStatus(
                 task_id or getattr(function, "__name__", "job"),
                 msg or "",
-                timeout if timeout is not None else -1,
+                timeout if timeout is not None else self._default_timeout,
             )
         elif timeout is not None:
             task_status.timeout = timeout

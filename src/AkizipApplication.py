@@ -9,6 +9,7 @@ gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
 from .window import AkizipWindow
+from .ui.window import _host_path
 
 
 class AkizipApplication(Adw.Application):
@@ -16,7 +17,7 @@ class AkizipApplication(Adw.Application):
 
     def __init__(self):
         super().__init__(application_id='top.akizip.akizip',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+                         flags=Gio.ApplicationFlags.HANDLES_OPEN,
                          resource_base_path='/top/akizip/akizip')
         self.settings = Gio.Settings.new('top.akizip.akizip')
         self.add_action(self.settings.create_action('language'))
@@ -36,6 +37,24 @@ class AkizipApplication(Adw.Application):
         if not win:
             win = AkizipWindow(application=self)
         win.present()
+
+    def do_open(self, files, n_files, hint):
+        """Called when files are opened from the desktop or file manager."""
+        self.do_activate()
+        win = self.props.active_window
+        if win is None:
+            return
+        for i in range(n_files):
+            file = files[i]
+            path = file.get_path()
+            if path is None:
+                continue
+            display_path = _host_path(path)
+            if win._select_path(path, display_path):
+                win._refresh_file_list()
+                win._update_title()
+                win._sync_address_bar()
+            break
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""

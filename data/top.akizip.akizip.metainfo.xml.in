@@ -41,6 +41,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.1" date="2026-05-09">
+      <description translate="no">
+        <p>Fix hard-coded timeout and add Italian support</p>
+        <ul>
+          <li>Fixed the hard-coded timeout issue</li>
+          <li>Added Italian translation support</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.0" date="2026-05-07">
       <description translate="no">
         <p>Support archive password</p>

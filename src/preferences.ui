@@ -33,7 +33,7 @@
         <child>
           <object class="AdwActionRow" id="depth_row">
             <property name="title" translatable="yes">Scan depth</property>
-            <property name="subtitle" translatable="yes">Maximum folder levels to scan for recommendations.</property>
+            <property name="subtitle" translatable="yes">Maximum folder depth to scan for compression recommendations. Deeper scans may improve suggestions but take longer.</property>
             <property name="activatable-widget">depth_spin</property>
             <child type="suffix">
               <object class="GtkSpinButton" id="depth_spin">

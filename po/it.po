@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"POT-Creation-Date: 2026-05-09 14:32+0800\n"
 "PO-Revision-Date: 2026-05-06 20:10+0200\n"
 "Last-Translator: Albano Battistella\n"
 "Language-Team: Italian\n"
@@ -865,11 +865,11 @@ msgstr ""
 msgid "Leave empty for no password"
 msgstr ""
 
-#: src/compress-dialog.ui:277 src/preferences.ui:150
+#: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
 msgstr ""
 
-#: src/compress-dialog.ui:288
+#: src/compress-dialog.ui:290 src/compress-dialog.ui:301
 msgid "Only available for 7z format"
 msgstr ""
 
@@ -906,7 +906,9 @@ msgid "Scan depth"
 msgstr ""
 
 #: src/preferences.ui:36
-msgid "Maximum folder levels to scan for recommendations."
+msgid ""
+"Maximum folder depth to scan for compression recommendations. Deeper scans "
+"may improve suggestions but take longer."
 msgstr ""
 
 #: src/preferences.ui:56

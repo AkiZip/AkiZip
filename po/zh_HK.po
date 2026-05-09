@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"POT-Creation-Date: 2026-05-09 14:32+0800\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -758,11 +758,11 @@ msgstr "密碼"
 msgid "Leave empty for no password"
 msgstr "留空表示無密碼"
 
-#: src/compress-dialog.ui:277 src/preferences.ui:150
+#: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
 msgstr "加密檔案名稱"
 
-#: src/compress-dialog.ui:288
+#: src/compress-dialog.ui:290 src/compress-dialog.ui:301
 msgid "Only available for 7z format"
 msgstr "僅 7z 格式可用"
 
@@ -795,8 +795,12 @@ msgid "Scan depth"
 msgstr "掃描深度"
 
 #: src/preferences.ui:36
-msgid "Maximum folder levels to scan for recommendations."
-msgstr "掃描推薦的最大資料夾層級。"
+msgid ""
+"Maximum folder depth to scan for compression recommendations. Deeper scans "
+"may improve suggestions but take longer."
+msgstr ""
+"掃描資料夾以取得壓縮建議的最大深度。更深的掃描可能提升建議品質，"
+"但耗時更長。"
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
@@ -809,6 +813,9 @@ msgstr "用於普通壓縮和推薦回退。"
 #: src/preferences.ui:151
 msgid "Default for password-protected 7z archives."
 msgstr "受密碼保護的 7z 歸檔的預設值。"
+
+#~ msgid "Maximum folder levels to scan for recommendations."
+#~ msgstr "掃描推薦的最大資料夾層級。"
 
 #~ msgid "Keep the summary shorter, between 10 and 35 characters"
 #~ msgstr "請將摘要控制在 10 至 35 個字元之間"

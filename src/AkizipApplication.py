@@ -61,7 +61,7 @@ class AkizipApplication(Adw.Application):
         about = Adw.AboutDialog(application_name='Akizip',
                                 application_icon='top.akizip.akizip',
                                 developer_name='akizip',
-                                version='0.2.1',
+                                version='0.2.2',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
                                 translator_credits = _('translator-credits'),
                                 developers=['ckappgit','HungryNeko'],

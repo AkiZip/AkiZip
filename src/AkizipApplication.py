@@ -114,6 +114,9 @@ class AkizipApplication(Adw.Application):
             method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
             dictionary_spin.set_sensitive(fmt == '7z')
             threads_spin.set_sensitive(fmt in ('7z', 'zip'))
+            encrypt_names_switch.set_sensitive(fmt == '7z')
+            if fmt != '7z':
+                encrypt_names_switch.set_active(False)
 
         default_format = self._settings_get_string('default-compress-format', '7z')
         _VALID_FORMATS = ('7z', 'tar', 'zip')

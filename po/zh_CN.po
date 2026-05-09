@@ -811,8 +811,8 @@ msgid "Used for normal compression and recommendation fallback."
 msgstr "用于普通压缩和推荐回退。"
 
 #: src/preferences.ui:151
-msgid "Default for password-protected 7z archives."
-msgstr "受密码保护的 7z 归档的默认值。"
+msgid "Only available for 7z format."
+msgstr "仅 7z 格式可用。"
 
 #~ msgid "Maximum folder levels to scan for recommendations."
 #~ msgstr "扫描推荐的最大文件夹层级。"

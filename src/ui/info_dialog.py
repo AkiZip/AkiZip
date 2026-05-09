@@ -57,7 +57,6 @@ class InfoDialogMixin:
                 info_args,
                 on_success=lambda output: present_dialog(archive_output=output),
                 on_error=on_error,
-                timeout=60,
                 task_id='archive.info',
                 msg=_('Read archive information from ') + selected.name,
             )

@@ -1038,7 +1038,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 extract_args,
                 on_success=lambda output: _on_extract_success(output),
                 on_error=on_error,
-                timeout=60,
                 task_id='archive.extract_file',
                 msg=_('Extract ') + display_name,
             )
@@ -1102,7 +1101,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 list_args,
                 on_success=lambda output: self._populate_file_list(output),
                 on_error=on_error,
-                timeout=120,
                 task_id='archive.list',
                 msg=_('List ') + selected.name,
             )
@@ -1411,7 +1409,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             args,
             on_success=on_success,
             on_error=on_error,
-            timeout=60,
             task_id=name,
             msg=summary,
             on_status=on_status,

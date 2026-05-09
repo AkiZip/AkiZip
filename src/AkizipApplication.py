@@ -42,7 +42,7 @@ class AkizipApplication(Adw.Application):
         about = Adw.AboutDialog(application_name='Akizip',
                                 application_icon='top.akizip.akizip',
                                 developer_name='akizip',
-                                version='0.2.0',
+                                version='0.2.1',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
                                 translator_credits = _('translator-credits'),
                                 developers=['ckappgit','HungryNeko'],
@@ -73,6 +73,13 @@ class AkizipApplication(Adw.Application):
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
         encrypt_names_switch = builder.get_object('encrypt_names_switch')
+        timeout_spin = builder.get_object('timeout_spin')
+
+        timeout_spin.set_value(self._settings_get_int('default-timeout', -1))
+        timeout_spin.connect(
+            'value-changed',
+            lambda spin: self._on_timeout_changed(spin.get_value_as_int()),
+        )
 
         depth_spin.set_value(self.settings.get_int('compress-scan-depth'))
         depth_spin.connect(
@@ -172,6 +179,11 @@ class AkizipApplication(Adw.Application):
 
         self._preferences_window = window
         window.present()
+
+    def _on_timeout_changed(self, value):
+        self._settings_set_int('default-timeout', value)
+        if hasattr(self, 'job_queue'):
+            self.job_queue.default_timeout = value
 
     def _on_preferences_closed(self, window):
         self._preferences_window = None

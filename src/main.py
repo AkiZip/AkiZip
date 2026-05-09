@@ -27,7 +27,7 @@ def main(version):
     """The application's entry point."""
     app = AkizipApplication()
     app.commands = {}
-    app.job_queue = JobQueue()
+    app.job_queue = JobQueue(default_timeout=app.settings.get_int('default-timeout'))
     app.system = sysop()
     register_plugins(app.commands)
     app.job_queue.start()

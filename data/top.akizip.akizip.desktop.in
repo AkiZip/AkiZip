@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Akizip
-Exec=akizip
+Exec=akizip %F
 Icon=top.akizip.akizip
 Terminal=false
 Type=Application
@@ -8,3 +8,4 @@ Categories=Utility;
 Keywords=GTK;
 StartupNotify=true
 DBusActivatable=true
+MimeType=application/x-7z-compressed;application/zip;application/x-rar-compressed;application/vnd.rar;application/x-tar;application/gzip;application/x-bzip2;application/x-xz;application/vnd.ms-cab-compressed;application/x-iso9660-image;application/x-apple-diskimage;application/x-ms-wim;application/x-arj;application/x-compress;application/x-gtar-compressed;application/x-lzh-compressed;application/x-lha;application/x-compressed-tar;

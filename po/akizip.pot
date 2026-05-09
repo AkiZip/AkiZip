@@ -10,7 +10,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# #-#-#-#-#  python.pot (akizip 0.2.1)  #-#-#-#-#
+# #-#-#-#-#  python.pot (akizip 0.2.2)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the akizip package.
@@ -28,7 +28,7 @@ msgstr ""
 "#-#-#-#-#  desktop.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"POT-Creation-Date: 2026-05-09 14:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 "#-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"POT-Creation-Date: 2026-05-09 14:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,9 +48,9 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 "#-#-#-#-#  python.pot (akizip 0.2.1)  #-#-#-#-#\n"
-"Project-Id-Version: akizip 0.2.1\n"
+"Project-Id-Version: akizip 0.2.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"POT-Creation-Date: 2026-05-09 14:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 "#-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"POT-Creation-Date: 2026-05-09 14:32+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -812,11 +812,11 @@ msgstr ""
 msgid "Leave empty for no password"
 msgstr ""
 
-#: src/compress-dialog.ui:277 src/preferences.ui:150
+#: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
 msgstr ""
 
-#: src/compress-dialog.ui:288
+#: src/compress-dialog.ui:290 src/compress-dialog.ui:301
 msgid "Only available for 7z format"
 msgstr ""
 
@@ -849,7 +849,9 @@ msgid "Scan depth"
 msgstr ""
 
 #: src/preferences.ui:36
-msgid "Maximum folder levels to scan for recommendations."
+msgid ""
+"Maximum folder depth to scan for compression recommendations. Deeper scans "
+"may improve suggestions but take longer."
 msgstr ""
 
 #: src/preferences.ui:56

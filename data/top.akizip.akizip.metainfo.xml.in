@@ -41,6 +41,18 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.2" date="2026-05-09">
+      <description translate="no">
+        <p>Usability improvements and open-with support</p>
+        <ul>
+          <li>Adjusted encryption file name hint in compression dialog</li>
+          <li>Added support for open-with</li>
+          <li>Adjusted preferences descriptions</li>
+          <li>Removed keyboard shortcuts dialog entry</li>
+          <li>Fixed issue where encrypt file names could be selected for non-7z formats in preferences</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.1" date="2026-05-09">
       <description translate="no">
         <p>Fix hard-coded timeout and add Italian support</p>

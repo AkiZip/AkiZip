@@ -1,87 +1,33 @@
-# #-#-#-#-#  desktop.pot (PACKAGE VERSION)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Chinese translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Automatically generated, 2026.
 #
-# #-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# #-#-#-#-#  python.pot (akizip 0.2.2)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the akizip package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-# #-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"#-#-#-#-#  desktop.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 14:32+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"POT-Creation-Date: 2026-05-08 15:52+0800\n"
+"PO-Revision-Date: 2026-05-02 12:59+0800\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 14:32+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  python.pot (akizip 0.2.1)  #-#-#-#-#\n"
-"Project-Id-Version: akizip 0.2.2\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 14:32+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
-"#-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#\n"
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-09 14:32+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
 msgid "Akizip"
-msgstr ""
+msgstr "Akizip"
 
 #: data/top.akizip.akizip.desktop.in:8
 msgid "GTK;"
-msgstr ""
+msgstr "GTK;"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "GNOME 上 7-Zip 的现代化前端"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
@@ -99,769 +45,791 @@ msgstr ""
 
 #: data/top.akizip.akizip.metainfo.xml.in:15
 msgid "ckappgit"
-msgstr ""
+msgstr "ckappgit"
 
 #: data/top.akizip.akizip.metainfo.xml.in:39
 msgid "Main window showing archive contents and toolbar"
-msgstr ""
+msgstr "显示归档内容和工具栏的主窗口"
 
 #: src/ui/info_dialog.py:13 src/ui/window.py:1276
 msgid "System state not found"
-msgstr ""
+msgstr "未找到系统状态"
 
 #: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
 msgid "Archive"
-msgstr ""
+msgstr "压缩包"
 
 #: src/ui/info_dialog.py:27
 msgid "Archive information is unavailable."
-msgstr ""
+msgstr "压缩包信息不可用。"
 
 #: src/ui/info_dialog.py:61 src/ui/window.py:1590
 msgid "Read archive information from "
-msgstr ""
+msgstr "读取压缩包信息："
 
 #: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:188
 #: src/window.ui:202
 msgid "Info"
-msgstr ""
+msgstr "信息"
 
 #: src/ui/info_dialog.py:97
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: src/ui/info_dialog.py:104
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/ui/info_dialog.py:105 src/ui/window.py:897
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 #: src/ui/info_dialog.py:106
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: src/ui/info_dialog.py:108 src/ui/window.py:898
 msgid "Size"
-msgstr ""
+msgstr "大小"
 
 #: src/ui/info_dialog.py:109
 msgid "Can compress"
-msgstr ""
+msgstr "可压缩"
 
 #: src/ui/info_dialog.py:110
 msgid "Can extract"
-msgstr ""
+msgstr "可解压"
 
 #: src/ui/info_dialog.py:136
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: src/ui/info_dialog.py:148
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "已复制到剪贴板"
 
 #: src/ui/info_dialog.py:157
 msgid "No archive information found."
-msgstr ""
+msgstr "未找到压缩包信息。"
 
 #: src/ui/info_dialog.py:161
 msgid "Loaded"
-msgstr ""
+msgstr "已加载"
 
 #: src/ui/info_dialog.py:163
 msgid "Archive type"
-msgstr ""
+msgstr "压缩包类型"
 
 #: src/ui/info_dialog.py:164
 msgid "Archive size"
-msgstr ""
+msgstr "压缩包大小"
 
 #: src/ui/info_dialog.py:165
 msgid "Headers size"
-msgstr ""
+msgstr "头部大小"
 
 #: src/ui/info_dialog.py:166
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: src/ui/info_dialog.py:167
 msgid "Solid"
-msgstr ""
+msgstr "固实"
 
 #: src/ui/info_dialog.py:168
 msgid "Blocks"
-msgstr ""
+msgstr "块"
 
 #: src/ui/info_dialog.py:192
 msgid "Archive file"
-msgstr ""
+msgstr "压缩包文件"
 
 #: src/ui/info_dialog.py:194
 msgid "Folder"
-msgstr ""
+msgstr "文件夹"
 
 #: src/ui/info_dialog.py:196
 msgid "File"
-msgstr ""
+msgstr "文件"
 
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/ui/info_dialog.py:200
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: src/ui/info_dialog.py:200
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: src/ui/info_dialog.py:200
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: src/ui/info_dialog.py:200
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: src/ui/info_dialog.py:211
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: src/ui/log_panel.py:32
 msgid "Logs"
-msgstr ""
+msgstr "日志"
 
 #: src/ui/log_panel.py:96 src/ui/window.py:1338
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/ui/log_panel.py:105
 msgid "Cancelling..."
-msgstr ""
+msgstr "正在取消..."
 
 #: src/ui/log_panel.py:109
 msgid "Running"
-msgstr ""
+msgstr "运行中"
 
 #: src/ui/log_panel.py:110
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: src/ui/log_panel.py:111
 msgid "Warning"
-msgstr ""
+msgstr "警告"
 
 #: src/ui/log_panel.py:112
 msgid "Timeout"
-msgstr ""
+msgstr "超时"
 
 #: src/ui/log_panel.py:113
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: src/ui/log_panel.py:114
 msgid "Cancelled"
-msgstr ""
+msgstr "已取消"
 
 #: src/ui/log_panel.py:115
 msgid "Pending"
-msgstr ""
+msgstr "等待中"
 
 #: src/ui/window.py:227
 msgid "Test failed"
-msgstr ""
+msgstr "测试失败"
 
 #: src/ui/window.py:227 src/ui/window.py:256 src/ui/window.py:320
 #: src/ui/window.py:376
 msgid "Selected path is not an archive."
-msgstr ""
+msgstr "所选路径不是压缩包。"
 
 #: src/ui/window.py:256 src/ui/window.py:259
 msgid "Move failed"
-msgstr ""
+msgstr "移动失败"
 
 #: src/ui/window.py:259 src/ui/window.py:323
 msgid "This archive format does not support modification."
-msgstr ""
+msgstr "该压缩包格式不支持修改。"
 
 #: src/ui/window.py:267 src/ui/window.py:331 src/ui/window.py:404
 #: src/ui/window.py:1268 src/ui/window.py:1269
 msgid "No file selected"
-msgstr ""
+msgstr "未选择文件"
 
 #: src/ui/window.py:271 src/window.ui:140 src/window.ui:154
 msgid "Move"
-msgstr ""
+msgstr "移动"
 
 #: src/ui/window.py:271
 msgid "Move \"{}\" to:"
-msgstr ""
+msgstr "移动 \"{}\" 到："
 
 #: src/ui/window.py:276 src/ui/window.py:336 src/ui/window.py:415
 #: src/ui/window.py:454 src/ui/window.py:521 src/ui/window.py:569
 #: src/ui/window.py:591 src/ui/window.py:622 src/ui/window.py:837
 #: src/ui/window.py:860
 msgid "_Cancel"
-msgstr ""
+msgstr "取消(_C)"
 
 #: src/ui/window.py:277
 msgid "_Move"
-msgstr ""
+msgstr "移动(_M)"
 
 #: src/ui/window.py:320 src/ui/window.py:323
 msgid "Delete failed"
-msgstr ""
+msgstr "删除失败"
 
 #: src/ui/window.py:335 src/window.ui:164 src/window.ui:178
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: src/ui/window.py:335
 msgid "Are you sure you want to delete \"{}\"?"
-msgstr ""
+msgstr "确定要删除\"{}\"吗？"
 
 #: src/ui/window.py:337
 msgid "_Delete"
-msgstr ""
+msgstr "删除(_D)"
 
 #: src/ui/window.py:376
 msgid "Extract failed"
-msgstr ""
+msgstr "提取失败"
 
 #: src/ui/window.py:411
 msgid "Select File"
-msgstr ""
+msgstr "选择文件"
 
 #: src/ui/window.py:414 src/ui/window.py:453
 msgid "_Open"
-msgstr ""
+msgstr "打开(_O)"
 
 #: src/ui/window.py:450 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr ""
+msgstr "选择目标文件夹"
 
 #: src/ui/window.py:497 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
-msgstr ""
+msgstr "默认"
 
 #: src/ui/window.py:519 src/ui/window.py:522 src/window.ui:67 src/window.ui:81
 msgid "Compress"
-msgstr ""
+msgstr "压缩"
 
 #: src/ui/window.py:543
 msgid "Source items ({})"
-msgstr ""
+msgstr "源项目 ({})"
 
 #: src/ui/window.py:565
 msgid "Select Files"
-msgstr ""
+msgstr "选择文件"
 
 #: src/ui/window.py:568 src/ui/window.py:590
 msgid "_Add"
-msgstr ""
+msgstr "添加(_A)"
 
 #: src/ui/window.py:587
 msgid "Select Folders"
-msgstr ""
+msgstr "选择文件夹"
 
 #: src/ui/window.py:618
 msgid "Save Archive As"
-msgstr ""
+msgstr "另存压缩包为"
 
 #: src/ui/window.py:621
 msgid "_Save"
-msgstr ""
+msgstr "保存(_S)"
 
 #: src/ui/window.py:677
 msgid "No source items to analyze"
-msgstr ""
+msgstr "没有可分析的源项目"
 
 #: src/ui/window.py:684
 msgid "Recommendation not available"
-msgstr ""
+msgstr "推荐功能不可用"
 
 #: src/ui/window.py:737
 msgid "Recommendation failed"
-msgstr ""
+msgstr "压缩参数推荐失败"
 
 #: src/ui/window.py:738
 msgid "Compression recommendation failed"
-msgstr ""
+msgstr "压缩参数推荐失败"
 
 #: src/ui/window.py:788
 msgid "Compression recommendation"
-msgstr ""
+msgstr "压缩参数推荐"
 
 #: src/ui/window.py:793
 msgid "Recommendation reason"
-msgstr ""
+msgstr "推荐原因"
 
 #: src/ui/window.py:827
 msgid "Password Required"
-msgstr ""
+msgstr "需要密码"
 
 #: src/ui/window.py:828
 msgid "This archive is encrypted. Please enter the password."
-msgstr ""
+msgstr "此归档已加密。请输入密码。"
 
 #: src/ui/window.py:838 src/ui/window.py:1298 src/ui/window.py:1307
 #: src/ui/window.py:1331
 msgid "_OK"
-msgstr ""
+msgstr "确定"
 
 #: src/ui/window.py:858 src/ui/window.py:861
 msgid "Extract"
-msgstr ""
+msgstr "提取"
 
 #: src/ui/window.py:899
 msgid "Modified"
-msgstr ""
+msgstr "修改时间"
 
 #: src/ui/window.py:1016
 msgid "Failed to create temporary directory"
-msgstr ""
+msgstr "创建临时目录失败"
 
 #: src/ui/window.py:1042 src/ui/window.py:1506 src/ui/window.py:1508
 #: src/ui/window.py:1534 src/ui/window.py:1536 src/ui/window.py:1595
 #: src/ui/window.py:1605
 msgid "Extract "
-msgstr ""
+msgstr "提取 "
 
 #: src/ui/window.py:1048
 msgid "Extracted file not found"
-msgstr ""
+msgstr "未找到解压后的文件"
 
 #: src/ui/window.py:1105
 msgid "List "
-msgstr ""
+msgstr "列出 "
 
 #: src/ui/window.py:1207
 msgid "List failed"
-msgstr ""
+msgstr "列出失败"
 
 #: src/ui/window.py:1288
 msgid "Select failed"
-msgstr ""
+msgstr "选择失败"
 
 #: src/ui/window.py:1291
 msgid "Selected "
-msgstr ""
+msgstr "已选择 "
 
 #: src/ui/window.py:1295
 msgid "Format compatibility warning"
-msgstr ""
+msgstr "格式兼容性警告"
 
 #: src/ui/window.py:1296
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
-msgstr ""
+msgstr "该格式未经兼容性验证。移动和删除操作已被禁用。"
 
 #: src/ui/window.py:1304
 msgid "Nested archive opened"
-msgstr ""
+msgstr "嵌套压缩包已打开"
 
 #: src/ui/window.py:1305
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
-msgstr ""
+msgstr "该压缩包从父压缩包中提取。移动和删除操作已被禁用。"
 
 #: src/ui/window.py:1328
 msgid "Language changed"
-msgstr ""
+msgstr "语言已更改"
 
 #: src/ui/window.py:1329
 msgid "Restart the application to apply the new language."
-msgstr ""
+msgstr "重启应用以应用新的语言设置。"
 
 #: src/ui/window.py:1376
 msgid "Command not found"
-msgstr ""
+msgstr "未找到命令"
 
 #: src/ui/window.py:1381
 msgid "Job queue not found"
-msgstr ""
+msgstr "未找到任务队列"
 
 #: src/ui/window.py:1471 src/ui/window.py:1580
 msgid "{} items"
-msgstr ""
+msgstr "{} 个项目"
 
 #: src/ui/window.py:1475 src/ui/window.py:1532 src/ui/window.py:1546
 #: src/ui/window.py:1560 src/ui/window.py:1582 src/ui/window.py:1603
 #: src/ui/window.py:1609 src/ui/window.py:1614
 msgid "file"
-msgstr ""
+msgstr "文件"
 
 #: src/ui/window.py:1478 src/ui/window.py:1480
 msgid "Compress "
-msgstr ""
+msgstr "压缩 "
 
 #: src/ui/window.py:1482
 msgid "Compressed "
-msgstr ""
+msgstr "已压缩 "
 
 #: src/ui/window.py:1484
 msgid "Compress timed out: "
-msgstr ""
+msgstr "压缩超时："
 
 #: src/ui/window.py:1486
 msgid "Compress cancelled: "
-msgstr ""
+msgstr "压缩已取消："
 
 #: src/ui/window.py:1487
 msgid "Compress failed: "
-msgstr ""
+msgstr "压缩失败："
 
 #: src/ui/window.py:1490 src/ui/window.py:1504 src/ui/window.py:1518
 #: src/ui/window.py:1577 src/ui/window.py:1589 src/ui/window.py:1593
 #: src/ui/window.py:1598 src/ui/window.py:1602 src/ui/window.py:1608
 #: src/ui/window.py:1613
 msgid "archive"
-msgstr ""
+msgstr "压缩包"
 
 #: src/ui/window.py:1492 src/ui/window.py:1494
 msgid "Open "
-msgstr ""
+msgstr "打开 "
 
 #: src/ui/window.py:1496
 msgid "Opened "
-msgstr ""
+msgstr "已打开 "
 
 #: src/ui/window.py:1498
 msgid "Open timed out: "
-msgstr ""
+msgstr "打开超时："
 
 #: src/ui/window.py:1500
 msgid "Open cancelled: "
-msgstr ""
+msgstr "打开已取消："
 
 #: src/ui/window.py:1501
 msgid "Open failed: "
-msgstr ""
+msgstr "打开失败："
 
 #: src/ui/window.py:1510 src/ui/window.py:1538
 msgid "Extracted "
-msgstr ""
+msgstr "已提取 "
 
 #: src/ui/window.py:1512 src/ui/window.py:1540
 msgid "Extract timed out: "
-msgstr ""
+msgstr "提取超时："
 
 #: src/ui/window.py:1514 src/ui/window.py:1542
 msgid "Extract cancelled: "
-msgstr ""
+msgstr "提取已取消："
 
 #: src/ui/window.py:1515 src/ui/window.py:1543
 msgid "Extract failed: "
-msgstr ""
+msgstr "提取失败："
 
 #: src/ui/window.py:1520 src/ui/window.py:1522 src/ui/window.py:1599
 msgid "Test "
-msgstr ""
+msgstr "测试 "
 
 #: src/ui/window.py:1524
 msgid "Tested "
-msgstr ""
+msgstr "已测试 "
 
 #: src/ui/window.py:1526
 msgid "Test timed out: "
-msgstr ""
+msgstr "测试超时："
 
 #: src/ui/window.py:1528
 msgid "Test cancelled: "
-msgstr ""
+msgstr "测试已取消："
 
 #: src/ui/window.py:1529
 msgid "Test failed: "
-msgstr ""
+msgstr "测试失败："
 
 #: src/ui/window.py:1548 src/ui/window.py:1550 src/ui/window.py:1610
 msgid "Delete "
-msgstr ""
+msgstr "删除 "
 
 #: src/ui/window.py:1552
 msgid "Deleted "
-msgstr ""
+msgstr "已删除 "
 
 #: src/ui/window.py:1554
 msgid "Delete timed out: "
-msgstr ""
+msgstr "删除超时："
 
 #: src/ui/window.py:1556
 msgid "Delete cancelled: "
-msgstr ""
+msgstr "删除已取消："
 
 #: src/ui/window.py:1557
 msgid "Delete failed: "
-msgstr ""
+msgstr "删除失败："
 
 #: src/ui/window.py:1562 src/ui/window.py:1564 src/ui/window.py:1616
 msgid "Move "
-msgstr ""
+msgstr "移动 "
 
 #: src/ui/window.py:1566
 msgid "Moved "
-msgstr ""
+msgstr "已移动 "
 
 #: src/ui/window.py:1568
 msgid "Move timed out: "
-msgstr ""
+msgstr "移动超时："
 
 #: src/ui/window.py:1570
 msgid "Move cancelled: "
-msgstr ""
+msgstr "移动已取消："
 
 #: src/ui/window.py:1571
 msgid "Move failed: "
-msgstr ""
+msgstr "移动失败："
 
 #: src/ui/window.py:1583
 msgid "Create "
-msgstr ""
+msgstr "创建 "
 
 #: src/ui/window.py:1583 src/ui/window.py:1605 src/ui/window.py:1610
 msgid " from "
-msgstr ""
+msgstr "，来源 "
 
 #: src/ui/window.py:1585
 msgid "Parameters: "
-msgstr ""
+msgstr "参数："
 
 #: src/ui/window.py:1594 src/ui/window.py:1604
 msgid "folder"
-msgstr ""
+msgstr "文件夹"
 
 #: src/ui/window.py:1595 src/ui/window.py:1605 src/ui/window.py:1616
 msgid " to "
-msgstr ""
+msgstr " 到 "
 
 #: src/ui/window.py:1615
 msgid "destination"
-msgstr ""
+msgstr "目标位置"
 
 #: src/ui/window.py:1616
 msgid " in "
-msgstr ""
+msgstr " 在 "
 
 #: src/window.ui:19
 msgid "Main Menu"
-msgstr ""
+msgstr "主菜单"
 
 #: src/window.ui:43
 msgid "Open File"
-msgstr ""
+msgstr "打开文件"
 
 #: src/window.ui:57
 msgid "Open"
-msgstr ""
+msgstr "打开"
 
 #: src/window.ui:91 src/window.ui:106
 msgid "Extract All"
-msgstr ""
+msgstr "全部提取"
 
 #: src/window.ui:116 src/window.ui:130
 msgid "Test"
-msgstr ""
+msgstr "测试"
 
 #: src/window.ui:214
 msgid "Path or archive"
-msgstr ""
+msgstr "路径或压缩包"
 
 #: src/window.ui:229
 msgid "Open an archive to view its contents"
-msgstr ""
+msgstr "打开一个压缩包以查看其内容"
 
 #: src/window.ui:240
 msgid "The selected file is not an archive"
-msgstr ""
+msgstr "所选文件不是压缩包"
 
 #: src/window.ui:265
 msgid "This archive is empty"
-msgstr ""
+msgstr "该压缩包为空"
 
 #: src/window.ui:293
 msgid "_Language"
-msgstr ""
+msgstr "语言(_L)"
 
 #: src/window.ui:296
 msgid "System Default"
-msgstr ""
+msgstr "跟随系统"
 
 #: src/window.ui:327
 msgid "Show _Logs"
-msgstr ""
+msgstr "显示日志(_L)"
 
 #: src/window.ui:333
 msgid "_Preferences"
-msgstr ""
+msgstr "首选项(_P)"
 
 #: src/window.ui:337
 msgid "_Keyboard Shortcuts"
-msgstr ""
+msgstr "键盘快捷键(_K)"
 
 #: src/window.ui:341
 msgid "_About Akizip"
-msgstr ""
+msgstr "关于 Akizip(_A)"
 
 #: src/window.ui:349
 msgid "Extract Selected"
-msgstr ""
+msgstr "提取所选"
 
 #: src/compress-dialog.ui:12
 msgid "Output archive"
-msgstr ""
+msgstr "输出压缩包"
 
 #: src/compress-dialog.ui:24
 msgid "Select output archive path"
-msgstr ""
+msgstr "选择输出压缩包路径"
 
 #: src/compress-dialog.ui:30
 msgid "Select Output Archive"
-msgstr ""
+msgstr "选择输出压缩包"
 
 #: src/compress-dialog.ui:46 src/preferences.ui:60
 msgid "Format"
-msgstr ""
+msgstr "格式"
 
 #: src/compress-dialog.ui:63
 msgid "Auto Recommend"
-msgstr ""
+msgstr "自动推荐"
 
 #: src/compress-dialog.ui:64
 msgid "Scan source files and recommend format and parameters"
-msgstr ""
+msgstr "扫描源文件并推荐格式和参数"
 
 #: src/compress-dialog.ui:72
 msgid "Source items"
-msgstr ""
+msgstr "源项目"
 
 #: src/compress-dialog.ui:99
 msgid "Add Files"
-msgstr ""
+msgstr "添加文件"
 
 #: src/compress-dialog.ui:104
 msgid "Add Folders"
-msgstr ""
+msgstr "添加文件夹"
 
 #: src/compress-dialog.ui:109
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/compress-dialog.ui:122
 msgid "Advanced options"
-msgstr ""
+msgstr "高级选项"
 
 #: src/compress-dialog.ui:140 src/preferences.ui:76
 msgid "Compression level"
-msgstr ""
+msgstr "压缩等级"
 
 #: src/compress-dialog.ui:153 src/preferences.ui:82
 msgid "Store"
-msgstr ""
+msgstr "仅存储"
 
 #: src/compress-dialog.ui:154 src/preferences.ui:83
 msgid "Fastest"
-msgstr ""
+msgstr "最快"
 
 #: src/compress-dialog.ui:155 src/preferences.ui:84
 msgid "Fast"
-msgstr ""
+msgstr "快速"
 
 #: src/compress-dialog.ui:156 src/preferences.ui:85
 msgid "Normal"
-msgstr ""
+msgstr "普通"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:86
 msgid "Maximum"
-msgstr ""
+msgstr "最大"
 
 #: src/compress-dialog.ui:158 src/preferences.ui:87
 msgid "Ultra"
-msgstr ""
+msgstr "极限"
 
 #: src/compress-dialog.ui:169 src/preferences.ui:95
 msgid "Algorithm"
-msgstr ""
+msgstr "算法"
 
 #: src/compress-dialog.ui:196 src/preferences.ui:112
 msgid "Dictionary size (MB)"
-msgstr ""
+msgstr "字典大小 (MB)"
 
 #: src/compress-dialog.ui:208 src/compress-dialog.ui:237 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
-msgstr ""
+msgstr "0 使用 7-Zip 默认值。"
 
 #: src/compress-dialog.ui:225 src/preferences.ui:131
 msgid "Threads"
-msgstr ""
+msgstr "线程数"
 
 #: src/compress-dialog.ui:254
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: src/compress-dialog.ui:267
 msgid "Leave empty for no password"
-msgstr ""
+msgstr "留空表示无密码"
 
-#: src/compress-dialog.ui:282 src/preferences.ui:150
+#: src/compress-dialog.ui:277 src/preferences.ui:150
 msgid "Encrypt file names"
-msgstr ""
+msgstr "加密文件名"
 
-#: src/compress-dialog.ui:290 src/compress-dialog.ui:301
+#: src/compress-dialog.ui:288
 msgid "Only available for 7z format"
-msgstr ""
+msgstr "仅 7z 格式可用"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
-msgstr ""
+msgstr "目标文件夹"
 
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
-msgstr ""
+msgstr "如无密码请留空"
 
 #: src/preferences.ui:8
 msgid "General"
-msgstr ""
+msgstr "通用"
 
 #: src/preferences.ui:11
 msgid "Timeout (seconds)"
-msgstr ""
+msgstr "超时时间（秒）"
 
 #: src/preferences.ui:12
 msgid "-1 means no timeout."
-msgstr ""
+msgstr "-1 表示无超时。"
 
 #: src/preferences.ui:32
 msgid "Compression"
-msgstr ""
+msgstr "压缩"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
-msgstr ""
+msgstr "扫描深度"
 
 #: src/preferences.ui:36
-msgid ""
-"Maximum folder depth to scan for compression recommendations. Deeper scans "
-"may improve suggestions but take longer."
-msgstr ""
+msgid "Maximum folder levels to scan for recommendations."
+msgstr "扫描推荐的最大文件夹层级。"
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
-msgstr ""
+msgstr "默认压缩参数"
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
-msgstr ""
+msgstr "用于普通压缩和推荐回退。"
 
 #: src/preferences.ui:151
 msgid "Default for password-protected 7z archives."
-msgstr ""
+msgstr "受密码保护的 7z 归档的默认值。"
+
+#~ msgid "Keep the summary shorter, between 10 and 35 characters"
+#~ msgstr "请将摘要控制在 10 到 35 个字符之间"
+
+#~ msgid "No description"
+#~ msgstr "无描述"
+
+#~ msgid "Developer name"
+#~ msgstr "开发者名称"
+
+#~ msgid "A caption"
+#~ msgstr "说明文字"
+
+#~ msgid "Reading..."
+#~ msgstr "正在读取..."
+
+#~ msgid "Default parameters"
+#~ msgstr "默认参数"
+
+#~ msgid "Use compression recommendations"
+#~ msgstr "使用压缩参数推荐"
+
+#~ msgid "Automatically choose 7-Zip parameters before compressing."
+#~ msgstr "在压缩前自动选择 7-Zip 参数。"

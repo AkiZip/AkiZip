@@ -23,6 +23,7 @@ class status:
         self.started_at = None
         self.finished_at = None
         self.progress = None
+        self.eta = None
         self._on_progress = None
 
     def start(self, msg=None):
@@ -40,6 +41,11 @@ class status:
 
     def set_progress(self, percent):
         self.progress = percent
+        if self.started_at is not None and percent is not None and percent > 0:
+            elapsed = time.time() - self.started_at
+            self.eta = max(0, elapsed * (100.0 / percent) - elapsed)
+        else:
+            self.eta = None
         if self._on_progress is not None:
             self._on_progress(percent)
         return self

@@ -1348,6 +1348,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         progress_bar.set_show_text(True)
         box.append(progress_bar)
 
+        eta_label = Gtk.Label()
+        eta_label.add_css_class('dim-label')
+        box.append(eta_label)
+
         dialog.set_extra_child(box)
 
         def on_response(_d, response):
@@ -1358,12 +1362,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
         dialog._progress_bar = progress_bar
+        dialog._eta_label = eta_label
         return dialog
 
-    def _update_progress_dialog(self, dialog, percent):
+    def _format_eta(self, seconds):
+        if seconds is None:
+            return _('Calculating...')
+        if seconds < 0:
+            return ''
+        seconds = int(seconds)
+        if seconds < 60:
+            return _('%d seconds remaining') % seconds
+        return _('%d minutes remaining') % int(seconds / 60)
+
+    def _update_progress_dialog(self, dialog, percent, eta=None):
         if dialog is None:
             return
         dialog._progress_bar.set_fraction(percent / 100.0)
+        if hasattr(dialog, '_eta_label') and dialog._eta_label is not None:
+            dialog._eta_label.set_text(self._format_eta(eta))
 
     def _close_progress_dialog(self, dialog):
         if dialog is not None:
@@ -1401,7 +1418,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def on_status(task_status):
             if has_progress and task_status.progress is not None:
-                self._update_progress_dialog(progress_dialog, task_status.progress)
+                self._update_progress_dialog(progress_dialog, task_status.progress, getattr(task_status, 'eta', None))
             self._on_command_status(log_id, name, args, task_status)
 
         handle = job_queue.submit(

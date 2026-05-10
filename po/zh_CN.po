@@ -5,7 +5,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: akizip 0.2.2\n"
+"Project-Id-Version: akizip 0.2.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-09 01:11-0700\n"
 "PO-Revision-Date: 2026-05-02 12:59+0800\n"

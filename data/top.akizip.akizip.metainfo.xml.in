@@ -41,7 +41,7 @@
   </screenshots>
 
   <releases>
-    <release version="0.2.2" date="2026-05-09">
+    <release version="0.2.3" date="2026-05-09">
       <description translate="no">
         <p>Usability improvements and open-with support</p>
         <ul>

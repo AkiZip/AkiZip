@@ -262,7 +262,7 @@
                             <property name="child">
                               <object class="AdwStatusPage">
                                 <property name="icon-name">view-list-symbolic</property>
-                                <property name="title" translatable="yes">This archive is empty or could not be read</property>
+                                <property name="title" translatable="yes">This archive is empty</property>
                               </object>
                             </property>
                           </object>

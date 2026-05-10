@@ -19,7 +19,6 @@
 
 import os
 import tempfile
-import time
 from pathlib import Path
 
 from gettext import gettext as _
@@ -171,23 +170,21 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         except Exception:
             return fallback
 
-    def _run_default_compress_multi(self, output_path, source_paths, replace_existing=False):
+    def _run_default_compress_multi(self, output_path, source_paths):
         options = self._default_compress_options()
         self._run_command(
             'archive.compress_advance',
             output_path,
             source_paths,
             self._advanced_compress_args(options),
-            replace_existing,
         )
 
-    def _run_advanced_compress_multi(self, output_path, source_paths, options, replace_existing=False):
+    def _run_advanced_compress_multi(self, output_path, source_paths, options):
         self._run_command(
             'archive.compress_advance',
             output_path,
             source_paths,
             self._advanced_compress_args(options),
-            replace_existing,
         )
 
     def _advanced_compress_args(self, options):
@@ -482,7 +479,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         output_entry = builder.get_object('output_entry')
         output_entry.set_editable(not _IS_FLATPAK)
         output_browse = builder.get_object('output_browse')
-        same_dir_check = builder.get_object('same_dir_check')
         source_label = builder.get_object('source_label')
         source_list = builder.get_object('source_list')
         add_files_btn = builder.get_object('add_files_btn')
@@ -496,8 +492,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         password_entry = builder.get_object('password_entry')
         encrypt_names_check = builder.get_object('encrypt_names_check')
         suggest_btn = builder.get_object('suggest_btn')
-        suggest_job = {'handle': None, 'token': None, 'open': True}
-        updating_output = {'active': False}
 
         _METHOD_ITEMS = {
             '7z': [('default', _('Default')), ('LZMA2', 'LZMA2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd'), ('BZip2', 'BZip2')],
@@ -551,34 +545,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             confirm_sensitive = len(source_paths) > 0 and output_entry.get_text().strip()
             dialog.set_response_enabled('confirm', confirm_sensitive)
 
-        def same_dir_output():
-            if not source_paths:
-                return None
-            fmt = format_combo.get_active_id() or '7z'
-            source = Path(source_paths[0]).expanduser()
-            display_source = Path(_host_path(source))
-            output_name = f'{display_source.name}.{fmt}'
-            output_path = source.parent / output_name
-            display_path = display_source.parent / output_name
-            return output_path, display_path
-
-        def update_same_dir_output():
-            if same_dir_check is None or not same_dir_check.get_active():
-                return
-            output = same_dir_output()
-            if output is None:
-                return
-            output_path, display_path = output
-            updating_output['active'] = True
-            output_entry.set_text(str(display_path))
-            updating_output['active'] = False
-            last_output['display'] = output_entry.get_text()
-            last_output['op'] = str(output_path)
-
         def on_output_changed(_entry):
             text = output_entry.get_text().strip()
-            if not updating_output['active'] and same_dir_check is not None and same_dir_check.get_active():
-                same_dir_check.set_active(False)
             confirm_sensitive = len(source_paths) > 0 and text
             dialog.set_response_enabled('confirm', confirm_sensitive)
             suffix = Path(text).suffix.lstrip('.').lower()
@@ -608,9 +576,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                         path = file.get_path()
                         if path and path not in source_paths:
                             source_paths.append(path)
-                    cancel_suggestion()
                     update_source_list()
-                    update_same_dir_output()
                 c.destroy()
 
             chooser.connect('response', on_response)
@@ -632,9 +598,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                         path = file.get_path()
                         if path and path not in source_paths:
                             source_paths.append(path)
-                    cancel_suggestion()
                     update_source_list()
-                    update_same_dir_output()
                 c.destroy()
 
             chooser.connect('response', on_response)
@@ -647,9 +611,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             idx = row.get_index()
             if 0 <= idx < len(source_paths):
                 source_paths.pop(idx)
-                cancel_suggestion()
                 update_source_list()
-                update_same_dir_output()
 
         def on_browse_output(_btn):
             chooser = Gtk.FileChooserNative.new(
@@ -661,13 +623,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             )
             if source_paths:
                 archive_format = format_combo.get_active_id() or self._default_compress_format()
-                default_name = Path(_host_path(source_paths[0])).name + f'.{archive_format}'
+                default_name = Path(source_paths[0]).name + f'.{archive_format}'
                 chooser.set_current_name(default_name)
 
             def on_response(c, response):
                 if response == Gtk.ResponseType.ACCEPT:
-                    if same_dir_check is not None:
-                        same_dir_check.set_active(False)
                     file = c.get_file()
                     if file is not None:
                         op = file.get_path()
@@ -698,9 +658,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             encrypt_names_check.set_sensitive(fmt == '7z')
             if fmt != '7z':
                 encrypt_names_check.set_active(False)
-            if same_dir_check is not None and same_dir_check.get_active():
-                update_same_dir_output()
-                return
             text = output_entry.get_text().strip()
             if text:
                 op_path = Path(text)
@@ -711,101 +668,76 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     if last_output['display'] == text and last_output['op']:
                         last_output['display'] = new_text
                         last_output['op'] = str(Path(last_output['op']).with_suffix(f'.{fmt}'))
-            update_same_dir_output()
 
         format_combo.connect('changed', on_format_changed)
         on_format_changed(format_combo)
 
-        def on_same_dir_toggled(check):
-            update_same_dir_output()
-
-        if same_dir_check is not None:
-            same_dir_check.connect('toggled', on_same_dir_toggled)
-
-        def cancel_suggestion():
-            suggest_job['token'] = None
-            handle = suggest_job.get('handle')
-            suggest_job['handle'] = None
-            if handle is not None:
-                handle.cancel()
-            if suggest_job['open']:
-                suggest_btn.set_sensitive(True)
-
-        def build_suggestion(paths, depth, scan_command, suggest_command, timeout=-1, cancel_event=None):
-            started_at = time.monotonic()
-
-            def remaining_timeout():
-                if cancel_event is not None and cancel_event.is_set():
-                    raise RuntimeError("Cancelled")
-                if timeout is None or timeout < 0:
-                    return timeout
-                remaining = timeout - (time.monotonic() - started_at)
-                if remaining <= 0:
-                    raise TimeoutError(f"Job timed out after {timeout} seconds")
-                return remaining
-
-            merged = {
-                'root': 'multiple',
-                'max_depth': depth,
-                'total': 0,
-                'files': 0,
-                'folders': 0,
-                'total_size': 0,
-                'largest_file': {'path': '', 'size': 0},
-                'extensions': {},
-                'categories': {
-                    'compressed': {'count': 0, 'size': 0},
-                    'media': {'count': 0, 'size': 0},
-                    'documents': {'count': 0, 'size': 0},
-                    'code': {'count': 0, 'size': 0},
-                    'other': {'count': 0, 'size': 0},
-                },
-                'size_buckets': {
-                    'small': {'count': 0, 'size': 0},
-                    'medium': {'count': 0, 'size': 0},
-                    'large': {'count': 0, 'size': 0},
-                    'huge': {'count': 0, 'size': 0},
-                },
-                'errors': [],
-            }
-            for src in paths:
-                result = scan_command(
-                    str(src),
-                    depth,
-                    timeout=remaining_timeout(),
-                    cancel_event=cancel_event,
-                )
-                merged['files'] += result.get('files', 0)
-                merged['folders'] += result.get('folders', 0)
-                merged['total'] = merged['files'] + merged['folders']
-                merged['total_size'] += result.get('total_size', 0)
-                merged['errors'].extend(result.get('errors', []))
-                if result.get('largest_file', {}).get('size', 0) > merged['largest_file']['size']:
-                    merged['largest_file'] = result['largest_file']
-                for key, val in result.get('extensions', {}).items():
-                    bucket = merged['extensions'].setdefault(key, {'count': 0, 'size': 0})
-                    bucket['count'] += val.get('count', 0)
-                    bucket['size'] += val.get('size', 0)
-                for key, val in result.get('categories', {}).items():
-                    bucket = merged['categories'].setdefault(key, {'count': 0, 'size': 0})
-                    bucket['count'] += val.get('count', 0)
-                    bucket['size'] += val.get('size', 0)
-                for key, val in result.get('size_buckets', {}).items():
-                    bucket = merged['size_buckets'].setdefault(key, {'count': 0, 'size': 0})
-                    bucket['count'] += val.get('count', 0)
-                    bucket['size'] += val.get('size', 0)
-            return suggest_command(
-                merged,
-                timeout=remaining_timeout(),
-                cancel_event=cancel_event,
-            )
-
-        def apply_suggestion(suggestion, token):
-            if token is not suggest_job.get('token') or not suggest_job['open']:
+        def on_suggest(_btn):
+            if not source_paths:
+                self._show_notification(_('No source items to analyze'), _status.WARNING)
                 return
-            suggest_job['token'] = None
-            suggest_job['handle'] = None
-            suggest_btn.set_sensitive(True)
+
+            app = self.get_application()
+            scan = getattr(app, 'commands', {}).get('system.scan')
+            suggest = getattr(app, 'commands', {}).get('system.suggest_zip_paramiters')
+            if scan is None or suggest is None:
+                self._show_notification(_('Recommendation not available'), _status.ERROR)
+                return
+
+            try:
+                depth = app.settings.get_int('compress-scan-depth') if (app is not None and hasattr(app, 'settings')) else 3
+                merged = {
+                    'root': 'multiple',
+                    'max_depth': depth,
+                    'total': 0,
+                    'files': 0,
+                    'folders': 0,
+                    'total_size': 0,
+                    'largest_file': {'path': '', 'size': 0},
+                    'extensions': {},
+                    'categories': {
+                        'compressed': {'count': 0, 'size': 0},
+                        'media': {'count': 0, 'size': 0},
+                        'documents': {'count': 0, 'size': 0},
+                        'code': {'count': 0, 'size': 0},
+                        'other': {'count': 0, 'size': 0},
+                    },
+                    'size_buckets': {
+                        'small': {'count': 0, 'size': 0},
+                        'medium': {'count': 0, 'size': 0},
+                        'large': {'count': 0, 'size': 0},
+                        'huge': {'count': 0, 'size': 0},
+                    },
+                    'errors': [],
+                }
+                for src in source_paths:
+                    result = scan(str(src), depth)
+                    merged['files'] += result.get('files', 0)
+                    merged['folders'] += result.get('folders', 0)
+                    merged['total'] = merged['files'] + merged['folders']
+                    merged['total_size'] += result.get('total_size', 0)
+                    merged['errors'].extend(result.get('errors', []))
+                    if result.get('largest_file', {}).get('size', 0) > merged['largest_file']['size']:
+                        merged['largest_file'] = result['largest_file']
+                    for key, val in result.get('extensions', {}).items():
+                        bucket = merged['extensions'].setdefault(key, {'count': 0, 'size': 0})
+                        bucket['count'] += val.get('count', 0)
+                        bucket['size'] += val.get('size', 0)
+                    for key, val in result.get('categories', {}).items():
+                        bucket = merged['categories'].setdefault(key, {'count': 0, 'size': 0})
+                        bucket['count'] += val.get('count', 0)
+                        bucket['size'] += val.get('size', 0)
+                    for key, val in result.get('size_buckets', {}).items():
+                        bucket = merged['size_buckets'].setdefault(key, {'count': 0, 'size': 0})
+                        bucket['count'] += val.get('count', 0)
+                        bucket['size'] += val.get('size', 0)
+
+                suggestion = suggest(merged)
+            except Exception as error:
+                self._show_notification(_('Recommendation failed'), _status.ERROR)
+                self._append_log(_('Compression recommendation failed'), str(error), _status.WARNING)
+                return
+
             fmt = suggestion.get('format', '7z')
             if fmt in ('7z', 'tar', 'zip'):
                 format_combo.set_active_id(fmt)
@@ -860,42 +792,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 for r in reasons:
                     self._append_log(_('Recommendation reason'), r, _status.FINISHED)
 
-        def on_suggest_error(error, token):
-            if token is not suggest_job.get('token') or not suggest_job['open']:
-                return
-            suggest_job['token'] = None
-            suggest_job['handle'] = None
-            suggest_btn.set_sensitive(True)
-            self._show_notification(_('Recommendation failed'), _status.ERROR)
-            self._append_log(_('Compression recommendation failed'), str(error), _status.ERROR)
-
-        def on_suggest(_btn):
-            if not source_paths:
-                self._show_notification(_('No source items to analyze'), _status.WARNING)
-                return
-
-            app = self.get_application()
-            job_queue = getattr(app, 'job_queue', None)
-            scan = getattr(app, 'commands', {}).get('system.scan')
-            suggest = getattr(app, 'commands', {}).get('system.suggest_zip_paramiters')
-            if scan is None or suggest is None or job_queue is None:
-                self._show_notification(_('Recommendation not available'), _status.ERROR)
-                return
-
-            depth = app.settings.get_int('compress-scan-depth') if (app is not None and hasattr(app, 'settings')) else 3
-            cancel_suggestion()
-            token = object()
-            suggest_job['token'] = token
-            suggest_btn.set_sensitive(False)
-            suggest_job['handle'] = job_queue.submit(
-                build_suggestion,
-                (list(source_paths), depth, scan, suggest),
-                on_success=lambda suggestion, token=token: apply_suggestion(suggestion, token),
-                on_error=lambda error, token=token: on_suggest_error(error, token),
-                task_id='system.suggest_zip_paramiters',
-                msg=_('Analyze compression settings'),
-            )
-
         add_files_btn.connect('clicked', on_add_files)
         add_folders_btn.connect('clicked', on_add_folders)
         remove_btn.connect('clicked', on_remove)
@@ -904,11 +800,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         suggest_btn.connect('clicked', on_suggest)
 
         def on_response(_d, response):
-            suggest_job['open'] = False
-            cancel_suggestion()
             if response == 'confirm':
-                if same_dir_check is not None and same_dir_check.get_active():
-                    update_same_dir_output()
                 text = output_entry.get_text().strip()
                 if not text or not source_paths:
                     return
@@ -926,8 +818,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     'password': password_entry.get_text(),
                     'encrypt_names': encrypt_names_check.get_active(),
                 }
-                replace_existing = same_dir_check is not None and same_dir_check.get_active()
-                self._run_advanced_compress_multi(output_path, paths, options, replace_existing)
+                self._run_advanced_compress_multi(output_path, paths, options)
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -962,7 +853,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = builder.get_object('entry')
         entry.set_editable(not _IS_FLATPAK)
         browse_button = builder.get_object('browse_button')
-        same_dir_check = builder.get_object('same_dir_check')
         password_entry = builder.get_object('password_entry')
 
         dialog = Adw.AlertDialog.new(_('Extract'), None)
@@ -974,48 +864,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_close_response('cancel')
 
         last = {'display': None, 'op': None}
-        updating_entry = {'active': False}
 
         def on_picked(display, op):
             last['display'] = display
             last['op'] = op
 
-        def same_dir_destination():
-            selected = self._selected_path_from_input()
-            if selected is None:
-                return None
-            return selected.parent
-
-        def update_same_dir_destination():
-            if same_dir_check is None or not same_dir_check.get_active():
-                return
-            destination = same_dir_destination()
-            if destination is None:
-                return
-            updating_entry['active'] = True
-            entry.set_text(_host_path(destination))
-            updating_entry['active'] = False
-            last['display'] = entry.get_text()
-            last['op'] = str(destination)
-
-        def on_entry_changed(_entry):
-            if not updating_entry['active'] and same_dir_check is not None and same_dir_check.get_active():
-                same_dir_check.set_active(False)
-
-        def on_browse_extract(_btn):
-            if same_dir_check is not None:
-                same_dir_check.set_active(False)
-            self._open_folder_chooser_for_entry(entry, on_picked=on_picked)
-
-        browse_button.connect('clicked', on_browse_extract)
-        entry.connect('changed', on_entry_changed)
+        browse_button.connect('clicked',
+            lambda _btn: self._open_folder_chooser_for_entry(entry, on_picked=on_picked))
         entry.connect('activate', lambda _e: dialog.response('confirm'))
-
-        def on_same_dir_toggled(check):
-            update_same_dir_destination()
-
-        if same_dir_check is not None:
-            same_dir_check.connect('toggled', on_same_dir_toggled)
 
         def on_response(_d, response):
             if response == 'confirm':
@@ -1492,21 +1348,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         progress_bar.set_show_text(True)
         box.append(progress_bar)
 
-        time_label = Gtk.Label()
-        time_label.set_xalign(0)
-        time_label.set_label(_('Elapsed time: --'))
-        box.append(time_label)
-
-        average_label = Gtk.Label()
-        average_label.set_xalign(0)
-        average_label.set_label(_('Average speed remaining time: --'))
-        box.append(average_label)
-
-        current_label = Gtk.Label()
-        current_label.set_xalign(0)
-        current_label.set_label(_('Current speed remaining time: --'))
-        box.append(current_label)
-
         dialog.set_extra_child(box)
 
         def on_response(_d, response):
@@ -1517,23 +1358,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
         dialog._progress_bar = progress_bar
-        dialog._time_label = time_label
-        dialog._average_label = average_label
-        dialog._current_label = current_label
         return dialog
 
-    def _update_progress_dialog(self, dialog, task_status):
+    def _update_progress_dialog(self, dialog, percent):
         if dialog is None:
             return
-        percent = task_status.progress
-        if percent is None:
-            return
         dialog._progress_bar.set_fraction(percent / 100.0)
-        dialog._progress_bar.set_text(f'{percent}%')
-        timeTake, averageTimeLeft, curSpeedTimeLeft = task_status.progress_times
-        dialog._time_label.set_label(_('Elapsed time: {}').format(timeTake))
-        dialog._average_label.set_label(_('Average speed remaining time: {}').format(averageTimeLeft))
-        dialog._current_label.set_label(_('Current speed remaining time: {}').format(curSpeedTimeLeft))
 
     def _close_progress_dialog(self, dialog):
         if dialog is not None:
@@ -1571,7 +1401,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def on_status(task_status):
             if has_progress and task_status.progress is not None:
-                self._update_progress_dialog(progress_dialog, task_status)
+                self._update_progress_dialog(progress_dialog, task_status.progress)
             self._on_command_status(log_id, name, args, task_status)
 
         handle = job_queue.submit(

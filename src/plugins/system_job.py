@@ -66,7 +66,7 @@ def _check_stop(deadline, cancel_event=None):
     if cancel_event is not None and cancel_event.is_set():
         raise RuntimeError("Cancelled")
     if deadline is not None and time.monotonic() >= deadline:
-        raise TimeoutError("Job timed out")
+        raise TimeoutError("Move timed out")
 
 
 def move_path(source_path, destination_dir, timeout=-1, cancel_event=None):
@@ -151,10 +151,8 @@ def _remove_partial(target):
             pass
 
 
-def scan_fileAndFolder(path, n=DEFAULT_SCAN_DEPTH, timeout=-1, cancel_event=None):
+def scan_fileAndFolder(path, n=DEFAULT_SCAN_DEPTH):
     root = Path(path).expanduser()
-    deadline = _deadline(timeout)
-    _check_stop(deadline, cancel_event)
     try:
         max_depth = max(0, int(n))
     except (TypeError, ValueError):
@@ -170,13 +168,12 @@ def scan_fileAndFolder(path, n=DEFAULT_SCAN_DEPTH, timeout=-1, cancel_event=None
         return fileCount
 
     fileCount["folders"] = 1
-    _scan_folder(fileCount, root, 0, max_depth, deadline, cancel_event)
+    _scan_folder(fileCount, root, 0, max_depth)
     fileCount["total"] = fileCount["files"] + fileCount["folders"]
     return fileCount
 
 
-def _scan_folder(fileCount, folder, depth, max_depth, deadline=None, cancel_event=None):
-    _check_stop(deadline, cancel_event)
+def _scan_folder(fileCount, folder, depth, max_depth):
     if depth >= max_depth:
         return
 
@@ -187,11 +184,10 @@ def _scan_folder(fileCount, folder, depth, max_depth, deadline=None, cancel_even
         return
 
     for child in children:
-        _check_stop(deadline, cancel_event)
         try:
             if child.is_dir() and not child.is_symlink():
                 fileCount["folders"] += 1
-                _scan_folder(fileCount, child, depth + 1, max_depth, deadline, cancel_event)
+                _scan_folder(fileCount, child, depth + 1, max_depth)
             else:
                 _scan_add_file(fileCount, child)
         except OSError as error:
@@ -249,13 +245,10 @@ def _size_bucket(size):
     return "huge"
 
 
-def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
-    deadline = _deadline(timeout)
-    _check_stop(deadline, cancel_event)
+def suggest_zip_paramiters(fileCount):
     total_size = fileCount.get("total_size", 0) or 0
     files = fileCount.get("files", fileCount.get("total", 0)) or 0
     categories = fileCount.get("categories", {})
-    _check_stop(deadline, cancel_event)
     compressed_size = _category_size(categories, "compressed")
     media_size = _category_size(categories, "media")
     code_size = _category_size(categories, "code")
@@ -275,7 +268,6 @@ def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
     }
 
     if files == 0:
-        _check_stop(deadline, cancel_event)
         suggestion.update({
             "level": 0,
             "method": "store",
@@ -285,7 +277,6 @@ def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
         return suggestion
 
     if already_packed_ratio >= 0.90 and files < 50:
-        _check_stop(deadline, cancel_event)
         suggestion.update({
             "format": "tar",
             "level": 0,
@@ -301,7 +292,6 @@ def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
         return suggestion
 
     if already_packed_ratio >= 0.70:
-        _check_stop(deadline, cancel_event)
         suggestion.update({
             "format": "zip",
             "method": "store",
@@ -317,7 +307,6 @@ def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
         return suggestion
 
     if text_like_ratio >= 0.60:
-        _check_stop(deadline, cancel_event)
         dictionary = "64m" if total_size < 1024 * 1024 * 1024 else "128m"
         suggestion.update({
             "level": 9,
@@ -335,7 +324,6 @@ def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
         return suggestion
 
     if files > 5000:
-        _check_stop(deadline, cancel_event)
         suggestion.update({
             "level": 7,
             "solid": True,
@@ -349,7 +337,6 @@ def suggest_zip_paramiters(fileCount, timeout=-1, cancel_event=None):
         return suggestion
 
     if total_size >= 2 * 1024 * 1024 * 1024:
-        _check_stop(deadline, cancel_event)
         suggestion.update({
             "level": 3,
             "dictionary": "32m",
@@ -378,7 +365,8 @@ def _ratio(part, total):
     return part / total
 
 
-suggest_zip_parameters = suggest_zip_paramiters
+def suggest_zip_parameters(fileCount):
+    return suggest_zip_paramiters(fileCount)
 
 
 def register(commands):

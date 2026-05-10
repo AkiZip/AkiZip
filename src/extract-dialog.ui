@@ -25,13 +25,6 @@
     </child>
 
     <child>
-      <object class="GtkCheckButton" id="same_dir_check">
-        <property name="label" translatable="yes">Extract beside archive using the same name</property>
-        <property name="tooltip-text" translatable="yes">Use the archive folder; full extraction creates a folder named after the archive without its suffix.</property>
-      </object>
-    </child>
-
-    <child>
       <object class="GtkPasswordEntry" id="password_entry">
         <property name="hexpand">true</property>
         <property name="show-peek-icon">true</property>

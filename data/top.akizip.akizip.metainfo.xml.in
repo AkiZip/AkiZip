@@ -41,6 +41,17 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.3" date="2026-05-09">
+      <description translate="no">
+        <p>Compression workflow and release metadata updates</p>
+        <ul>
+          <li>Updated application metadata and version information for 0.2.3</li>
+          <li>Improved compression recommendation handling, timeout behavior, and progress estimates</li>
+          <li>Added same-folder compression and extraction path shortcuts</li>
+          <li>Improved translations and removed editor backup files from tracked sources</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.2" date="2026-05-09">
       <description translate="no">
         <p>Usability improvements and open-with support</p>

@@ -152,24 +152,61 @@ def archive_list(archive_path, password=None, timeout=-1, cancel_event=None):
     return _run_7zip(args, timeout, cancel_event)
 
 
-def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None, task_status=None):
-    if isinstance(source_paths, (str, Path)):
-        source_paths = [source_paths]
+def _normalize_paths(paths):
+    if isinstance(paths, (str, Path)):
+        return [Path(paths)]
+    return [Path(path) for path in paths]
+
+
+def _same_path(left, right):
+    try:
+        return left.resolve() == right.resolve()
+    except OSError:
+        return left.absolute() == right.absolute()
+
+
+def _prepare_new_archive(output_archive, source_paths, replace_existing=False):
+    output = Path(output_archive)
+    sources = _normalize_paths(source_paths)
+    if any(_same_path(output, source) for source in sources):
+        raise ValueError('Output archive cannot be the same as a source item')
+    if output.exists():
+        if not replace_existing:
+            raise FileExistsError(f'Output archive already exists: {output}')
+        if not output.is_file():
+            raise FileExistsError(f'Output path already exists and is not a file: {output}')
+        output.unlink()
+    return output, sources
+
+
+def _remove_partial_archive(output):
+    try:
+        if output.exists() and output.is_file():
+            output.unlink()
+    except OSError:
+        pass
+
+
+def archive_compress(output_archive, source_paths, replace_existing=False, timeout=-1, cancel_event=None, task_status=None):
+    output_archive, source_paths = _prepare_new_archive(output_archive, source_paths, replace_existing)
 
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
 
-    return _run_7zip([
-        'a',
-        str(output_archive),
-        *[str(path) for path in source_paths],
-    ], timeout, cancel_event, on_progress)
+    try:
+        return _run_7zip([
+            'a',
+            str(output_archive),
+            *[str(path) for path in source_paths],
+        ], timeout, cancel_event, on_progress)
+    except Exception:
+        _remove_partial_archive(output_archive)
+        raise
 
 
-def archive_compress_advance(output_archive, source_paths, args, timeout=-1, cancel_event=None, task_status=None):
-    if isinstance(source_paths, (str, Path)):
-        source_paths = [source_paths]
+def archive_compress_advance(output_archive, source_paths, args, replace_existing=False, timeout=-1, cancel_event=None, task_status=None):
+    output_archive, source_paths = _prepare_new_archive(output_archive, source_paths, replace_existing)
     if args is None:
         args = []
     if isinstance(args, dict):
@@ -179,12 +216,16 @@ def archive_compress_advance(output_archive, source_paths, args, timeout=-1, can
         if task_status is not None:
             task_status.set_progress(percent)
 
-    return _run_7zip([
-        'a',
-        *[str(arg) for arg in args],
-        str(output_archive),
-        *[str(path) for path in source_paths],
-    ], timeout, cancel_event, on_progress)
+    try:
+        return _run_7zip([
+            'a',
+            *[str(arg) for arg in args],
+            str(output_archive),
+            *[str(path) for path in source_paths],
+        ], timeout, cancel_event, on_progress)
+    except Exception:
+        _remove_partial_archive(output_archive)
+        raise
 
 
 def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):

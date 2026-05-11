@@ -30,7 +30,7 @@ from gi.repository import GObject
 from gi.repository import Pango
 from ..plugins.password import is_password_error
 from ..plugins.status import _status
-from ..plugins.system import ARCHIVE_SUFFIXES
+from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
 
@@ -1004,7 +1004,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._current_internal_path = item.full_path
             self._render_current_folder()
             return
-        if item.path != '..' and Path(item.path).suffix.lower() in ARCHIVE_SUFFIXES:
+        if item.path != '..' and archive_suffix(Path(item.path)) in ARCHIVE_SUFFIXES:
             self._open_nested_archive(item)
 
     def _open_nested_archive(self, item):
@@ -1080,6 +1080,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if not app.system.is_archive():
             self.file_list_stack.set_visible_child_name('not_archive')
             return
+        if app.system.format_category() == 'no_preview':
+            self.file_list_stack.set_visible_child_name('no_preview')
+            return
 
         selected = Path(app.system.operation_path())
         command = getattr(app, 'commands', {}).get('archive.list')
@@ -1116,6 +1119,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _populate_file_list(self, output):
         self._all_entries = parse_archive_entries(output)
+        app = self.get_application()
+        if app is not None and hasattr(app, 'system') and app.system.has_selected():
+            suffix = archive_suffix(app.system.selected)
+            if suffix in ('.tar.bz2', '.tar.xz'):
+                has_real_entry = any(
+                    not entry.get('Path', '').startswith('/')
+                    for entry in self._all_entries
+                )
+                if not has_real_entry:
+                    inner_name = app.system.selected.name
+                    if suffix == '.tar.bz2':
+                        inner_name = inner_name[:-4]
+                    else:
+                        inner_name = inner_name[:-3]
+                    self._all_entries.append({
+                        'Path': inner_name,
+                        'Size': '',
+                        'Modified': '',
+                    })
         self._folder_set = self._collect_folders(self._all_entries)
         self._current_internal_path = ''
         self._render_current_folder()
@@ -1301,6 +1323,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dialog = Adw.AlertDialog.new(
                 _('Format compatibility warning'),
                 _('This format has not been verified for compatibility. Move and delete operations are disabled.'),
+            )
+            dialog.add_response('ok', _('_OK'))
+            dialog.set_default_response('ok')
+            dialog.set_close_response('ok')
+            dialog.present(self)
+        elif info.get('format_category') == 'no_preview':
+            dialog = Adw.AlertDialog.new(
+                _('Preview not supported'),
+                _('This format does not support preview. Only extract is available.'),
             )
             dialog.add_response('ok', _('_OK'))
             dialog.set_default_response('ok')

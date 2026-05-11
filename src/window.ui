@@ -269,6 +269,17 @@
                         </child>
                         <child>
                           <object class="GtkStackPage">
+                            <property name="name">no_preview</property>
+                            <property name="child">
+                              <object class="AdwStatusPage">
+                                <property name="icon-name">text-x-generic-symbolic</property>
+                                <property name="title" translatable="yes">This format does not support preview</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkStackPage">
                             <property name="name">list</property>
                             <property name="child">
                               <object class="GtkScrolledWindow" id="file_list_scroller">

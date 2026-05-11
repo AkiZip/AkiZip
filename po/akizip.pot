@@ -474,6 +474,14 @@ msgid ""
 "are disabled."
 msgstr ""
 
+#: src/ui/window.py:1310
+msgid "Preview not supported"
+msgstr ""
+
+#: src/ui/window.py:1311
+msgid "This format does not support preview. Only extract is available."
+msgstr ""
+
 #: src/ui/window.py:1328
 msgid "Language changed"
 msgstr ""
@@ -699,6 +707,10 @@ msgstr ""
 
 #: src/window.ui:265
 msgid "This archive is empty"
+msgstr ""
+
+#: src/window.ui:276
+msgid "This format does not support preview"
 msgstr ""
 
 #: src/window.ui:293

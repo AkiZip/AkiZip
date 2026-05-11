@@ -420,6 +420,14 @@ msgid ""
 "are disabled."
 msgstr "該壓縮檔從父壓縮檔中提取。移動和刪除操作已被停用。"
 
+#: src/ui/window.py:1310
+msgid "Preview not supported"
+msgstr "無法預覽"
+
+#: src/ui/window.py:1311
+msgid "This format does not support preview. Only extract is available."
+msgstr "該類型不支援預覽，僅可解壓縮。"
+
 #: src/ui/window.py:1328
 msgid "Language changed"
 msgstr "語言已變更"
@@ -646,6 +654,10 @@ msgstr "所選檔案不是壓縮檔"
 #: src/window.ui:265
 msgid "This archive is empty"
 msgstr "該壓縮檔為空"
+
+#: src/window.ui:276
+msgid "This format does not support preview"
+msgstr "該類型不支援預覽"
 
 #: src/window.ui:293
 msgid "_Language"

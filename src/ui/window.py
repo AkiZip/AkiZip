@@ -638,9 +638,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                             if suffix not in ('7z', 'tar', 'zip'):
                                 op = str(Path(op).with_suffix('.7z'))
                                 display = str(display_path.with_suffix('.7z'))
-                            output_entry.set_text(display)
-                            last_output['display'] = display
-                            last_output['op'] = op
+                            if Path(op).exists():
+                                dialog = Adw.AlertDialog.new(_('Overwrite is not currently supported'), None)
+                                dialog.add_response('ok', _('_OK'))
+                                dialog.set_default_response('ok')
+                                dialog.set_close_response('ok')
+                                dialog.present(self)
+                            else:
+                                output_entry.set_text(display)
+                                last_output['display'] = display
+                                last_output['op'] = op
                 c.destroy()
 
             chooser.connect('response', on_response)

@@ -18,7 +18,7 @@
   <url type="homepage">https://github.com/AkiZip/AkiZip</url>
   <url type="vcs-browser">https://github.com/AkiZip/AkiZip</url>
   <url type="bugtracker">https://github.com/AkiZip/AkiZip/issues</url>
-  <url type="translate">https://github.com/AkiZip/AkiZip/tree/master/po</url>
+  <url type="translate">https://hosted.weblate.org/engage/akizip/</url>
 
   <translation type="gettext">akizip</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.

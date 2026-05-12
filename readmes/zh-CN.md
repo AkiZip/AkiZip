@@ -9,8 +9,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
+[![翻译状态](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 
-**语言：** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-TW.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
+**语言：** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
 </div>
 
@@ -82,6 +83,8 @@ msgfmt --check po/zh_CN.po -o /dev/null     # 验证目录文件而不编译
 `po/POTFILES.in` 列出输入文件。`update-po.sh` 按扩展名分派：Python 源码使用 `xgettext --language=Python`，`.ui` 文件使用 Glade，`.desktop.in` / `.metainfo.xml.in` 使用 GNOME ITS 文件。`.gschema.xml` 中的字符串会列出，但会跳过提取（它们由 GLib 在运行时翻译）。
 
 要添加新的语言环境，请将其代码追加到 `po/LINGUAS`，运行 `./update-po.sh`，然后翻译生成的 `.po` 文件。
+
+也可以通过 [Weblate](https://hosted.weblate.org/engage/akizip/) 贡献翻译。
 
 ## 项目布局
 

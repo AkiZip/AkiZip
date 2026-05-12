@@ -9,8 +9,9 @@ GTK 4 と libadwaita で構築された、GNOME 向けのモダンなアーカ�
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
+[![翻訳状況](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 
-**言語:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-TW.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
+**言語:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
 </div>
 
@@ -82,6 +83,8 @@ msgfmt --check po/zh_CN.po -o /dev/null     # コンパイルせずにカタロ�
 `po/POTFILES.in` には入力ファイルが列挙されています。`update-po.sh` は拡張子ごとに処理を分けます。Python ソースは `xgettext --language=Python`、`.ui` ファイルは Glade、`.desktop.in` / `.metainfo.xml.in` は GNOME ITS ファイルを使用します。`.gschema.xml` 内の文字列は一覧には含まれますが、抽出はスキップされます（GLib により実行時に翻訳されます）。
 
 新しいロケールを追加するには、そのコードを `po/LINGUAS` に追記し、`./update-po.sh` を実行して、生成された `.po` ファイルを翻訳します。
+
+翻訳は [Weblate](https://hosted.weblate.org/engage/akizip/) からも貢献できます。
 
 ## プロジェクト構成
 

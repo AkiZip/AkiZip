@@ -1439,7 +1439,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         log_id = object()
         summary = self._command_summary(name, args, _status.PENDING)
 
-        has_progress = name in ('archive.compress', 'archive.compress_advance', 'archive.extract', 'archive.extract_file')
+        has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file')
         progress_dialog = None
 
         def on_success(output):
@@ -1520,7 +1520,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.toast_overlay.add_toast(toast)
 
     def _command_summary(self, name, args, state):
-        if name == 'archive.compress' or name == 'archive.compress_advance':
+        if name == 'archive.compress_advance':
             source_paths = args[1] if len(args) > 1 else []
             if len(source_paths) > 1:
                 target = _('{} items').format(len(source_paths))
@@ -1628,7 +1628,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         return name
 
     def _command_preview(self, name, args):
-        if name == 'archive.compress' or name == 'archive.compress_advance':
+        if name == 'archive.compress_advance':
             output = Path(args[0]).name if args else _('archive')
             source_paths = args[1] if len(args) > 1 else []
             if len(source_paths) > 1:

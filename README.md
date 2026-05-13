@@ -9,8 +9,9 @@ A modern archive manager for GNOME, built with GTK 4 and libadwaita.
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
+[![Translation status](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 
-**Languages:** [English](README.md) | [简体中文](readmes/zh-CN.md) | [繁體中文](readmes/zh-TW.md) | [日本語](readmes/ja.md) | [한국어](readmes/ko.md) | [Español](readmes/es.md) | [Italiano](readmes/it.md)
+**Languages:** [English](README.md) | [简体中文](readmes/zh-CN.md) | [繁體中文](readmes/zh-HK.md) | [日本語](readmes/ja.md) | [한국어](readmes/ko.md) | [Español](readmes/es.md) | [Italiano](readmes/it.md)
 
 </div>
 
@@ -82,6 +83,8 @@ msgfmt --check po/zh_CN.po -o /dev/null     # validate a catalog without compili
 `po/POTFILES.in` lists the inputs. `update-po.sh` dispatches by extension: Python sources via `xgettext --language=Python`, `.ui` files via Glade, and `.desktop.in` / `.metainfo.xml.in` via the GNOME ITS file. Strings in `.gschema.xml` are listed but skipped from extraction (they are translated at runtime by GLib).
 
 To add a new locale, append its code to `po/LINGUAS`, run `./update-po.sh`, and translate the generated `.po` file.
+
+Translations can also be contributed through [Weblate](https://hosted.weblate.org/engage/akizip/).
 
 ## Project layout
 

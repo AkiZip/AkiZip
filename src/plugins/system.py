@@ -12,14 +12,33 @@ FULL_FEATURE_SUFFIXES = {
 READ_ONLY_SUFFIXES = {
     ".rar",
     ".gz",
+    ".tar.gz",
+    ".tar.bz2",
+    ".tar.xz",
+}
+
+NO_PREVIEW_SUFFIXES = {
+    ".bz2",
+    ".xz",
 }
 
 # Additional archive formats 7-Zip can open but are not fully verified for modification.
 ARCHIVE_SUFFIXES = {
     ".7z", ".zip", ".rar", ".tar", ".gz", ".bz2", ".xz",
+    ".tar.gz", ".tar.bz2", ".tar.xz",
     ".cab", ".iso", ".dmg", ".wim", ".swm", ".esd",
     ".arj", ".z", ".taz", ".lzh", ".lha",
 }
+
+
+def archive_suffix(path):
+    """Return the archive suffix for a path, handling multi-part extensions like .tar.gz."""
+    suffixes = path.suffixes
+    if len(suffixes) >= 2:
+        combined = ''.join(suffixes[-2:]).lower()
+        if combined in ('.tar.gz', '.tar.bz2', '.tar.xz'):
+            return combined
+    return suffixes[-1].lower() if suffixes else ''
 
 
 class sysop:
@@ -151,25 +170,27 @@ class sysop:
         return self.selected is not None and self.selected.is_dir()
 
     def is_archive(self):
-        return self.is_file() and self.selected.suffix.lower() in ARCHIVE_SUFFIXES
+        return self.is_file() and archive_suffix(self.selected) in ARCHIVE_SUFFIXES
 
     def format_category(self):
         if not self.is_archive():
             return None
         if self.is_nested:
             return 'nested'
-        suffix = self.selected.suffix.lower()
+        suffix = archive_suffix(self.selected)
         if suffix in FULL_FEATURE_SUFFIXES:
             return 'full'
         if suffix in READ_ONLY_SUFFIXES:
             return 'readonly'
+        if suffix in NO_PREVIEW_SUFFIXES:
+            return 'no_preview'
         return 'unverified'
 
     def can_modify(self):
-        return self.is_archive() and not self.is_nested and self.selected.suffix.lower() in FULL_FEATURE_SUFFIXES
+        return self.is_archive() and not self.is_nested and archive_suffix(self.selected) in FULL_FEATURE_SUFFIXES
 
     def is_zip(self):
-        return self.is_file() and self.selected.suffix.lower() == ".zip"
+        return self.is_file() and archive_suffix(self.selected) == ".zip"
 
     def can_compress(self):
         return self.is_file() or self.is_folder()

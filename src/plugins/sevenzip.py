@@ -152,21 +152,6 @@ def archive_list(archive_path, password=None, timeout=-1, cancel_event=None):
     return _run_7zip(args, timeout, cancel_event)
 
 
-def archive_compress(output_archive, source_paths, timeout=-1, cancel_event=None, task_status=None):
-    if isinstance(source_paths, (str, Path)):
-        source_paths = [source_paths]
-
-    def on_progress(percent):
-        if task_status is not None:
-            task_status.set_progress(percent)
-
-    return _run_7zip([
-        'a',
-        str(output_archive),
-        *[str(path) for path in source_paths],
-    ], timeout, cancel_event, on_progress)
-
-
 def archive_compress_advance(output_archive, source_paths, args, timeout=-1, cancel_event=None, task_status=None):
     if isinstance(source_paths, (str, Path)):
         source_paths = [source_paths]
@@ -259,7 +244,6 @@ def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, ca
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
-    commands['archive.compress'] = archive_compress
     commands['archive.compress_advance'] = archive_compress_advance
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip

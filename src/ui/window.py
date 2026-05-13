@@ -30,7 +30,7 @@ from gi.repository import GObject
 from gi.repository import Pango
 from ..plugins.password import is_password_error
 from ..plugins.status import _status
-from ..plugins.system import ARCHIVE_SUFFIXES
+from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
 
@@ -638,9 +638,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                             if suffix not in ('7z', 'tar', 'zip'):
                                 op = str(Path(op).with_suffix('.7z'))
                                 display = str(display_path.with_suffix('.7z'))
-                            output_entry.set_text(display)
-                            last_output['display'] = display
-                            last_output['op'] = op
+                            if Path(op).exists():
+                                dialog = Adw.AlertDialog.new(_('Overwrite is not currently supported'), None)
+                                dialog.add_response('ok', _('_OK'))
+                                dialog.set_default_response('ok')
+                                dialog.set_close_response('ok')
+                                dialog.present(self)
+                            else:
+                                output_entry.set_text(display)
+                                last_output['display'] = display
+                                last_output['op'] = op
                 c.destroy()
 
             chooser.connect('response', on_response)
@@ -997,7 +1004,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._current_internal_path = item.full_path
             self._render_current_folder()
             return
-        if item.path != '..' and Path(item.path).suffix.lower() in ARCHIVE_SUFFIXES:
+        if item.path != '..' and archive_suffix(Path(item.path)) in ARCHIVE_SUFFIXES:
             self._open_nested_archive(item)
 
     def _open_nested_archive(self, item):
@@ -1073,6 +1080,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if not app.system.is_archive():
             self.file_list_stack.set_visible_child_name('not_archive')
             return
+        if app.system.format_category() == 'no_preview':
+            self.file_list_stack.set_visible_child_name('no_preview')
+            return
 
         selected = Path(app.system.operation_path())
         command = getattr(app, 'commands', {}).get('archive.list')
@@ -1109,6 +1119,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _populate_file_list(self, output):
         self._all_entries = parse_archive_entries(output)
+        app = self.get_application()
+        if app is not None and hasattr(app, 'system') and app.system.has_selected():
+            suffix = archive_suffix(app.system.selected)
+            if suffix in ('.tar.bz2', '.tar.xz'):
+                has_real_entry = any(
+                    not entry.get('Path', '').startswith('/')
+                    for entry in self._all_entries
+                )
+                if not has_real_entry:
+                    inner_name = app.system.selected.name
+                    if suffix == '.tar.bz2':
+                        inner_name = inner_name[:-4]
+                    else:
+                        inner_name = inner_name[:-3]
+                    self._all_entries.append({
+                        'Path': inner_name,
+                        'Size': '',
+                        'Modified': '',
+                    })
         self._folder_set = self._collect_folders(self._all_entries)
         self._current_internal_path = ''
         self._render_current_folder()
@@ -1299,6 +1328,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dialog.set_default_response('ok')
             dialog.set_close_response('ok')
             dialog.present(self)
+        elif info.get('format_category') == 'no_preview':
+            dialog = Adw.AlertDialog.new(
+                _('Preview not supported'),
+                _('This format does not support preview. Only extract is available.'),
+            )
+            dialog.add_response('ok', _('_OK'))
+            dialog.set_default_response('ok')
+            dialog.set_close_response('ok')
+            dialog.present(self)
         elif info.get('format_category') == 'nested':
             dialog = Adw.AlertDialog.new(
                 _('Nested archive opened'),
@@ -1348,6 +1386,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         progress_bar.set_show_text(True)
         box.append(progress_bar)
 
+        eta_label = Gtk.Label()
+        eta_label.add_css_class('dim-label')
+        box.append(eta_label)
+
         dialog.set_extra_child(box)
 
         def on_response(_d, response):
@@ -1358,12 +1400,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
         dialog._progress_bar = progress_bar
+        dialog._eta_label = eta_label
         return dialog
 
-    def _update_progress_dialog(self, dialog, percent):
+    def _format_eta(self, seconds):
+        if seconds is None:
+            return _('Calculating...')
+        if seconds < 0:
+            return ''
+        seconds = int(seconds)
+        if seconds < 60:
+            return _('%d seconds remaining') % seconds
+        return _('%d minutes remaining') % int(seconds / 60)
+
+    def _update_progress_dialog(self, dialog, percent, eta=None):
         if dialog is None:
             return
         dialog._progress_bar.set_fraction(percent / 100.0)
+        if hasattr(dialog, '_eta_label') and dialog._eta_label is not None:
+            dialog._eta_label.set_text(self._format_eta(eta))
 
     def _close_progress_dialog(self, dialog):
         if dialog is not None:
@@ -1384,7 +1439,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         log_id = object()
         summary = self._command_summary(name, args, _status.PENDING)
 
-        has_progress = name in ('archive.compress', 'archive.compress_advance', 'archive.extract', 'archive.extract_file')
+        has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file')
         progress_dialog = None
 
         def on_success(output):
@@ -1401,7 +1456,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def on_status(task_status):
             if has_progress and task_status.progress is not None:
-                self._update_progress_dialog(progress_dialog, task_status.progress)
+                self._update_progress_dialog(progress_dialog, task_status.progress, getattr(task_status, 'eta', None))
             self._on_command_status(log_id, name, args, task_status)
 
         handle = job_queue.submit(
@@ -1465,7 +1520,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.toast_overlay.add_toast(toast)
 
     def _command_summary(self, name, args, state):
-        if name == 'archive.compress' or name == 'archive.compress_advance':
+        if name == 'archive.compress_advance':
             source_paths = args[1] if len(args) > 1 else []
             if len(source_paths) > 1:
                 target = _('{} items').format(len(source_paths))
@@ -1573,7 +1628,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         return name
 
     def _command_preview(self, name, args):
-        if name == 'archive.compress' or name == 'archive.compress_advance':
+        if name == 'archive.compress_advance':
             output = Path(args[0]).name if args else _('archive')
             source_paths = args[1] if len(args) > 1 else []
             if len(source_paths) > 1:

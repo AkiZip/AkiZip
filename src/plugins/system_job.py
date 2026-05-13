@@ -365,12 +365,8 @@ def _ratio(part, total):
     return part / total
 
 
-def suggest_zip_parameters(fileCount):
-    return suggest_zip_paramiters(fileCount)
-
 
 def register(commands):
     commands["system.move"] = move_path
     commands["system.scan"] = scan_fileAndFolder
     commands["system.suggest_zip_paramiters"] = suggest_zip_paramiters
-    commands["system.suggest_zip_parameters"] = suggest_zip_parameters

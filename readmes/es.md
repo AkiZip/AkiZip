@@ -9,8 +9,9 @@ Un gestor de archivos comprimidos moderno para GNOME, creado con GTK 4 y libadwa
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
+[![Estado de traducción](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 
-**Idiomas:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-TW.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
+**Idiomas:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
 </div>
 
@@ -82,6 +83,8 @@ msgfmt --check po/zh_CN.po -o /dev/null     # valida un catálogo sin compilarlo
 `po/POTFILES.in` enumera las entradas. `update-po.sh` despacha según la extensión: fuentes Python mediante `xgettext --language=Python`, archivos `.ui` mediante Glade, y `.desktop.in` / `.metainfo.xml.in` mediante el archivo ITS de GNOME. Las cadenas en `.gschema.xml` se listan pero se omiten durante la extracción (GLib las traduce en tiempo de ejecución).
 
 Para añadir una nueva configuración regional, agrega su código a `po/LINGUAS`, ejecuta `./update-po.sh` y traduce el archivo `.po` generado.
+
+Las traducciones también pueden contribuirse a través de [Weblate](https://hosted.weblate.org/engage/akizip/).
 
 ## Estructura del proyecto
 

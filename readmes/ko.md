@@ -9,8 +9,9 @@ GTK 4와 libadwaita로 만든 GNOME용 현대적인 아카이브 관리자입니
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
+[![번역 상태](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 
-**언어:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-TW.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
+**언어:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
 </div>
 
@@ -82,6 +83,8 @@ msgfmt --check po/zh_CN.po -o /dev/null     # 컴파일하지 않고 카탈로�
 `po/POTFILES.in`은 입력 파일을 나열합니다. `update-po.sh`는 확장자별로 처리합니다. Python 소스는 `xgettext --language=Python`, `.ui` 파일은 Glade, `.desktop.in` / `.metainfo.xml.in` 파일은 GNOME ITS 파일을 사용합니다. `.gschema.xml`의 문자열은 목록에는 포함되지만 추출은 건너뜁니다(GLib이 런타임에 번역합니다).
 
 새 로캘을 추가하려면 해당 코드를 `po/LINGUAS`에 추가하고 `./update-po.sh`를 실행한 다음 생성된 `.po` 파일을 번역하세요.
+
+번역은 [Weblate](https://hosted.weblate.org/engage/akizip/)를 통해 기여할 수도 있습니다.
 
 ## 프로젝트 구조
 

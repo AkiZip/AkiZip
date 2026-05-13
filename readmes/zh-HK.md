@@ -9,8 +9,9 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
+[![翻譯狀態](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 
-**語言：** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-TW.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
+**語言：** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
 </div>
 
@@ -82,6 +83,8 @@ msgfmt --check po/zh_CN.po -o /dev/null     # 驗證目錄檔而不編譯
 `po/POTFILES.in` 列出輸入檔案。`update-po.sh` 按副檔名分派：Python 原始碼使用 `xgettext --language=Python`，`.ui` 檔案使用 Glade，`.desktop.in` / `.metainfo.xml.in` 使用 GNOME ITS 檔案。`.gschema.xml` 中的字串會列出，但會跳過提取（它們由 GLib 在執行階段翻譯）。
 
 要新增新的語言環境，請將其代碼追加到 `po/LINGUAS`，執行 `./update-po.sh`，然後翻譯產生的 `.po` 檔案。
+
+也可以透過 [Weblate](https://hosted.weblate.org/engage/akizip/) 貢獻翻譯。
 
 ## 專案佈局
 

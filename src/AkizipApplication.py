@@ -63,7 +63,7 @@ class AkizipApplication(Adw.Application):
                                 developer_name='akizip',
                                 version='0.2.3',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
-                                translator_credits = _('translator-credits'),
+                                translator_credits = "weblate https://hosted.weblate.org/engage/akizip/",
                                 developers=['ckappgit','HungryNeko'],
                                 copyright='© 2026 akizip',
                                 license_type=Gtk.License.GPL_3_0)

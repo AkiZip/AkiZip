@@ -42,7 +42,7 @@
   </screenshots>
 
   <releases>
-    <release version="0.2.3" date="2026-05-15">
+    <release version="0.2.3" date="2026-05-13">
       <description translate="no">
         <p>New features and code cleanup</p>
         <ul>

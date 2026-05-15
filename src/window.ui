@@ -326,6 +326,11 @@
             <attribute name="target">zh_HK</attribute>
           </item>
           <item>
+            <attribute name="label">Français</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">fr</attribute>
+          </item>
+          <item>
             <attribute name="label">Italiano</attribute>
             <attribute name="action">app.language</attribute>
             <attribute name="target">it</attribute>

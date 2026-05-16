@@ -15,6 +15,7 @@ READ_ONLY_SUFFIXES = {
     ".tar.gz",
     ".tar.bz2",
     ".tar.xz",
+    ".iso"
 }
 
 NO_PREVIEW_SUFFIXES = {

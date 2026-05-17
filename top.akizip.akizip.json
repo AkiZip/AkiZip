@@ -46,7 +46,7 @@
             "sources" : [
                 {
                     "type" : "git",
-                    "tag": "0.2.3",
+                    "tag": "0.2.4",
                     "url" : "https://github.com/akizip/akizip"
                 }
             ]

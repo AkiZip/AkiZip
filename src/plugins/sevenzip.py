@@ -6,8 +6,11 @@ import threading
 import time
 from pathlib import Path
 
+from .scan_7zip import scanner as ArchiveScanner
+
 
 SEVENZIP_PATH = '/app/bin/7zz'
+_archive_scanner = ArchiveScanner("", -1, SEVENZIP_PATH)
 
 
 def _parse_progress(line):
@@ -172,7 +175,21 @@ def archive_compress_advance(output_archive, source_paths, args, timeout=-1, can
     ], timeout, cancel_event, on_progress)
 
 
-def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
+def _exclude_args(skip_paths):
+    if not skip_paths:
+        return []
+
+    args = []
+    for path in skip_paths:
+        normalized = str(path).replace('\\', '/').strip('/')
+        if not normalized:
+            continue
+        args.append(f'-x!{normalized}')
+        args.append(f'-x!{normalized}/*')
+    return args
+
+
+def archive_extract(archive_path, output_dir, password=None, skip_paths=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
@@ -185,9 +202,10 @@ def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_
     ]
     if password:
         args.append(f'-p{password}')
+    args.extend(_exclude_args(skip_paths))
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, skip_paths=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
@@ -200,8 +218,13 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None
     ]
     if password:
         args.append(f'-p{password}')
+    args.extend(_exclude_args(skip_paths))
     args.extend(['--', str(file_name)])
     return _run_7zip(args, timeout, cancel_event, on_progress)
+
+
+def archive_scan_exist(archive_path, output_dir, password=None, timeout=-1):
+    return _archive_scanner.scan_exist(archive_path, output_dir, password, timeout)
 
 def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
@@ -259,6 +282,7 @@ def register(commands):
     commands['archive.compress_advance'] = archive_compress_advance
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip
+    commands['archive.scan_exist'] = archive_scan_exist
     commands['archive.delete'] = archive_delete
     commands['archive.test'] = archive_test
     commands['archive.move'] = archive_move

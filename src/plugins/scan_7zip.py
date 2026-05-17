@@ -2,7 +2,7 @@
 # scanner(archive_path, maxThreads, sevenzipPath='/app/bin/7zz').call_scan(path=None, maxLevel=3)
 # Returns {PurePosixPath: (is_file, name)} for paths inside archives.
 # scanner(...).count_files(path=None, maxLevel=3) returns the number of files.
-# scanner(...).scan_exist(archivePath, destinationPath) returns existing extract conflicts.
+# scanner(...).scan_exist(archivePath, destinationPath, password=None) returns existing extract conflicts.
 # maxThreads=-1 means no scanner-specific thread limit; maxLevel=-1 means unlimited path depth.
 # Archive files inside the archive are recorded as folders, but they are not extracted or opened.
 
@@ -207,7 +207,7 @@ class scanner():
             result[childArchivePath] = (False, folderName)
             self._scan_exist_tree(childNode, targetPath, childArchivePath, result)
 
-    def scan_exist(self, archivePath=None, destinationPath=None):
+    def scan_exist(self, archivePath=None, destinationPath=None, password=None, timeout=-1):
         if archivePath is None:
             archivePath = self.basePath
         if destinationPath is None:
@@ -221,7 +221,7 @@ class scanner():
             return {}
 
         try:
-            entries = self._parse_archive_entries(self.archive_list(archivePath))
+            entries = self._parse_archive_entries(self.archive_list(archivePath, password, timeout))
         except Exception:
             return {}
 

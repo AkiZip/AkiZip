@@ -19,7 +19,7 @@
 
 import os
 import tempfile
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 from gettext import gettext as _
 
@@ -31,6 +31,7 @@ from gi.repository import Pango
 from ..plugins.password import is_password_error
 from ..plugins.status import _status
 from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix
+from .extract_conflict_dialog import ExtractConflictDialog
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
 
@@ -377,21 +378,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return
 
         def run_extract(dest, password):
-            def on_error(error):
-                if is_password_error(error):
-                    self._present_password_dialog(
-                        lambda new_password: run_extract(dest, new_password)
-                    )
-                    return True
-                return False
-
-            self._run_command(
-                'archive.extract',
-                selected,
-                dest / selected.stem,
-                password,
-                on_error_extra=on_error,
-            )
+            self._extract_archive_with_conflict_check(selected, dest / selected.stem, password)
 
         self._present_extract_dialog(run_extract)
 
@@ -830,6 +817,101 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
+    def _present_extract_conflicts(self, conflicts, on_confirm):
+        if not conflicts:
+            on_confirm([])
+            return
+
+        dialog = ExtractConflictDialog(conflicts)
+        self._extract_conflict_dialog = dialog
+        dialog.present(self, on_confirm)
+
+    def _extract_archive_with_conflict_check(self, selected, output_dir, password):
+        app = self.get_application()
+        job_queue = getattr(app, 'job_queue', None) if app is not None else None
+        scan_command = getattr(app, 'commands', {}).get('archive.scan_exist') if app is not None else None
+
+        def run_extract(active_password, ignored_paths):
+            def on_error(error):
+                if is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_extract(new_password, ignored_paths)
+                    )
+                    return True
+                return False
+
+            self._run_command(
+                'archive.extract',
+                selected,
+                output_dir,
+                active_password,
+                ignored_paths,
+                on_error_extra=on_error,
+            )
+
+        if scan_command is None or job_queue is None:
+            run_extract(password, [])
+            return
+
+        def on_scan_success(conflicts):
+            self._present_extract_conflicts(
+                conflicts,
+                lambda ignored_paths: run_extract(password, ignored_paths),
+            )
+
+        def on_scan_error(_error):
+            run_extract(password, [])
+
+        job_queue.submit(
+            scan_command,
+            (selected, output_dir, password),
+            on_success=on_scan_success,
+            on_error=on_scan_error,
+            task_id='archive.scan_exist',
+            msg=_('Check existing files'),
+        )
+
+    def _archive_entry_is_folder(self, entry):
+        return 'D' in entry.get('Attributes', '') or entry.get('Folder') == '+'
+
+    def _selected_extract_conflicts(self, item, output_dir):
+        output_dir = Path(output_dir)
+        item_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+        item_path = item_path.replace('\\', '/').strip('/')
+        if not item_path:
+            return {}
+
+        conflicts = {}
+        if not item.is_folder:
+            target = output_dir / item_path
+            if target.exists():
+                conflicts[PurePosixPath(item_path)] = (True, Path(item_path).name)
+            return conflicts
+
+        prefix = item_path.rstrip('/') + '/'
+        folder_target = output_dir / item_path
+        if folder_target.exists():
+            conflicts[PurePosixPath(item_path)] = (False, Path(item_path).name)
+
+        for folder in self._folder_set:
+            folder_path = folder.replace('\\', '/').strip('/').rstrip('/')
+            if not folder_path or (folder_path != item_path and not folder_path.startswith(prefix)):
+                continue
+            target = output_dir / folder_path
+            if target.exists():
+                conflicts[PurePosixPath(folder_path)] = (False, Path(folder_path).name)
+
+        for entry in self._all_entries:
+            entry_path = entry.get('Path', '').replace('\\', '/').strip('/')
+            if not entry_path or (entry_path != item_path and not entry_path.startswith(prefix)):
+                continue
+            is_folder = self._archive_entry_is_folder(entry)
+            target = output_dir / entry_path
+            if target.exists():
+                conflicts[PurePosixPath(entry_path)] = (not is_folder, Path(entry_path).name)
+
+        return conflicts
+
     def _present_password_dialog(self, on_password_entered):
         dialog = Adw.AlertDialog.new(_('Password Required'), None)
         dialog.set_body(_('This archive is encrypted. Please enter the password.'))
@@ -977,21 +1059,31 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return
 
         def run_extract(dest, password):
-            def on_error(error):
-                if is_password_error(error):
-                    self._present_password_dialog(
-                        lambda new_password: run_extract(dest, new_password)
-                    )
-                    return True
-                return False
+            file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+            conflicts = self._selected_extract_conflicts(item, dest)
 
-            self._run_command(
-                'archive.extract_file',
-                selected,
-                item.full_path.rstrip('/') if item.is_folder else item.full_path,
-                dest,
-                password,
-                on_error_extra=on_error,
+            def start_extract(active_password, ignored_paths):
+                def on_error(error):
+                    if is_password_error(error):
+                        self._present_password_dialog(
+                            lambda new_password: start_extract(new_password, ignored_paths)
+                        )
+                        return True
+                    return False
+
+                self._run_command(
+                    'archive.extract_file',
+                    selected,
+                    file_name,
+                    dest,
+                    active_password,
+                    ignored_paths,
+                    on_error_extra=on_error,
+                )
+
+            self._present_extract_conflicts(
+                conflicts,
+                lambda ignored_paths: start_extract(password, ignored_paths),
             )
 
         self._present_extract_dialog(run_extract)

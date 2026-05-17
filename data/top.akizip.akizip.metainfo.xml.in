@@ -42,6 +42,18 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.4" date="2026-05-20">
+      <description translate="no">
+        <p>Progress support and format fixes</p>
+        <ul>
+          <li>Added progress bar support for move, remove and delete operations</li>
+          <li>Added support for iso format</li>
+          <li>Fixed Italian interface still showing English</li>
+          <li>Added French translation support</li>
+          <li>Fixed tar.xz and tar.bz2 not opening with Akizip</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.3" date="2026-05-13">
       <description translate="no">
         <p>New features and code cleanup</p>

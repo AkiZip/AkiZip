@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-16 07:43+0800\n"
-"PO-Revision-Date: 2026-05-15 22:11+0000\n"
+"PO-Revision-Date: 2026-05-17 12:45+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/it/"
-">\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/"
+"it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,20 +33,12 @@ msgid "A modern front-end for 7-Zip on GNOME"
 msgstr "Un front-end moderno per 7-Zip su GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
-#, fuzzy
-#| msgid ""
-#| "Akizip is a graphical archive utility built with GTK 4 and libadwaita "
-#| "that brings the power of 7-Zip to the GNOME desktop. It supports creating "
-#| "and extracting archives in a wide range of formats, including 7z, ZIP, "
-#| "TAR, GZIP, and RAR (read-only)."
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
 "Akizip è un'utilità grafica per archivi realizzata con GTK 4 e libadwaita "
-"che porta la potenza di 7-Zip sul desktop GNOME. Supporta la creazione e "
-"l'estrazione di archivi in una vasta gamma di formati, tra cui 7z, ZIP, TAR, "
-"GZIP e RAR (sola lettura)."
+"che porta la potenza di 7-Zip sul desktop GNOME."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -54,6 +46,9 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"Supporta la creazione e l'estrazione di archivi nei formati 7z, zip e tar. "
+"Può anche aprire (in sola lettura) archivi rar, gz, bz2, xz, tar.gz, tar.bz2 "
+"e tar.xz."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
@@ -350,7 +345,7 @@ msgstr "_Salva"
 
 #: src/ui/window.py:642
 msgid "Overwrite is not currently supported"
-msgstr ""
+msgstr "La sovrascrittura non è attualmente supportata"
 
 #: src/ui/window.py:643 src/ui/window.py:845 src/ui/window.py:1327
 #: src/ui/window.py:1336 src/ui/window.py:1345 src/ui/window.py:1369

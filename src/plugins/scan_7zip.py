@@ -1,25 +1,30 @@
 # Usage:
-# scanner(archive_path, maxThreads).call_scan(path=None, maxLevel=3)
+# scanner(archive_path, maxThreads, sevenzipPath='/app/bin/7zz').call_scan(path=None, maxLevel=3)
 # Returns {PurePosixPath: (is_file, name)} for paths inside archives.
 # scanner(...).count_files(path=None, maxLevel=3) returns the number of files.
 # scanner(...).scan_exist(archivePath, destinationPath) returns existing extract conflicts.
-# maxThreads=-1 means no scanner-specific thread limit; maxLevel=-1 means unlimited nested archive depth.
+# maxThreads=-1 means no scanner-specific thread limit; maxLevel=-1 means unlimited path depth.
+# Archive files inside the archive are recorded as folders, but they are not extracted or opened.
 
 from collections import defaultdict
 from pathlib import Path, PurePosixPath
+import os
 import random
-import shutil
-import tempfile
+import signal
+import subprocess
 import threading
 import time
 
-from .sevenzip import archive_extract_FileInZip, archive_list
 from .system import ARCHIVE_SUFFIXES, archive_suffix
 
 
+SEVENZIP_PATH = '/app/bin/7zz'
+
+
 class scanner():
-    def __init__(self, basePath, maxThreads):
+    def __init__(self, basePath, maxThreads, sevenzipPath=SEVENZIP_PATH):
         self.basePath = Path(basePath).expanduser()
+        self.sevenzipPath = sevenzipPath
         self.pathDict = defaultdict(dict)
         # {jobId: {archive_path: (True(is file), name), archive_path: (False(not file), name)}}
         if maxThreads == -1:
@@ -59,6 +64,47 @@ class scanner():
         path = PurePosixPath(str(path).replace('\\', '/'))
         self.pathDict[jobId][path] = (isFile, path.name)
 
+    def _kill_process(self, process):
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+
+    def _run_7zip(self, args, timeout=-1):
+        started_at = time.monotonic()
+        process = subprocess.Popen(
+            [self.sevenzipPath, *args],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=subprocess.DEVNULL,
+            text=True,
+            start_new_session=True,
+        )
+
+        while True:
+            try:
+                stdout, stderr = process.communicate(timeout=0.1)
+                break
+            except subprocess.TimeoutExpired:
+                if timeout is not None and timeout >= 0:
+                    elapsed = time.monotonic() - started_at
+                    if elapsed >= timeout:
+                        self._kill_process(process)
+                        stdout, stderr = process.communicate()
+                        output = (stdout + stderr).strip()
+                        raise TimeoutError(output or f'7zz timed out after {timeout} seconds')
+
+        output = (stdout + stderr).strip()
+        if process.returncode != 0:
+            raise RuntimeError(output or f'7zz exited with {process.returncode}')
+        return output
+
+    def archive_list(self, archivePath, password=None, timeout=-1):
+        args = ['l', '-slt', '-ba', str(archivePath)]
+        if password:
+            args.append(f'-p{password}')
+        return self._run_7zip(args, timeout)
+
     def scan_path(self, path, levelLeft=3, jobId=0, counted=False, prefix=""):
         if not counted:
             self._add_job(jobId)
@@ -78,59 +124,33 @@ class scanner():
         if levelLeft == 0:
             return
 
-        if levelLeft != -1:
-            nextLevel = levelLeft - 1
-        else:
-            nextLevel = -1
-
         try:
-            entries = self._parse_archive_entries(archive_list(path))
+            entries = self._parse_archive_entries(self.archive_list(path))
         except Exception:
             return
 
-        nested_archives = []
         for entry in entries:
             entry_path = entry.get('Path', '').replace('\\', '/').strip('/')
             if not entry_path:
                 continue
 
-            full_path = f"{archive_name}/{entry_path}"
             isFolder = self._is_folder_entry(entry)
             isArchive = archive_suffix(PurePosixPath(entry_path)) in ARCHIVE_SUFFIXES
+            self._add_entry_path(jobId, archive_name, entry_path, not (isFolder or isArchive), levelLeft)
 
-            if isFolder or isArchive:
-                self._add_path(jobId, full_path, False)
-            else:
-                self._add_path(jobId, full_path, True)
+    def _add_entry_path(self, jobId, archiveName, entryPath, isFile, maxLevel):
+        parts = [part for part in entryPath.split('/') if part]
+        if not parts:
+            return
 
-            if isArchive and levelLeft != 0:
-                nested_archives.append((entry_path, full_path))
+        current = PurePosixPath(archiveName)
+        for index, part in enumerate(parts, 1):
+            if maxLevel != -1 and index > maxLevel:
+                return
 
-        i = 0
-        while i < len(nested_archives):
-            inner_path, full_path = nested_archives[i]
-            if self.getCurThreads() < self.maxThreads:
-                self._add_job(jobId)
-                thread = threading.Thread(
-                    target=self._scan_nested_archive,
-                    args=(path, inner_path, full_path, nextLevel, jobId),
-                    daemon=True,
-                )
-                thread.start()
-            else:
-                self._scan_nested_archive(path, inner_path, full_path, nextLevel, jobId, counted=False)
-            i += 1
-
-    def _scan_nested_archive(self, archivePath, innerPath, prefix, levelLeft, jobId, counted=True):
-        temp_dir = tempfile.mkdtemp(prefix='akizip-scan-')
-        try:
-            archive_extract_FileInZip(archivePath, innerPath, temp_dir)
-            nested_path = Path(temp_dir) / innerPath
-            self._scan_path(nested_path, levelLeft, jobId, prefix=prefix)
-        finally:
-            shutil.rmtree(temp_dir, ignore_errors=True)
-            if counted:
-                self._finish_job(jobId)
+            current = current / part
+            isLast = index == len(parts)
+            self._add_path(jobId, current, isFile if isLast else False)
 
     def _parse_archive_entries(self, output):
         entries = []
@@ -201,7 +221,7 @@ class scanner():
             return {}
 
         try:
-            entries = self._parse_archive_entries(archive_list(archivePath))
+            entries = self._parse_archive_entries(self.archive_list(archivePath))
         except Exception:
             return {}
 

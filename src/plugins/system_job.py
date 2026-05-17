@@ -4,9 +4,12 @@ import shutil
 import time
 from pathlib import Path
 
+from .scan_job import scanner
+
 
 COPY_CHUNK_SIZE = 1024 * 1024
 DEFAULT_SCAN_DEPTH = 3
+DEFAULT_SCAN_THREADS = -1
 
 COMPRESSED_SUFFIXES = {
     ".7z", ".zip", ".rar", ".gz", ".bz2", ".xz", ".zst", ".lz", ".lzma",
@@ -27,6 +30,9 @@ CODE_SUFFIXES = {
     ".hpp", ".rs", ".go", ".java", ".kt", ".swift", ".rb", ".php",
     ".html", ".css", ".scss", ".sh", ".sql",
 }
+
+
+_scanner = scanner("", DEFAULT_SCAN_THREADS)
 
 
 def _empty_scan_result(root, max_depth):
@@ -154,7 +160,9 @@ def _remove_partial(target):
 def scan_fileAndFolder(path, n=DEFAULT_SCAN_DEPTH):
     root = Path(path).expanduser()
     try:
-        max_depth = max(0, int(n))
+        max_depth = int(n)
+        if max_depth < -1:
+            max_depth = DEFAULT_SCAN_DEPTH
     except (TypeError, ValueError):
         max_depth = DEFAULT_SCAN_DEPTH
 
@@ -163,12 +171,14 @@ def scan_fileAndFolder(path, n=DEFAULT_SCAN_DEPTH):
         fileCount["errors"].append(f"Path not found: {root}")
         return fileCount
 
-    if root.is_file() or root.is_symlink():
-        _scan_add_file(fileCount, root)
-        return fileCount
+    scanned_paths = _scanner.call_scan(root, max_depth)
+    for scanned_path, value in scanned_paths.items():
+        is_file = value[0]
+        if is_file:
+            _scan_add_file(fileCount, scanned_path)
+        else:
+            fileCount["folders"] += 1
 
-    fileCount["folders"] = 1
-    _scan_folder(fileCount, root, 0, max_depth)
     fileCount["total"] = fileCount["files"] + fileCount["folders"]
     return fileCount
 

@@ -10,7 +10,8 @@ from .scan_7zip import scanner as ArchiveScanner
 
 
 SEVENZIP_PATH = '/app/bin/7zz'
-_archive_scanner = ArchiveScanner("", -1, SEVENZIP_PATH)
+DEFAULT_SCAN_THREADS = 4
+_archive_scanner = ArchiveScanner("", DEFAULT_SCAN_THREADS, SEVENZIP_PATH)
 
 
 def _parse_progress(line):

@@ -9,7 +9,7 @@ from .scan_system import scanner
 
 COPY_CHUNK_SIZE = 1024 * 1024
 DEFAULT_SCAN_DEPTH = 3
-DEFAULT_SCAN_THREADS = -1
+DEFAULT_SCAN_THREADS = 4
 
 COMPRESSED_SUFFIXES = {
     ".7z", ".zip", ".rar", ".gz", ".bz2", ".xz", ".zst", ".lz", ".lzma",

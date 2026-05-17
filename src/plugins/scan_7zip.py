@@ -1,9 +1,11 @@
 # Usage:
-# scanner(archive_path, maxThreads, sevenzipPath='/app/bin/7zz').call_scan(path=None, maxLevel=3)
+# scanner(archive_path, maxThreads=4, sevenzipPath='/app/bin/7zz').call_scan(path=None, maxLevel=3)
 # Returns {PurePosixPath: (is_file, name)} for paths inside archives.
 # scanner(...).count_files(path=None, maxLevel=3) returns the number of files.
 # scanner(...).scan_exist(archivePath, destinationPath, password=None) returns existing extract conflicts.
-# maxThreads=-1 means no scanner-specific thread limit; maxLevel=-1 means unlimited path depth.
+# Use maxThreads=4 for normal scans.
+# maxThreads=-1 means no scanner-specific thread limit and should only be used for controlled tests.
+# maxLevel=-1 means unlimited path depth.
 # Archive files inside the archive are recorded as folders, but they are not extracted or opened.
 
 from collections import defaultdict
@@ -129,28 +131,47 @@ class scanner():
         except Exception:
             return
 
-        for entry in entries:
-            entry_path = entry.get('Path', '').replace('\\', '/').strip('/')
-            if not entry_path:
-                continue
+        tree = self._build_entry_tree(entries, archiveAsFolder=True)
+        self.scan_archive_folder(tree, PurePosixPath(archive_name), levelLeft, jobId)
 
-            isFolder = self._is_folder_entry(entry)
-            isArchive = archive_suffix(PurePosixPath(entry_path)) in ARCHIVE_SUFFIXES
-            self._add_entry_path(jobId, archive_name, entry_path, not (isFolder or isArchive), levelLeft)
+    def scan_archive_folder(self, node, archivePath, levelLeft=3, jobId=0, counted=False):
+        if not counted:
+            self._add_job(jobId)
+        try:
+            self._scan_archive_folder(node, archivePath, levelLeft, jobId)
+        finally:
+            self._finish_job(jobId)
 
-    def _add_entry_path(self, jobId, archiveName, entryPath, isFile, maxLevel):
-        parts = [part for part in entryPath.split('/') if part]
-        if not parts:
+    def _scan_archive_folder(self, node, archivePath, levelLeft=3, jobId=0):
+        if levelLeft == 0:
             return
 
-        current = PurePosixPath(archiveName)
-        for index, part in enumerate(parts, 1):
-            if maxLevel != -1 and index > maxLevel:
-                return
+        if levelLeft != -1:
+            nextLevel = levelLeft - 1
+        else:
+            nextLevel = -1
 
-            current = current / part
-            isLast = index == len(parts)
-            self._add_path(jobId, current, isFile if isLast else False)
+        for fileName in node['files']:
+            self._add_path(jobId, archivePath / fileName, True)
+
+        folders = list(node['folders'].items())
+        i = 0
+        while i < len(folders):
+            folderName, childNode = folders[i]
+            childPath = archivePath / folderName
+            self._add_path(jobId, childPath, False)
+            if nextLevel != 0:
+                if self.getCurThreads() < self.maxThreads:
+                    self._add_job(jobId)
+                    thread = threading.Thread(
+                        target=self.scan_archive_folder,
+                        args=(childNode, childPath, nextLevel, jobId, True),
+                        daemon=True,
+                    )
+                    thread.start()
+                else:
+                    self.scan_archive_folder(childNode, childPath, nextLevel, jobId)
+            i += 1
 
     def _parse_archive_entries(self, output):
         entries = []
@@ -170,7 +191,7 @@ class scanner():
     def _is_folder_entry(self, entry):
         return 'D' in entry.get('Attributes', '') or entry.get('Folder') == '+'
 
-    def _build_entry_tree(self, entries):
+    def _build_entry_tree(self, entries, archiveAsFolder=False):
         tree = {'folders': {}, 'files': {}}
         for entry in entries:
             entry_path = entry.get('Path', '').replace('\\', '/').strip('/')
@@ -186,7 +207,8 @@ class scanner():
                 node = node['folders'].setdefault(part, {'folders': {}, 'files': {}})
 
             name = parts[-1]
-            if self._is_folder_entry(entry):
+            isArchive = archive_suffix(PurePosixPath(entry_path)) in ARCHIVE_SUFFIXES
+            if self._is_folder_entry(entry) or (archiveAsFolder and isArchive):
                 node['folders'].setdefault(name, {'folders': {}, 'files': {}})
             else:
                 node['files'][name] = entry

@@ -1,3 +1,8 @@
+# Usage:
+# scanner(path, maxThreads).call_scan(path=None, maxLevel=3)
+# Returns {Path: (is_file, name)} for filesystem paths.
+# maxThreads=-1 means no scanner-specific thread limit; maxLevel=-1 means unlimited depth.
+
 from collections import defaultdict
 from pathlib import Path
 import random

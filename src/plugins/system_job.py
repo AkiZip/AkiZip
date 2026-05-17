@@ -4,7 +4,7 @@ import shutil
 import time
 from pathlib import Path
 
-from .scan_job import scanner
+from .scan_system import scanner
 
 
 COPY_CHUNK_SIZE = 1024 * 1024

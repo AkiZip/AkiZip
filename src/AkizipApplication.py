@@ -61,7 +61,7 @@ class AkizipApplication(Adw.Application):
         about = Adw.AboutDialog(application_name='Akizip',
                                 application_icon='top.akizip.akizip',
                                 developer_name='akizip',
-                                version='0.2.3',
+                                version='0.2.4',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
                                 translator_credits = "weblate https://hosted.weblate.org/engage/akizip/",
                                 developers=['ckappgit','HungryNeko'],

@@ -43,7 +43,7 @@ try:
         os.environ['LANGUAGE'] = _lang
         os.environ['LANG'] = _lang + '.UTF-8'
         try:
-            locale.setlocale(locale.LC_ALL, _lang + '.UTF-8')
+            locale.setlocale(locale.LC_ALL, locale.normalize(_lang + '.UTF-8'))
         except locale.Error:
             pass
     else:

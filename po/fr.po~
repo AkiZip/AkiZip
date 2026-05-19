@@ -1,23 +1,42 @@
-# Italian translations for PACKAGE package.
-# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# #-#-#-#-#  desktop.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2026.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  python.pot (akizip 0.2.4)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the akizip package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-10 16:41+0800\n"
-"PO-Revision-Date: 2026-05-15 22:11+0000\n"
-"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/"
-"it/>\n"
-"Language: it\n"
+"PO-Revision-Date: 2026-05-14 21:08+0000\n"
+"Last-Translator: lawatux <weblate.parameter299@passinbox.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/akizip/akizip/fr/>"
+"\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 2026.5.dev0\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
@@ -26,11 +45,11 @@ msgstr "Akizip"
 
 #: data/top.akizip.akizip.desktop.in:8
 msgid "GTK;"
-msgstr "GTK;"
+msgstr "GTK ;"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr "Un front-end moderno per 7-Zip su GNOME"
+msgstr "Une interface moderne pour 7-Zip sous GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
@@ -39,19 +58,19 @@ msgid ""
 "extracting archives in a wide range of formats, including 7z, ZIP, TAR, "
 "GZIP, and RAR (read-only)."
 msgstr ""
-"Akizip è un'utilità grafica per archivi realizzata con GTK 4 e libadwaita "
-"che porta la potenza di 7-Zip sul desktop GNOME. Supporta la creazione e "
-"l'estrazione di archivi in una vasta gamma di formati, tra cui 7z, ZIP, TAR, "
-"GZIP e RAR (sola lettura)."
+"Akizip est un utilitaire graphique de gestion d'archives développé avec GTK "
+"4 et libadwaita, qui apporte toute la puissance de 7-Zip au bureau GNOME. Il "
+"permet de créer et d'extraire des archives dans un large éventail de "
+"formats, notamment 7z, ZIP, TAR, GZIP et RAR (en lecture seule)."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
-"Le funzionalità includono l'ispezione degli archivi, processi in background "
-"annullabili con notifica dell'avanzamento, un pannello log dedicato e "
-"supporto multilingua."
+"Parmi les fonctionnalités, on trouve la consultation des archives, des "
+"tâches en arrière-plan pouvant être annulées avec suivi de la progression, "
+"un panneau dédié aux journaux et une prise en charge multilingue."
 
 #: data/top.akizip.akizip.metainfo.xml.in:15
 msgid "ckappgit"
@@ -60,113 +79,112 @@ msgstr "ckappgit"
 #: data/top.akizip.akizip.metainfo.xml.in:39
 msgid "Main window showing archive contents and toolbar"
 msgstr ""
-"Finestra principale che mostra il contenuto dell'archivio e la barra degli "
-"strumenti"
+"Fenêtre principale affichant le contenu des archives et la barre d'outils"
 
 #: src/ui/info_dialog.py:13 src/ui/window.py:1276
 msgid "System state not found"
-msgstr "Stato del sistema non trovato"
+msgstr "État du système introuvable"
 
 #: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
 msgid "Archive"
-msgstr "Archivio"
+msgstr "Archive"
 
 #: src/ui/info_dialog.py:27
 msgid "Archive information is unavailable."
-msgstr "Le informazioni sull'archivio non sono disponibili."
+msgstr "Informations d'archives non disponibles."
 
 #: src/ui/info_dialog.py:61 src/ui/window.py:1607
 msgid "Read archive information from "
-msgstr "Lettura informazioni archivio da "
+msgstr "Consulter les informations d'archives provenant de "
 
 #: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:188
 #: src/window.ui:202
 msgid "Info"
-msgstr "Informazioni"
+msgstr "Info"
 
 #: src/ui/info_dialog.py:97
 msgid "Close"
-msgstr "Chiudi"
+msgstr "Fermer"
 
 #: src/ui/info_dialog.py:104
 msgid "Name"
-msgstr "Nome"
+msgstr "Nom"
 
 #: src/ui/info_dialog.py:105 src/ui/window.py:897
 msgid "Path"
-msgstr "Percorso"
+msgstr "Chemin"
 
 #: src/ui/info_dialog.py:106
 msgid "Type"
-msgstr "Tipo"
+msgstr "Type"
 
 #: src/ui/info_dialog.py:108 src/ui/window.py:898
 msgid "Size"
-msgstr "Dimensione"
+msgstr "Taille"
 
 #: src/ui/info_dialog.py:109
 msgid "Can compress"
-msgstr "Comprimibile"
+msgstr "Peut être compressé"
 
 #: src/ui/info_dialog.py:110
 msgid "Can extract"
-msgstr "Estraibile"
+msgstr "Peut extraire"
 
 #: src/ui/info_dialog.py:136
 msgid "Copy"
-msgstr "Copia"
+msgstr "Copier"
 
 #: src/ui/info_dialog.py:148
 msgid "Copied to clipboard"
-msgstr "Copiato negli appunti"
+msgstr "Copié dans le presse-papiers"
 
 #: src/ui/info_dialog.py:157
 msgid "No archive information found."
-msgstr "Nessuna informazione sull'archivio trovata."
+msgstr "Aucune information d'archive trouvée."
 
 #: src/ui/info_dialog.py:161
 msgid "Loaded"
-msgstr "Caricato"
+msgstr "Chargé"
 
 #: src/ui/info_dialog.py:163
 msgid "Archive type"
-msgstr "Tipo di archivio"
+msgstr "Type d'archive"
 
 #: src/ui/info_dialog.py:164
 msgid "Archive size"
-msgstr "Dimensione archivio"
+msgstr "Taille archive"
 
 #: src/ui/info_dialog.py:165
 msgid "Headers size"
-msgstr "Dimensione intestazioni"
+msgstr "Taille en-têtes"
 
 #: src/ui/info_dialog.py:166
 msgid "Method"
-msgstr "Metodo"
+msgstr "Méthode"
 
 #: src/ui/info_dialog.py:167
 msgid "Solid"
-msgstr "Solido"
+msgstr "Solide"
 
 #: src/ui/info_dialog.py:168
 msgid "Blocks"
-msgstr "Blocchi"
+msgstr "Blocs"
 
 #: src/ui/info_dialog.py:192
 msgid "Archive file"
-msgstr "File d'archivio"
+msgstr "Fichier archive"
 
 #: src/ui/info_dialog.py:194
 msgid "Folder"
-msgstr "Cartella"
+msgstr "Dossier"
 
 #: src/ui/info_dialog.py:196
 msgid "File"
-msgstr "File"
+msgstr "Fichier"
 
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
-msgstr "Sconosciuto"
+msgstr "Inconnu"
 
 #: src/ui/info_dialog.py:200
 msgid "B"
@@ -186,188 +204,188 @@ msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
-msgstr "Sì"
+msgstr "Oui"
 
 #: src/ui/info_dialog.py:211
 msgid "No"
-msgstr "No"
+msgstr "Non"
 
 #: src/ui/log_panel.py:32
 msgid "Logs"
-msgstr "Log"
+msgstr "Journaux"
 
 #: src/ui/log_panel.py:96 src/ui/window.py:1338
 msgid "Cancel"
-msgstr "Annulla"
+msgstr "Annuler"
 
 #: src/ui/log_panel.py:105
 msgid "Cancelling..."
-msgstr "Annullamento in corso..."
+msgstr "Annulation..."
 
 #: src/ui/log_panel.py:109
 msgid "Running"
-msgstr "In esecuzione"
+msgstr "En cours"
 
 #: src/ui/log_panel.py:110
 msgid "Done"
-msgstr "Completato"
+msgstr "Fait"
 
 #: src/ui/log_panel.py:111
 msgid "Warning"
-msgstr "Avviso"
+msgstr "Attention"
 
 #: src/ui/log_panel.py:112
 msgid "Timeout"
-msgstr "Tempo scaduto"
+msgstr "Délai dépassé"
 
 #: src/ui/log_panel.py:113
 msgid "Error"
-msgstr "Errore"
+msgstr "Erreur"
 
 #: src/ui/log_panel.py:114
 msgid "Cancelled"
-msgstr "Annullato"
+msgstr "Annulé"
 
 #: src/ui/log_panel.py:115
 msgid "Pending"
-msgstr "In attesa"
+msgstr "En attente"
 
 #: src/ui/window.py:227
 msgid "Test failed"
-msgstr "Test fallito"
+msgstr "Échec du test"
 
 #: src/ui/window.py:227 src/ui/window.py:256 src/ui/window.py:320
 #: src/ui/window.py:376
 msgid "Selected path is not an archive."
-msgstr "Il percorso selezionato non è un archivio."
+msgstr "Le chemin sélectionné n'est pas une archive."
 
 #: src/ui/window.py:256 src/ui/window.py:259
 msgid "Move failed"
-msgstr "Spostamento fallito"
+msgstr "Échec du déplacement"
 
 #: src/ui/window.py:259 src/ui/window.py:323
 msgid "This archive format does not support modification."
-msgstr "Questo formato di archivio non supporta la modifica."
+msgstr "Ce format d'archive ne peut pas être modifié."
 
 #: src/ui/window.py:267 src/ui/window.py:331 src/ui/window.py:404
 #: src/ui/window.py:1268 src/ui/window.py:1269
 msgid "No file selected"
-msgstr "Nessun file selezionato"
+msgstr "Aucun fichier sélectionné"
 
 #: src/ui/window.py:271 src/window.ui:140 src/window.ui:154
 msgid "Move"
-msgstr "Sposta"
+msgstr "Déplacer"
 
 #: src/ui/window.py:271
 msgid "Move \"{}\" to:"
-msgstr "Sposta \"{}\" in:"
+msgstr "Déplacer « {} » vers :"
 
 #: src/ui/window.py:276 src/ui/window.py:336 src/ui/window.py:415
 #: src/ui/window.py:454 src/ui/window.py:521 src/ui/window.py:569
 #: src/ui/window.py:591 src/ui/window.py:622 src/ui/window.py:837
 #: src/ui/window.py:860
 msgid "_Cancel"
-msgstr "_Annulla"
+msgstr "_Annuler"
 
 #: src/ui/window.py:277
 msgid "_Move"
-msgstr "_Sposta"
+msgstr "_Déplacer"
 
 #: src/ui/window.py:320 src/ui/window.py:323
 msgid "Delete failed"
-msgstr "Eliminazione fallita"
+msgstr "Échec de la suppression"
 
 #: src/ui/window.py:335 src/window.ui:164 src/window.ui:178
 msgid "Delete"
-msgstr "Elimina"
+msgstr "Supprimer"
 
 #: src/ui/window.py:335
 msgid "Are you sure you want to delete \"{}\"?"
-msgstr "Sei sicuro di voler eliminare \"{}\"?"
+msgstr "Êtes-vous sûr de vouloir supprimer « {} » ?"
 
 #: src/ui/window.py:337
 msgid "_Delete"
-msgstr "_Elimina"
+msgstr "_Supprimer"
 
 #: src/ui/window.py:376
 msgid "Extract failed"
-msgstr "Estrazione fallita"
+msgstr "Échec extraction"
 
 #: src/ui/window.py:411
 msgid "Select File"
-msgstr "Seleziona file"
+msgstr "Sélectionner Fichier"
 
 #: src/ui/window.py:414 src/ui/window.py:453
 msgid "_Open"
-msgstr "_Apri"
+msgstr "_Ouvrir"
 
 #: src/ui/window.py:450 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr "Seleziona cartella di destinazione"
+msgstr "Sélectionner le Dossier de Destination"
 
 #: src/ui/window.py:497 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
-msgstr "Predefinito"
+msgstr "Par défaut"
 
 #: src/ui/window.py:519 src/ui/window.py:522 src/window.ui:67 src/window.ui:81
 msgid "Compress"
-msgstr "Comprimi"
+msgstr "Compresser"
 
 #: src/ui/window.py:543
 msgid "Source items ({})"
-msgstr "Elementi sorgente ({})"
+msgstr "Éléments source ({})"
 
 #: src/ui/window.py:565
 msgid "Select Files"
-msgstr "Seleziona file"
+msgstr "Sélectionner des Fichiers"
 
 #: src/ui/window.py:568 src/ui/window.py:590
 msgid "_Add"
-msgstr "_Aggiungi"
+msgstr "_Ajouter"
 
 #: src/ui/window.py:587
 msgid "Select Folders"
-msgstr "Seleziona cartella"
+msgstr "Sélectionner des Dossiers"
 
 #: src/ui/window.py:618
 msgid "Save Archive As"
-msgstr "Salva archivio come"
+msgstr "Enregistrer l'Archive Sous"
 
 #: src/ui/window.py:621
 msgid "_Save"
-msgstr "_Salva"
+msgstr "_Enregistrer"
 
 #: src/ui/window.py:677
 msgid "No source items to analyze"
-msgstr "Nessun elemento sorgente da analizzare"
+msgstr "Aucun élément source à analyser"
 
 #: src/ui/window.py:684
 msgid "Recommendation not available"
-msgstr "Raccomandazione non disponibile"
+msgstr "Recommandation non disponible"
 
 #: src/ui/window.py:737
 msgid "Recommendation failed"
-msgstr "Generazione suggerimento fallita"
+msgstr "Échec Recommandation"
 
 #: src/ui/window.py:738
 msgid "Compression recommendation failed"
-msgstr "Suggerimento di compressione fallito"
+msgstr "Échec de la recommandation de compression"
 
 #: src/ui/window.py:788
 msgid "Compression recommendation"
-msgstr "Suggerimento di compressione"
+msgstr "Recommandation de compression"
 
 #: src/ui/window.py:793
 msgid "Recommendation reason"
-msgstr "Motivo del suggerimento"
+msgstr "Motif de la recommandation"
 
 #: src/ui/window.py:827
 msgid "Password Required"
-msgstr "Password richiesta"
+msgstr "Mot de passe requis"
 
 #: src/ui/window.py:828
 msgid "This archive is encrypted. Please enter the password."
-msgstr "Questo archivio è cifrato. Inserire la password."
+msgstr "Cette archive est cryptée. Veuillez saisir le mot de passe."
 
 #: src/ui/window.py:838 src/ui/window.py:1298 src/ui/window.py:1307
 #: src/ui/window.py:1331
@@ -376,176 +394,178 @@ msgstr "_OK"
 
 #: src/ui/window.py:858 src/ui/window.py:861
 msgid "Extract"
-msgstr "Estrazione"
+msgstr "Extraire"
 
 #: src/ui/window.py:899
 msgid "Modified"
-msgstr "Modificato"
+msgstr "Modifié"
 
 #: src/ui/window.py:1016
 msgid "Failed to create temporary directory"
-msgstr "Creazione della cartella temporanea fallita"
+msgstr "Échec création du répertoire temporaire"
 
 #: src/ui/window.py:1042 src/ui/window.py:1523 src/ui/window.py:1525
 #: src/ui/window.py:1551 src/ui/window.py:1553 src/ui/window.py:1612
 #: src/ui/window.py:1622
 msgid "Extract "
-msgstr "Estrazione "
+msgstr "Extraire "
 
 #: src/ui/window.py:1048
 msgid "Extracted file not found"
-msgstr "Estrazione file non trovata"
+msgstr "Fichier décompressé introuvable"
 
 #: src/ui/window.py:1105
 msgid "List "
-msgstr "Elenco "
+msgstr "Liste "
 
 #: src/ui/window.py:1207
 msgid "List failed"
-msgstr "Elencazione fallita"
+msgstr "Échec de la liste"
 
 #: src/ui/window.py:1288
 msgid "Select failed"
-msgstr "Selezione fallita"
+msgstr "Échec de la sélection"
 
 #: src/ui/window.py:1291
 msgid "Selected "
-msgstr "Selezionato"
+msgstr "Sélectionné "
 
 #: src/ui/window.py:1295
 msgid "Format compatibility warning"
-msgstr "Avviso compatibilità formato"
+msgstr "Avertissement compatibilité format"
 
 #: src/ui/window.py:1296
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr ""
-"La compatibilità di questo formato non è stata verificata. Le operazioni di "
-"spostamento e eliminazione sono disabilitate."
+"La compatibilité de ce format n'a pas été vérifiée. Les opérations de "
+"déplacement et de suppression sont désactivées."
 
 #: src/ui/window.py:1304
 msgid "Nested archive opened"
-msgstr "Archivio nidificato aperto"
+msgstr "Ouverture d'archive imbriquée"
 
 #: src/ui/window.py:1305
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr ""
-"Questo archivio è stato estratto da un archivio superiore. Le operazioni di "
-"spostamento ed eliminazione sono disabilitate."
+"Cette archive a été extraite d'une archive parente. Les opérations de "
+"déplacement et de suppression sont désactivées."
 
 #: src/ui/window.py:1310
 msgid "Preview not supported"
-msgstr "Anteprima non supportata"
+msgstr "Aperçu non pris en charge"
 
 #: src/ui/window.py:1311
 msgid "This format does not support preview. Only extract is available."
-msgstr "Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
+msgstr ""
+"Ce format ne prend pas en charge l'aperçu. Seul l'extrait est disponible."
 
 #: src/ui/window.py:1328
 msgid "Language changed"
-msgstr "Lingua cambiata"
+msgstr "Langue modifiée"
 
 #: src/ui/window.py:1329
 msgid "Restart the application to apply the new language."
-msgstr "Riavvia l'applicazione per applicare la nuova lingua."
+msgstr ""
+"Redémarrez l'application pour que la nouvelle langue soit prise en compte."
 
 #: src/ui/window.py:1370
 msgid "Calculating..."
-msgstr "Calcolo in corso..."
+msgstr "Calcul en cours..."
 
 #: src/ui/window.py:1375
 #, python-format
 msgid "%d seconds remaining"
-msgstr "%d secondi rimanenti"
+msgstr "%d secondes restantes"
 
 #: src/ui/window.py:1376
 #, python-format
 msgid "%d minutes remaining"
-msgstr "%d minuti rimanenti"
+msgstr "%d minutes restantes"
 
 #: src/ui/window.py:1393
 msgid "Command not found"
-msgstr "Comando non trovato"
+msgstr "Commande introuvable"
 
 #: src/ui/window.py:1398
 msgid "Job queue not found"
-msgstr "Coda dei processi non trovata"
+msgstr "File d'attente des tâches introuvable"
 
 #: src/ui/window.py:1488 src/ui/window.py:1597
 msgid "{} items"
-msgstr "{} elementi"
+msgstr "{} éléments"
 
 #: src/ui/window.py:1492 src/ui/window.py:1549 src/ui/window.py:1563
 #: src/ui/window.py:1577 src/ui/window.py:1599 src/ui/window.py:1620
 #: src/ui/window.py:1626 src/ui/window.py:1631
 msgid "file"
-msgstr "file"
+msgstr "fichier"
 
 #: src/ui/window.py:1495 src/ui/window.py:1497
 msgid "Compress "
-msgstr "Comprimi "
+msgstr "Compression "
 
 #: src/ui/window.py:1499
 msgid "Compressed "
-msgstr "Compresso "
+msgstr "Compressé "
 
 #: src/ui/window.py:1501
 msgid "Compress timed out: "
-msgstr "Compressione scaduta: "
+msgstr "Délai compression expiré : "
 
 #: src/ui/window.py:1503
 msgid "Compress cancelled: "
-msgstr "Compressione annullata: "
+msgstr "Compression annulée : "
 
 #: src/ui/window.py:1504
 msgid "Compress failed: "
-msgstr "Compressione fallita: "
+msgstr "Compression échouée : "
 
 #: src/ui/window.py:1507 src/ui/window.py:1521 src/ui/window.py:1535
 #: src/ui/window.py:1594 src/ui/window.py:1606 src/ui/window.py:1610
 #: src/ui/window.py:1615 src/ui/window.py:1619 src/ui/window.py:1625
 #: src/ui/window.py:1630
 msgid "archive"
-msgstr "archivio"
+msgstr "archive"
 
 #: src/ui/window.py:1509 src/ui/window.py:1511
 msgid "Open "
-msgstr "Apri "
+msgstr "Ouvrir "
 
 #: src/ui/window.py:1513
 msgid "Opened "
-msgstr "Aperto "
+msgstr "Ouvert "
 
 #: src/ui/window.py:1515
 msgid "Open timed out: "
-msgstr "Apertura scaduta: "
+msgstr "Délai d'ouverture expiré : "
 
 #: src/ui/window.py:1517
 msgid "Open cancelled: "
-msgstr "Apertura annullata: "
+msgstr "Ouverture annulée : "
 
 #: src/ui/window.py:1518
 msgid "Open failed: "
-msgstr "Apertura fallita: "
+msgstr "Ouverture échouée : "
 
 #: src/ui/window.py:1527 src/ui/window.py:1555
 msgid "Extracted "
-msgstr "Estratto "
+msgstr "Extrait "
 
 #: src/ui/window.py:1529 src/ui/window.py:1557
 msgid "Extract timed out: "
-msgstr "Estrazione scaduta: "
+msgstr "Extraction délai expirée : "
 
 #: src/ui/window.py:1531 src/ui/window.py:1559
 msgid "Extract cancelled: "
-msgstr "Estrazione annullata: "
+msgstr "Extraction annulée : "
 
 #: src/ui/window.py:1532 src/ui/window.py:1560
 msgid "Extract failed: "
-msgstr "Estrazione fallita: "
+msgstr "Extraction échouée : "
 
 #: src/ui/window.py:1537 src/ui/window.py:1539 src/ui/window.py:1616
 msgid "Test "
@@ -553,103 +573,103 @@ msgstr "Test "
 
 #: src/ui/window.py:1541
 msgid "Tested "
-msgstr "Testato "
+msgstr "Testé "
 
 #: src/ui/window.py:1543
 msgid "Test timed out: "
-msgstr "Test scaduto: "
+msgstr "Test délai expiré : "
 
 #: src/ui/window.py:1545
 msgid "Test cancelled: "
-msgstr "Test annullato: "
+msgstr "Test annulé : "
 
 #: src/ui/window.py:1546
 msgid "Test failed: "
-msgstr "Test fallito: "
+msgstr "Échec du test : "
 
 #: src/ui/window.py:1565 src/ui/window.py:1567 src/ui/window.py:1627
 msgid "Delete "
-msgstr "Elimina "
+msgstr "Supprimer "
 
 #: src/ui/window.py:1569
 msgid "Deleted "
-msgstr "Eliminato "
+msgstr "Supprimé "
 
 #: src/ui/window.py:1571
 msgid "Delete timed out: "
-msgstr "Eliminazione scaduta: "
+msgstr "Échec suppression délai expiré : "
 
 #: src/ui/window.py:1573
 msgid "Delete cancelled: "
-msgstr "Eliminazione annullata: "
+msgstr "Suppression annulée : "
 
 #: src/ui/window.py:1574
 msgid "Delete failed: "
-msgstr "Eliminazione fallita: "
+msgstr "Échec de la suppression : "
 
 #: src/ui/window.py:1579 src/ui/window.py:1581 src/ui/window.py:1633
 msgid "Move "
-msgstr "Sposta "
+msgstr "Déplacer "
 
 #: src/ui/window.py:1583
 msgid "Moved "
-msgstr "Spostato "
+msgstr "Déplacé "
 
 #: src/ui/window.py:1585
 msgid "Move timed out: "
-msgstr "Spostamento scaduto: "
+msgstr "Déplacement délai expiré : "
 
 #: src/ui/window.py:1587
 msgid "Move cancelled: "
-msgstr "Spostamento annullato: "
+msgstr "Déplacement annulée : "
 
 #: src/ui/window.py:1588
 msgid "Move failed: "
-msgstr "Spostamento fallito: "
+msgstr "Échec déplacement : "
 
 #: src/ui/window.py:1600
 msgid "Create "
-msgstr "Crea "
+msgstr "Création "
 
 #: src/ui/window.py:1600 src/ui/window.py:1622 src/ui/window.py:1627
 msgid " from "
-msgstr " da "
+msgstr " de "
 
 #: src/ui/window.py:1602
 msgid "Parameters: "
-msgstr "Parametri: "
+msgstr "Paramètres : "
 
 #: src/ui/window.py:1611 src/ui/window.py:1621
 msgid "folder"
-msgstr "cartella"
+msgstr "dossier"
 
 #: src/ui/window.py:1612 src/ui/window.py:1622 src/ui/window.py:1633
 msgid " to "
-msgstr " a "
+msgstr " à "
 
 #: src/ui/window.py:1632
 msgid "destination"
-msgstr "destinazione"
+msgstr "destination"
 
 #: src/ui/window.py:1633
 msgid " in "
-msgstr " in "
+msgstr " dans "
 
 #: src/window.ui:19
 msgid "Main Menu"
-msgstr "Menu principale"
+msgstr "Menu principal"
 
 #: src/window.ui:43
 msgid "Open File"
-msgstr "Apri file"
+msgstr "Ouvrir le Fichier"
 
 #: src/window.ui:57
 msgid "Open"
-msgstr "Apri"
+msgstr "Ouvrir"
 
 #: src/window.ui:91 src/window.ui:106
 msgid "Extract All"
-msgstr "Estrai tutto"
+msgstr "Tout Extraire"
 
 #: src/window.ui:116 src/window.ui:130
 msgid "Test"
@@ -657,115 +677,115 @@ msgstr "Test"
 
 #: src/window.ui:214
 msgid "Path or archive"
-msgstr "Percorso o archivio"
+msgstr "Chemin ou archive"
 
 #: src/window.ui:229
 msgid "Open an archive to view its contents"
-msgstr "Apri un archivio per visualizzarne il contenuto"
+msgstr "Ouvrez une archive pour consulter son contenu"
 
 #: src/window.ui:240
 msgid "The selected file is not an archive"
-msgstr "Il file selezionato non è un archivio"
+msgstr "Le fichier sélectionné n'est pas une archive"
 
 #: src/window.ui:265
 msgid "This archive is empty"
-msgstr "Questo archivio è vuoto"
+msgstr "Cette archive est vide"
 
 #: src/window.ui:276
 msgid "This format does not support preview"
-msgstr "Questo formato non supporta l'anteprima"
+msgstr "Ce format ne prend pas en charge l'aperçu"
 
 #: src/window.ui:293
 msgid "_Language"
-msgstr "_Lingua"
+msgstr "_Langue"
 
 #: src/window.ui:296
 msgid "System Default"
-msgstr "Predefinita di sistema"
+msgstr "Système par défaut"
 
 #: src/window.ui:327
 msgid "Show _Logs"
-msgstr "Mostra _log"
+msgstr "Afficher _Journaux"
 
 #: src/window.ui:333
 msgid "_Preferences"
-msgstr "_Preferenze"
+msgstr "_Préférences"
 
 #: src/window.ui:337
 msgid "_About Akizip"
-msgstr "Infor_mazioni su Akizip"
+msgstr "_À propos d'Akizip"
 
 #: src/window.ui:345
 msgid "Extract Selected"
-msgstr "Estrai selezionati"
+msgstr "Extraire la sélection"
 
 #: src/compress-dialog.ui:12
 msgid "Output archive"
-msgstr "Archivio di destinazione"
+msgstr "Fichier d'archive"
 
 #: src/compress-dialog.ui:24
 msgid "Select output archive path"
-msgstr "Seleziona il percorso dell'archivio di destinazione"
+msgstr "Sélectionner le chemin de sortie pour l'archive"
 
 #: src/compress-dialog.ui:30
 msgid "Select Output Archive"
-msgstr "Seleziona archivio di destinazione"
+msgstr "Sélectionner l'archive de sortie"
 
 #: src/compress-dialog.ui:46 src/preferences.ui:60
 msgid "Format"
-msgstr "Formato"
+msgstr "Format"
 
 #: src/compress-dialog.ui:63
 msgid "Auto Recommend"
-msgstr "Consiglio automatico"
+msgstr "Recommandation automatique"
 
 #: src/compress-dialog.ui:64
 msgid "Scan source files and recommend format and parameters"
-msgstr "Scansiona i file sorgente e consiglia formato e parametri"
+msgstr "Analyser les fichiers source et recommander un format et des paramètres"
 
 #: src/compress-dialog.ui:72
 msgid "Source items"
-msgstr "Elementi sorgente"
+msgstr "Éléments sources"
 
 #: src/compress-dialog.ui:99
 msgid "Add Files"
-msgstr "Aggiungi file"
+msgstr "Ajouter des Fichiers"
 
 #: src/compress-dialog.ui:104
 msgid "Add Folders"
-msgstr "Aggiungi cartelle"
+msgstr "Ajouter des Dossiers"
 
 #: src/compress-dialog.ui:109
 msgid "Remove"
-msgstr "Rimuovi"
+msgstr "Enlever"
 
 #: src/compress-dialog.ui:122
 msgid "Advanced options"
-msgstr "Opzioni avanzate"
+msgstr "Options avancées"
 
 #: src/compress-dialog.ui:140 src/preferences.ui:76
 msgid "Compression level"
-msgstr "Livello di compressione"
+msgstr "Niveau de compression"
 
 #: src/compress-dialog.ui:153 src/preferences.ui:82
 msgid "Store"
-msgstr "Memorizzazione"
+msgstr "Stocker"
 
 #: src/compress-dialog.ui:154 src/preferences.ui:83
 msgid "Fastest"
-msgstr "Rapidissima"
+msgstr "Le plus rapide"
 
 #: src/compress-dialog.ui:155 src/preferences.ui:84
 msgid "Fast"
-msgstr "Rapida"
+msgstr "Rapide"
 
 #: src/compress-dialog.ui:156 src/preferences.ui:85
 msgid "Normal"
-msgstr "Normale"
+msgstr "Normal"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:86
 msgid "Maximum"
-msgstr "Massima"
+msgstr "Maximum"
 
 #: src/compress-dialog.ui:158 src/preferences.ui:87
 msgid "Ultra"
@@ -773,90 +793,84 @@ msgstr "Ultra"
 
 #: src/compress-dialog.ui:169 src/preferences.ui:95
 msgid "Algorithm"
-msgstr "Algoritmo"
+msgstr "Algorithme"
 
 #: src/compress-dialog.ui:196 src/preferences.ui:112
 msgid "Dictionary size (MB)"
-msgstr "Dimensione dizionario (MB)"
+msgstr "Taille du dictionnaire (MB)"
 
 #: src/compress-dialog.ui:208 src/compress-dialog.ui:237 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
-msgstr "0 utilizza il valore predefinito di 7-Zip."
+msgstr "0 utilise les paramètres par défaut de 7-Zip."
 
 #: src/compress-dialog.ui:225 src/preferences.ui:131
 msgid "Threads"
-msgstr "Thread"
+msgstr "Processus"
 
 #: src/compress-dialog.ui:254
 msgid "Password"
-msgstr "Password"
+msgstr "Mot de passe"
 
 #: src/compress-dialog.ui:267
 msgid "Leave empty for no password"
-msgstr "Lasciare vuoto per nessuna password"
+msgstr "Laisser vide pour pas de mot de passe"
 
 #: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
-msgstr "Cifra i nomi dei file"
+msgstr "Chiffrer les noms de fichiers"
 
 #: src/compress-dialog.ui:290 src/compress-dialog.ui:301
 msgid "Only available for 7z format"
-msgstr "Disponibile solo per il formato 7z"
+msgstr "Disponible uniquement au format 7z"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
-msgstr "Cartella di destinazione"
+msgstr "Dossier de destination"
 
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
-msgstr "Lasciare vuoto se non c'è una password"
+msgstr "Ne rien indiquer s'il n'y a pas de mot de passe"
 
 #: src/preferences.ui:8
 msgid "General"
-msgstr "Generale"
+msgstr "Généralités"
 
 #: src/preferences.ui:11
 msgid "Timeout (seconds)"
-msgstr "Timeout (secondi)"
+msgstr "Délai d'expiration (secondes)"
 
 #: src/preferences.ui:12
 msgid "-1 means no timeout."
-msgstr "-1 significa nessun timeout."
+msgstr "-1 signifie pas de délai d'expiration."
 
 #: src/preferences.ui:32
 msgid "Compression"
-msgstr "Compressione"
+msgstr "Compression"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
-msgstr "Profondità di scansione"
+msgstr "Étendue d'analyse"
 
 #: src/preferences.ui:36
 msgid ""
 "Maximum folder depth to scan for compression recommendations. Deeper scans "
 "may improve suggestions but take longer."
 msgstr ""
-"Profondità massima delle cartelle da scansionare per i consigli sulla "
-"compressione. Scansioni più profonde possono migliorare i suggerimenti, ma "
-"richiedono più tempo."
+"Niveau de sous-répertoires maximal à analyser pour obtenir des "
+"recommandations de compression. Une analyse plus approfondie peut améliorer "
+"la qualité des suggestions, mais prendra plus de temps."
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
-msgstr "Parametri di compressione predefiniti"
+msgstr "Paramètres de compression par défaut"
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
 msgstr ""
-"Utilizzati per la compressione normale e come alternativa in mancanza di "
-"consigli."
+"Utilisé pour la compression standard et comme solution de secours pour les "
+"recommandations."
 
 #: src/preferences.ui:151
 msgid "Only available for 7z format."
-msgstr "Disponibile solo per il formato 7z."
-
-#~ msgid "_Keyboard Shortcuts"
-#~ msgstr "Scorciatoie da _tastiera"
-
-#~ msgid "Default for password-protected 7z archives."
-#~ msgstr "Predefinito per gli archivi 7z protetti da password."
+msgstr "Disponible uniquement au format 7z."

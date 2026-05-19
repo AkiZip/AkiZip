@@ -25,22 +25,70 @@
             </child>
           </object>
         </child>
+        <child>
+          <object class="AdwActionRow" id="scan_threads_row">
+            <property name="title" translatable="yes">Scan threads</property>
+            <property name="subtitle" translatable="yes">Experimental. Only affects compression recommendations and extract duplicate checks. -1 removes the scanner-specific limit; 0 uses a CPU recommendation. The app may use more total threads for normal operation.</property>
+            <property name="activatable-widget">scan_threads_spin</property>
+            <child type="suffix">
+              <object class="GtkSpinButton" id="scan_threads_spin">
+                <property name="valign">center</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">128</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="extract_group">
+        <property name="title" translatable="yes">Extraction</property>
+        <child>
+          <object class="AdwActionRow" id="overwrite_conflicts_row">
+            <property name="title" translatable="yes">Overwrite conflicts</property>
+            <property name="subtitle" translatable="yes">Experimental. When disabled, extracting to an existing output path is blocked.</property>
+            <property name="activatable-widget">overwrite_conflicts_switch</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="overwrite_conflicts_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
       </object>
     </child>
     <child>
       <object class="AdwPreferencesGroup" id="compression_group">
         <property name="title" translatable="yes">Compression</property>
         <child>
+          <object class="AdwActionRow" id="compression_recommendation_row">
+            <property name="title" translatable="yes">Compression recommendations</property>
+            <property name="subtitle" translatable="yes">Experimental. Enables scanning source files to recommend compression parameters.</property>
+            <property name="activatable-widget">compression_recommendation_switch</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="compression_recommendation_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+        <child>
           <object class="AdwActionRow" id="depth_row">
             <property name="title" translatable="yes">Scan depth</property>
-            <property name="subtitle" translatable="yes">Maximum folder depth to scan for compression recommendations. Deeper scans may improve suggestions but take longer.</property>
+            <property name="subtitle" translatable="yes">Maximum folder depth to scan for compression recommendations. Use -1 for unlimited depth.</property>
             <property name="activatable-widget">depth_spin</property>
             <child type="suffix">
               <object class="GtkSpinButton" id="depth_spin">
                 <property name="valign">center</property>
                 <property name="adjustment">
                   <object class="GtkAdjustment">
-                    <property name="lower">0</property>
+                    <property name="lower">-1</property>
                     <property name="upper">10</property>
                     <property name="step-increment">1</property>
                   </object>

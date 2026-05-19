@@ -375,8 +375,13 @@ def _ratio(part, total):
     return part / total
 
 
+def set_scan_threads(max_threads):
+    _scanner.setMaxThreads(max_threads)
+    return f"System scan threads set to {max_threads}"
+
 
 def register(commands):
     commands["system.move"] = move_path
     commands["system.scan"] = scan_fileAndFolder
     commands["system.suggest_zip_paramiters"] = suggest_zip_paramiters
+    commands["system.set_scan_threads"] = set_scan_threads

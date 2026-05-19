@@ -6,6 +6,7 @@
 # maxLevel=-1 means unlimited depth.
 
 from collections import defaultdict
+import os
 from pathlib import Path
 import random
 import threading
@@ -17,14 +18,19 @@ class scanner():
         self.basePath = Path(basePath).expanduser()
         self.pathDict = defaultdict(dict)
         # {jobId: {path: (True(is file), name), path: (False(not file), name)}}
-        if maxThreads == -1:
-            self.maxThreads = float('inf')
-        elif maxThreads <= 0:
-            raise ValueError(f'gets maxThreads={maxThreads}, maxThreads needs be -1 or positive.')
-        else:
-            self.maxThreads = maxThreads
+        self.setMaxThreads(maxThreads)
         self.jobs = defaultdict(int)
         self._lock = threading.Lock()
+
+    def setMaxThreads(self, maxThreads):
+        if maxThreads == -1:
+            self.maxThreads = float('inf')
+        elif maxThreads == 0:
+            self.maxThreads = max(1, os.cpu_count() or 1)
+        elif maxThreads < -1:
+            raise ValueError(f'gets maxThreads={maxThreads}, maxThreads needs be -1, 0, or positive.')
+        else:
+            self.maxThreads = max(1, maxThreads)
 
     def getCurThreads(self):
         return threading.active_count()
@@ -50,28 +56,36 @@ class scanner():
         with self._lock:
             return self.jobs[jobId]
 
-    def _add_path(self, jobId, path, isFile):
-        self.pathDict[jobId][path.resolve()] = (isFile, path.name)
+    def _merge_pathDict(self, jobId, pathDict):
+        if not pathDict:
+            return
+        with self._lock:
+            self.pathDict[jobId].update(pathDict)
+
+    def _add_path(self, pathDict, path, isFile):
+        pathDict[path.resolve()] = (isFile, path.name)
 
     def scan_path(self, path, levelLeft=3, jobId=0, counted=False):
         if not counted:
             self._add_job(jobId)
+        pathDict = {}
         try:
-            self._scan_path(path, levelLeft, jobId)
+            self._scan_path(path, levelLeft, jobId, pathDict)
         finally:
+            self._merge_pathDict(jobId, pathDict)
             self._finish_job(jobId)
 
-    def _scan_path(self, path, levelLeft=3, jobId=0):
+    def _scan_path(self, path, levelLeft=3, jobId=0, pathDict=None):
         path = Path(path).expanduser()
 
         if not path.exists():
             return
 
         if path.is_file() or path.is_symlink():
-            self._add_path(jobId, path, True)
+            self._add_path(pathDict, path, True)
             return
 
-        self._add_path(jobId, path, False)
+        self._add_path(pathDict, path, False)
 
         if levelLeft == 0:
             return
@@ -98,11 +112,12 @@ class scanner():
                 continue
 
         for file in files:
-            self._add_path(jobId, file, True)
+            self._add_path(pathDict, file, True)
 
         i = 0
         while i < len(folders):
-            if self.getCurThreads() < self.maxThreads:
+            isLast = i == len(folders) - 1
+            if not isLast and self.getCurThreads() < self.maxThreads:
                 self._add_job(jobId)
                 thread = threading.Thread(
                     target=self.scan_path,

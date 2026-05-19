@@ -29,14 +29,19 @@ class scanner():
         self.sevenzipPath = sevenzipPath
         self.pathDict = defaultdict(dict)
         # {jobId: {archive_path: (True(is file), name), archive_path: (False(not file), name)}}
-        if maxThreads == -1:
-            self.maxThreads = float('inf')
-        elif maxThreads <= 0:
-            raise ValueError(f'gets maxThreads={maxThreads}, maxThreads needs be -1 or positive.')
-        else:
-            self.maxThreads = maxThreads
+        self.setMaxThreads(maxThreads)
         self.jobs = defaultdict(int)
         self._lock = threading.Lock()
+
+    def setMaxThreads(self, maxThreads):
+        if maxThreads == -1:
+            self.maxThreads = float('inf')
+        elif maxThreads == 0:
+            self.maxThreads = max(1, os.cpu_count() or 1)
+        elif maxThreads < -1:
+            raise ValueError(f'gets maxThreads={maxThreads}, maxThreads needs be -1, 0, or positive.')
+        else:
+            self.maxThreads = max(1, maxThreads)
 
     def getCurThreads(self):
         return threading.active_count()
@@ -62,9 +67,15 @@ class scanner():
         with self._lock:
             return self.jobs[jobId]
 
-    def _add_path(self, jobId, path, isFile):
+    def _merge_pathDict(self, jobId, pathDict):
+        if not pathDict:
+            return
+        with self._lock:
+            self.pathDict[jobId].update(pathDict)
+
+    def _add_path(self, pathDict, path, isFile):
         path = PurePosixPath(str(path).replace('\\', '/'))
-        self.pathDict[jobId][path] = (isFile, path.name)
+        pathDict[path] = (isFile, path.name)
 
     def _kill_process(self, process):
         try:
@@ -110,18 +121,20 @@ class scanner():
     def scan_path(self, path, levelLeft=3, jobId=0, counted=False, prefix=""):
         if not counted:
             self._add_job(jobId)
+        pathDict = {}
         try:
-            self._scan_path(path, levelLeft, jobId, prefix)
+            self._scan_path(path, levelLeft, jobId, prefix, pathDict)
         finally:
+            self._merge_pathDict(jobId, pathDict)
             self._finish_job(jobId)
 
-    def _scan_path(self, path, levelLeft=3, jobId=0, prefix=""):
+    def _scan_path(self, path, levelLeft=3, jobId=0, prefix="", pathDict=None):
         path = Path(path).expanduser()
         if not path.exists() or not path.is_file():
             return
 
         archive_name = prefix.rstrip('/') or path.name
-        self._add_path(jobId, archive_name, False)
+        self._add_path(pathDict, archive_name, False)
 
         if levelLeft == 0:
             return
@@ -137,12 +150,14 @@ class scanner():
     def scan_archive_folder(self, node, archivePath, levelLeft=3, jobId=0, counted=False):
         if not counted:
             self._add_job(jobId)
+        pathDict = {}
         try:
-            self._scan_archive_folder(node, archivePath, levelLeft, jobId)
+            self._scan_archive_folder(node, archivePath, levelLeft, jobId, pathDict)
         finally:
+            self._merge_pathDict(jobId, pathDict)
             self._finish_job(jobId)
 
-    def _scan_archive_folder(self, node, archivePath, levelLeft=3, jobId=0):
+    def _scan_archive_folder(self, node, archivePath, levelLeft=3, jobId=0, pathDict=None):
         if levelLeft == 0:
             return
 
@@ -152,16 +167,17 @@ class scanner():
             nextLevel = -1
 
         for fileName in node['files']:
-            self._add_path(jobId, archivePath / fileName, True)
+            self._add_path(pathDict, archivePath / fileName, True)
 
         folders = list(node['folders'].items())
         i = 0
         while i < len(folders):
             folderName, childNode = folders[i]
             childPath = archivePath / folderName
-            self._add_path(jobId, childPath, False)
+            self._add_path(pathDict, childPath, False)
             if nextLevel != 0:
-                if self.getCurThreads() < self.maxThreads:
+                isLast = i == len(folders) - 1
+                if not isLast and self.getCurThreads() < self.maxThreads:
                     self._add_job(jobId)
                     thread = threading.Thread(
                         target=self.scan_archive_folder,

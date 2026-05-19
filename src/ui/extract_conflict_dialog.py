@@ -16,11 +16,11 @@ def _ensure_css():
 
     _CSS_PROVIDER = Gtk.CssProvider()
     _CSS_PROVIDER.load_from_data(b"""
-    dropdown.conflict-ignore {
+    dropdown.conflict-skip {
       color: #2f5f91;
       background-color: rgba(47, 95, 145, 0.12);
     }
-    dropdown.conflict-replace {
+    dropdown.conflict-overwrite {
       color: #9b4a4a;
       background-color: rgba(155, 74, 74, 0.12);
     }
@@ -66,7 +66,7 @@ class ExtractConflictDialog:
 
         subtitle = Gtk.Label(xalign=0)
         subtitle.set_wrap(True)
-        subtitle.set_label(_('Choose which existing files should be replaced or ignored before extracting.'))
+        subtitle.set_label(_('Choose which existing files should be overwritten or skipped before extracting.'))
         root.append(subtitle)
 
         scroller = Gtk.ScrolledWindow()
@@ -86,14 +86,14 @@ class ExtractConflictDialog:
         buttons.set_halign(Gtk.Align.END)
         root.append(buttons)
 
-        replace_btn = Gtk.Button(label=_('Replace Selected'))
-        ignore_btn = Gtk.Button(label=_('Ignore Selected'))
+        replace_btn = Gtk.Button(label=_('Overwrite Selected'))
+        ignore_btn = Gtk.Button(label=_('Skip Selected'))
         cancel_btn = Gtk.Button(label=_('Cancel'))
         confirm_btn = Gtk.Button(label=_('Confirm'))
         confirm_btn.add_css_class('suggested-action')
 
-        replace_btn.connect('clicked', lambda _btn: self._set_selected_action('replace'))
-        ignore_btn.connect('clicked', lambda _btn: self._set_selected_action('ignore'))
+        replace_btn.connect('clicked', lambda _btn: self._set_selected_action('overwrite'))
+        ignore_btn.connect('clicked', lambda _btn: self._set_selected_action('skip'))
         cancel_btn.connect('clicked', lambda _btn: self._window.close())
         confirm_btn.connect('clicked', self._confirm)
 
@@ -115,7 +115,7 @@ class ExtractConflictDialog:
                     'is_file': False,
                     'name': current.name,
                     'depth': len(current.parts) - 1,
-                    'action': 'ignore',
+                    'action': 'skip',
                     'real_conflict': current in self._conflicts,
                 })
             items[path] = {
@@ -123,7 +123,7 @@ class ExtractConflictDialog:
                 'is_file': isFile,
                 'name': value[1],
                 'depth': len(parts) - 1,
-                'action': 'ignore',
+                'action': 'skip',
                 'real_conflict': True,
             }
 
@@ -157,8 +157,8 @@ class ExtractConflictDialog:
         box.append(label)
 
         action_combo = Gtk.DropDown.new_from_strings([
-            _('Replace'),
-            _('Ignore'),
+            _('Overwrite'),
+            _('Skip'),
         ])
         action_combo.set_size_request(140, -1)
         action_combo.connect('notify::selected', self._on_action_selected, item)
@@ -202,21 +202,21 @@ class ExtractConflictDialog:
                 self._update_action_combo(child)
 
     def _update_action_combo(self, item):
-        index = 0 if item['action'] == 'replace' else 1
+        index = 0 if item['action'] == 'overwrite' else 1
         combo = item.get('action_combo')
         if combo is None:
             return
         if combo.get_selected() != index:
             combo.set_selected(index)
-        if item['action'] == 'replace':
-            combo.remove_css_class('conflict-ignore')
-            combo.add_css_class('conflict-replace')
+        if item['action'] == 'overwrite':
+            combo.remove_css_class('conflict-skip')
+            combo.add_css_class('conflict-overwrite')
         else:
-            combo.remove_css_class('conflict-replace')
-            combo.add_css_class('conflict-ignore')
+            combo.remove_css_class('conflict-overwrite')
+            combo.add_css_class('conflict-skip')
 
     def _on_action_selected(self, combo, _pspec, item):
-        action = 'ignore' if combo.get_selected() == 1 else 'replace'
+        action = 'skip' if combo.get_selected() == 1 else 'overwrite'
         if item['action'] == action:
             return
         self._set_action(item, action)
@@ -224,7 +224,7 @@ class ExtractConflictDialog:
     def _confirm(self, _button):
         ignored = []
         for item in self._rows:
-            if item['action'] != 'ignore' or not item['is_file']:
+            if item['action'] != 'skip' or not item['is_file']:
                 continue
             if item['path'] in self._conflicts:
                 ignored.append(str(item['path']))

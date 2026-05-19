@@ -30,6 +30,11 @@ def main(version):
     app.job_queue = JobQueue(default_timeout=app.settings.get_int('default-timeout'))
     app.system = sysop()
     register_plugins(app.commands)
+    scan_threads = app.settings.get_int('experimental-scan-threads')
+    for name in ('system.set_scan_threads', 'archive.set_scan_threads'):
+        command = app.commands.get(name)
+        if command is not None:
+            command(scan_threads)
     app.job_queue.start()
 
     try:

@@ -171,6 +171,22 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         except Exception:
             return fallback
 
+    def _experimental_overwrite_conflicts_enabled(self):
+        return self._settings_get_boolean('experimental-overwrite-conflicts', False)
+
+    def _experimental_compression_recommendation_enabled(self):
+        return self._settings_get_boolean('experimental-compression-recommendation', False)
+
+    def _show_overwrite_disabled(self):
+        dialog = Adw.AlertDialog.new(
+            _('Extract blocked'),
+            _('The selected output path already exists. Choose another destination or enable the experimental overwrite conflict dialog in Preferences.'),
+        )
+        dialog.add_response('ok', _('_OK'))
+        dialog.set_default_response('ok')
+        dialog.set_close_response('ok')
+        dialog.present(self)
+
     def _run_default_compress_multi(self, output_path, source_paths):
         options = self._default_compress_options()
         self._run_command(
@@ -479,6 +495,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         password_entry = builder.get_object('password_entry')
         encrypt_names_check = builder.get_object('encrypt_names_check')
         suggest_btn = builder.get_object('suggest_btn')
+        recommendation_enabled = self._experimental_compression_recommendation_enabled()
+        if not recommendation_enabled:
+            suggest_btn.set_tooltip_text(_('Enable experimental compression recommendations in Preferences.'))
 
         _METHOD_ITEMS = {
             '7z': [('default', _('Default')), ('LZMA2', 'LZMA2'), ('LZMA', 'LZMA'), ('PPMd', 'PPMd'), ('BZip2', 'BZip2')],
@@ -667,6 +686,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         on_format_changed(format_combo)
 
         def on_suggest(_btn):
+            if not self._experimental_compression_recommendation_enabled():
+                self._show_notification(_('Compression recommendations are experimental. Enable them in Preferences.'), _status.WARNING)
+                return
+
             if not source_paths:
                 self._show_notification(_('No source items to analyze'), _status.WARNING)
                 return
@@ -827,40 +850,29 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self, on_confirm)
 
     def _extract_archive_with_conflict_check(self, selected, output_dir, password):
+        if not self._experimental_overwrite_conflicts_enabled():
+            if Path(output_dir).exists():
+                self._show_overwrite_disabled()
+                return
+            self._run_archive_extract(selected, output_dir, password, [])
+            return
+
         app = self.get_application()
         job_queue = getattr(app, 'job_queue', None) if app is not None else None
         scan_command = getattr(app, 'commands', {}).get('archive.scan_exist') if app is not None else None
 
-        def run_extract(active_password, ignored_paths):
-            def on_error(error):
-                if is_password_error(error):
-                    self._present_password_dialog(
-                        lambda new_password: run_extract(new_password, ignored_paths)
-                    )
-                    return True
-                return False
-
-            self._run_command(
-                'archive.extract',
-                selected,
-                output_dir,
-                active_password,
-                ignored_paths,
-                on_error_extra=on_error,
-            )
-
         if scan_command is None or job_queue is None:
-            run_extract(password, [])
+            self._run_archive_extract(selected, output_dir, password, [])
             return
 
         def on_scan_success(conflicts):
             self._present_extract_conflicts(
                 conflicts,
-                lambda ignored_paths: run_extract(password, ignored_paths),
+                lambda skipped_paths: self._run_archive_extract(selected, output_dir, password, skipped_paths),
             )
 
         def on_scan_error(_error):
-            run_extract(password, [])
+            self._run_archive_extract(selected, output_dir, password, [])
 
         job_queue.submit(
             scan_command,
@@ -869,6 +881,29 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             on_error=on_scan_error,
             task_id='archive.scan_exist',
             msg=_('Check existing files'),
+        )
+
+    def _run_archive_extract(self, selected, output_dir, password, skipped_paths):
+        def on_error(error):
+            if is_password_error(error):
+                self._present_password_dialog(
+                    lambda new_password: self._run_archive_extract(
+                        selected,
+                        output_dir,
+                        new_password,
+                        skipped_paths,
+                    )
+                )
+                return True
+            return False
+
+        self._run_command(
+            'archive.extract',
+            selected,
+            output_dir,
+            password,
+            skipped_paths,
+            on_error_extra=on_error,
         )
 
     def _archive_entry_is_folder(self, entry):
@@ -1081,9 +1116,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     on_error_extra=on_error,
                 )
 
+            if not self._experimental_overwrite_conflicts_enabled():
+                if conflicts:
+                    self._show_overwrite_disabled()
+                    return
+                start_extract(password, [])
+                return
+
             self._present_extract_conflicts(
                 conflicts,
-                lambda ignored_paths: start_extract(password, ignored_paths),
+                lambda skipped_paths: start_extract(password, skipped_paths),
             )
 
         self._present_extract_dialog(run_extract)

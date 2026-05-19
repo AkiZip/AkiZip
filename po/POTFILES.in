@@ -3,12 +3,13 @@
 data/top.akizip.akizip.desktop.in
 data/top.akizip.akizip.metainfo.xml.in
 data/top.akizip.akizip.gschema.xml
+src/compress-dialog.ui
+src/extract-dialog.ui
 src/main.py
+src/preferences.ui
+src/ui/extract_conflict_dialog.py
 src/ui/info_dialog.py
 src/ui/log_panel.py
 src/ui/window.py
 src/window.py
 src/window.ui
-src/compress-dialog.ui
-src/extract-dialog.ui
-src/preferences.ui

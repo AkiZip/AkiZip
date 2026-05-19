@@ -227,6 +227,11 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None
 def archive_scan_exist(archive_path, output_dir, password=None, timeout=-1):
     return _archive_scanner.scan_exist(archive_path, output_dir, password, timeout)
 
+
+def archive_set_scan_threads(max_threads):
+    _archive_scanner.setMaxThreads(max_threads)
+    return f"Archive scan threads set to {max_threads}"
+
 def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
@@ -284,6 +289,7 @@ def register(commands):
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip
     commands['archive.scan_exist'] = archive_scan_exist
+    commands['archive.set_scan_threads'] = archive_set_scan_threads
     commands['archive.delete'] = archive_delete
     commands['archive.test'] = archive_test
     commands['archive.move'] = archive_move

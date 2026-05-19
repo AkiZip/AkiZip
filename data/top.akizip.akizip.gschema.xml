@@ -56,11 +56,37 @@
 		</key>
 		<key name="compress-scan-depth" type="i">
 			<default>3</default>
-			<range min="0" max="10"/>
+			<range min="-1" max="10"/>
 			<summary>Compression scan depth</summary>
 			<description>
 				Maximum number of folder levels to scan when recommending compression
-				parameters.
+				parameters. Use -1 for unlimited depth.
+			</description>
+		</key>
+		<key name="experimental-scan-threads" type="i">
+			<default>0</default>
+			<range min="-1" max="128"/>
+			<summary>Experimental scan threads</summary>
+			<description>
+				Thread limit for the compression recommendation scanner and extract conflict
+				scanner. Use -1 for no scanner-specific limit, 0 for a CPU-based recommendation,
+				or a positive value for a manual limit. The application may still have more total
+				threads for normal operation.
+			</description>
+		</key>
+		<key name="experimental-compression-recommendation" type="b">
+			<default>false</default>
+			<summary>Experimental compression recommendation</summary>
+			<description>
+				Whether to enable experimental compression parameter recommendations.
+			</description>
+		</key>
+		<key name="experimental-overwrite-conflicts" type="b">
+			<default>false</default>
+			<summary>Experimental overwrite conflict dialog</summary>
+			<description>
+				Whether to allow the experimental extract overwrite dialog. When disabled,
+				extracting to an existing output path is blocked instead of overwriting.
 			</description>
 		</key>
 		<key name="default-timeout" type="i">

@@ -86,12 +86,15 @@ class AkizipApplication(Adw.Application):
         builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/preferences.ui')
         page = builder.get_object('page')
         depth_spin = builder.get_object('depth_spin')
+        scan_threads_spin = builder.get_object('scan_threads_spin')
+        compression_recommendation_switch = builder.get_object('compression_recommendation_switch')
         format_combo = builder.get_object('format_combo')
         level_combo = builder.get_object('level_combo')
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
         encrypt_names_switch = builder.get_object('encrypt_names_switch')
+        overwrite_conflicts_switch = builder.get_object('overwrite_conflicts_switch')
         timeout_spin = builder.get_object('timeout_spin')
 
         timeout_spin.set_value(self._settings_get_int('default-timeout', -1))
@@ -104,6 +107,34 @@ class AkizipApplication(Adw.Application):
         depth_spin.connect(
             'value-changed',
             lambda spin: self.settings.set_int('compress-scan-depth', spin.get_value_as_int()),
+        )
+
+        scan_threads_spin.set_value(self._settings_get_int('experimental-scan-threads', 0))
+        scan_threads_spin.connect(
+            'value-changed',
+            lambda spin: self._on_scan_threads_changed(spin.get_value_as_int()),
+        )
+
+        compression_recommendation_switch.set_active(
+            self._settings_get_boolean('experimental-compression-recommendation', False)
+        )
+        compression_recommendation_switch.connect(
+            'notify::active',
+            lambda switch, pspec: self._settings_set_boolean(
+                'experimental-compression-recommendation',
+                switch.get_active(),
+            ),
+        )
+
+        overwrite_conflicts_switch.set_active(
+            self._settings_get_boolean('experimental-overwrite-conflicts', False)
+        )
+        overwrite_conflicts_switch.connect(
+            'notify::active',
+            lambda switch, pspec: self._settings_set_boolean(
+                'experimental-overwrite-conflicts',
+                switch.get_active(),
+            ),
         )
 
         def _update_prefs_method_combo(fmt, method_combo):
@@ -206,6 +237,17 @@ class AkizipApplication(Adw.Application):
         self._settings_set_int('default-timeout', value)
         if hasattr(self, 'job_queue'):
             self.job_queue.default_timeout = value
+
+    def _on_scan_threads_changed(self, value):
+        self._settings_set_int('experimental-scan-threads', value)
+        commands = getattr(self, 'commands', {})
+        for name in ('system.set_scan_threads', 'archive.set_scan_threads'):
+            command = commands.get(name)
+            if command is not None:
+                try:
+                    command(value)
+                except Exception:
+                    pass
 
     def _on_preferences_closed(self, window):
         self._preferences_window = None

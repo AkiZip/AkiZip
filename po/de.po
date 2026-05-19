@@ -27,19 +27,21 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-16 07:43+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-05-20 14:22+0000\n"
+"Last-Translator: mondstern <mondstern@monocles.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/akizip/akizip/de/>"
+"\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
 msgid "Akizip"
-msgstr ""
+msgstr "Akizip"
 
 #: data/top.akizip.akizip.desktop.in:8
 msgid "GTK;"
@@ -47,13 +49,16 @@ msgstr ""
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "Ein modernes Frontend für 7-Zip unter GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
+"Akizip ist ein grafisches Archivierungsprogramm, das mit GTK 4 und "
+"libadwaita erstellt wurde und die Leistungsfähigkeit von 7-Zip auf den GNOME-"
+"Desktop bringt."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -61,12 +66,18 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"Es unterstützt das Erstellen und Extrahieren von Archiven in den Formaten "
+"7z, zip und tar. Es kann auch (schreibgeschützt) rar, gz, bz2, xz, tar "
+"öffnen.gz, tar.bz2 und tar.in: xz archives."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
+"Zu den Funktionen gehören die Archivprüfung, abbrechbare Hintergrundaufträge "
+"mit Fortschrittsanzeige, ein eigenes Protokollfenster sowie mehrsprachige "
+"Unterstützung."
 
 #: data/top.akizip.akizip.metainfo.xml.in:16
 msgid "ckappgit"
@@ -74,19 +85,19 @@ msgstr ""
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
-msgstr ""
+msgstr "Hauptfenster mit Archivinhalten und Symbolleiste"
 
 #: src/ui/info_dialog.py:13 src/ui/window.py:1305
 msgid "System state not found"
-msgstr ""
+msgstr "Systemstatus nicht gefunden"
 
 #: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
 msgid "Archive"
-msgstr ""
+msgstr "Archiv"
 
 #: src/ui/info_dialog.py:27
 msgid "Archive information is unavailable."
-msgstr ""
+msgstr "Archivinformationen sind nicht verfügbar."
 
 #: src/ui/info_dialog.py:61 src/ui/window.py:1645
 msgid "Read archive information from "
@@ -95,19 +106,19 @@ msgstr ""
 #: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:188
 #: src/window.ui:202
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/ui/info_dialog.py:97
 msgid "Close"
-msgstr ""
+msgstr "Schließen"
 
 #: src/ui/info_dialog.py:104
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #: src/ui/info_dialog.py:105 src/ui/window.py:904
 msgid "Path"
-msgstr ""
+msgstr "Pfad"
 
 #: src/ui/info_dialog.py:106
 msgid "Type"
@@ -115,31 +126,31 @@ msgstr ""
 
 #: src/ui/info_dialog.py:108 src/ui/window.py:905
 msgid "Size"
-msgstr ""
+msgstr "Größe"
 
 #: src/ui/info_dialog.py:109
 msgid "Can compress"
-msgstr ""
+msgstr "Kann komprimieren"
 
 #: src/ui/info_dialog.py:110
 msgid "Can extract"
-msgstr ""
+msgstr "Kann extrahieren"
 
 #: src/ui/info_dialog.py:136
 msgid "Copy"
-msgstr ""
+msgstr "Kopieren"
 
 #: src/ui/info_dialog.py:148
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "In die Zwischenablage kopiert"
 
 #: src/ui/info_dialog.py:157
 msgid "No archive information found."
-msgstr ""
+msgstr "Keine Archivinformationen gefunden."
 
 #: src/ui/info_dialog.py:161
 msgid "Loaded"
-msgstr ""
+msgstr "Laden"
 
 #: src/ui/info_dialog.py:163
 msgid "Archive type"
@@ -155,7 +166,7 @@ msgstr ""
 
 #: src/ui/info_dialog.py:166
 msgid "Method"
-msgstr ""
+msgstr "Methode"
 
 #: src/ui/info_dialog.py:167
 msgid "Solid"
@@ -171,63 +182,63 @@ msgstr ""
 
 #: src/ui/info_dialog.py:194
 msgid "Folder"
-msgstr ""
+msgstr "Ordner"
 
 #: src/ui/info_dialog.py:196
 msgid "File"
-msgstr ""
+msgstr "Datei"
 
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
-msgstr ""
+msgstr "Unbekannt"
 
 #: src/ui/info_dialog.py:200
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: src/ui/info_dialog.py:200
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: src/ui/info_dialog.py:200
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: src/ui/info_dialog.py:200
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: src/ui/info_dialog.py:211
 msgid "No"
-msgstr ""
+msgstr "Nein"
 
 #: src/ui/log_panel.py:32
 msgid "Logs"
-msgstr ""
+msgstr "Protokolle"
 
 #: src/ui/log_panel.py:96 src/ui/window.py:1376
 msgid "Cancel"
-msgstr ""
+msgstr "Abbrechen"
 
 #: src/ui/log_panel.py:105
 msgid "Cancelling..."
-msgstr ""
+msgstr "Abbrechen..."
 
 #: src/ui/log_panel.py:109
 msgid "Running"
-msgstr ""
+msgstr "Ausführen"
 
 #: src/ui/log_panel.py:110
 msgid "Done"
-msgstr ""
+msgstr "Fertig"
 
 #: src/ui/log_panel.py:111
 msgid "Warning"
-msgstr ""
+msgstr "Warnung"
 
 #: src/ui/log_panel.py:112
 msgid "Timeout"
@@ -235,7 +246,7 @@ msgstr ""
 
 #: src/ui/log_panel.py:113
 msgid "Error"
-msgstr ""
+msgstr "Fehlermeldung"
 
 #: src/ui/log_panel.py:114
 msgid "Cancelled"
@@ -247,12 +258,12 @@ msgstr ""
 
 #: src/ui/window.py:227
 msgid "Test failed"
-msgstr ""
+msgstr "Test fehlgeschlagen"
 
 #: src/ui/window.py:227 src/ui/window.py:256 src/ui/window.py:320
 #: src/ui/window.py:376
 msgid "Selected path is not an archive."
-msgstr ""
+msgstr "Der ausgewählte Pfad ist kein Archiv."
 
 #: src/ui/window.py:256 src/ui/window.py:259
 msgid "Move failed"
@@ -260,12 +271,12 @@ msgstr ""
 
 #: src/ui/window.py:259 src/ui/window.py:323
 msgid "This archive format does not support modification."
-msgstr ""
+msgstr "Dieses Archivformat unterstützt keine Änderungen."
 
 #: src/ui/window.py:267 src/ui/window.py:331 src/ui/window.py:404
 #: src/ui/window.py:1297 src/ui/window.py:1298
 msgid "No file selected"
-msgstr ""
+msgstr "Keine Datei ausgewählt"
 
 #: src/ui/window.py:271 src/window.ui:140 src/window.ui:154
 msgid "Move"
@@ -280,7 +291,7 @@ msgstr ""
 #: src/ui/window.py:591 src/ui/window.py:622 src/ui/window.py:844
 #: src/ui/window.py:867
 msgid "_Cancel"
-msgstr ""
+msgstr "_Abbrechen"
 
 #: src/ui/window.py:277
 msgid "_Move"
@@ -288,11 +299,11 @@ msgstr ""
 
 #: src/ui/window.py:320 src/ui/window.py:323
 msgid "Delete failed"
-msgstr ""
+msgstr "Löschen fehlgeschlagen"
 
 #: src/ui/window.py:335 src/window.ui:164 src/window.ui:178
 msgid "Delete"
-msgstr ""
+msgstr "Löschen"
 
 #: src/ui/window.py:335
 msgid "Are you sure you want to delete \"{}\"?"
@@ -300,23 +311,23 @@ msgstr ""
 
 #: src/ui/window.py:337
 msgid "_Delete"
-msgstr ""
+msgstr "_Löschen"
 
 #: src/ui/window.py:376
 msgid "Extract failed"
-msgstr ""
+msgstr "Extrahieren fehlgeschlagen"
 
 #: src/ui/window.py:411
 msgid "Select File"
-msgstr ""
+msgstr "Datei auswählen"
 
 #: src/ui/window.py:414 src/ui/window.py:453
 msgid "_Open"
-msgstr ""
+msgstr "_Öffnen"
 
 #: src/ui/window.py:450 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr ""
+msgstr "Zielordner auswählen"
 
 #: src/ui/window.py:497 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
@@ -324,7 +335,7 @@ msgstr ""
 
 #: src/ui/window.py:519 src/ui/window.py:522 src/window.ui:67 src/window.ui:81
 msgid "Compress"
-msgstr ""
+msgstr "Komprimieren"
 
 #: src/ui/window.py:543
 msgid "Source items ({})"
@@ -332,68 +343,68 @@ msgstr ""
 
 #: src/ui/window.py:565
 msgid "Select Files"
-msgstr ""
+msgstr "Dateien auswählen"
 
 #: src/ui/window.py:568 src/ui/window.py:590
 msgid "_Add"
-msgstr ""
+msgstr "_Hinzufügen"
 
 #: src/ui/window.py:587
 msgid "Select Folders"
-msgstr ""
+msgstr "Ordner auswählen"
 
 #: src/ui/window.py:618
 msgid "Save Archive As"
-msgstr ""
+msgstr "Archiv speichern unter"
 
 #: src/ui/window.py:621
 msgid "_Save"
-msgstr ""
+msgstr "_Speichern"
 
 #: src/ui/window.py:642
 msgid "Overwrite is not currently supported"
-msgstr ""
+msgstr "Überschreiben wird derzeit nicht unterstützt"
 
 #: src/ui/window.py:643 src/ui/window.py:845 src/ui/window.py:1327
 #: src/ui/window.py:1336 src/ui/window.py:1345 src/ui/window.py:1369
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: src/ui/window.py:684
 msgid "No source items to analyze"
-msgstr ""
+msgstr "Keine zu analysierenden Quellelemente"
 
 #: src/ui/window.py:691
 msgid "Recommendation not available"
-msgstr ""
+msgstr "Empfehlung nicht verfügbar"
 
 #: src/ui/window.py:744
 msgid "Recommendation failed"
-msgstr ""
+msgstr "Empfehlung fehlgeschlagen"
 
 #: src/ui/window.py:745
 msgid "Compression recommendation failed"
-msgstr ""
+msgstr "Komprimierungsempfehlung fehlgeschlagen"
 
 #: src/ui/window.py:795
 msgid "Compression recommendation"
-msgstr ""
+msgstr "Kompressionsempfehlung"
 
 #: src/ui/window.py:800
 msgid "Recommendation reason"
-msgstr ""
+msgstr "Grund der Empfehlung"
 
 #: src/ui/window.py:834
 msgid "Password Required"
-msgstr ""
+msgstr "Passwort erforderlich"
 
 #: src/ui/window.py:835
 msgid "This archive is encrypted. Please enter the password."
-msgstr ""
+msgstr "Dieses Archiv ist verschlüsselt. Bitte gib das Passwort ein."
 
 #: src/ui/window.py:865 src/ui/window.py:868
 msgid "Extract"
-msgstr ""
+msgstr "Extrahieren"
 
 #: src/ui/window.py:906
 msgid "Modified"
@@ -401,25 +412,25 @@ msgstr ""
 
 #: src/ui/window.py:1023
 msgid "Failed to create temporary directory"
-msgstr ""
+msgstr "Temporäres Verzeichnis konnte nicht erstellt werden"
 
 #: src/ui/window.py:1049 src/ui/window.py:1561 src/ui/window.py:1563
 #: src/ui/window.py:1589 src/ui/window.py:1591 src/ui/window.py:1650
 #: src/ui/window.py:1660
 msgid "Extract "
-msgstr ""
+msgstr "Extrahieren "
 
 #: src/ui/window.py:1055
 msgid "Extracted file not found"
-msgstr ""
+msgstr "Extrahierte Datei nicht gefunden"
 
 #: src/ui/window.py:1115
 msgid "List "
-msgstr ""
+msgstr "Liste "
 
 #: src/ui/window.py:1236
 msgid "List failed"
-msgstr ""
+msgstr "Open cancelled:"
 
 #: src/ui/window.py:1317
 msgid "Select failed"
@@ -427,43 +438,48 @@ msgstr ""
 
 #: src/ui/window.py:1320
 msgid "Selected "
-msgstr ""
+msgstr "Ausgewählt "
 
 #: src/ui/window.py:1324
 msgid "Format compatibility warning"
-msgstr ""
+msgstr "Warnung zur Formatkompatibilität"
 
 #: src/ui/window.py:1325
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr ""
+"Dieses Format wurde nicht auf Kompatibilität überprüft. Verschieben- und "
+"Löschvorgänge sind deaktiviert."
 
 #: src/ui/window.py:1333
 msgid "Preview not supported"
-msgstr ""
+msgstr "Vorschau wird nicht unterstützt"
 
 #: src/ui/window.py:1334
 msgid "This format does not support preview. Only extract is available."
 msgstr ""
+"Dieses Format unterstützt keine Vorschau. Es ist nur ein Auszug verfügbar."
 
 #: src/ui/window.py:1342
 msgid "Nested archive opened"
-msgstr ""
+msgstr "Verschachteltes Archiv geöffnet"
 
 #: src/ui/window.py:1343
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr ""
+"Dieses Archiv wurde aus einem übergeordneten Archiv extrahiert. Verschieben- "
+"und Löschvorgänge sind deaktiviert."
 
 #: src/ui/window.py:1366
 msgid "Language changed"
-msgstr ""
+msgstr "Sprache geändert"
 
 #: src/ui/window.py:1367
 msgid "Restart the application to apply the new language."
-msgstr ""
+msgstr "Starte die Anwendung neu, um die neue Sprache anzuwenden."
 
 #: src/ui/window.py:1408
 msgid "Calculating..."
@@ -472,16 +488,16 @@ msgstr ""
 #: src/ui/window.py:1413
 #, python-format
 msgid "%d seconds remaining"
-msgstr ""
+msgstr "%d verbleibende Sekunden"
 
 #: src/ui/window.py:1414
 #, python-format
 msgid "%d minutes remaining"
-msgstr ""
+msgstr "%d verbleibende Minuten"
 
 #: src/ui/window.py:1431
 msgid "Command not found"
-msgstr ""
+msgstr "Befehl nicht gefunden"
 
 #: src/ui/window.py:1436
 msgid "Job queue not found"
@@ -495,7 +511,7 @@ msgstr ""
 #: src/ui/window.py:1615 src/ui/window.py:1637 src/ui/window.py:1658
 #: src/ui/window.py:1664 src/ui/window.py:1669
 msgid "file"
-msgstr ""
+msgstr "Datei"
 
 #: src/ui/window.py:1533 src/ui/window.py:1535
 msgid "Compress "
@@ -674,11 +690,11 @@ msgstr ""
 
 #: src/window.ui:229
 msgid "Open an archive to view its contents"
-msgstr ""
+msgstr "Öffne ein Archiv, um den Inhalt anzuzeigen"
 
 #: src/window.ui:240
 msgid "The selected file is not an archive"
-msgstr ""
+msgstr "Die ausgewählte Datei ist kein Archiv"
 
 #: src/window.ui:265
 msgid "This archive is empty"
@@ -734,7 +750,7 @@ msgstr ""
 
 #: src/compress-dialog.ui:64
 msgid "Scan source files and recommend format and parameters"
-msgstr ""
+msgstr "Quelldateien scannen und Format und Parameter empfehlen"
 
 #: src/compress-dialog.ui:72
 msgid "Source items"
@@ -850,6 +866,8 @@ msgid ""
 "Maximum folder depth to scan for compression recommendations. Deeper scans "
 "may improve suggestions but take longer."
 msgstr ""
+"Maximale Ordnertiefe zum Scannen nach Komprimierungsempfehlungen. Tiefere "
+"Scans können Vorschläge verbessern, dauern aber länger."
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
@@ -857,7 +875,7 @@ msgstr ""
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
-msgstr ""
+msgstr "Wird für normale Komprimierung und Empfehlungs-Fallback verwendet."
 
 #: src/preferences.ui:151
 msgid "Only available for 7z format."

@@ -27,8 +27,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-16 07:43+0800\n"
-"PO-Revision-Date: 2026-05-17 02:32+0000\n"
-"Last-Translator: lawatux <weblate.parameter299@passinbox.com>\n"
+"PO-Revision-Date: 2026-05-20 14:29+0000\n"
+"Last-Translator: Anonymous <noreply@weblate.org>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/akizip/akizip/fr/>"
 "\n"
 "Language: fr\n"
@@ -756,8 +756,7 @@ msgstr "Recommandation automatique"
 
 #: src/compress-dialog.ui:64
 msgid "Scan source files and recommend format and parameters"
-msgstr ""
-"Analyser les fichiers source et recommander un format et des paramètres"
+msgstr "Analyser les fichiers source et recommander un format et des paramètres"
 
 #: src/compress-dialog.ui:72
 msgid "Source items"

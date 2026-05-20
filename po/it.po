@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-16 07:43+0800\n"
-"PO-Revision-Date: 2026-05-17 12:45+0000\n"
+"PO-Revision-Date: 2026-05-20 14:29+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/"
 "it/>\n"
@@ -440,8 +440,7 @@ msgstr "Anteprima non supportata"
 
 #: src/ui/window.py:1334
 msgid "This format does not support preview. Only extract is available."
-msgstr ""
-"Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
+msgstr "Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
 
 #: src/ui/window.py:1342
 msgid "Nested archive opened"

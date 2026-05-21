@@ -1,0 +1,28 @@
+name: Check Format
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  check-format:
+    name: Check PO and XML Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext libxml2-utils
+
+      - name: Run format check script
+        run: |
+          chmod +x scripts/check-format.sh
+          ./scripts/check-format.sh

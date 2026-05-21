@@ -10,7 +10,7 @@ on:
 
 jobs:
   check-format:
-    name: Check PO and XML Format
+    name: Check File Formats
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Install tools
         run: |
           sudo apt-get update
-          sudo apt-get install -y gettext libxml2-utils
+          sudo apt-get install -y gettext libxml2-utils python3-yaml
 
       - name: Run format check script
         run: |

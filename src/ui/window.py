@@ -97,6 +97,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     add_button = Gtk.Template.Child()
     choose_button = Gtk.Template.Child()
+    extract_split_button = Gtk.Template.Child()
+    test_button = Gtk.Template.Child()
     info_button = Gtk.Template.Child()
     move_button = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
@@ -1257,6 +1259,21 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._all_entries = []
         self._folder_set = set()
         self._current_internal_path = ''
+
+        _current_lang = (os.environ.get('LANGUAGE') or os.environ.get('LANG', '')).split('.')[0].split('_')[0].lower()
+        if _current_lang in ('de', 'pl'):
+            self.set_default_size(800, 750)
+            for btn in (self.choose_button, self.add_button, self.extract_split_button,
+                        self.test_button, self.move_button, self.delete_button, self.info_button):
+                if btn is not None:
+                    btn.set_size_request(-1, 70)
+                    btn.set_valign(Gtk.Align.CENTER)
+                    child = btn.get_child()
+                    if child is not None:
+                        child.set_valign(Gtk.Align.CENTER)
+                        image = child.get_first_child()
+                        if image is not None and isinstance(image, Gtk.Image):
+                            image.set_pixel_size(32)
 
         app = self.get_application()
         if app is not None and hasattr(app, 'settings'):

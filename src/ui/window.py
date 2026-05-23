@@ -100,6 +100,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     info_button = Gtk.Template.Child()
     move_button = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
+    extract_split_button = Gtk.Template.Child()
+    extract_menu_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     address_entry = Gtk.Template.Child()
     file_list_stack = Gtk.Template.Child()
@@ -1265,12 +1267,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         action.connect('activate', lambda _a, _p: self.butextract_one(None))
         self.add_action(action)
 
+        action = Gio.SimpleAction.new('extract-all', None)
+        action.connect('activate', lambda _a, _p: self.butextract(None))
+        self.add_action(action)
+
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)
         self.file_list_stack.set_visible_child_name('empty')
         self._update_archive_buttons()
         self._sync_address_bar()
         self._update_title()
+        self._update_extract_button_for_locale()
         self.connect('destroy', self._on_destroy)
 
     def _on_destroy(self, widget):
@@ -1683,3 +1690,28 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 title = title + '/'
             title = title + self._current_internal_path
         self.set_title(title)
+
+    def _get_effective_locale(self):
+        app = self.get_application()
+        if app is not None and hasattr(app, 'settings'):
+            lang_setting = app.settings.get_string('language')
+            if lang_setting and lang_setting != 'auto':
+                return lang_setting.split('_')[0].lower()
+
+        for env_var in ('LANGUAGE', 'LC_ALL', 'LC_MESSAGES', 'LANG'):
+            val = os.environ.get(env_var, '')
+            if val:
+                first_lang = val.split(':')[0]
+                if first_lang and first_lang not in ('C', 'POSIX'):
+                    return first_lang.split('_')[0].lower()
+
+        return 'en'
+
+    def _update_extract_button_for_locale(self):
+        lang = self._get_effective_locale()
+        if lang in ('de', 'pl'):
+            self.extract_split_button.set_visible(False)
+            self.extract_menu_button.set_visible(True)
+        else:
+            self.extract_split_button.set_visible(True)
+            self.extract_menu_button.set_visible(False)

@@ -111,6 +111,31 @@
                           </object>
                         </child>
                         <child>
+                          <object class="GtkMenuButton" id="extract_menu_button">
+                            <property name="width-request">70</property>
+                            <property name="tooltip-text" translatable="yes">Extract</property>
+                            <property name="menu-model">extract_popup_menu</property>
+                            <property name="visible">False</property>
+                            <property name="child">
+                              <object class="GtkBox">
+                                <property name="orientation">vertical</property>
+                                <property name="spacing">4</property>
+                                <child>
+                                  <object class="GtkImage">
+                                    <property name="icon-name">list-remove-symbolic</property>
+                                    <property name="pixel-size">24</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkLabel">
+                                    <property name="label" translatable="yes">Extract</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
                           <object class="GtkButton" id="test_button">
                             <property name="width-request">70</property>
                             <property name="tooltip-text" translatable="yes">Test</property>
@@ -367,6 +392,18 @@
   </menu>
   <menu id="extract_menu">
     <section>
+      <item>
+        <attribute name="label" translatable="yes">Extract Selected</attribute>
+        <attribute name="action">win.extract-selected</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="extract_popup_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Extract All</attribute>
+        <attribute name="action">win.extract-all</attribute>
+      </item>
       <item>
         <attribute name="label" translatable="yes">Extract Selected</attribute>
         <attribute name="action">win.extract-selected</attribute>

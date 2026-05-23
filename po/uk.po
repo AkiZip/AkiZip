@@ -27,34 +27,38 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-16 07:43+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-05-23 15:51+0000\n"
+"Last-Translator: mondstern <mondstern@monocles.de>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/akizip/akizip/"
+"uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 2026.6.dev0\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
 msgid "Akizip"
-msgstr ""
+msgstr "Akizip"
 
 #: data/top.akizip.akizip.desktop.in:8
 msgid "GTK;"
-msgstr ""
+msgstr "GTK;"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "Сучасний інтерфейс для 7-Zip у середовищі GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
+"Akizip це графічна утиліта для роботи з архівами, створена на базі GTK 4 та "
+"libadwaita, яка надає користувачам робочого столу GNOME всі можливості 7-Zip."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -62,804 +66,819 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"Програма підтримує створення та розпакування архівів у форматах 7z, zip та "
+"tar. Вона також може відкривати (лише для читання) архіви у форматах rar, "
+"gz, bz2, xz, tar.gz, tar.bz2 та tar.xz."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
+"Серед функцій перегляд архівів, фонові завдання з можливістю скасування та "
+"відстеженням ходу виконання, спеціальна панель журналів та багатомовна "
+"підтримка."
 
 #: data/top.akizip.akizip.metainfo.xml.in:16
 msgid "ckappgit"
-msgstr ""
+msgstr "цкаппгіт"
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
-msgstr ""
+msgstr "Головне вікно з вмістом архіву та панеллю інструментів"
 
 #: src/ui/info_dialog.py:13 src/ui/window.py:1305
 msgid "System state not found"
-msgstr ""
+msgstr "Стан системи не знайдено"
 
 #: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
 msgid "Archive"
-msgstr ""
+msgstr "Архів"
 
 #: src/ui/info_dialog.py:27
 msgid "Archive information is unavailable."
-msgstr ""
+msgstr "Інформація в архіві недоступна."
 
 #: src/ui/info_dialog.py:61 src/ui/window.py:1645
 msgid "Read archive information from "
-msgstr ""
+msgstr "Переглянути архівні дані з "
 
 #: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:188
 #: src/window.ui:202
 msgid "Info"
-msgstr ""
+msgstr "Інформація"
 
 #: src/ui/info_dialog.py:97
 msgid "Close"
-msgstr ""
+msgstr "Закрити"
 
 #: src/ui/info_dialog.py:104
 msgid "Name"
-msgstr ""
+msgstr "Ім'я"
 
 #: src/ui/info_dialog.py:105 src/ui/window.py:904
 msgid "Path"
-msgstr ""
+msgstr "Шлях"
 
 #: src/ui/info_dialog.py:106
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 #: src/ui/info_dialog.py:108 src/ui/window.py:905
 msgid "Size"
-msgstr ""
+msgstr "Розмір"
 
 #: src/ui/info_dialog.py:109
 msgid "Can compress"
-msgstr ""
+msgstr "Можна стиснути"
 
 #: src/ui/info_dialog.py:110
 msgid "Can extract"
-msgstr ""
+msgstr "Можна витягти"
 
 #: src/ui/info_dialog.py:136
 msgid "Copy"
-msgstr ""
+msgstr "Скопіювати"
 
 #: src/ui/info_dialog.py:148
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Скопійовано в буфер обміну"
 
 #: src/ui/info_dialog.py:157
 msgid "No archive information found."
-msgstr ""
+msgstr "Інформація в архіві не знайдена."
 
 #: src/ui/info_dialog.py:161
 msgid "Loaded"
-msgstr ""
+msgstr "Завантажено"
 
 #: src/ui/info_dialog.py:163
 msgid "Archive type"
-msgstr ""
+msgstr "Тип архіву"
 
 #: src/ui/info_dialog.py:164
 msgid "Archive size"
-msgstr ""
+msgstr "Розмір архіву"
 
 #: src/ui/info_dialog.py:165
 msgid "Headers size"
-msgstr ""
+msgstr "Розмір заголовків"
 
 #: src/ui/info_dialog.py:166
 msgid "Method"
-msgstr ""
+msgstr "Метод"
 
 #: src/ui/info_dialog.py:167
 msgid "Solid"
-msgstr ""
+msgstr "Твердий"
 
 #: src/ui/info_dialog.py:168
 msgid "Blocks"
-msgstr ""
+msgstr "Блоки"
 
 #: src/ui/info_dialog.py:192
 msgid "Archive file"
-msgstr ""
+msgstr "Архівний файл"
 
 #: src/ui/info_dialog.py:194
 msgid "Folder"
-msgstr ""
+msgstr "Папка"
 
 #: src/ui/info_dialog.py:196
 msgid "File"
-msgstr ""
+msgstr "Файл"
 
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
-msgstr ""
+msgstr "Невідомо"
 
 #: src/ui/info_dialog.py:200
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: src/ui/info_dialog.py:200
 msgid "KB"
-msgstr ""
+msgstr "KB"
 
 #: src/ui/info_dialog.py:200
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: src/ui/info_dialog.py:200
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
-msgstr ""
+msgstr "Так"
 
 #: src/ui/info_dialog.py:211
 msgid "No"
-msgstr ""
+msgstr "Ні"
 
 #: src/ui/log_panel.py:32
 msgid "Logs"
-msgstr ""
+msgstr "Журнали"
 
 #: src/ui/log_panel.py:96 src/ui/window.py:1376
 msgid "Cancel"
-msgstr ""
+msgstr "Скасувати"
 
 #: src/ui/log_panel.py:105
 msgid "Cancelling..."
-msgstr ""
+msgstr "Скасування..."
 
 #: src/ui/log_panel.py:109
 msgid "Running"
-msgstr ""
+msgstr "Біг"
 
 #: src/ui/log_panel.py:110
 msgid "Done"
-msgstr ""
+msgstr "Готово"
 
 #: src/ui/log_panel.py:111
 msgid "Warning"
-msgstr ""
+msgstr "Попередження"
 
 #: src/ui/log_panel.py:112
 msgid "Timeout"
-msgstr ""
+msgstr "Тайм-аут"
 
 #: src/ui/log_panel.py:113
 msgid "Error"
-msgstr ""
+msgstr "Помилка"
 
 #: src/ui/log_panel.py:114
 msgid "Cancelled"
-msgstr ""
+msgstr "Скасовано"
 
 #: src/ui/log_panel.py:115
 msgid "Pending"
-msgstr ""
+msgstr "Очікується"
 
 #: src/ui/window.py:227
 msgid "Test failed"
-msgstr ""
+msgstr "Тест не пройшов"
 
 #: src/ui/window.py:227 src/ui/window.py:256 src/ui/window.py:320
 #: src/ui/window.py:376
 msgid "Selected path is not an archive."
-msgstr ""
+msgstr "Вибраний шлях не є архівом."
 
 #: src/ui/window.py:256 src/ui/window.py:259
 msgid "Move failed"
-msgstr ""
+msgstr "Операція не вдалася"
 
 #: src/ui/window.py:259 src/ui/window.py:323
 msgid "This archive format does not support modification."
-msgstr ""
+msgstr "Цей формат архіву не підтримує редагування."
 
 #: src/ui/window.py:267 src/ui/window.py:331 src/ui/window.py:404
 #: src/ui/window.py:1297 src/ui/window.py:1298
 msgid "No file selected"
-msgstr ""
+msgstr "Файл не вибрано"
 
 #: src/ui/window.py:271 src/window.ui:140 src/window.ui:154
 msgid "Move"
-msgstr ""
+msgstr "Перемістити"
 
 #: src/ui/window.py:271
 msgid "Move \"{}\" to:"
-msgstr ""
+msgstr "Перемістити «{}» до:"
 
 #: src/ui/window.py:276 src/ui/window.py:336 src/ui/window.py:415
 #: src/ui/window.py:454 src/ui/window.py:521 src/ui/window.py:569
 #: src/ui/window.py:591 src/ui/window.py:622 src/ui/window.py:844
 #: src/ui/window.py:867
 msgid "_Cancel"
-msgstr ""
+msgstr "_Скасувати"
 
 #: src/ui/window.py:277
 msgid "_Move"
-msgstr ""
+msgstr "_Перемістити"
 
 #: src/ui/window.py:320 src/ui/window.py:323
 msgid "Delete failed"
-msgstr ""
+msgstr "Видалення не вдалося"
 
 #: src/ui/window.py:335 src/window.ui:164 src/window.ui:178
 msgid "Delete"
-msgstr ""
+msgstr "Скинути"
 
 #: src/ui/window.py:335
 msgid "Are you sure you want to delete \"{}\"?"
-msgstr ""
+msgstr "Ви впевнені, що хочете видалити «{}»?"
 
 #: src/ui/window.py:337
 msgid "_Delete"
-msgstr ""
+msgstr "_Видалити"
 
 #: src/ui/window.py:376
 msgid "Extract failed"
-msgstr ""
+msgstr "Витяг не вдалося виконати"
 
 #: src/ui/window.py:411
 msgid "Select File"
-msgstr ""
+msgstr "Вибрати файл"
 
 #: src/ui/window.py:414 src/ui/window.py:453
 msgid "_Open"
-msgstr ""
+msgstr "_Відкрити"
 
 #: src/ui/window.py:450 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr ""
+msgstr "Виберіть папку призначення"
 
 #: src/ui/window.py:497 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
-msgstr ""
+msgstr "За замовчуванням"
 
 #: src/ui/window.py:519 src/ui/window.py:522 src/window.ui:67 src/window.ui:81
 msgid "Compress"
-msgstr ""
+msgstr "Стиснути"
 
 #: src/ui/window.py:543
 msgid "Source items ({})"
-msgstr ""
+msgstr "Елементи джерела ({})"
 
 #: src/ui/window.py:565
 msgid "Select Files"
-msgstr ""
+msgstr "Вибрати файли"
 
 #: src/ui/window.py:568 src/ui/window.py:590
 msgid "_Add"
-msgstr ""
+msgstr "_Додати"
 
 #: src/ui/window.py:587
 msgid "Select Folders"
-msgstr ""
+msgstr "Вибрати папки"
 
 #: src/ui/window.py:618
 msgid "Save Archive As"
-msgstr ""
+msgstr "Зберегти архів як"
 
 #: src/ui/window.py:621
 msgid "_Save"
-msgstr ""
+msgstr "_Зберегти"
 
 #: src/ui/window.py:642
 msgid "Overwrite is not currently supported"
-msgstr ""
+msgstr "Наразі функція перезапису не підтримується"
 
 #: src/ui/window.py:643 src/ui/window.py:845 src/ui/window.py:1327
 #: src/ui/window.py:1336 src/ui/window.py:1345 src/ui/window.py:1369
 msgid "_OK"
-msgstr ""
+msgstr "_ОК"
 
 #: src/ui/window.py:684
 msgid "No source items to analyze"
-msgstr ""
+msgstr "Немає елементів для аналізу"
 
 #: src/ui/window.py:691
 msgid "Recommendation not available"
-msgstr ""
+msgstr "Рекомендація відсутня"
 
 #: src/ui/window.py:744
 msgid "Recommendation failed"
-msgstr ""
+msgstr "Рекомендація не виконана"
 
 #: src/ui/window.py:745
 msgid "Compression recommendation failed"
-msgstr ""
+msgstr "Не вдалося виконати рекомендацію щодо стиснення"
 
 #: src/ui/window.py:795
 msgid "Compression recommendation"
-msgstr ""
+msgstr "Рекомендації щодо стиснення"
 
 #: src/ui/window.py:800
 msgid "Recommendation reason"
-msgstr ""
+msgstr "Причина рекомендації"
 
 #: src/ui/window.py:834
 msgid "Password Required"
-msgstr ""
+msgstr "Потрібен пароль"
 
 #: src/ui/window.py:835
 msgid "This archive is encrypted. Please enter the password."
-msgstr ""
+msgstr "Цей архів зашифровано. Введіть пароль."
 
 #: src/ui/window.py:865 src/ui/window.py:868
 msgid "Extract"
-msgstr ""
+msgstr "Витяг"
 
 #: src/ui/window.py:906
 msgid "Modified"
-msgstr ""
+msgstr "Змінено"
 
 #: src/ui/window.py:1023
 msgid "Failed to create temporary directory"
-msgstr ""
+msgstr "Не вдалося створити тимчасовий каталог"
 
 #: src/ui/window.py:1049 src/ui/window.py:1561 src/ui/window.py:1563
 #: src/ui/window.py:1589 src/ui/window.py:1591 src/ui/window.py:1650
 #: src/ui/window.py:1660
 msgid "Extract "
-msgstr ""
+msgstr "Витяг "
 
 #: src/ui/window.py:1055
 msgid "Extracted file not found"
-msgstr ""
+msgstr "Витягнутий файл не знайдено"
 
 #: src/ui/window.py:1115
 msgid "List "
-msgstr ""
+msgstr "Список "
 
 #: src/ui/window.py:1236
 msgid "List failed"
-msgstr ""
+msgstr "Список не вдалося створити"
 
 #: src/ui/window.py:1317
 msgid "Select failed"
-msgstr ""
+msgstr "Вибір не вдався"
 
 #: src/ui/window.py:1320
 msgid "Selected "
-msgstr ""
+msgstr "Вибрано "
 
 #: src/ui/window.py:1324
 msgid "Format compatibility warning"
-msgstr ""
+msgstr "Попередження про несумісність форматів"
 
 #: src/ui/window.py:1325
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr ""
+"Сумісність цього формату не перевірено. Операції переміщення та видалення "
+"недоступні."
 
 #: src/ui/window.py:1333
 msgid "Preview not supported"
-msgstr ""
+msgstr "Попередній перегляд не підтримується"
 
 #: src/ui/window.py:1334
 msgid "This format does not support preview. Only extract is available."
-msgstr ""
+msgstr "Цей формат не підтримує попередній перегляд. Доступний лише уривок."
 
 #: src/ui/window.py:1342
 msgid "Nested archive opened"
-msgstr ""
+msgstr "Відкрито вкладене архівне файли"
 
 #: src/ui/window.py:1343
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr ""
+"Цей архів було вилучено з батьківського архіву. Операції переміщення та "
+"видалення недоступні."
 
 #: src/ui/window.py:1366
 msgid "Language changed"
-msgstr ""
+msgstr "Мова змінена"
 
 #: src/ui/window.py:1367
 msgid "Restart the application to apply the new language."
-msgstr ""
+msgstr "Перезапустіть програму, щоб застосувати нову мову."
 
 #: src/ui/window.py:1408
 msgid "Calculating..."
-msgstr ""
+msgstr "Обчислення..."
 
 #: src/ui/window.py:1413
 #, python-format
 msgid "%d seconds remaining"
-msgstr ""
+msgstr "Залишилося %d секунд"
 
 #: src/ui/window.py:1414
 #, python-format
 msgid "%d minutes remaining"
-msgstr ""
+msgstr "Залишилося %d хвилин"
 
 #: src/ui/window.py:1431
 msgid "Command not found"
-msgstr ""
+msgstr "Команда не знайдена"
 
 #: src/ui/window.py:1436
 msgid "Job queue not found"
-msgstr ""
+msgstr "Черга завдань не знайдена"
 
 #: src/ui/window.py:1526 src/ui/window.py:1635
 msgid "{} items"
-msgstr ""
+msgstr "{} елементів"
 
 #: src/ui/window.py:1530 src/ui/window.py:1587 src/ui/window.py:1601
 #: src/ui/window.py:1615 src/ui/window.py:1637 src/ui/window.py:1658
 #: src/ui/window.py:1664 src/ui/window.py:1669
 msgid "file"
-msgstr ""
+msgstr "файл"
 
 #: src/ui/window.py:1533 src/ui/window.py:1535
 msgid "Compress "
-msgstr ""
+msgstr "Стиснути "
 
 #: src/ui/window.py:1537
 msgid "Compressed "
-msgstr ""
+msgstr "Стиснений "
 
 #: src/ui/window.py:1539
 msgid "Compress timed out: "
-msgstr ""
+msgstr "Час очікування стиснення вичерпано: "
 
 #: src/ui/window.py:1541
 msgid "Compress cancelled: "
-msgstr ""
+msgstr "Стиснення скасовано: "
 
 #: src/ui/window.py:1542
 msgid "Compress failed: "
-msgstr ""
+msgstr "Помилка стиснення: "
 
 #: src/ui/window.py:1545 src/ui/window.py:1559 src/ui/window.py:1573
 #: src/ui/window.py:1632 src/ui/window.py:1644 src/ui/window.py:1648
 #: src/ui/window.py:1653 src/ui/window.py:1657 src/ui/window.py:1663
 #: src/ui/window.py:1668
 msgid "archive"
-msgstr ""
+msgstr "архів"
 
 #: src/ui/window.py:1547 src/ui/window.py:1549
 msgid "Open "
-msgstr ""
+msgstr "Відкрити "
 
 #: src/ui/window.py:1551
 msgid "Opened "
-msgstr ""
+msgstr "Відкрито "
 
 #: src/ui/window.py:1553
 msgid "Open timed out: "
-msgstr ""
+msgstr "Час очікування на відкриття закінчився: "
 
 #: src/ui/window.py:1555
 msgid "Open cancelled: "
-msgstr ""
+msgstr "Відкриття скасовано: "
 
 #: src/ui/window.py:1556
 msgid "Open failed: "
-msgstr ""
+msgstr "Не вдалося відкрити: "
 
 #: src/ui/window.py:1565 src/ui/window.py:1593
 msgid "Extracted "
-msgstr ""
+msgstr "Витягнуто "
 
 #: src/ui/window.py:1567 src/ui/window.py:1595
 msgid "Extract timed out: "
-msgstr ""
+msgstr "Час очікування вичерпано: "
 
 #: src/ui/window.py:1569 src/ui/window.py:1597
 msgid "Extract cancelled: "
-msgstr ""
+msgstr "Витяг скасовано: "
 
 #: src/ui/window.py:1570 src/ui/window.py:1598
 msgid "Extract failed: "
-msgstr ""
+msgstr "Витяг не вдалося виконати: "
 
 #: src/ui/window.py:1575 src/ui/window.py:1577 src/ui/window.py:1654
 msgid "Test "
-msgstr ""
+msgstr "Тест "
 
 #: src/ui/window.py:1579
 msgid "Tested "
-msgstr ""
+msgstr "Перевірено "
 
 #: src/ui/window.py:1581
 msgid "Test timed out: "
-msgstr ""
+msgstr "Час тесту закінчився: "
 
 #: src/ui/window.py:1583
 msgid "Test cancelled: "
-msgstr ""
+msgstr "Тест скасовано: "
 
 #: src/ui/window.py:1584
 msgid "Test failed: "
-msgstr ""
+msgstr "Тест не пройшов: "
 
 #: src/ui/window.py:1603 src/ui/window.py:1605 src/ui/window.py:1665
 msgid "Delete "
-msgstr ""
+msgstr "Видалити "
 
 #: src/ui/window.py:1607
 msgid "Deleted "
-msgstr ""
+msgstr "Видалено "
 
 #: src/ui/window.py:1609
 msgid "Delete timed out: "
-msgstr ""
+msgstr "Час очікування на видалення закінчився: "
 
 #: src/ui/window.py:1611
 msgid "Delete cancelled: "
-msgstr ""
+msgstr "Видалення скасовано: "
 
 #: src/ui/window.py:1612
 msgid "Delete failed: "
-msgstr ""
+msgstr "Видалення не вдалося: "
 
 #: src/ui/window.py:1617 src/ui/window.py:1619 src/ui/window.py:1671
 msgid "Move "
-msgstr ""
+msgstr "Перемістити "
 
 #: src/ui/window.py:1621
 msgid "Moved "
-msgstr ""
+msgstr "Переміщено "
 
 #: src/ui/window.py:1623
 msgid "Move timed out: "
-msgstr ""
+msgstr "Час очікування завершився: "
 
 #: src/ui/window.py:1625
 msgid "Move cancelled: "
-msgstr ""
+msgstr "Переміщення скасовано: "
 
 #: src/ui/window.py:1626
 msgid "Move failed: "
-msgstr ""
+msgstr "Помилка під час переміщення: "
 
 #: src/ui/window.py:1638
 msgid "Create "
-msgstr ""
+msgstr "Створити "
 
 #: src/ui/window.py:1638 src/ui/window.py:1660 src/ui/window.py:1665
 msgid " from "
-msgstr ""
+msgstr " з "
 
 #: src/ui/window.py:1640
 msgid "Parameters: "
-msgstr ""
+msgstr "Параметри: "
 
 #: src/ui/window.py:1649 src/ui/window.py:1659
 msgid "folder"
-msgstr ""
+msgstr "папка"
 
 #: src/ui/window.py:1650 src/ui/window.py:1660 src/ui/window.py:1671
 msgid " to "
-msgstr ""
+msgstr " до "
 
 #: src/ui/window.py:1670
 msgid "destination"
-msgstr ""
+msgstr "пункт призначення"
 
 #: src/ui/window.py:1671
 msgid " in "
-msgstr ""
+msgstr " в "
 
 #: src/window.ui:19
 msgid "Main Menu"
-msgstr ""
+msgstr "Головне меню"
 
 #: src/window.ui:43
 msgid "Open File"
-msgstr ""
+msgstr "Відкрити файл"
 
 #: src/window.ui:57
 msgid "Open"
-msgstr ""
+msgstr "Відкрити"
 
 #: src/window.ui:91 src/window.ui:106
 msgid "Extract All"
-msgstr ""
+msgstr "Витягнути все"
 
 #: src/window.ui:116 src/window.ui:130
 msgid "Test"
-msgstr ""
+msgstr "Тест"
 
 #: src/window.ui:214
 msgid "Path or archive"
-msgstr ""
+msgstr "Шлях або архів"
 
 #: src/window.ui:229
 msgid "Open an archive to view its contents"
-msgstr ""
+msgstr "Відкрийте архів, щоб переглянути його вміст"
 
 #: src/window.ui:240
 msgid "The selected file is not an archive"
-msgstr ""
+msgstr "Вибраний файл не є архівом"
 
 #: src/window.ui:265
 msgid "This archive is empty"
-msgstr ""
+msgstr "Цей архів порожній"
 
 #: src/window.ui:276
 msgid "This format does not support preview"
-msgstr ""
+msgstr "Цей формат не підтримує попередній перегляд"
 
 #: src/window.ui:304
 msgid "_Language"
-msgstr ""
+msgstr "_Мова"
 
 #: src/window.ui:307
 msgid "System Default"
-msgstr ""
+msgstr "Системні налаштування за замовчуванням"
 
 #: src/window.ui:343
 msgid "Show _Logs"
-msgstr ""
+msgstr "Показати _Журнали"
 
 #: src/window.ui:349
 msgid "_Preferences"
-msgstr ""
+msgstr "_Налаштування"
 
 #: src/window.ui:353
 msgid "_About Akizip"
-msgstr ""
+msgstr "_Про Akizip"
 
 #: src/window.ui:361
 msgid "Extract Selected"
-msgstr ""
+msgstr "Вибрати фрагмент"
 
 #: src/compress-dialog.ui:12
 msgid "Output archive"
-msgstr ""
+msgstr "Вихідний архів"
 
 #: src/compress-dialog.ui:24
 msgid "Select output archive path"
-msgstr ""
+msgstr "Виберіть шлях до архіву вихідних даних"
 
 #: src/compress-dialog.ui:30
 msgid "Select Output Archive"
-msgstr ""
+msgstr "Вибрати вихідний архів"
 
 #: src/compress-dialog.ui:46 src/preferences.ui:60
 msgid "Format"
-msgstr ""
+msgstr "Формат"
 
 #: src/compress-dialog.ui:63
 msgid "Auto Recommend"
-msgstr ""
+msgstr "Автоматичні рекомендації"
 
 #: src/compress-dialog.ui:64
 msgid "Scan source files and recommend format and parameters"
-msgstr ""
+msgstr "Проаналізувати вихідні файли та запропонувати формат і параметри"
 
 #: src/compress-dialog.ui:72
 msgid "Source items"
-msgstr ""
+msgstr "Елементи джерелаЕлементи джерела"
 
 #: src/compress-dialog.ui:99
 msgid "Add Files"
-msgstr ""
+msgstr "Додати файли"
 
 #: src/compress-dialog.ui:104
 msgid "Add Folders"
-msgstr ""
+msgstr "Додати папки"
 
 #: src/compress-dialog.ui:109
 msgid "Remove"
-msgstr ""
+msgstr "Прибрати"
 
 #: src/compress-dialog.ui:122
 msgid "Advanced options"
-msgstr ""
+msgstr "Додаткові параметри"
 
 #: src/compress-dialog.ui:140 src/preferences.ui:76
 msgid "Compression level"
-msgstr ""
+msgstr "Рівень стиснення"
 
 #: src/compress-dialog.ui:153 src/preferences.ui:82
 msgid "Store"
-msgstr ""
+msgstr "Магазин"
 
 #: src/compress-dialog.ui:154 src/preferences.ui:83
 msgid "Fastest"
-msgstr ""
+msgstr "Найшвидший"
 
 #: src/compress-dialog.ui:155 src/preferences.ui:84
 msgid "Fast"
-msgstr ""
+msgstr "Швидко"
 
 #: src/compress-dialog.ui:156 src/preferences.ui:85
 msgid "Normal"
-msgstr ""
+msgstr "Звичайний"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:86
 msgid "Maximum"
-msgstr ""
+msgstr "Максимум"
 
 #: src/compress-dialog.ui:158 src/preferences.ui:87
 msgid "Ultra"
-msgstr ""
+msgstr "Ультра"
 
 #: src/compress-dialog.ui:169 src/preferences.ui:95
 msgid "Algorithm"
-msgstr ""
+msgstr "Алгоритм"
 
 #: src/compress-dialog.ui:196 src/preferences.ui:112
 msgid "Dictionary size (MB)"
-msgstr ""
+msgstr "Розмір словника (МБ)"
 
 #: src/compress-dialog.ui:208 src/compress-dialog.ui:237 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
-msgstr ""
+msgstr "0 використовує стандартні налаштування 7-Zip."
 
 #: src/compress-dialog.ui:225 src/preferences.ui:131
 msgid "Threads"
-msgstr ""
+msgstr "Теми"
 
 #: src/compress-dialog.ui:254
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 #: src/compress-dialog.ui:267
 msgid "Leave empty for no password"
-msgstr ""
+msgstr "Залиште поле порожнім, якщо пароль відсутній"
 
 #: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
-msgstr ""
+msgstr "Зашифрувати імена файлів"
 
 #: src/compress-dialog.ui:290 src/compress-dialog.ui:301
 msgid "Only available for 7z format"
-msgstr ""
+msgstr "Доступно лише для формату 7z"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
-msgstr ""
+msgstr "Папка призначення"
 
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
-msgstr ""
+msgstr "Якщо пароль відсутній, залиште поле порожнім"
 
 #: src/preferences.ui:8
 msgid "General"
-msgstr ""
+msgstr "Загальна інформація"
 
 #: src/preferences.ui:11
 msgid "Timeout (seconds)"
-msgstr ""
+msgstr "Час очікування (секунди)"
 
 #: src/preferences.ui:12
 msgid "-1 means no timeout."
-msgstr ""
+msgstr "-1 означає відсутність тайм-ауту."
 
 #: src/preferences.ui:32
 msgid "Compression"
-msgstr ""
+msgstr "Стиснення"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
-msgstr ""
+msgstr "Глибина сканування"
 
 #: src/preferences.ui:36
 msgid ""
 "Maximum folder depth to scan for compression recommendations. Deeper scans "
 "may improve suggestions but take longer."
 msgstr ""
+"Максимальна глибина вкладених папок для сканування з метою отримання "
+"рекомендацій щодо стиснення. Більш глибоке сканування може покращити якість "
+"пропозицій, але займе більше часу."
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
-msgstr ""
+msgstr "Параметри стиснення за замовчуванням"
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
 msgstr ""
+"Використовується для звичайного стиснення та як запасний варіант у разі "
+"відсутності рекомендацій."
 
 #: src/preferences.ui:151
 msgid "Only available for 7z format."
-msgstr ""
+msgstr "Доступно лише для формату 7z."

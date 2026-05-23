@@ -45,9 +45,8 @@
             "buildsystem" : "meson",
             "sources" : [
                 {
-                    "type" : "git",
-                    "tag": "0.2.4",
-                    "url" : "https://github.com/akizip/akizip"
+                    "type" : "dir",
+                    "path":"."
                 }
             ]
         }

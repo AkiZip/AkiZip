@@ -335,6 +335,16 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">it</attribute>
           </item>
+          <item>
+            <attribute name="label">Deutsch</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">de</attribute>
+          </item>
+          <item>
+            <attribute name="label">Polski</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">pl</attribute>
+          </item>
         </section>
       </submenu>
     </section>

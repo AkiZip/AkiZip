@@ -1300,9 +1300,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _selected_path_from_input(self):
         app = self.get_application()
-        if app is None or not hasattr(app, 'system') or not app.system.has_selected():
+        if app is None or not hasattr(app, 'system'):
             self._append_log(_('No file selected'), None, _status.ERROR)
             self._show_notification(_('No file selected'), _status.ERROR)
+            return None
+        if app.system.selected is None:
+            self._append_log(_('No file selected'), None, _status.ERROR)
+            self._show_notification(_('No file selected'), _status.ERROR)
+            return None
+        if not app.system.selected.exists():
+            self._append_log(_('File not found'), str(app.system.selected), _status.ERROR)
+            self._show_notification(_('File not found'), _status.ERROR)
             return None
         return Path(app.system.operation_path())
 

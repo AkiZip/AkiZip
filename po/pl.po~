@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-16 05:28-0700\n"
+"POT-Creation-Date: 2026-05-16 14:28+0200\n"
 "PO-Revision-Date: 2026-05-20 22:30+0200\n"
 "Last-Translator: bazixv13 <bazixv13@users.noreply.github.com>\n"
 "Language-Team: Polish\n"
@@ -15,7 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
@@ -35,8 +36,8 @@ msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
-"Akizip to graficzny program do obsługi archiwów zbudowany przy użyciu GTK 4 i libadwaita, "
-"który przenosi możliwości programu 7-Zip na GNOME."
+"Akizip to graficzny program do obsługi archiwów zbudowany przy użyciu GTK 4 "
+"i libadwaita, który przenosi możliwości programu 7-Zip na GNOME."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -45,15 +46,17 @@ msgid ""
 "archives."
 msgstr ""
 "Obsługuje tworzenie i rozpakowywanie archiwów w formatach 7z, zip oraz tar. "
-"Może także otwierać (tylko do odczytu) archiwa rar, gz, bz2, xz, tar.gz, tar.bz2 i tar.xz."
+"Może także otwierać (tylko do odczytu) archiwa rar, gz, bz2, xz, tar.gz, "
+"tar.bz2 i tar.xz."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
-"Funkcje obejmują przeglądanie archiwów, zadania w tle z możliwością anulowania i raportowania postępu, "
-"wyświetlanie logów oraz wsparcie dla wielu języków."
+"Funkcje obejmują przeglądanie archiwów, zadania w tle z możliwością "
+"anulowania i raportowania postępu, wyświetlanie logów oraz wsparcie dla "
+"wielu języków."
 
 #: data/top.akizip.akizip.metainfo.xml.in:16
 msgid "ckappgit"
@@ -63,7 +66,7 @@ msgstr "ckappgit"
 msgid "Main window showing archive contents and toolbar"
 msgstr "Główne okno wyświetlające zawartość archiwum i pasek narzędzi"
 
-#: src/ui/info_dialog.py:13 src/ui/window.py:1439
+#: src/ui/info_dialog.py:13 src/ui/window.py:1305
 msgid "System state not found"
 msgstr "Nie można odczytać stanu systemu"
 
@@ -75,7 +78,7 @@ msgstr "Archiwum"
 msgid "Archive information is unavailable."
 msgstr "Informacje o archiwum są niedostępne."
 
-#: src/ui/info_dialog.py:61 src/ui/window.py:1779
+#: src/ui/info_dialog.py:61 src/ui/window.py:1645
 msgid "Read archive information from "
 msgstr "Odczyt informacji o archiwum z "
 
@@ -92,7 +95,7 @@ msgstr "Zamknij"
 msgid "Name"
 msgstr "Nazwa"
 
-#: src/ui/info_dialog.py:105 src/ui/window.py:1021
+#: src/ui/info_dialog.py:105 src/ui/window.py:904
 msgid "Path"
 msgstr "Ścieżka"
 
@@ -100,7 +103,7 @@ msgstr "Ścieżka"
 msgid "Type"
 msgstr "Typ"
 
-#: src/ui/info_dialog.py:108 src/ui/window.py:1022
+#: src/ui/info_dialog.py:108 src/ui/window.py:905
 msgid "Size"
 msgstr "Rozmiar"
 
@@ -196,7 +199,7 @@ msgstr "Nie"
 msgid "Logs"
 msgstr "Logi"
 
-#: src/ui/log_panel.py:96 src/ui/window.py:1510
+#: src/ui/log_panel.py:96 src/ui/window.py:1376
 msgid "Cancel"
 msgstr "Anuluj"
 
@@ -232,434 +235,414 @@ msgstr "Anulowano"
 msgid "Pending"
 msgstr "Oczekujące"
 
-#: src/ui/window.py:182
-msgid "Extract blocked"
-msgstr "Rozpakowywanie zablokowane"
-
-#: src/ui/window.py:183
-msgid ""
-"The selected output path already exists. Choose another destination or "
-"enable the experimental overwrite conflict dialog in Preferences."
-msgstr ""
-"Wybrana ścieżka docelowa już istnieje. Wybierz inną lokalizację lub "
-"włącz eksperymentalne okno dialogowe konfliktów nadpisywania w Preferencjach."
-
-#: src/ui/window.py:185 src/ui/window.py:649 src/ui/window.py:962
-#: src/ui/window.py:1461 src/ui/window.py:1470 src/ui/window.py:1479
-#: src/ui/window.py:1503
-msgid "_OK"
-msgstr "_OK"
-
-#: src/ui/window.py:244
+#: src/ui/window.py:227
 msgid "Test failed"
 msgstr "Test nie powiódł się"
 
-#: src/ui/window.py:244 src/ui/window.py:273 src/ui/window.py:337
-#: src/ui/window.py:393
+#: src/ui/window.py:227 src/ui/window.py:256 src/ui/window.py:320
+#: src/ui/window.py:376
 msgid "Selected path is not an archive."
 msgstr "Wybrana ścieżka nie jest archiwum."
 
-#: src/ui/window.py:273 src/ui/window.py:276
+#: src/ui/window.py:256 src/ui/window.py:259
 msgid "Move failed"
 msgstr "Przenoszenie nie powiodło się"
 
-#: src/ui/window.py:276 src/ui/window.py:340
+#: src/ui/window.py:259 src/ui/window.py:323
 msgid "This archive format does not support modification."
 msgstr "Ten format archiwum nie obsługuje modyfikacji."
 
-#: src/ui/window.py:284 src/ui/window.py:348 src/ui/window.py:407
-#: src/ui/window.py:1431 src/ui/window.py:1432
+#: src/ui/window.py:267 src/ui/window.py:331 src/ui/window.py:404
+#: src/ui/window.py:1297 src/ui/window.py:1298
 msgid "No file selected"
 msgstr "Nie wybrano pliku"
 
-#: src/ui/window.py:288 src/window.ui:140 src/window.ui:154
+#: src/ui/window.py:271 src/window.ui:140 src/window.ui:154
 msgid "Move"
 msgstr "Przenieś"
 
-#: src/ui/window.py:288
+#: src/ui/window.py:271
+#, python-brace-format
 msgid "Move \"{}\" to:"
 msgstr "Przenieś \"{}\" do:"
 
-#: src/ui/window.py:293 src/ui/window.py:353 src/ui/window.py:418
-#: src/ui/window.py:457 src/ui/window.py:527 src/ui/window.py:575
-#: src/ui/window.py:597 src/ui/window.py:628 src/ui/window.py:961
-#: src/ui/window.py:984
+#: src/ui/window.py:276 src/ui/window.py:336 src/ui/window.py:415
+#: src/ui/window.py:454 src/ui/window.py:521 src/ui/window.py:569
+#: src/ui/window.py:591 src/ui/window.py:622 src/ui/window.py:844
+#: src/ui/window.py:867
 msgid "_Cancel"
 msgstr "_Anuluj"
 
-#: src/ui/window.py:294
+#: src/ui/window.py:277
 msgid "_Move"
 msgstr "_Przenieś"
 
-#: src/ui/window.py:337 src/ui/window.py:340
+#: src/ui/window.py:320 src/ui/window.py:323
 msgid "Delete failed"
 msgstr "Usuwanie nie powiodło się"
 
-#: src/ui/window.py:352 src/window.ui:164 src/window.ui:178
+#: src/ui/window.py:335 src/window.ui:164 src/window.ui:178
 msgid "Delete"
 msgstr "Usuń"
 
-#: src/ui/window.py:352
+#: src/ui/window.py:335
+#, python-brace-format
 msgid "Are you sure you want to delete \"{}\"?"
 msgstr "Czy na pewno chcesz usunąć \"{}\"?"
 
-#: src/ui/window.py:354
+#: src/ui/window.py:337
 msgid "_Delete"
 msgstr "_Usuń"
 
-#: src/ui/window.py:393
+#: src/ui/window.py:376
 msgid "Extract failed"
 msgstr "Rozpakowywanie nie powiodło się"
 
-#: src/ui/window.py:414
+#: src/ui/window.py:411
 msgid "Select File"
 msgstr "Wybierz plik"
 
-#: src/ui/window.py:417 src/ui/window.py:456
+#: src/ui/window.py:414 src/ui/window.py:453
 msgid "_Open"
 msgstr "_Otwórz"
 
-#: src/ui/window.py:453 src/extract-dialog.ui:21
+#: src/ui/window.py:450 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
 msgstr "Wybierz folder docelowy"
 
-#: src/ui/window.py:500
-msgid "Enable experimental compression recommendations in Preferences."
-msgstr "Włącz eksperymentalne rekomendacje kompresji w Preferencjach."
-
-#: src/ui/window.py:503 src/compress-dialog.ui:182 src/preferences.ui:149
+#: src/ui/window.py:497 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
 msgstr "Domyślne"
 
-#: src/ui/window.py:525 src/ui/window.py:528 src/window.ui:67 src/window.ui:81
+#: src/ui/window.py:519 src/ui/window.py:522 src/window.ui:67 src/window.ui:81
 msgid "Compress"
 msgstr "Kompresuj"
 
-#: src/ui/window.py:549
+#: src/ui/window.py:543
+#, python-brace-format
 msgid "Source items ({})"
 msgstr "Elementy źródłowe ({})"
 
-#: src/ui/window.py:571
+#: src/ui/window.py:565
 msgid "Select Files"
 msgstr "Wybierz pliki"
 
-#: src/ui/window.py:574 src/ui/window.py:596
+#: src/ui/window.py:568 src/ui/window.py:590
 msgid "_Add"
 msgstr "_Dodaj"
 
-#: src/ui/window.py:593
+#: src/ui/window.py:587
 msgid "Select Folders"
 msgstr "Wybierz foldery"
 
-#: src/ui/window.py:624
+#: src/ui/window.py:618
 msgid "Save Archive As"
 msgstr "Zapisz archiwum jako"
 
-#: src/ui/window.py:627
+#: src/ui/window.py:621
 msgid "_Save"
 msgstr "_Zapisz"
 
-#: src/ui/window.py:648
+#: src/ui/window.py:642
 msgid "Overwrite is not currently supported"
 msgstr "Nadpisywanie nie jest obecnie obsługiwane"
 
-#: src/ui/window.py:690
-msgid ""
-"Compression recommendations are experimental. Enable them in Preferences."
-msgstr "Rekomendacje kompresji są eksperymentalne. Włącz je w Preferencjach."
+#: src/ui/window.py:643 src/ui/window.py:845 src/ui/window.py:1327
+#: src/ui/window.py:1336 src/ui/window.py:1345 src/ui/window.py:1369
+msgid "_OK"
+msgstr "_OK"
 
-#: src/ui/window.py:694
+#: src/ui/window.py:684
 msgid "No source items to analyze"
 msgstr "Brak elementów źródłowych do analizy"
 
-#: src/ui/window.py:701
+#: src/ui/window.py:691
 msgid "Recommendation not available"
 msgstr "Rekomendacja niedostępna"
 
-#: src/ui/window.py:754
+#: src/ui/window.py:744
 msgid "Recommendation failed"
 msgstr "Rekomendacja nie powiodła się"
 
-#: src/ui/window.py:755
+#: src/ui/window.py:745
 msgid "Compression recommendation failed"
 msgstr "Rekomendacja kompresji nie powiodła się"
 
-#: src/ui/window.py:805
+#: src/ui/window.py:795
 msgid "Compression recommendation"
 msgstr "Rekomendacja kompresji"
 
-#: src/ui/window.py:810
+#: src/ui/window.py:800
 msgid "Recommendation reason"
 msgstr "Powód rekomendacji"
 
-#: src/ui/window.py:883
-msgid "Check existing files"
-msgstr "Sprawdź istniejące pliki"
-
-#: src/ui/window.py:951
+#: src/ui/window.py:834
 msgid "Password Required"
 msgstr "Wymagane hasło"
 
-#: src/ui/window.py:952
+#: src/ui/window.py:835
 msgid "This archive is encrypted. Please enter the password."
 msgstr "To archiwum jest zaszyfrowane. Wprowadź hasło."
 
-#: src/ui/window.py:982 src/ui/window.py:985
+#: src/ui/window.py:865 src/ui/window.py:868
 msgid "Extract"
 msgstr "Rozpakuj"
 
-#: src/ui/window.py:1023
+#: src/ui/window.py:906
 msgid "Modified"
 msgstr "Zmodyfikowano"
 
-#: src/ui/window.py:1157
+#: src/ui/window.py:1023
 msgid "Failed to create temporary directory"
 msgstr "Nie udało się utworzyć katalogu tymczasowego"
 
-#: src/ui/window.py:1183 src/ui/window.py:1695 src/ui/window.py:1697
-#: src/ui/window.py:1723 src/ui/window.py:1725 src/ui/window.py:1784
-#: src/ui/window.py:1794
+#: src/ui/window.py:1049 src/ui/window.py:1561 src/ui/window.py:1563
+#: src/ui/window.py:1589 src/ui/window.py:1591 src/ui/window.py:1650
+#: src/ui/window.py:1660
 msgid "Extract "
 msgstr "Rozpakuj "
 
-#: src/ui/window.py:1189
+#: src/ui/window.py:1055
 msgid "Extracted file not found"
 msgstr "Nie znaleziono rozpakowanego pliku"
 
-#: src/ui/window.py:1249
+#: src/ui/window.py:1115
 msgid "List "
 msgstr "Wyświetl "
 
-#: src/ui/window.py:1370
+#: src/ui/window.py:1236
 msgid "List failed"
 msgstr "Nie udało się wyświetlić"
 
-#: src/ui/window.py:1451
+#: src/ui/window.py:1317
 msgid "Select failed"
 msgstr "Wybór nie powiódł się"
 
-#: src/ui/window.py:1454
+#: src/ui/window.py:1320
 msgid "Selected "
 msgstr "Wybrano "
 
-#: src/ui/window.py:1458
+#: src/ui/window.py:1324
 msgid "Format compatibility warning"
 msgstr "Ostrzeżenie o kompatybilności formatu"
 
-#: src/ui/window.py:1459
+#: src/ui/window.py:1325
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr ""
-"Format nie został zweryfikowany pod kątem kompatybilności. Operacje przenoszenia i usuwania są wyłączone."
+"Format nie został zweryfikowany pod kątem kompatybilności. Operacje "
+"przenoszenia i usuwania są wyłączone."
 
-#: src/ui/window.py:1467
+#: src/ui/window.py:1333
 msgid "Preview not supported"
 msgstr "Podgląd nie jest obsługiwany"
 
-#: src/ui/window.py:1468
+#: src/ui/window.py:1334
 msgid "This format does not support preview. Only extract is available."
 msgstr "Ten format nie obsługuje podglądu. Dostępne jest tylko rozpakowanie."
 
-#: src/ui/window.py:1476
+#: src/ui/window.py:1342
 msgid "Nested archive opened"
 msgstr "Otwarto zagnieżdżone archiwum"
 
-#: src/ui/window.py:1477
+#: src/ui/window.py:1343
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr ""
-"To archiwum zostało otwarte z nadrzędnego archiwum. Operacje przenoszenia i usuwania są wyłączone."
+"To archiwum zostało otwarte z nadrzędnego archiwum. Operacje przenoszenia i "
+"usuwania są wyłączone."
 
-#: src/ui/window.py:1500
+#: src/ui/window.py:1366
 msgid "Language changed"
 msgstr "Zmieniono język"
 
-#: src/ui/window.py:1501
+#: src/ui/window.py:1367
 msgid "Restart the application to apply the new language."
 msgstr "Uruchom ponownie aplikację, aby zastosować nowy język."
 
-#: src/ui/window.py:1542
+#: src/ui/window.py:1408
 msgid "Calculating..."
 msgstr "Obliczanie..."
 
-#: src/ui/window.py:1547
+#: src/ui/window.py:1413
 #, python-format
 msgid "%d seconds remaining"
 msgstr "Pozostało %d s"
 
-#: src/ui/window.py:1548
+#: src/ui/window.py:1414
 #, python-format
 msgid "%d minutes remaining"
 msgstr "Pozostało %d min"
 
-#: src/ui/window.py:1565
+#: src/ui/window.py:1431
 msgid "Command not found"
 msgstr "Nie znaleziono polecenia"
 
-#: src/ui/window.py:1570
+#: src/ui/window.py:1436
 msgid "Job queue not found"
 msgstr "Nie znaleziono kolejki zadań"
 
-#: src/ui/window.py:1660 src/ui/window.py:1769
+#: src/ui/window.py:1526 src/ui/window.py:1635
+#, python-brace-format
 msgid "{} items"
 msgstr "Elementy: {}"
 
-#: src/ui/window.py:1664 src/ui/window.py:1721 src/ui/window.py:1735
-#: src/ui/window.py:1749 src/ui/window.py:1771 src/ui/window.py:1792
-#: src/ui/window.py:1798 src/ui/window.py:1803
+#: src/ui/window.py:1530 src/ui/window.py:1587 src/ui/window.py:1601
+#: src/ui/window.py:1615 src/ui/window.py:1637 src/ui/window.py:1658
+#: src/ui/window.py:1664 src/ui/window.py:1669
 msgid "file"
 msgstr "plik"
 
-#: src/ui/window.py:1667 src/ui/window.py:1669
+#: src/ui/window.py:1533 src/ui/window.py:1535
 msgid "Compress "
 msgstr "Kompresuj "
 
-#: src/ui/window.py:1671
+#: src/ui/window.py:1537
 msgid "Compressed "
 msgstr "Skompresowano "
 
-#: src/ui/window.py:1673
+#: src/ui/window.py:1539
 msgid "Compress timed out: "
 msgstr "Przekroczono limit czasu kompresji: "
 
-#: src/ui/window.py:1675
+#: src/ui/window.py:1541
 msgid "Compress cancelled: "
 msgstr "Anulowano kompresję: "
 
-#: src/ui/window.py:1676
+#: src/ui/window.py:1542
 msgid "Compress failed: "
 msgstr "Kompresja nie powiodła się: "
 
-#: src/ui/window.py:1679 src/ui/window.py:1693 src/ui/window.py:1707
-#: src/ui/window.py:1766 src/ui/window.py:1778 src/ui/window.py:1782
-#: src/ui/window.py:1787 src/ui/window.py:1791 src/ui/window.py:1797
-#: src/ui/window.py:1802
+#: src/ui/window.py:1545 src/ui/window.py:1559 src/ui/window.py:1573
+#: src/ui/window.py:1632 src/ui/window.py:1644 src/ui/window.py:1648
+#: src/ui/window.py:1653 src/ui/window.py:1657 src/ui/window.py:1663
+#: src/ui/window.py:1668
 msgid "archive"
 msgstr "archiwum"
 
-#: src/ui/window.py:1681 src/ui/window.py:1683
+#: src/ui/window.py:1547 src/ui/window.py:1549
 msgid "Open "
 msgstr "Otwórz "
 
-#: src/ui/window.py:1685
+#: src/ui/window.py:1551
 msgid "Opened "
 msgstr "Otwarto "
 
-#: src/ui/window.py:1687
+#: src/ui/window.py:1553
 msgid "Open timed out: "
 msgstr "Przekroczono limit czasu otwierania: "
 
-#: src/ui/window.py:1689
+#: src/ui/window.py:1555
 msgid "Open cancelled: "
 msgstr "Anulowano otwieranie: "
 
-#: src/ui/window.py:1690
+#: src/ui/window.py:1556
 msgid "Open failed: "
 msgstr "Nie udało się otworzyć: "
 
-#: src/ui/window.py:1699 src/ui/window.py:1727
+#: src/ui/window.py:1565 src/ui/window.py:1593
 msgid "Extracted "
 msgstr "Rozpakowano "
 
-#: src/ui/window.py:1701 src/ui/window.py:1729
+#: src/ui/window.py:1567 src/ui/window.py:1595
 msgid "Extract timed out: "
 msgstr "Przekroczono limit czasu rozpakowywania: "
 
-#: src/ui/window.py:1703 src/ui/window.py:1731
+#: src/ui/window.py:1569 src/ui/window.py:1597
 msgid "Extract cancelled: "
 msgstr "Rozpakowywanie anulowane: "
 
-#: src/ui/window.py:1704 src/ui/window.py:1732
+#: src/ui/window.py:1570 src/ui/window.py:1598
 msgid "Extract failed: "
 msgstr "Nie udało się rozpakować: "
 
-#: src/ui/window.py:1709 src/ui/window.py:1711 src/ui/window.py:1788
+#: src/ui/window.py:1575 src/ui/window.py:1577 src/ui/window.py:1654
 msgid "Test "
 msgstr "Testuj "
 
-#: src/ui/window.py:1713
+#: src/ui/window.py:1579
 msgid "Tested "
 msgstr "Przetestowano "
 
-#: src/ui/window.py:1715
+#: src/ui/window.py:1581
 msgid "Test timed out: "
 msgstr "Przekroczono limit czasu testowania: "
 
-#: src/ui/window.py:1717
+#: src/ui/window.py:1583
 msgid "Test cancelled: "
 msgstr "Testowanie anulowane: "
 
-#: src/ui/window.py:1718
+#: src/ui/window.py:1584
 msgid "Test failed: "
 msgstr "Test nie powiódł się: "
 
-#: src/ui/window.py:1737 src/ui/window.py:1739 src/ui/window.py:1799
+#: src/ui/window.py:1603 src/ui/window.py:1605 src/ui/window.py:1665
 msgid "Delete "
 msgstr "Usuń "
 
-#: src/ui/window.py:1741
+#: src/ui/window.py:1607
 msgid "Deleted "
 msgstr "Usunięto "
 
-#: src/ui/window.py:1743
+#: src/ui/window.py:1609
 msgid "Delete timed out: "
 msgstr "Przekroczono limit czasu usuwania: "
 
-#: src/ui/window.py:1745
+#: src/ui/window.py:1611
 msgid "Delete cancelled: "
 msgstr "Anulowano usuwanie: "
 
-#: src/ui/window.py:1746
+#: src/ui/window.py:1612
 msgid "Delete failed: "
 msgstr "Usuwanie nie powiodło się: "
 
-#: src/ui/window.py:1751 src/ui/window.py:1753 src/ui/window.py:1805
+#: src/ui/window.py:1617 src/ui/window.py:1619 src/ui/window.py:1671
 msgid "Move "
 msgstr "Przenieś "
 
-#: src/ui/window.py:1755
+#: src/ui/window.py:1621
 msgid "Moved "
 msgstr "Przeniesiono "
 
-#: src/ui/window.py:1757
+#: src/ui/window.py:1623
 msgid "Move timed out: "
 msgstr "Przekroczono limit czasu przenoszenia: "
 
-#: src/ui/window.py:1759
+#: src/ui/window.py:1625
 msgid "Move cancelled: "
 msgstr "Anulowano przenoszenie: "
 
-#: src/ui/window.py:1760
+#: src/ui/window.py:1626
 msgid "Move failed: "
 msgstr "Przenoszenie nie powiodło się: "
 
-#: src/ui/window.py:1772
+#: src/ui/window.py:1638
 msgid "Create "
 msgstr "Utwórz "
 
-#: src/ui/window.py:1772 src/ui/window.py:1794 src/ui/window.py:1799
+#: src/ui/window.py:1638 src/ui/window.py:1660 src/ui/window.py:1665
 msgid " from "
 msgstr " z "
 
-#: src/ui/window.py:1774
+#: src/ui/window.py:1640
 msgid "Parameters: "
 msgstr "Parametry: "
 
-#: src/ui/window.py:1783 src/ui/window.py:1793
+#: src/ui/window.py:1649 src/ui/window.py:1659
 msgid "folder"
 msgstr "folder"
 
-#: src/ui/window.py:1784 src/ui/window.py:1794 src/ui/window.py:1805
+#: src/ui/window.py:1650 src/ui/window.py:1660 src/ui/window.py:1671
 msgid " to "
 msgstr " do "
 
-#: src/ui/window.py:1804
+#: src/ui/window.py:1670
 msgid "destination"
 msgstr "miejsce docelowe"
 
-#: src/ui/window.py:1805
+#: src/ui/window.py:1671
 msgid " in "
 msgstr " w "
 
@@ -739,7 +722,7 @@ msgstr "Wybierz ścieżkę archiwum wyjściowego"
 msgid "Select Output Archive"
 msgstr "Wybierz archiwum wyjściowe"
 
-#: src/compress-dialog.ui:46 src/preferences.ui:108
+#: src/compress-dialog.ui:46 src/preferences.ui:60
 msgid "Format"
 msgstr "Format"
 
@@ -771,48 +754,48 @@ msgstr "Usuń"
 msgid "Advanced options"
 msgstr "Opcje zaawansowane"
 
-#: src/compress-dialog.ui:140 src/preferences.ui:124
+#: src/compress-dialog.ui:140 src/preferences.ui:76
 msgid "Compression level"
 msgstr "Poziom kompresji"
 
-#: src/compress-dialog.ui:153 src/preferences.ui:130
+#: src/compress-dialog.ui:153 src/preferences.ui:82
 msgid "Store"
 msgstr "Bez kompresji (Store)"
 
-#: src/compress-dialog.ui:154 src/preferences.ui:131
+#: src/compress-dialog.ui:154 src/preferences.ui:83
 msgid "Fastest"
 msgstr "Najszybszy"
 
-#: src/compress-dialog.ui:155 src/preferences.ui:132
+#: src/compress-dialog.ui:155 src/preferences.ui:84
 msgid "Fast"
 msgstr "Szybki"
 
-#: src/compress-dialog.ui:156 src/preferences.ui:133
+#: src/compress-dialog.ui:156 src/preferences.ui:85
 msgid "Normal"
 msgstr "Normalny"
 
-#: src/compress-dialog.ui:157 src/preferences.ui:134
+#: src/compress-dialog.ui:157 src/preferences.ui:86
 msgid "Maximum"
 msgstr "Maksymalny"
 
-#: src/compress-dialog.ui:158 src/preferences.ui:135
+#: src/compress-dialog.ui:158 src/preferences.ui:87
 msgid "Ultra"
 msgstr "Ultra"
 
-#: src/compress-dialog.ui:169 src/preferences.ui:143
+#: src/compress-dialog.ui:169 src/preferences.ui:95
 msgid "Algorithm"
 msgstr "Algorytm"
 
-#: src/compress-dialog.ui:196 src/preferences.ui:160
+#: src/compress-dialog.ui:196 src/preferences.ui:112
 msgid "Dictionary size (MB)"
 msgstr "Rozmiar słownika (MB)"
 
-#: src/compress-dialog.ui:208 src/compress-dialog.ui:237 src/preferences.ui:161
-#: src/preferences.ui:180
+#: src/compress-dialog.ui:208 src/compress-dialog.ui:237 src/preferences.ui:113
+#: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
 msgstr "Wartość 0 używa domyślnej dla 7-Zip."
 
-#: src/compress-dialog.ui:225 src/preferences.ui:179
+#: src/compress-dialog.ui:225 src/preferences.ui:131
 msgid "Threads"
 msgstr "Wątki"
 
@@ -824,7 +807,7 @@ msgstr "Hasło"
 msgid "Leave empty for no password"
 msgstr "Pozostaw puste w przypadku braku hasła"
 
-#: src/compress-dialog.ui:282 src/preferences.ui:198
+#: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
 msgstr "Szyfruj nazwy plików"
 
@@ -852,66 +835,91 @@ msgstr "Limit czasu (sekundy)"
 msgid "-1 means no timeout."
 msgstr "Wartość -1 oznacza brak limitu czasu."
 
-#: src/preferences.ui:30
-msgid "Scan threads"
-msgstr "Wątki skanowania"
-
-#: src/preferences.ui:31
-msgid ""
-"Experimental. Only affects compression recommendations and extract duplicate "
-"checks. -1 removes the scanner-specific limit; 0 uses a CPU recommendation. "
-"The app may use more total threads for normal operation."
-msgstr ""
-"Eksperymentalne. Wpływa tylko na rekomendacje kompresji i sprawdzanie duplikatów przy rozpakowywaniu. "
-"Wartość -1 usuwa limit specyficzny dla skanera; 0 używa rekomendacji procesora. "
-"Aplikacja może używać więcej wątków w normalnym działaniu."
-
-#: src/preferences.ui:51
-msgid "Extraction"
-msgstr "Rozpakowywanie"
-
-#: src/preferences.ui:54
-msgid "Overwrite conflicts"
-msgstr "Konflikty nadpisywania"
-
-#: src/preferences.ui:55
-msgid ""
-"Experimental. When disabled, extracting to an existing output path is "
-"blocked."
-msgstr "Eksperymentalne. Gdy wyłączone, rozpakowywanie do istniejącej ścieżki wyjściowej jest zablokowane."
-
-#: src/preferences.ui:68
+#: src/preferences.ui:32
 msgid "Compression"
 msgstr "Kompresja"
 
-#: src/preferences.ui:71
-msgid "Compression recommendations"
-msgstr "Rekomendacje kompresji"
-
-#: src/preferences.ui:72
-msgid ""
-"Experimental. Enables scanning source files to recommend compression "
-"parameters."
-msgstr "Eksperymentalne. Umożliwia skanowanie plików źródłowych w celu rekomendacji parametrów kompresji."
-
-#: src/preferences.ui:83
+#: src/preferences.ui:35
 msgid "Scan depth"
 msgstr "Głębokość skanowania"
 
-#: src/preferences.ui:84
+#: src/preferences.ui:36
+#, fuzzy
+#| msgid ""
+#| "Maximum folder depth to scan for compression recommendations. Use -1 for "
+#| "unlimited depth."
 msgid ""
-"Maximum folder depth to scan for compression recommendations. Use -1 for "
-"unlimited depth."
-msgstr "Maksymalna głębokość folderów do skanowania w celu rekomendacji kompresji. Wartość -1 oznacza nieograniczoną głębokość."
+"Maximum folder depth to scan for compression recommendations. Deeper scans "
+"may improve suggestions but take longer."
+msgstr ""
+"Maksymalna głębokość folderów do skanowania w celu rekomendacji kompresji. "
+"Wartość -1 oznacza nieograniczoną głębokość."
 
-#: src/preferences.ui:104
+#: src/preferences.ui:56
 msgid "Default compression parameters"
 msgstr "Domyślne parametry kompresji"
 
-#: src/preferences.ui:105
+#: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
 msgstr "Używane do normalnej kompresji i jako rezerwowe dla rekomendacji."
 
-#: src/preferences.ui:199
+#: src/preferences.ui:151
 msgid "Only available for 7z format."
 msgstr "Dostępne tylko dla formatu 7z."
+
+#~ msgid "Extract blocked"
+#~ msgstr "Rozpakowywanie zablokowane"
+
+#~ msgid ""
+#~ "The selected output path already exists. Choose another destination or "
+#~ "enable the experimental overwrite conflict dialog in Preferences."
+#~ msgstr ""
+#~ "Wybrana ścieżka docelowa już istnieje. Wybierz inną lokalizację lub włącz "
+#~ "eksperymentalne okno dialogowe konfliktów nadpisywania w Preferencjach."
+
+#~ msgid "Enable experimental compression recommendations in Preferences."
+#~ msgstr "Włącz eksperymentalne rekomendacje kompresji w Preferencjach."
+
+#~ msgid ""
+#~ "Compression recommendations are experimental. Enable them in Preferences."
+#~ msgstr ""
+#~ "Rekomendacje kompresji są eksperymentalne. Włącz je w Preferencjach."
+
+#~ msgid "Check existing files"
+#~ msgstr "Sprawdź istniejące pliki"
+
+#~ msgid "Scan threads"
+#~ msgstr "Wątki skanowania"
+
+#~ msgid ""
+#~ "Experimental. Only affects compression recommendations and extract "
+#~ "duplicate checks. -1 removes the scanner-specific limit; 0 uses a CPU "
+#~ "recommendation. The app may use more total threads for normal operation."
+#~ msgstr ""
+#~ "Eksperymentalne. Wpływa tylko na rekomendacje kompresji i sprawdzanie "
+#~ "duplikatów przy rozpakowywaniu. Wartość -1 usuwa limit specyficzny dla "
+#~ "skanera; 0 używa rekomendacji procesora. Aplikacja może używać więcej "
+#~ "wątków w normalnym działaniu."
+
+#~ msgid "Extraction"
+#~ msgstr "Rozpakowywanie"
+
+#~ msgid "Overwrite conflicts"
+#~ msgstr "Konflikty nadpisywania"
+
+#~ msgid ""
+#~ "Experimental. When disabled, extracting to an existing output path is "
+#~ "blocked."
+#~ msgstr ""
+#~ "Eksperymentalne. Gdy wyłączone, rozpakowywanie do istniejącej ścieżki "
+#~ "wyjściowej jest zablokowane."
+
+#~ msgid "Compression recommendations"
+#~ msgstr "Rekomendacje kompresji"
+
+#~ msgid ""
+#~ "Experimental. Enables scanning source files to recommend compression "
+#~ "parameters."
+#~ msgstr ""
+#~ "Eksperymentalne. Umożliwia skanowanie plików źródłowych w celu "
+#~ "rekomendacji parametrów kompresji."

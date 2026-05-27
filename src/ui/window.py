@@ -274,7 +274,36 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = Gtk.Entry()
         entry.set_text(item.full_path.rstrip('/') if item.is_folder else item.full_path)
         entry.set_activates_default(True)
-        dialog.set_extra_child(entry)
+
+        browse_button = Gtk.Button(icon_name='folder-symbolic')
+        browse_button.set_tooltip_text(_('Select destination folder'))
+        browse_button.set_valign(Gtk.Align.CENTER)
+
+        def on_browse_clicked(_btn):
+            from .move_folder_chooser import FolderChooserDialog
+            chooser = FolderChooserDialog(self)
+            chooser.set_folders(self._folder_set)
+            if item.is_folder:
+                chooser.set_source_path(item.full_path.rstrip('/'))
+            chooser.set_current_path('')
+
+            def on_selected(path):
+                if path:
+                    entry.set_text(path + '/' + item.path)
+                else:
+                    entry.set_text(item.path)
+
+            chooser.connect_select(on_selected)
+            chooser.present()
+
+        browse_button.connect('clicked', on_browse_clicked)
+
+        entry.set_hexpand(True)
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        box.set_hexpand(True)
+        box.append(entry)
+        box.append(browse_button)
+        dialog.set_extra_child(box)
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('confirm', _('_Move'))
         dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)

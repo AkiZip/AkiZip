@@ -319,9 +319,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return True
                 return False
 
-            dst_path = entry.get_text().strip().lstrip('/')
+            dst_path = entry.get_text().strip().lstrip('/').rstrip('/')
             if not dst_path:
-                dst_path = item.path
+                dst_path = item.path.rstrip('/')
             src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
             self._run_command(
                 'archive.move',

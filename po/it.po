@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-30 16:26+0800\n"
-"PO-Revision-Date: 2026-05-20 14:29+0000\n"
+"PO-Revision-Date: 2026-05-30 23:02+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/it/"
-">\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/"
+"it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -270,8 +270,6 @@ msgid "Move \"{}\" to:"
 msgstr "Sposta \"{}\" in:"
 
 #: src/ui/window.py:279
-#, fuzzy
-#| msgid "Select Destination Folder"
 msgid "Select destination folder"
 msgstr "Seleziona cartella di destinazione"
 
@@ -423,10 +421,8 @@ msgid "List failed"
 msgstr "Elencazione fallita"
 
 #: src/ui/window.py:1341 src/ui/window.py:1342
-#, fuzzy
-#| msgid "Extracted file not found"
 msgid "File not found"
-msgstr "Estrazione file non trovata"
+msgstr "File non trovato"
 
 #: src/ui/window.py:1361
 msgid "Select failed"
@@ -662,7 +658,7 @@ msgstr " in "
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"
-msgstr ""
+msgstr "(root)"
 
 #: src/window.ui:19
 msgid "Main Menu"
@@ -885,16 +881,12 @@ msgid "Only available for 7z format."
 msgstr "Disponibile solo per il formato 7z."
 
 #: src/move-folder-chooser.ui:6
-#, fuzzy
-#| msgid "Select Folders"
 msgid "Select Folder"
 msgstr "Seleziona cartella"
 
 #: src/move-folder-chooser.ui:57
-#, fuzzy
-#| msgid "Selected "
 msgid "_Select"
-msgstr "Selezionato"
+msgstr "_Seleziona"
 
 #~ msgid "_Keyboard Shortcuts"
 #~ msgstr "Scorciatoie da _tastiera"

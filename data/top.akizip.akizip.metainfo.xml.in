@@ -42,6 +42,18 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.5" date="2026-05-30">
+      <description translate="no">
+        <p>Polish support and UI improvements</p>
+        <ul>
+          <li>Added Polish translation support</li>
+          <li>Added long-word language UI support</li>
+          <li>Added folder chooser support in move dialog</li>
+          <li>Fixed issue where moving folders failed in some cases</li>
+          <li>Fixed incorrect error message when file does not exist</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.4" date="2026-05-20">
       <description translate="no">
         <p>Progress support and format fixes</p>

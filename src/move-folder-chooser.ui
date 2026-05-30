@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <requires lib="Adw" version="1.0" />
+  <object class="AdwWindow" id="window">
+    <property name="title" translatable="yes">Select Folder</property>
+    <property name="default-width">420</property>
+    <property name="default-height">480</property>
+    <property name="modal">true</property>
+    <child>
+      <object class="AdwToolbarView">
+        <child type="top">
+          <object class="AdwHeaderBar" />
+        </child>
+        <property name="content">
+          <object class="GtkBox" id="content">
+            <property name="orientation">vertical</property>
+            <property name="spacing">12</property>
+            <property name="margin-start">16</property>
+            <property name="margin-end">16</property>
+            <property name="margin-top">12</property>
+            <property name="margin-bottom">16</property>
+
+            <child>
+              <object class="GtkEntry" id="current_path_entry">
+                <property name="hexpand">true</property>
+                <property name="editable">false</property>
+                <property name="xalign">0</property>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkScrolledWindow">
+                <property name="vexpand">true</property>
+                <property name="has-frame">true</property>
+                <child>
+                  <object class="GtkListBox" id="folder_list">
+                    <property name="selection-mode">single</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">8</property>
+                <property name="halign">end</property>
+                <child>
+                  <object class="GtkButton" id="cancel_button">
+                    <property name="label" translatable="yes">_Cancel</property>
+                    <property name="use-underline">true</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="select_button">
+                    <property name="label" translatable="yes">_Select</property>
+                    <property name="use-underline">true</property>
+                    <style>
+                      <class name="suggested-action" />
+                    </style>
+                  </object>
+                </child>
+              </object>
+            </child>
+
+          </object>
+        </property>
+      </object>
+    </child>
+  </object>
+</interface>

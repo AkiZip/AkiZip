@@ -100,6 +100,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     info_button = Gtk.Template.Child()
     move_button = Gtk.Template.Child()
     delete_button = Gtk.Template.Child()
+    extract_split_button = Gtk.Template.Child()
+    extract_menu_button = Gtk.Template.Child()
     toast_overlay = Gtk.Template.Child()
     address_entry = Gtk.Template.Child()
     file_list_stack = Gtk.Template.Child()
@@ -272,7 +274,36 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = Gtk.Entry()
         entry.set_text(item.full_path.rstrip('/') if item.is_folder else item.full_path)
         entry.set_activates_default(True)
-        dialog.set_extra_child(entry)
+
+        browse_button = Gtk.Button(icon_name='folder-symbolic')
+        browse_button.set_tooltip_text(_('Select destination folder'))
+        browse_button.set_valign(Gtk.Align.CENTER)
+
+        def on_browse_clicked(_btn):
+            from .move_folder_chooser import FolderChooserDialog
+            chooser = FolderChooserDialog(self)
+            chooser.set_folders(self._folder_set)
+            if item.is_folder:
+                chooser.set_source_path(item.full_path.rstrip('/'))
+            chooser.set_current_path('')
+
+            def on_selected(path):
+                if path:
+                    entry.set_text(path + '/' + item.path)
+                else:
+                    entry.set_text(item.path)
+
+            chooser.connect_select(on_selected)
+            chooser.present()
+
+        browse_button.connect('clicked', on_browse_clicked)
+
+        entry.set_hexpand(True)
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        box.set_hexpand(True)
+        box.append(entry)
+        box.append(browse_button)
+        dialog.set_extra_child(box)
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('confirm', _('_Move'))
         dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
@@ -288,9 +319,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return True
                 return False
 
-            dst_path = entry.get_text().strip().lstrip('/')
+            dst_path = entry.get_text().strip().lstrip('/').rstrip('/')
             if not dst_path:
-                dst_path = item.path
+                dst_path = item.path.rstrip('/')
             src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
             self._run_command(
                 'archive.move',
@@ -1265,12 +1296,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         action.connect('activate', lambda _a, _p: self.butextract_one(None))
         self.add_action(action)
 
+        action = Gio.SimpleAction.new('extract-all', None)
+        action.connect('activate', lambda _a, _p: self.butextract(None))
+        self.add_action(action)
+
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)
         self.file_list_stack.set_visible_child_name('empty')
         self._update_archive_buttons()
         self._sync_address_bar()
         self._update_title()
+        self._update_extract_button_for_locale()
         self.connect('destroy', self._on_destroy)
 
     def _on_destroy(self, widget):
@@ -1293,9 +1329,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _selected_path_from_input(self):
         app = self.get_application()
-        if app is None or not hasattr(app, 'system') or not app.system.has_selected():
+        if app is None or not hasattr(app, 'system'):
             self._append_log(_('No file selected'), None, _status.ERROR)
             self._show_notification(_('No file selected'), _status.ERROR)
+            return None
+        if app.system.selected is None:
+            self._append_log(_('No file selected'), None, _status.ERROR)
+            self._show_notification(_('No file selected'), _status.ERROR)
+            return None
+        if not app.system.selected.exists():
+            self._append_log(_('File not found'), str(app.system.selected), _status.ERROR)
+            self._show_notification(_('File not found'), _status.ERROR)
             return None
         return Path(app.system.operation_path())
 
@@ -1683,3 +1727,28 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 title = title + '/'
             title = title + self._current_internal_path
         self.set_title(title)
+
+    def _get_effective_locale(self):
+        app = self.get_application()
+        if app is not None and hasattr(app, 'settings'):
+            lang_setting = app.settings.get_string('language')
+            if lang_setting and lang_setting != 'auto':
+                return lang_setting.split('_')[0].lower()
+
+        for env_var in ('LANGUAGE', 'LC_ALL', 'LC_MESSAGES', 'LANG'):
+            val = os.environ.get(env_var, '')
+            if val:
+                first_lang = val.split(':')[0]
+                if first_lang and first_lang not in ('C', 'POSIX'):
+                    return first_lang.split('_')[0].lower()
+
+        return 'en'
+
+    def _update_extract_button_for_locale(self):
+        lang = self._get_effective_locale()
+        if lang in ('pl',):
+            self.extract_split_button.set_visible(False)
+            self.extract_menu_button.set_visible(True)
+        else:
+            self.extract_split_button.set_visible(True)
+            self.extract_menu_button.set_visible(False)

@@ -1,0 +1,28 @@
+name: Check Format
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - '**'
+  workflow_dispatch:
+
+jobs:
+  check-format:
+    name: Check File Formats
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gettext libxml2-utils python3-yaml
+
+      - name: Run format check script
+        run: |
+          chmod +x scripts/check-format.sh
+          ./scripts/check-format.sh

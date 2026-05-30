@@ -1,0 +1,21 @@
+on:
+    push:
+        branches:
+            - '**'
+    pull_request:
+    workflow_dispatch:
+name: flatpak auto build
+jobs:
+  flatpak:
+    name: "Flatpak"
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
+    steps:
+    - uses: actions/checkout@v6
+    - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+      with:
+        bundle: akizip.flatpak
+        manifest-path: top.akizip.akizip.json
+        cache-key: flatpak-builder-${{ github.sha }}

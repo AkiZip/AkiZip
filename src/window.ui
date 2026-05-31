@@ -365,6 +365,11 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">pl</attribute>
           </item>
+          <item>
+            <attribute name="label">Português (Brasil)</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">pt_BR</attribute>
+          </item>
         </section>
       </submenu>
     </section>

@@ -27,33 +27,37 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-30 16:26+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-06-02 09:27+0000\n"
+"Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/"
+"es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.6\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
 msgid "Akizip"
-msgstr ""
+msgstr "Akizip"
 
 #: data/top.akizip.akizip.desktop.in:8
 msgid "GTK;"
-msgstr ""
+msgstr "GTK;"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "Una interfaz moderna para 7-ZIP en GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
+"Akizip es una utilidad gráfica de gestión de archivadores creada con GTK 4 y "
+"libadwaita que lleva la potencia de 7-Zip al escritorio GNOME."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -61,275 +65,283 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"Permite crear y extraer archivadores en los formatos 7z, zip y tar. También "
+"puede abrir (en modo de solo lectura) archivadores rar, gz, bz2, xz, tar.gz, "
+"tar.bz2 y tar.xz."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
+"Entre sus funcionalidades se incluyen la inspección de archivos, tareas en "
+"segundo plano cancelables con informes de progreso, un panel específico para "
+"registros y traducciones a varios idiomas."
 
 #: data/top.akizip.akizip.metainfo.xml.in:16
 msgid "ckappgit"
-msgstr ""
+msgstr "ckappgit"
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
 msgstr ""
+"Ventana principal que muestra el contenido del archivador y la barra de "
+"herramientas"
 
 #: src/ui/info_dialog.py:13 src/ui/window.py:1349
 msgid "System state not found"
-msgstr ""
+msgstr "No se encontró el estado del sistema"
 
 #: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
 msgid "Archive"
-msgstr ""
+msgstr "Archivador"
 
 #: src/ui/info_dialog.py:27
 msgid "Archive information is unavailable."
-msgstr ""
+msgstr "No hay información disponible sobre el archivador."
 
 #: src/ui/info_dialog.py:61 src/ui/window.py:1689
 msgid "Read archive information from "
-msgstr ""
+msgstr "Leer información del archivador desde "
 
 #: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:213
 #: src/window.ui:227
 msgid "Info"
-msgstr ""
+msgstr "Información"
 
 #: src/ui/info_dialog.py:97
 msgid "Close"
-msgstr ""
+msgstr "Cerrar"
 
 #: src/ui/info_dialog.py:104
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: src/ui/info_dialog.py:105 src/ui/window.py:935
 msgid "Path"
-msgstr ""
+msgstr "Ruta"
 
 #: src/ui/info_dialog.py:106
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: src/ui/info_dialog.py:108 src/ui/window.py:936
 msgid "Size"
-msgstr ""
+msgstr "Tamaño"
 
 #: src/ui/info_dialog.py:109
 msgid "Can compress"
-msgstr ""
+msgstr "Se puede comprimir"
 
 #: src/ui/info_dialog.py:110
 msgid "Can extract"
-msgstr ""
+msgstr "Se puede extraer"
 
 #: src/ui/info_dialog.py:136
 msgid "Copy"
-msgstr ""
+msgstr "Copiar"
 
 #: src/ui/info_dialog.py:148
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Copiado en el portapapeles"
 
 #: src/ui/info_dialog.py:157
 msgid "No archive information found."
-msgstr ""
+msgstr "No se encontró información sobre el archivador."
 
 #: src/ui/info_dialog.py:161
 msgid "Loaded"
-msgstr ""
+msgstr "Cargado"
 
 #: src/ui/info_dialog.py:163
 msgid "Archive type"
-msgstr ""
+msgstr "Tipo de archivador"
 
 #: src/ui/info_dialog.py:164
 msgid "Archive size"
-msgstr ""
+msgstr "Tamaño del archivador"
 
 #: src/ui/info_dialog.py:165
 msgid "Headers size"
-msgstr ""
+msgstr "Tamaño de las cabeceras"
 
 #: src/ui/info_dialog.py:166
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 #: src/ui/info_dialog.py:167
 msgid "Solid"
-msgstr ""
+msgstr "Sólido"
 
 #: src/ui/info_dialog.py:168
 msgid "Blocks"
-msgstr ""
+msgstr "Bloques"
 
 #: src/ui/info_dialog.py:192
 msgid "Archive file"
-msgstr ""
+msgstr "Archivador"
 
 #: src/ui/info_dialog.py:194
 msgid "Folder"
-msgstr ""
+msgstr "Carpeta"
 
 #: src/ui/info_dialog.py:196
 msgid "File"
-msgstr ""
+msgstr "Archivo"
 
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: src/ui/info_dialog.py:200
 msgid "B"
-msgstr ""
+msgstr "B"
 
 #: src/ui/info_dialog.py:200
 msgid "KB"
-msgstr ""
+msgstr "kB"
 
 #: src/ui/info_dialog.py:200
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 #: src/ui/info_dialog.py:200
 msgid "GB"
-msgstr ""
+msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: src/ui/info_dialog.py:211
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: src/ui/log_panel.py:32
 msgid "Logs"
-msgstr ""
+msgstr "Registros"
 
 #: src/ui/log_panel.py:96 src/ui/window.py:1420
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #: src/ui/log_panel.py:105
 msgid "Cancelling..."
-msgstr ""
+msgstr "Cancelando…"
 
 #: src/ui/log_panel.py:109
 msgid "Running"
-msgstr ""
+msgstr "Ejecutando"
 
 #: src/ui/log_panel.py:110
 msgid "Done"
-msgstr ""
+msgstr "Hecho"
 
 #: src/ui/log_panel.py:111
 msgid "Warning"
-msgstr ""
+msgstr "Atención"
 
 #: src/ui/log_panel.py:112
 msgid "Timeout"
-msgstr ""
+msgstr "Tiempo de espera"
 
 #: src/ui/log_panel.py:113
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: src/ui/log_panel.py:114
 msgid "Cancelled"
-msgstr ""
+msgstr "Cancelado"
 
 #: src/ui/log_panel.py:115
 msgid "Pending"
-msgstr ""
+msgstr "Pendiente"
 
 #: src/ui/window.py:229
 msgid "Test failed"
-msgstr ""
+msgstr "Falló la prueba"
 
 #: src/ui/window.py:229 src/ui/window.py:258 src/ui/window.py:351
 #: src/ui/window.py:407
 msgid "Selected path is not an archive."
-msgstr ""
+msgstr "La ruta seleccionada no apunta a un archivador."
 
 #: src/ui/window.py:258 src/ui/window.py:261
 msgid "Move failed"
-msgstr ""
+msgstr "Falló el movimiento"
 
 #: src/ui/window.py:261 src/ui/window.py:354
 msgid "This archive format does not support modification."
-msgstr ""
+msgstr "Este formato de archivador no permite modificaciones."
 
 #: src/ui/window.py:269 src/ui/window.py:362 src/ui/window.py:435
 #: src/ui/window.py:1333 src/ui/window.py:1334 src/ui/window.py:1337
 #: src/ui/window.py:1338
 msgid "No file selected"
-msgstr ""
+msgstr "No se seleccionó ningún archivo"
 
 #: src/ui/window.py:273 src/window.ui:165 src/window.ui:179
 msgid "Move"
-msgstr ""
+msgstr "Mover"
 
 #: src/ui/window.py:273
 msgid "Move \"{}\" to:"
-msgstr ""
+msgstr "Mover «{}» a:"
 
 #: src/ui/window.py:279
 msgid "Select destination folder"
-msgstr ""
+msgstr "Seleccione la carpeta de destino"
 
 #: src/ui/window.py:307 src/ui/window.py:367 src/ui/window.py:446
 #: src/ui/window.py:485 src/ui/window.py:552 src/ui/window.py:600
 #: src/ui/window.py:622 src/ui/window.py:653 src/ui/window.py:875
 #: src/ui/window.py:898 src/move-folder-chooser.ui:51
 msgid "_Cancel"
-msgstr ""
+msgstr "_Cancelar"
 
 #: src/ui/window.py:308
 msgid "_Move"
-msgstr ""
+msgstr "_Mover"
 
 #: src/ui/window.py:351 src/ui/window.py:354
 msgid "Delete failed"
-msgstr ""
+msgstr "Falló la eliminación"
 
 #: src/ui/window.py:366 src/window.ui:189 src/window.ui:203
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: src/ui/window.py:366
 msgid "Are you sure you want to delete \"{}\"?"
-msgstr ""
+msgstr "¿Confirma que quiere eliminar «{}»?"
 
 #: src/ui/window.py:368
 msgid "_Delete"
-msgstr ""
+msgstr "_Eliminar"
 
 #: src/ui/window.py:407
 msgid "Extract failed"
-msgstr ""
+msgstr "Falló la extracción"
 
 #: src/ui/window.py:442
 msgid "Select File"
-msgstr ""
+msgstr "Seleccione un archivo"
 
 #: src/ui/window.py:445 src/ui/window.py:484
 msgid "_Open"
-msgstr ""
+msgstr "_Abrir"
 
 #: src/ui/window.py:481 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr ""
+msgstr "Seleccione la carpeta de destino"
 
 #: src/ui/window.py:528 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
-msgstr ""
+msgstr "Predeterminada"
 
 #: src/ui/window.py:550 src/ui/window.py:553 src/window.ui:67 src/window.ui:81
 msgid "Compress"
-msgstr ""
+msgstr "Comprimir"
 
 #: src/ui/window.py:574
 msgid "Source items ({})"
@@ -337,32 +349,32 @@ msgstr ""
 
 #: src/ui/window.py:596
 msgid "Select Files"
-msgstr ""
+msgstr "Seleccionar archivos"
 
 #: src/ui/window.py:599 src/ui/window.py:621
 msgid "_Add"
-msgstr ""
+msgstr "_Añadir"
 
 #: src/ui/window.py:618
 msgid "Select Folders"
-msgstr ""
+msgstr "Seleccionar carpetas"
 
 #: src/ui/window.py:649
 msgid "Save Archive As"
-msgstr ""
+msgstr "Guardar archivador como"
 
 #: src/ui/window.py:652
 msgid "_Save"
-msgstr ""
+msgstr "_Guardar"
 
 #: src/ui/window.py:673
 msgid "Overwrite is not currently supported"
-msgstr ""
+msgstr "Por ahora no se admite la sobrescritura"
 
 #: src/ui/window.py:674 src/ui/window.py:876 src/ui/window.py:1371
 #: src/ui/window.py:1380 src/ui/window.py:1389 src/ui/window.py:1413
 msgid "_OK"
-msgstr ""
+msgstr "_Aceptar"
 
 #: src/ui/window.py:715
 msgid "No source items to analyze"
@@ -370,36 +382,36 @@ msgstr ""
 
 #: src/ui/window.py:722
 msgid "Recommendation not available"
-msgstr ""
+msgstr "Recomendación no disponible"
 
 #: src/ui/window.py:775
 msgid "Recommendation failed"
-msgstr ""
+msgstr "Falló la recomendación"
 
 #: src/ui/window.py:776
 msgid "Compression recommendation failed"
-msgstr ""
+msgstr "Falló la recomendación de compresión"
 
 #: src/ui/window.py:826
 msgid "Compression recommendation"
-msgstr ""
+msgstr "Recomendación de compresión"
 
 #: src/ui/window.py:831
 msgid "Recommendation reason"
-msgstr ""
+msgstr "Razón para la recomendación"
 
 #: src/ui/window.py:865
 msgid "Password Required"
-msgstr ""
+msgstr "Se requiere una contraseña"
 
 #: src/ui/window.py:866
 msgid "This archive is encrypted. Please enter the password."
-msgstr ""
+msgstr "Este archivador está cifrado. Introduzca la contraseña."
 
 #: src/ui/window.py:896 src/ui/window.py:899 src/window.ui:116
 #: src/window.ui:131
 msgid "Extract"
-msgstr ""
+msgstr "Extraer"
 
 #: src/ui/window.py:937
 msgid "Modified"
@@ -407,17 +419,17 @@ msgstr ""
 
 #: src/ui/window.py:1054
 msgid "Failed to create temporary directory"
-msgstr ""
+msgstr "No se pudo crear un directorio temporal"
 
 #: src/ui/window.py:1080 src/ui/window.py:1605 src/ui/window.py:1607
 #: src/ui/window.py:1633 src/ui/window.py:1635 src/ui/window.py:1694
 #: src/ui/window.py:1704
 msgid "Extract "
-msgstr ""
+msgstr "Extraer "
 
 #: src/ui/window.py:1086
 msgid "Extracted file not found"
-msgstr ""
+msgstr "No se encontró el archivo extraído"
 
 #: src/ui/window.py:1146
 msgid "List "
@@ -425,15 +437,15 @@ msgstr ""
 
 #: src/ui/window.py:1267
 msgid "List failed"
-msgstr ""
+msgstr "Falló la lista"
 
 #: src/ui/window.py:1341 src/ui/window.py:1342
 msgid "File not found"
-msgstr ""
+msgstr "No se encontró el archivo"
 
 #: src/ui/window.py:1361
 msgid "Select failed"
-msgstr ""
+msgstr "Falló la selección"
 
 #: src/ui/window.py:1364
 msgid "Selected "
@@ -451,7 +463,7 @@ msgstr ""
 
 #: src/ui/window.py:1377
 msgid "Preview not supported"
-msgstr ""
+msgstr "No se admite la previsualización"
 
 #: src/ui/window.py:1378
 msgid "This format does not support preview. Only extract is available."
@@ -499,7 +511,7 @@ msgstr ""
 
 #: src/ui/window.py:1570 src/ui/window.py:1679
 msgid "{} items"
-msgstr ""
+msgstr "{} elementos"
 
 #: src/ui/window.py:1574 src/ui/window.py:1631 src/ui/window.py:1645
 #: src/ui/window.py:1659 src/ui/window.py:1681 src/ui/window.py:1702
@@ -624,11 +636,11 @@ msgstr ""
 
 #: src/ui/window.py:1669
 msgid "Move cancelled: "
-msgstr ""
+msgstr "Movimiento cancelado: "
 
 #: src/ui/window.py:1670
 msgid "Move failed: "
-msgstr ""
+msgstr "Falló el movimiento: "
 
 #: src/ui/window.py:1682
 msgid "Create "
@@ -636,79 +648,79 @@ msgstr ""
 
 #: src/ui/window.py:1682 src/ui/window.py:1704 src/ui/window.py:1709
 msgid " from "
-msgstr ""
+msgstr " de "
 
 #: src/ui/window.py:1684
 msgid "Parameters: "
-msgstr ""
+msgstr "Parámetros: "
 
 #: src/ui/window.py:1693 src/ui/window.py:1703
 msgid "folder"
-msgstr ""
+msgstr "carpeta"
 
 #: src/ui/window.py:1694 src/ui/window.py:1704 src/ui/window.py:1715
 msgid " to "
-msgstr ""
+msgstr " a "
 
 #: src/ui/window.py:1714
 msgid "destination"
-msgstr ""
+msgstr "destino"
 
 #: src/ui/window.py:1715
 msgid " in "
-msgstr ""
+msgstr " en "
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"
-msgstr ""
+msgstr "(raíz)"
 
 #: src/window.ui:19
 msgid "Main Menu"
-msgstr ""
+msgstr "Menú principal"
 
 #: src/window.ui:43
 msgid "Open File"
-msgstr ""
+msgstr "Abrir archivo"
 
 #: src/window.ui:57
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: src/window.ui:91 src/window.ui:106 src/window.ui:399
 msgid "Extract All"
-msgstr ""
+msgstr "Extraer todo"
 
 #: src/window.ui:141 src/window.ui:155
 msgid "Test"
-msgstr ""
+msgstr "Probar"
 
 #: src/window.ui:239
 msgid "Path or archive"
-msgstr ""
+msgstr "Ruta o archivador"
 
 #: src/window.ui:254
 msgid "Open an archive to view its contents"
-msgstr ""
+msgstr "Abra un archivador para ver su contenido"
 
 #: src/window.ui:265
 msgid "The selected file is not an archive"
-msgstr ""
+msgstr "El archivo seleccionado no es un archivador"
 
 #: src/window.ui:290
 msgid "This archive is empty"
-msgstr ""
+msgstr "Este archivador está vacío"
 
 #: src/window.ui:301
 msgid "This format does not support preview"
-msgstr ""
+msgstr "Este formato no admite previsualizaciones"
 
 #: src/window.ui:329
 msgid "_Language"
-msgstr ""
+msgstr "_Idioma"
 
 #: src/window.ui:332
 msgid "System Default"
-msgstr ""
+msgstr "Predeterminado del sistema"
 
 #: src/window.ui:373
 msgid "Show _Logs"
@@ -716,19 +728,19 @@ msgstr ""
 
 #: src/window.ui:379
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferencias"
 
 #: src/window.ui:383
 msgid "_About Akizip"
-msgstr ""
+msgstr "_Acerca de Akizip"
 
 #: src/window.ui:391 src/window.ui:403
 msgid "Extract Selected"
-msgstr ""
+msgstr "Extraer selección"
 
 #: src/compress-dialog.ui:12
 msgid "Output archive"
-msgstr ""
+msgstr "Archivador de salida"
 
 #: src/compress-dialog.ui:24
 msgid "Select output archive path"
@@ -740,7 +752,7 @@ msgstr ""
 
 #: src/compress-dialog.ui:46 src/preferences.ui:60
 msgid "Format"
-msgstr ""
+msgstr "Formato"
 
 #: src/compress-dialog.ui:63
 msgid "Auto Recommend"
@@ -756,27 +768,27 @@ msgstr ""
 
 #: src/compress-dialog.ui:99
 msgid "Add Files"
-msgstr ""
+msgstr "Añadir archivos"
 
 #: src/compress-dialog.ui:104
 msgid "Add Folders"
-msgstr ""
+msgstr "Añadir carpetas"
 
 #: src/compress-dialog.ui:109
 msgid "Remove"
-msgstr ""
+msgstr "Quitar"
 
 #: src/compress-dialog.ui:122
 msgid "Advanced options"
-msgstr ""
+msgstr "Opciones avanzadas"
 
 #: src/compress-dialog.ui:140 src/preferences.ui:76
 msgid "Compression level"
-msgstr ""
+msgstr "Nivel de compresión"
 
 #: src/compress-dialog.ui:153 src/preferences.ui:82
 msgid "Store"
-msgstr ""
+msgstr "Almacenar"
 
 #: src/compress-dialog.ui:154 src/preferences.ui:83
 msgid "Fastest"
@@ -788,7 +800,7 @@ msgstr ""
 
 #: src/compress-dialog.ui:156 src/preferences.ui:85
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:86
 msgid "Maximum"
@@ -800,7 +812,7 @@ msgstr ""
 
 #: src/compress-dialog.ui:169 src/preferences.ui:95
 msgid "Algorithm"
-msgstr ""
+msgstr "Algoritmo"
 
 #: src/compress-dialog.ui:196 src/preferences.ui:112
 msgid "Dictionary size (MB)"
@@ -813,11 +825,11 @@ msgstr ""
 
 #: src/compress-dialog.ui:225 src/preferences.ui:131
 msgid "Threads"
-msgstr ""
+msgstr "Hilos"
 
 #: src/compress-dialog.ui:254
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: src/compress-dialog.ui:267
 msgid "Leave empty for no password"
@@ -833,7 +845,7 @@ msgstr ""
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
-msgstr ""
+msgstr "Carpeta de destino"
 
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
@@ -841,7 +853,7 @@ msgstr ""
 
 #: src/preferences.ui:8
 msgid "General"
-msgstr ""
+msgstr "Generales"
 
 #: src/preferences.ui:11
 msgid "Timeout (seconds)"
@@ -853,7 +865,7 @@ msgstr ""
 
 #: src/preferences.ui:32
 msgid "Compression"
-msgstr ""
+msgstr "Compresión"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
@@ -883,4 +895,4 @@ msgstr ""
 
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
-msgstr ""
+msgstr "_Seleccionar"

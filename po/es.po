@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-05-30 16:26+0800\n"
-"PO-Revision-Date: 2026-06-02 09:27+0000\n"
+"PO-Revision-Date: 2026-06-03 10:01+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/"
 "es/>\n"
@@ -453,13 +453,15 @@ msgstr ""
 
 #: src/ui/window.py:1368
 msgid "Format compatibility warning"
-msgstr ""
+msgstr "Alerta de compatibilidad de formato"
 
 #: src/ui/window.py:1369
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr ""
+"No se ha verificado la compatibilidad de este formato. Las operaciones de "
+"movimiento y eliminación están desactivadas."
 
 #: src/ui/window.py:1377
 msgid "Preview not supported"
@@ -468,6 +470,8 @@ msgstr "No se admite la previsualización"
 #: src/ui/window.py:1378
 msgid "This format does not support preview. Only extract is available."
 msgstr ""
+"Este formato no admite previsualizaciones. Solo está disponible la "
+"extracción."
 
 #: src/ui/window.py:1386
 msgid "Nested archive opened"
@@ -478,6 +482,8 @@ msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr ""
+"Este archivador se extrajo de un archivador contenedor. Las operaciones de "
+"movimiento y eliminación están desactivadas."
 
 #: src/ui/window.py:1410
 msgid "Language changed"
@@ -485,29 +491,29 @@ msgstr ""
 
 #: src/ui/window.py:1411
 msgid "Restart the application to apply the new language."
-msgstr ""
+msgstr "Reinicie la aplicación para aplicar el idioma nuevo."
 
 #: src/ui/window.py:1452
 msgid "Calculating..."
-msgstr ""
+msgstr "Calculando…"
 
 #: src/ui/window.py:1457
 #, python-format
 msgid "%d seconds remaining"
-msgstr ""
+msgstr "Quedan %d segundos"
 
 #: src/ui/window.py:1458
 #, python-format
 msgid "%d minutes remaining"
-msgstr ""
+msgstr "Quedan %d minutos"
 
 #: src/ui/window.py:1475
 msgid "Command not found"
-msgstr ""
+msgstr "Orden no encontrada"
 
 #: src/ui/window.py:1480
 msgid "Job queue not found"
-msgstr ""
+msgstr "Cola de tareas no encontrada"
 
 #: src/ui/window.py:1570 src/ui/window.py:1679
 msgid "{} items"
@@ -517,7 +523,7 @@ msgstr "{} elementos"
 #: src/ui/window.py:1659 src/ui/window.py:1681 src/ui/window.py:1702
 #: src/ui/window.py:1708 src/ui/window.py:1713
 msgid "file"
-msgstr ""
+msgstr "archivo"
 
 #: src/ui/window.py:1577 src/ui/window.py:1579
 msgid "Compress "
@@ -544,7 +550,7 @@ msgstr ""
 #: src/ui/window.py:1697 src/ui/window.py:1701 src/ui/window.py:1707
 #: src/ui/window.py:1712
 msgid "archive"
-msgstr ""
+msgstr "archivador"
 
 #: src/ui/window.py:1591 src/ui/window.py:1593
 msgid "Open "
@@ -756,7 +762,7 @@ msgstr "Formato"
 
 #: src/compress-dialog.ui:63
 msgid "Auto Recommend"
-msgstr ""
+msgstr "Recomendación automática"
 
 #: src/compress-dialog.ui:64
 msgid "Scan source files and recommend format and parameters"
@@ -764,7 +770,7 @@ msgstr ""
 
 #: src/compress-dialog.ui:72
 msgid "Source items"
-msgstr ""
+msgstr "Elementos fuente"
 
 #: src/compress-dialog.ui:99
 msgid "Add Files"
@@ -788,15 +794,15 @@ msgstr "Nivel de compresión"
 
 #: src/compress-dialog.ui:153 src/preferences.ui:82
 msgid "Store"
-msgstr "Almacenar"
+msgstr "Almacenamiento"
 
 #: src/compress-dialog.ui:154 src/preferences.ui:83
 msgid "Fastest"
-msgstr ""
+msgstr "El más rápido"
 
 #: src/compress-dialog.ui:155 src/preferences.ui:84
 msgid "Fast"
-msgstr ""
+msgstr "Rápido"
 
 #: src/compress-dialog.ui:156 src/preferences.ui:85
 msgid "Normal"
@@ -804,11 +810,11 @@ msgstr "Normal"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:86
 msgid "Maximum"
-msgstr ""
+msgstr "Máximo"
 
 #: src/compress-dialog.ui:158 src/preferences.ui:87
 msgid "Ultra"
-msgstr ""
+msgstr "Ultra"
 
 #: src/compress-dialog.ui:169 src/preferences.ui:95
 msgid "Algorithm"
@@ -816,16 +822,16 @@ msgstr "Algoritmo"
 
 #: src/compress-dialog.ui:196 src/preferences.ui:112
 msgid "Dictionary size (MB)"
-msgstr ""
+msgstr "Tamaño de diccionario (MB)"
 
 #: src/compress-dialog.ui:208 src/compress-dialog.ui:237 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
-msgstr ""
+msgstr "0 usa el valor predeterminado de 7-Zip."
 
 #: src/compress-dialog.ui:225 src/preferences.ui:131
 msgid "Threads"
-msgstr "Hilos"
+msgstr "Subprocesos"
 
 #: src/compress-dialog.ui:254
 msgid "Password"
@@ -837,11 +843,11 @@ msgstr ""
 
 #: src/compress-dialog.ui:282 src/preferences.ui:150
 msgid "Encrypt file names"
-msgstr ""
+msgstr "Cifrar nombres de archivo"
 
 #: src/compress-dialog.ui:290 src/compress-dialog.ui:301
 msgid "Only available for 7z format"
-msgstr ""
+msgstr "Solo disponible para el formato 7z"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
@@ -869,17 +875,20 @@ msgstr "Compresión"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
-msgstr ""
+msgstr "Profundidad de análisis"
 
 #: src/preferences.ui:36
 msgid ""
 "Maximum folder depth to scan for compression recommendations. Deeper scans "
 "may improve suggestions but take longer."
 msgstr ""
+"Profundidad máxima de las carpetas que se analizarán para obtener "
+"recomendaciones de compresión. Los análisis más exhaustivos pueden mejorar "
+"las sugerencias, pero tardan más tiempo."
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
-msgstr ""
+msgstr "Parámetros de compresión predeterminados"
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
@@ -887,7 +896,7 @@ msgstr ""
 
 #: src/preferences.ui:151
 msgid "Only available for 7z format."
-msgstr ""
+msgstr "Solo disponible para el formato 7z."
 
 #: src/move-folder-chooser.ui:6
 msgid "Select Folder"

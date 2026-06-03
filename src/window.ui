@@ -370,6 +370,11 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">pt_BR</attribute>
           </item>
+          <item>
+            <attribute name="label">Español</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">es</attribute>
+          </item>
         </section>
       </submenu>
     </section>

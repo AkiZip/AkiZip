@@ -138,6 +138,105 @@ def _kill_process(process):
         pass
 
 
+def _run_7zip_stdin(args, stdin_path, timeout=-1, cancel_event=None, on_progress=None):
+    if on_progress is not None:
+        args = list(args) + ['-bsp2']
+
+    started_at = time.monotonic()
+
+    with open(stdin_path, 'rb') as stdin_file:
+        process = subprocess.Popen(
+            [SEVENZIP_PATH, *args],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            stdin=stdin_file,
+            start_new_session=True,
+        )
+
+        if on_progress is None:
+            stdout_bytes, stderr_bytes = process.communicate()
+            stdout = stdout_bytes.decode('utf-8', errors='replace')
+            stderr = stderr_bytes.decode('utf-8', errors='replace')
+            output = (stdout + '\n' + stderr).strip()
+            if process.returncode != 0:
+                raise RuntimeError(output or f'7zz exited with {process.returncode}')
+            return output
+
+        stderr_lines = []
+        stderr_current = ""
+        stderr_lock = threading.Lock()
+        last_percent = -1
+
+        def read_stderr():
+            nonlocal stderr_current, last_percent
+            while True:
+                try:
+                    char = process.stderr.read(1)
+                    if not char:
+                        break
+                    with stderr_lock:
+                        if char == b'\n':
+                            stderr_lines.append(stderr_current)
+                            stderr_current = ""
+                        elif char == b'\x08':
+                            stderr_current = stderr_current[:-1]
+                        else:
+                            stderr_current += char.decode('utf-8', errors='replace')
+                        percent = _parse_progress(stderr_current)
+                        if percent is not None and percent != last_percent:
+                            last_percent = percent
+                            on_progress(percent)
+                except Exception:
+                    break
+
+        stderr_reader = threading.Thread(target=read_stderr, daemon=True)
+        stderr_reader.start()
+
+        stdout_lines = []
+
+        def read_stdout():
+            while True:
+                try:
+                    line = process.stdout.readline()
+                    if not line:
+                        break
+                    stdout_lines.append(line.decode('utf-8', errors='replace'))
+                except Exception:
+                    break
+
+        stdout_reader = threading.Thread(target=read_stdout, daemon=True)
+        stdout_reader.start()
+
+        while process.poll() is None:
+            if cancel_event is not None and cancel_event.is_set():
+                _kill_process(process)
+                stderr_reader.join(timeout=1.0)
+                stdout_reader.join(timeout=1.0)
+                raise RuntimeError('Cancelled')
+
+            if timeout is not None and timeout >= 0:
+                elapsed = time.monotonic() - started_at
+                if elapsed >= timeout:
+                    _kill_process(process)
+                    stderr_reader.join(timeout=1.0)
+                    stdout_reader.join(timeout=1.0)
+                    raise TimeoutError(f'7zz timed out after {timeout} seconds')
+
+            time.sleep(0.1)
+
+        stderr_reader.join(timeout=1.0)
+        stdout_reader.join(timeout=1.0)
+
+        with stderr_lock:
+            stderr = '\n'.join(stderr_lines + [stderr_current])
+        stdout = ''.join(stdout_lines)
+
+        output = (stdout + '\n' + stderr).strip()
+        if process.returncode != 0:
+            raise RuntimeError(output or f'7zz exited with {process.returncode}')
+        return output
+
+
 def archive_info(archive_path, password=None, timeout=-1, cancel_event=None):
     args = ['l', '-slt', str(archive_path)]
     if password:
@@ -220,6 +319,26 @@ def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_e
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 
+def archive_add(archive_path, source_path, dest_folder='', password=None, timeout=-1, cancel_event=None, task_status=None):
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
+
+    source_path = Path(source_path)
+    dest_folder = dest_folder.strip('/')
+
+    if dest_folder:
+        archive_name = str(Path(dest_folder) / source_path.name)
+    else:
+        archive_name = source_path.name
+
+    args = ['a', str(archive_path), f'-si{archive_name}']
+    if password:
+        args.append(f'-p{password}')
+
+    return _run_7zip_stdin(args, str(source_path), timeout, cancel_event, on_progress)
+
+
 def archive_test(archive_path, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
@@ -260,5 +379,6 @@ def register(commands):
     commands['archive.extract'] = archive_extract
     commands['archive.extract_file'] = archive_extract_FileInZip
     commands['archive.delete'] = archive_delete
+    commands['archive.add'] = archive_add
     commands['archive.test'] = archive_test
     commands['archive.move'] = archive_move

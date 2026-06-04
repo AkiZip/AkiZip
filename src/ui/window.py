@@ -340,6 +340,135 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
+    def butadd_file(self, button):
+        selected = self._selected_path_from_input()
+        if selected is None:
+            return
+
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.can_extract():
+            self._append_log(_('Add failed'), _('Selected path is not an archive.'), _status.ERROR)
+            return
+        if not app.system.can_modify():
+            self._append_log(_('Add failed'), _('This archive format does not support modification.'), _status.ERROR)
+            return
+
+        source_path = None
+
+        dialog = Adw.AlertDialog.new(_('Add File'), _('Add a file to the current archive.'))
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('_Add'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+        dialog.set_close_response('cancel')
+
+        content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        content.set_margin_top(12)
+        content.set_margin_bottom(12)
+        content.set_margin_start(12)
+        content.set_margin_end(12)
+
+        # Source file row
+        source_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        source_box.set_hexpand(True)
+        source_entry = Gtk.Entry()
+        source_entry.set_placeholder_text(_('Select a file'))
+        source_entry.set_editable(False)
+        source_entry.set_hexpand(True)
+        source_browse = Gtk.Button(icon_name='document-open-symbolic')
+        source_browse.set_tooltip_text(_('Select file'))
+        source_browse.set_valign(Gtk.Align.CENTER)
+
+        def on_source_browse(_btn):
+            chooser = Gtk.FileChooserNative.new(
+                _('Select File'),
+                self,
+                Gtk.FileChooserAction.OPEN,
+                _('_Open'),
+                _('_Cancel'),
+            )
+
+            def on_response(c, response):
+                nonlocal source_path
+                if response == Gtk.ResponseType.ACCEPT:
+                    file = c.get_file()
+                    if file is not None:
+                        path = file.get_path()
+                        if path is not None:
+                            source_path = path
+                            source_entry.set_text(_host_path(path))
+                c.destroy()
+
+            chooser.connect('response', on_response)
+            chooser.show()
+
+        source_browse.connect('clicked', on_source_browse)
+        source_box.append(source_entry)
+        source_box.append(source_browse)
+        content.append(source_box)
+
+        # Destination folder row
+        dest_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        dest_box.set_hexpand(True)
+        dest_entry = Gtk.Entry()
+        dest_entry.set_text(self._current_internal_path or '/')
+        dest_entry.set_placeholder_text(_('Destination folder'))
+        dest_entry.set_editable(False)
+        dest_entry.set_hexpand(True)
+        dest_browse = Gtk.Button(icon_name='folder-symbolic')
+        dest_browse.set_tooltip_text(_('Select destination folder'))
+        dest_browse.set_valign(Gtk.Align.CENTER)
+
+        def on_dest_browse(_btn):
+            from .move_folder_chooser import FolderChooserDialog
+            chooser = FolderChooserDialog(self)
+            chooser.set_folders(self._folder_set)
+            chooser.set_current_path(self._current_internal_path.rstrip('/'))
+
+            def on_selected(path):
+                dest_entry.set_text(path)
+
+            chooser.connect_select(on_selected)
+            chooser.present()
+
+        dest_browse.connect('clicked', on_dest_browse)
+        dest_box.append(dest_entry)
+        dest_box.append(dest_browse)
+        content.append(dest_box)
+
+        dialog.set_extra_child(content)
+
+        def run_add(password):
+            def on_error(error):
+                if is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_add(new_password)
+                    )
+                    return True
+                return False
+
+            if not source_path:
+                self._show_notification(_('No file selected'), _status.ERROR)
+                return
+
+            dest_folder = dest_entry.get_text().strip().lstrip('/').rstrip('/')
+            self._run_command(
+                'archive.add',
+                selected,
+                source_path,
+                dest_folder,
+                password,
+                on_success_extra=lambda _output: self._refresh_file_list(),
+                on_error_extra=on_error,
+            )
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                run_add(None)
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
     @Gtk.Template.Callback()
     def butdelete(self, button):
         selected = self._selected_path_from_input()
@@ -1300,6 +1429,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         action.connect('activate', lambda _a, _p: self.butextract(None))
         self.add_action(action)
 
+        self._add_file_action = Gio.SimpleAction.new('add-file', None)
+        self._add_file_action.connect('activate', lambda _a, _p: self.butadd_file(None))
+        self.add_action(self._add_file_action)
+
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)
         self.file_list_stack.set_visible_child_name('empty')
@@ -1396,12 +1529,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if app is None or not hasattr(app, 'system'):
             can_modify = False
+            has_selected_archive = False
         else:
             can_modify = app.system.can_modify()
+            has_selected_archive = app.system.has_selected() and app.system.is_archive()
         if self.move_button is not None:
             self.move_button.set_sensitive(can_modify)
         if self.delete_button is not None:
             self.delete_button.set_sensitive(can_modify)
+        if hasattr(self, '_add_file_action') and self._add_file_action is not None:
+            self._add_file_action.set_enabled(can_modify and has_selected_archive)
 
     def _on_language_changed(self, settings, key):
         if settings.get_string(key) == self._initial_language:
@@ -1483,7 +1620,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         log_id = object()
         summary = self._command_summary(name, args, _status.PENDING)
 
-        has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file', 'archive.test', 'archive.delete', 'archive.move')
+        has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file', 'archive.test', 'archive.delete', 'archive.move', 'archive.add')
         progress_dialog = None
 
         def on_success(output):
@@ -1669,6 +1806,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Move cancelled: ') + target
             return _('Move failed: ') + target
 
+        if name == 'archive.add':
+            target = Path(args[1]).name if len(args) > 1 else _('file')
+            if state == _status.PENDING:
+                return _('Add ') + target
+            if state == _status.WORKING:
+                return _('Add ') + target
+            if state == _status.FINISHED:
+                return _('Added ') + target
+            if state == _status.TIMEOUT:
+                return _('Add timed out: ') + target
+            if state == _status.CANCELLED:
+                return _('Add cancelled: ') + target
+            return _('Add failed: ') + target
+
         return name
 
     def _command_preview(self, name, args):
@@ -1713,6 +1864,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             file_name = Path(args[1]).name if len(args) > 1 else _('file')
             dst = Path(args[2]).name if len(args) > 2 else _('destination')
             return _('Move ') + file_name + _(' to ') + dst + _(' in ') + archive
+
+        if name == 'archive.add':
+            archive = Path(args[0]).name if args else _('archive')
+            file_name = Path(args[1]).name if len(args) > 1 else _('file')
+            dst = args[2] if len(args) > 2 else _('root')
+            return _('Add ') + file_name + _(' to ') + dst + _(' in ') + archive
 
         return name
 

@@ -367,10 +367,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         content.set_margin_bottom(12)
         content.set_margin_start(12)
         content.set_margin_end(12)
+        content.set_size_request(350, -1)
 
         # Source file row
         source_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         source_box.set_hexpand(True)
+        source_label = Gtk.Label(label=_('File'))
+        source_label.set_size_request(80, -1)
+        source_label.set_xalign(0)
         source_entry = Gtk.Entry()
         source_entry.set_placeholder_text(_('Select a file'))
         source_entry.set_editable(False)
@@ -403,6 +407,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             chooser.show()
 
         source_browse.connect('clicked', on_source_browse)
+        source_box.append(source_label)
         source_box.append(source_entry)
         source_box.append(source_browse)
         content.append(source_box)
@@ -410,10 +415,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         # Destination folder row
         dest_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
         dest_box.set_hexpand(True)
+        dest_label = Gtk.Label(label=_('Destination'))
+        dest_label.set_size_request(80, -1)
+        dest_label.set_xalign(0)
         dest_entry = Gtk.Entry()
         dest_entry.set_text(self._current_internal_path or '/')
         dest_entry.set_placeholder_text(_('Destination folder'))
-        dest_entry.set_editable(False)
         dest_entry.set_hexpand(True)
         dest_browse = Gtk.Button(icon_name='folder-symbolic')
         dest_browse.set_tooltip_text(_('Select destination folder'))
@@ -426,12 +433,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             chooser.set_current_path(self._current_internal_path.rstrip('/'))
 
             def on_selected(path):
-                dest_entry.set_text(path)
+                dest_entry.set_text(path + '/' if path else '/')
 
             chooser.connect_select(on_selected)
             chooser.present()
 
         dest_browse.connect('clicked', on_dest_browse)
+        dest_box.append(dest_label)
         dest_box.append(dest_entry)
         dest_box.append(dest_browse)
         content.append(dest_box)

@@ -921,7 +921,7 @@ msgstr "选择文件夹"
 
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
-msgstr "选择(_S)"
+msgstr "选择"
 
 #~ msgid "_Keyboard Shortcuts"
 #~ msgstr "键盘快捷键(_K)"

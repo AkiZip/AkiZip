@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.6" date="2026-06-06">
+      <description translate="no">
+        <p>Add file support and new translations</p>
+        <ul>
+          <li>Added Brazilian Portuguese (pt_BR) translation support</li>
+          <li>Added Spanish (es) translation support</li>
+          <li>Added ability to add files to existing archives via the Compress split button</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.5" date="2026-05-30">
       <description translate="no">
         <p>Polish support and UI improvements</p>

@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 20:43+0800\n"
-"PO-Revision-Date: 2026-05-30 23:02+0000\n"
+"PO-Revision-Date: 2026-06-06 16:17+0000\n"
 "Last-Translator: teste celular <teste.aparelho.mail@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "akizip/akizip/pt_BR/>\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"X-Generator: Weblate 2026.6\n"
 
 #: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
 #: src/window.ui:6
@@ -317,7 +317,7 @@ msgstr "Adicionar arquivos"
 
 #: src/ui/window.py:358
 msgid "Add a file to the current archive."
-msgstr ""
+msgstr "Adicione um arquivo ao arquivo atual."
 
 #: src/ui/window.py:360 src/ui/window.py:736 src/ui/window.py:758
 msgid "_Add"
@@ -694,7 +694,7 @@ msgstr "Adicionar arquivos"
 
 #: src/ui/window.py:1824
 msgid "Added "
-msgstr ""
+msgstr "Adicionado "
 
 #: src/ui/window.py:1826
 #, fuzzy

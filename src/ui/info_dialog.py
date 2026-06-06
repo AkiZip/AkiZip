@@ -197,7 +197,7 @@ class InfoDialogMixin:
         return _('Unknown')
 
     def _format_size(self, size):
-        units = (_('B'), _('KB'), _('MB'), _('GB'))
+        units = ('B', 'KB', 'MB', 'GB')
         value = float(size)
         for unit in units:
             if value < 1024 or unit == units[-1]:

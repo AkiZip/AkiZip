@@ -32,6 +32,7 @@ done < po/POTFILES.in
 # ========== Extract by file type ==========
 [[ ${#PY_FILES[@]} -gt 0 ]] && \
     xgettext --from-code=UTF-8 --language=Python \
+        --add-comments=TRANSLATORS: \
         --keyword=_ --keyword=N_ --keyword=C_:1c,2 --keyword=NC_:1c,2 \
         --package-name=akizip --package-version=0.2.6 \
         -o "$TMPDIR/python.pot" "${PY_FILES[@]}"

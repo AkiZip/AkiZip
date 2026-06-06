@@ -26,26 +26,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-05 20:43+0800\n"
+"POT-Creation-Date: 2026-06-07 00:21+0800\n"
 "PO-Revision-Date: 2026-06-06 16:17+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/"
-"es/>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/es/"
+">\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 2026.6\n"
-
-#: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
-#: src/window.ui:6
-msgid "Akizip"
-msgstr "Akizip"
-
-#: data/top.akizip.akizip.desktop.in:8
-msgid "GTK;"
-msgstr "GTK;"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -78,10 +69,6 @@ msgstr ""
 "segundo plano cancelables con informes de progreso, un panel específico para "
 "registros y traducciones a varios idiomas."
 
-#: data/top.akizip.akizip.metainfo.xml.in:16
-msgid "ckappgit"
-msgstr "ckappgit"
-
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
 msgstr ""
@@ -100,7 +87,7 @@ msgstr "Archivador"
 msgid "Archive information is unavailable."
 msgstr "No hay información disponible sobre el archivador."
 
-#: src/ui/info_dialog.py:61 src/ui/window.py:1848
+#: src/ui/info_dialog.py:61
 msgid "Read archive information from "
 msgstr "Leer información del archivador desde "
 
@@ -192,22 +179,6 @@ msgstr "Archivo"
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
 msgstr "Desconocido"
-
-#: src/ui/info_dialog.py:200
-msgid "B"
-msgstr "B"
-
-#: src/ui/info_dialog.py:200
-msgid "KB"
-msgstr "kB"
-
-#: src/ui/info_dialog.py:200
-msgid "MB"
-msgstr "MB"
-
-#: src/ui/info_dialog.py:200
-msgid "GB"
-msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
@@ -451,8 +422,7 @@ msgid "Failed to create temporary directory"
 msgstr "No se pudo crear un directorio temporal"
 
 #: src/ui/window.py:1217 src/ui/window.py:1750 src/ui/window.py:1752
-#: src/ui/window.py:1778 src/ui/window.py:1780 src/ui/window.py:1853
-#: src/ui/window.py:1863
+#: src/ui/window.py:1778 src/ui/window.py:1780
 msgid "Extract "
 msgstr "Extraer "
 
@@ -550,8 +520,8 @@ msgstr "{} elementos"
 
 #: src/ui/window.py:1719 src/ui/window.py:1776 src/ui/window.py:1790
 #: src/ui/window.py:1804 src/ui/window.py:1818 src/ui/window.py:1840
-#: src/ui/window.py:1861 src/ui/window.py:1867 src/ui/window.py:1872
-#: src/ui/window.py:1878
+#: src/ui/window.py:1866 src/ui/window.py:1873 src/ui/window.py:1879
+#: src/ui/window.py:1886
 msgid "file"
 msgstr "archivo"
 
@@ -576,9 +546,9 @@ msgid "Compress failed: "
 msgstr "Falló la compresión: "
 
 #: src/ui/window.py:1734 src/ui/window.py:1748 src/ui/window.py:1762
-#: src/ui/window.py:1835 src/ui/window.py:1847 src/ui/window.py:1851
-#: src/ui/window.py:1856 src/ui/window.py:1860 src/ui/window.py:1866
-#: src/ui/window.py:1871 src/ui/window.py:1877
+#: src/ui/window.py:1835 src/ui/window.py:1849 src/ui/window.py:1854
+#: src/ui/window.py:1860 src/ui/window.py:1865 src/ui/window.py:1872
+#: src/ui/window.py:1878 src/ui/window.py:1885
 msgid "archive"
 msgstr "archivador"
 
@@ -618,7 +588,7 @@ msgstr "Extracción cancelada: "
 msgid "Extract failed: "
 msgstr "Falló la extracción: "
 
-#: src/ui/window.py:1764 src/ui/window.py:1766 src/ui/window.py:1857
+#: src/ui/window.py:1764 src/ui/window.py:1766
 msgid "Test "
 msgstr ""
 
@@ -638,7 +608,7 @@ msgstr "Prueba cancelada: "
 msgid "Test failed: "
 msgstr "Falló la prueba: "
 
-#: src/ui/window.py:1792 src/ui/window.py:1794 src/ui/window.py:1868
+#: src/ui/window.py:1792 src/ui/window.py:1794
 msgid "Delete "
 msgstr ""
 
@@ -658,7 +628,7 @@ msgstr "Eliminación cancelada: "
 msgid "Delete failed: "
 msgstr "Falló la eliminación: "
 
-#: src/ui/window.py:1806 src/ui/window.py:1808 src/ui/window.py:1874
+#: src/ui/window.py:1806 src/ui/window.py:1808
 msgid "Move "
 msgstr ""
 
@@ -678,7 +648,7 @@ msgstr "Movimiento cancelado: "
 msgid "Move failed: "
 msgstr "Falló el movimiento: "
 
-#: src/ui/window.py:1820 src/ui/window.py:1822 src/ui/window.py:1880
+#: src/ui/window.py:1820 src/ui/window.py:1822
 #, fuzzy
 #| msgid "Add Files"
 msgid "Add "
@@ -700,38 +670,77 @@ msgstr "Adición cancelada: "
 msgid "Add failed: "
 msgstr "Falló la adición: "
 
-#: src/ui/window.py:1841
-msgid "Create "
+#. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
+#: src/ui/window.py:1842
+#, python-brace-format
+msgid "Create {output} from {source}"
 msgstr ""
 
-#: src/ui/window.py:1841 src/ui/window.py:1863 src/ui/window.py:1868
-msgid " from "
-msgstr " de "
-
-#: src/ui/window.py:1843
-msgid "Parameters: "
+#. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
+#: src/ui/window.py:1845
+#, fuzzy, python-brace-format
+#| msgid "Parameters: "
+msgid "Parameters: {params}"
 msgstr "Parámetros: "
 
-#: src/ui/window.py:1852 src/ui/window.py:1862
+#. TRANSLATORS: {archive} is the name of the archive file
+#: src/ui/window.py:1851
+#, fuzzy, python-brace-format
+#| msgid "Read archive information from "
+msgid "Read archive information from {archive}"
+msgstr "Leer información del archivador desde "
+
+#: src/ui/window.py:1855 src/ui/window.py:1867
 msgid "folder"
 msgstr "carpeta"
 
-#: src/ui/window.py:1853 src/ui/window.py:1863 src/ui/window.py:1874
-#: src/ui/window.py:1880
-msgid " to "
-msgstr " a "
+#. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
+#: src/ui/window.py:1857
+#, fuzzy, python-brace-format
+#| msgid "Extracted file not found"
+msgid "Extract {archive} to {folder}"
+msgstr "No se encontró el archivo extraído"
 
-#: src/ui/window.py:1873
+#. TRANSLATORS: {archive} is the name of the archive file
+#: src/ui/window.py:1862
+#, fuzzy, python-brace-format
+#| msgid "archive"
+msgid "Test {archive}"
+msgstr "archivador"
+
+#. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
+#: src/ui/window.py:1869
+#, python-brace-format
+msgid "Extract {file} from {archive} to {folder}"
+msgstr ""
+
+#. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
+#: src/ui/window.py:1875
+#, fuzzy, python-brace-format
+#| msgid "The selected file is not an archive"
+msgid "Delete {file} from {archive}"
+msgstr "El archivo seleccionado no es un archivador"
+
+#: src/ui/window.py:1880
 msgid "destination"
 msgstr "destino"
 
-#: src/ui/window.py:1874 src/ui/window.py:1880
-msgid " in "
-msgstr " en "
+#. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
+#: src/ui/window.py:1882
+#, python-brace-format
+msgid "Move {file} to {destination} in {archive}"
+msgstr ""
 
-#: src/ui/window.py:1879
+#: src/ui/window.py:1887
 msgid "root"
 msgstr "raíz"
+
+#. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
+#: src/ui/window.py:1889
+#, fuzzy, python-brace-format
+#| msgid "Add a file to the current archive."
+msgid "Add {file} to {destination} in {archive}"
+msgstr "Añada un archivo al archivador actual."
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"
@@ -961,3 +970,33 @@ msgstr ""
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
 msgstr "_Seleccionar"
+
+#~ msgid "Akizip"
+#~ msgstr "Akizip"
+
+#~ msgid "GTK;"
+#~ msgstr "GTK;"
+
+#~ msgid "ckappgit"
+#~ msgstr "ckappgit"
+
+#~ msgid "B"
+#~ msgstr "B"
+
+#~ msgid "KB"
+#~ msgstr "kB"
+
+#~ msgid "MB"
+#~ msgstr "MB"
+
+#~ msgid "GB"
+#~ msgstr "GB"
+
+#~ msgid " from "
+#~ msgstr " de "
+
+#~ msgid " to "
+#~ msgstr " a "
+
+#~ msgid " in "
+#~ msgstr " en "

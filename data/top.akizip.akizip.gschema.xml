@@ -6,7 +6,7 @@
 			<summary>Application language</summary>
 			<description>
 				Language code used by the application. Use "auto" to follow the system
-				locale, or a gettext language code such as "en", "fr", "it", "pl", "zh_CN" or "zh_HK".
+				locale, or a gettext language code such as "en", "es", "fr", "it", "pl", "pt_BR", "zh_CN" or "zh_HK".
 			</description>
 		</key>
 		<key name="default-compress-format" type="s">

@@ -62,10 +62,11 @@
                           </object>
                         </child>
                         <child>
-                          <object class="GtkButton" id="add_button">
+                          <object class="AdwSplitButton" id="add_button">
                             <property name="width-request">70</property>
                             <property name="tooltip-text" translatable="yes">Compress</property>
                             <signal name="clicked" handler="butadd"></signal>
+                            <property name="menu-model">add_menu</property>
                             <property name="child">
                               <object class="GtkBox">
                                 <property name="orientation">vertical</property>
@@ -365,6 +366,16 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">pl</attribute>
           </item>
+          <item>
+            <attribute name="label">Português (Brasil)</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">pt_BR</attribute>
+          </item>
+          <item>
+            <attribute name="label">Español</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">es</attribute>
+          </item>
         </section>
       </submenu>
     </section>
@@ -402,6 +413,14 @@
       <item>
         <attribute name="label" translatable="yes">Extract Selected</attribute>
         <attribute name="action">win.extract-selected</attribute>
+      </item>
+    </section>
+  </menu>
+  <menu id="add_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Add File</attribute>
+        <attribute name="action">win.add-file</attribute>
       </item>
     </section>
   </menu>

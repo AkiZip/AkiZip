@@ -1482,22 +1482,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             suffix = archive_suffix(app.system.selected)
             if suffix not in ARCHIVE_SUFFIXES:
                 app.system.add_discovered_suffix(suffix)
-            if suffix in ('.tar.bz2', '.tar.xz'):
-                has_real_entry = any(
-                    not entry.get('Path', '').startswith('/')
-                    for entry in self._all_entries
-                )
-                if not has_real_entry:
-                    inner_name = app.system.selected.name
-                    if suffix == '.tar.bz2':
-                        inner_name = inner_name[:-4]
+            if not self._all_entries:
+                if suffix in ('.tar.bz2', '.tar.xz', '.tar.zst', '.tzst', '.tbz2', '.txz'):
+                    name = app.system.selected.name
+                    for ext in ('.tar.zst', '.tar.bz2', '.tar.xz', '.tzst', '.tbz2', '.txz'):
+                        if name.endswith(ext):
+                            inner = name[:-len(ext)] + '.tar'
+                            break
                     else:
-                        inner_name = inner_name[:-3]
+                        inner = name + '.tar'
                     self._all_entries.append({
-                        'Path': inner_name,
+                        'Path': inner,
                         'Size': '',
                         'Modified': '',
                     })
+            elif all(entry.get('Path', '').startswith('/') for entry in self._all_entries):
+                for entry in self._all_entries:
+                    p = entry.get('Path', '')
+                    if p:
+                        entry['Path'] = p.lstrip('/')
         self._folder_set = self._collect_folders(self._all_entries)
         self._current_internal_path = ''
         self._render_current_folder()

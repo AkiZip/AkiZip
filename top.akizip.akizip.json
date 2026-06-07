@@ -40,6 +40,13 @@
             ]
         },
         {
+            "name" : "python3-chardet",
+            "buildsystem" : "simple",
+            "build-commands": [
+                "pip3 install --prefix=/app --no-deps 'chardet>=5.0,<7.0'"
+            ]
+        },
+        {
             "name" : "akizip",
             "builddir" : true,
             "buildsystem" : "meson",

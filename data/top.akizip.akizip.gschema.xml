@@ -71,5 +71,13 @@
 				Default timeout in seconds for archive operations. Use -1 for no timeout.
 			</description>
 		</key>
+		<key name="extract-subfolder-behavior" type="s">
+			<default>"smart"</default>
+			<summary>Extract subfolder behavior</summary>
+			<description>
+				Controls whether to create a subfolder when extracting: "always" to always create,
+				"never" to never create, "smart" to create only when archive has multiple top-level entries.
+			</description>
+		</key>
 	</schema>
 </schemalist>

@@ -8,7 +8,7 @@
   <summary>A modern front-end for 7-Zip on GNOME</summary>
   <description>
     <p>Akizip is a graphical archive utility built with GTK 4 and libadwaita that brings the power of 7-Zip to the GNOME desktop.</p>
-    <p>It supports creating and extracting archives in 7z, zip, and tar formats. It can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz archives.</p>
+    <p>It supports creating and extracting archives in 7z, zip, and tar formats. It can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, tar.xz, tar.zst, cpio, rpm, deb, jar, apk, and msi archives.</p>
     <p>Features include archive inspection, cancellable background jobs with progress reporting, a dedicated logs panel, and multilingual support.</p>
   </description>
 
@@ -42,6 +42,20 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.0" date="2026-06-07">
+      <description translate="no">
+        <p>Multi-select, smart extraction, and expanded format support</p>
+        <ul>
+          <li>Added multi-select support for archive entries (all batch operations)</li>
+          <li>Added smart subfolder checkbox in extract dialog (GSettings-configurable)</li>
+          <li>Added right-click context menu with extract actions</li>
+          <li>Added CLI interface with extract and compress subcommands</li>
+          <li>Added Nemo file manager actions</li>
+          <li>Added support for .zst, .tar.zst, .cpio, .rpm, .deb, .jar, .apk, .msi and other archive formats</li>
+          <li>Added fallback opening for unrecognized archive formats via confirmation dialog</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.6" date="2026-06-06">
       <description translate="no">
         <p>Add file support and new translations</p>

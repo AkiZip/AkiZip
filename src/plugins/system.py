@@ -15,12 +15,24 @@ READ_ONLY_SUFFIXES = {
     ".tar.gz",
     ".tar.bz2",
     ".tar.xz",
-    ".iso"
+    ".tar.zst",
+    ".tzst",
+    ".tgz",
+    ".tbz2",
+    ".txz",
+    ".cpio",
+    ".rpm",
+    ".deb",
+    ".jar",
+    ".apk",
+    ".msi",
+    ".iso",
 }
 
 NO_PREVIEW_SUFFIXES = {
     ".bz2",
     ".xz",
+    ".zst",
 }
 
 # Additional archive formats 7-Zip can open but are not fully verified for modification.
@@ -29,6 +41,10 @@ ARCHIVE_SUFFIXES = {
     ".tar.gz", ".tar.bz2", ".tar.xz",
     ".cab", ".iso", ".dmg", ".wim", ".swm", ".esd",
     ".arj", ".z", ".taz", ".lzh", ".lha",
+    ".zst", ".tar.zst", ".tzst",
+    ".tgz", ".tbz2", ".txz",
+    ".cpio", ".rpm", ".deb",
+    ".jar", ".apk", ".msi",
 }
 
 
@@ -37,7 +53,7 @@ def archive_suffix(path):
     suffixes = path.suffixes
     if len(suffixes) >= 2:
         combined = ''.join(suffixes[-2:]).lower()
-        if combined in ('.tar.gz', '.tar.bz2', '.tar.xz'):
+        if combined in ('.tar.gz', '.tar.bz2', '.tar.xz', '.tar.zst'):
             return combined
     return suffixes[-1].lower() if suffixes else ''
 
@@ -53,6 +69,7 @@ class sysop:
         self.updated_at = time.time()
         self.is_nested = False
         self._temp_dirs = []
+        self._discovered_suffixes = set()
 
     def _select_path(self, path, display_path=None):
         if path is None or str(path).strip() == "":
@@ -122,6 +139,7 @@ class sysop:
         self.selected = None
         self.display_path = ""
         self.is_nested = False
+        self._discovered_suffixes.clear()
         self.success = False
         self.msg = "Selection cleared"
         self.updated_at = time.time()
@@ -171,7 +189,16 @@ class sysop:
         return self.selected is not None and self.selected.is_dir()
 
     def is_archive(self):
-        return self.is_file() and archive_suffix(self.selected) in ARCHIVE_SUFFIXES
+        if not self.is_file():
+            return False
+        suffix = archive_suffix(self.selected)
+        return suffix in ARCHIVE_SUFFIXES or suffix in self._discovered_suffixes
+
+    def add_discovered_suffix(self, suffix):
+        self._discovered_suffixes.add(suffix)
+
+    def clear_discovered_suffixes(self):
+        self._discovered_suffixes.clear()
 
     def format_category(self):
         if not self.is_archive():

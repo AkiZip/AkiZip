@@ -1,0 +1,39 @@
+[Nemo Action]
+Name=Extract Here (Akizip)
+Comment=Extract archive to current directory
+Exec=akizip extract %f --no-dialog --no-progress --no-smart
+Icon-Name=top.akizip.akizip
+Selection=s
+Extensions=7z;zip;rar;tar;gz;bz2;xz;cab;iso;dmg;wim;arj;z;lzh;lha;Z;tgz;tbz2;txz
+
+[Nemo Action]
+Name=Smart Extract Here (Akizip)
+Comment=Smart extract archive to current directory
+Exec=akizip extract --smart %f --no-dialog --no-progress
+Icon-Name=top.akizip.akizip
+Selection=s
+Extensions=7z;zip;rar;tar;gz;bz2;xz;cab;iso;dmg;wim;arj;z;lzh;lha;Z;tgz;tbz2;txz
+
+[Nemo Action]
+Name=Extract with progress (Akizip)
+Comment=Extract with progress dialog
+Exec=akizip extract --progress %f --no-dialog
+Icon-Name=top.akizip.akizip
+Selection=s
+Extensions=7z;zip;rar;tar;gz;bz2;xz;cab;iso;dmg;wim;arj;z;lzh;lha;Z;tgz;tbz2;txz
+
+[Nemo Action]
+Name=Extract to... (Akizip)
+Comment=Open extract dialog
+Exec=akizip extract --dialog --progress %f
+Icon-Name=top.akizip.akizip
+Selection=s
+Extensions=7z;zip;rar;tar;gz;bz2;xz;cab;iso;dmg;wim;arj;z;lzh;lha;Z;tgz;tbz2;txz
+
+[Nemo Action]
+Name=Compress with Akizip
+Comment=Compress selected files
+Exec=akizip compress --silent %F
+Icon-Name=top.akizip.akizip
+Selection=m
+Extensions=any

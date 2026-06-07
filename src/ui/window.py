@@ -24,6 +24,7 @@ from pathlib import Path
 from gettext import gettext as _
 
 from gi.repository import Adw
+from gi.repository import Gdk
 from gi.repository import Gtk
 from gi.repository import Gio
 from gi.repository import GObject
@@ -261,83 +262,147 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Move failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
-            return
-        item = selection.get_selected_item()
-        if item is None or item.path == '..':
+        items = self._get_selected_items()
+        if not items:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
 
-        target_name = item.path
-        dialog = Adw.AlertDialog.new(_('Move'), _('Move "{}" to:').format(target_name))
-        entry = Gtk.Entry()
-        entry.set_text(item.full_path.rstrip('/') if item.is_folder else item.full_path)
-        entry.set_activates_default(True)
+        if len(items) == 1:
+            item = items[0]
+            target_name = item.path
+            dialog = Adw.AlertDialog.new(_('Move'), _('Move "{}" to:').format(target_name))
+            entry = Gtk.Entry()
+            entry.set_text(item.full_path.rstrip('/') if item.is_folder else item.full_path)
+            entry.set_activates_default(True)
 
-        browse_button = Gtk.Button(icon_name='folder-symbolic')
-        browse_button.set_tooltip_text(_('Select destination folder'))
-        browse_button.set_valign(Gtk.Align.CENTER)
+            browse_button = Gtk.Button(icon_name='folder-symbolic')
+            browse_button.set_tooltip_text(_('Select destination folder'))
+            browse_button.set_valign(Gtk.Align.CENTER)
 
-        def on_browse_clicked(_btn):
-            from .move_folder_chooser import FolderChooserDialog
-            chooser = FolderChooserDialog(self)
-            chooser.set_folders(self._folder_set)
-            if item.is_folder:
-                chooser.set_source_path(item.full_path.rstrip('/'))
-            chooser.set_current_path('')
+            def on_browse_clicked(_btn):
+                from .move_folder_chooser import FolderChooserDialog
+                chooser = FolderChooserDialog(self)
+                chooser.set_folders(self._folder_set)
+                if item.is_folder:
+                    chooser.set_source_path(item.full_path.rstrip('/'))
+                chooser.set_current_path('')
 
-            def on_selected(path):
-                if path:
-                    entry.set_text(path + '/' + item.path)
-                else:
-                    entry.set_text(item.path)
+                def on_selected(path):
+                    if path:
+                        entry.set_text(path + '/' + item.path)
+                    else:
+                        entry.set_text(item.path)
 
-            chooser.connect_select(on_selected)
-            chooser.present()
+                chooser.connect_select(on_selected)
+                chooser.present()
 
-        browse_button.connect('clicked', on_browse_clicked)
+            browse_button.connect('clicked', on_browse_clicked)
 
-        entry.set_hexpand(True)
-        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
-        box.set_hexpand(True)
-        box.append(entry)
-        box.append(browse_button)
-        dialog.set_extra_child(box)
+            entry.set_hexpand(True)
+            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+            box.set_hexpand(True)
+            box.append(entry)
+            box.append(browse_button)
+            dialog.set_extra_child(box)
+
+            def run_move(password):
+                def on_error(error):
+                    if is_password_error(error):
+                        self._present_password_dialog(
+                            lambda new_password: run_move(new_password)
+                        )
+                        return True
+                    return False
+
+                dst_path = entry.get_text().strip().lstrip('/').rstrip('/')
+                if not dst_path:
+                    dst_path = item.path.rstrip('/')
+                src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+                self._run_command(
+                    'archive.move',
+                    selected,
+                    src_path,
+                    dst_path,
+                    password,
+                    on_success_extra=lambda _output: self._refresh_file_list(),
+                    on_error_extra=on_error,
+                )
+
+            def on_response(_d, response):
+                if response == 'confirm':
+                    run_move(None)
+
+        else:
+            # Multi-move: pick destination folder, move all items there
+            dialog = Adw.AlertDialog.new(_('Move'), _('Move {} items to:').format(len(items)))
+            entry = Gtk.Entry()
+            parent_path = items[0].full_path.rstrip('/').rsplit('/', 1)[0] if '/' in items[0].full_path.rstrip('/') else ''
+            entry.set_text(parent_path)
+            entry.set_activates_default(True)
+
+            browse_button = Gtk.Button(icon_name='folder-symbolic')
+            browse_button.set_tooltip_text(_('Select destination folder'))
+            browse_button.set_valign(Gtk.Align.CENTER)
+
+            def on_browse_clicked_multi(_btn):
+                from .move_folder_chooser import FolderChooserDialog
+                chooser = FolderChooserDialog(self)
+                chooser.set_folders(self._folder_set)
+                chooser.set_current_path('')
+
+                def on_selected(path):
+                    entry.set_text(path)
+
+                chooser.connect_select(on_selected)
+                chooser.present()
+
+            browse_button.connect('clicked', on_browse_clicked_multi)
+
+            entry.set_hexpand(True)
+            box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+            box.set_hexpand(True)
+            box.append(entry)
+            box.append(browse_button)
+            dialog.set_extra_child(box)
+
+            def run_move_multi(password):
+                def on_error(error):
+                    if is_password_error(error):
+                        self._present_password_dialog(
+                            lambda new_password: run_move_multi(new_password)
+                        )
+                        return True
+                    return False
+
+                dst_base = entry.get_text().strip().lstrip('/').rstrip('/')
+                for item in items:
+                    src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+                    basename = src_path.rsplit('/', 1)[-1] if '/' in src_path else src_path
+                    dst_path = (dst_base + '/' + basename) if dst_base else basename
+                    self._run_command(
+                        'archive.move',
+                        selected,
+                        src_path,
+                        dst_path,
+                        password,
+                        on_success_extra=lambda _output: self._refresh_file_list(),
+                        on_error_extra=on_error,
+                    )
+
+            def on_response_multi(_d, response):
+                if response == 'confirm':
+                    run_move_multi(None)
+
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('confirm', _('_Move'))
         dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
         dialog.set_default_response('confirm')
         dialog.set_close_response('cancel')
 
-        def run_move(password):
-            def on_error(error):
-                if is_password_error(error):
-                    self._present_password_dialog(
-                        lambda new_password: run_move(new_password)
-                    )
-                    return True
-                return False
-
-            dst_path = entry.get_text().strip().lstrip('/').rstrip('/')
-            if not dst_path:
-                dst_path = item.path.rstrip('/')
-            src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
-            self._run_command(
-                'archive.move',
-                selected,
-                src_path,
-                dst_path,
-                password,
-                on_success_extra=lambda _output: self._refresh_file_list(),
-                on_error_extra=on_error,
-            )
-
-        def on_response(_d, response):
-            if response == 'confirm':
-                run_move(None)
-
-        dialog.connect('response', on_response)
+        if len(items) == 1:
+            dialog.connect('response', on_response)
+        else:
+            dialog.connect('response', on_response_multi)
         dialog.present(self)
 
     def butadd_file(self, button):
@@ -491,16 +556,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Delete failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
-            return
-        item = selection.get_selected_item()
-        if item is None or item.path == '..':
+        items = self._get_selected_items()
+        if not items:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
 
-        target_name = item.path
-        dialog = Adw.AlertDialog.new(_('Delete'), _('Are you sure you want to delete "{}"?').format(target_name))
+        if len(items) == 1:
+            message = _('Are you sure you want to delete "{}"?').format(items[0].path)
+        else:
+            message = _('Are you sure you want to delete {} items?').format(len(items))
+        dialog = Adw.AlertDialog.new(_('Delete'), message)
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('confirm', _('_Delete'))
         dialog.set_response_appearance('confirm', Adw.ResponseAppearance.DESTRUCTIVE)
@@ -516,11 +581,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return True
                 return False
 
-            file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+            file_names = [item.full_path.rstrip('/') if item.is_folder else item.full_path for item in items]
             self._run_command(
                 'archive.delete',
                 selected,
-                [file_name],
+                file_names,
                 password,
                 on_success_extra=lambda _output: self._refresh_file_list(),
                 on_error_extra=on_error,
@@ -556,22 +621,19 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._run_command(
                 'archive.extract',
                 selected,
-                dest / selected.stem,
+                dest,
                 password,
                 on_error_extra=on_error,
             )
 
-        self._present_extract_dialog(run_extract)
+        self._present_extract_dialog(run_extract, archive_stem=selected.stem)
 
     def butextract_one(self, button):
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
-            return
-        item = selection.get_selected_item()
-        if item is None:
+        items = self._get_selected_items()
+        if not items:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
-        self._on_extract_entry_clicked(item)
+        self._on_extract_entry_clicked(items)
 
     @Gtk.Template.Callback()
     def on_choose_file(self, button):
@@ -1022,13 +1084,90 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
-    def _present_extract_dialog(self, on_chosen):
+    def _present_unknown_format_dialog(self):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.has_selected():
+            self.file_list_stack.set_visible_child_name('not_archive')
+            return
+
+        name = app.system.selected.name
+        dialog = Adw.AlertDialog.new(
+            _('Unknown format'),
+            _('"{}" is not a known archive format. Open anyway?').format(name),
+        )
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('try', _('_Try anyway'))
+        dialog.set_response_appearance('try', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('cancel')
+        dialog.set_close_response('cancel')
+
+        def on_try_error(error):
+            self._all_entries = []
+            self._folder_set = set()
+            self._current_internal_path = ''
+            self._append_log(_('Not an archive'), str(error), _status.ERROR)
+            self.file_list_stack.set_visible_child_name('not_archive')
+
+        def on_response(_d, response):
+            if response == 'try':
+                self.file_list_stack.set_visible_child_name('loading')
+                self._start_list_job(on_try_error)
+            else:
+                self.file_list_stack.set_visible_child_name('not_archive')
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+    def _count_top_level_entries(self):
+        top_level = set()
+        for entry in self._all_entries:
+            path = entry.get('Path', '').replace('\\', '/')
+            if not path:
+                continue
+            seg = path.split('/')[0]
+            if seg:
+                top_level.add(seg)
+        return len(top_level)
+
+    def _present_extract_dialog(self, on_chosen, archive_stem=None):
+        archive_path = self._selected_path_from_input()
+        if archive_stem is None:
+            if archive_path is not None:
+                archive_stem = archive_path.stem
+            else:
+                archive_stem = ''
+
+        if archive_path is not None:
+            default_dest = _host_path(str(archive_path.parent))
+        else:
+            default_dest = ''
+
         builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/extract-dialog.ui')
         box = builder.get_object('content')
         entry = builder.get_object('entry')
+        entry.set_text(default_dest)
         entry.set_editable(not _IS_FLATPAK)
         browse_button = builder.get_object('browse_button')
         password_entry = builder.get_object('password_entry')
+
+        top_level_count = self._count_top_level_entries()
+        app = self.get_application()
+        behavior = 'smart'
+        if app is not None and hasattr(app, 'settings'):
+            behavior = app.settings.get_string('extract-subfolder-behavior')
+
+        if behavior == 'always':
+            create_subfolder = True
+        elif behavior == 'never':
+            create_subfolder = False
+        else:
+            create_subfolder = top_level_count > 1
+
+        subfolder_check = Gtk.CheckButton(
+            label=_('Extract to "{}" subfolder').format(archive_stem),
+            active=create_subfolder,
+        )
+        box.append(subfolder_check)
 
         dialog = Adw.AlertDialog.new(_('Extract'), None)
         dialog.set_extra_child(box)
@@ -1055,6 +1194,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return
                 password = password_entry.get_text() or None
                 dest = Path(last['op']) if (last['display'] == text and last['op']) else Path(text).expanduser()
+                if subfolder_check.get_active():
+                    dest = dest / archive_stem
                 on_chosen(dest, password)
 
         dialog.connect('response', on_response)
@@ -1062,7 +1203,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _build_file_list(self):
         self._file_list_store = Gio.ListStore(item_type=ArchiveEntry)
-        selection = Gtk.SingleSelection(model=self._file_list_store)
+        selection = Gtk.MultiSelection(model=self._file_list_store)
         view = Gtk.ColumnView(model=selection)
         view.set_show_row_separators(True)
         view.set_show_column_separators(False)
@@ -1085,6 +1226,41 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.file_list_scroller.set_child(view)
         self._file_list_view = view
         self._file_list_selection = selection
+
+        right_click = Gtk.GestureClick(button=3)
+        right_click.connect('pressed', self._on_right_click)
+        view.add_controller(right_click)
+
+    def _get_selected_items(self):
+        selection = getattr(self, '_file_list_selection', None)
+        if selection is None:
+            return []
+        items = []
+        for i in range(selection.get_n_items()):
+            if selection.is_selected(i):
+                item = selection.get_model().get_item(i)
+                if item is not None and item.path != '..':
+                    items.append(item)
+        return items
+
+    def _on_right_click(self, gesture, n_press, x, y):
+        menu_model = Gio.Menu()
+        section = Gio.Menu()
+        section.append(_('Extract All'), 'win.extract-all')
+        section.append(_('Extract Selected'), 'win.extract-selected')
+        menu_model.append_section(None, section)
+
+        menu = Gtk.PopoverMenu.new_from_model(menu_model)
+        menu.set_parent(self._file_list_view)
+        menu.set_has_arrow(False)
+
+        rect = Gdk.Rectangle()
+        rect.x = int(x) + 5
+        rect.y = int(y) + 5
+        rect.width = 1
+        rect.height = 1
+        menu.set_pointing_to(rect)
+        menu.popup()
 
     def _on_path_setup(self, factory, list_item):
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
@@ -1136,8 +1312,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _on_modified_bind(self, factory, list_item):
         list_item.get_child().set_text(list_item.get_item().modified)
 
-    def _on_extract_entry_clicked(self, item):
-        if item is None or item.path == '..':
+    def _on_extract_entry_clicked(self, items):
+        if not items:
             return
 
         selected = self._selected_path_from_input()
@@ -1153,16 +1329,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return True
                 return False
 
-            self._run_command(
-                'archive.extract_file',
-                selected,
-                item.full_path.rstrip('/') if item.is_folder else item.full_path,
-                dest,
-                password,
-                on_error_extra=on_error,
-            )
+            for item in items:
+                self._run_command(
+                    'archive.extract_file',
+                    selected,
+                    item.full_path.rstrip('/') if item.is_folder else item.full_path,
+                    dest,
+                    password,
+                    on_error_extra=on_error,
+                )
 
-        self._present_extract_dialog(run_extract)
+        self._present_extract_dialog(run_extract, archive_stem=selected.stem)
 
     def _on_row_activate(self, view, position):
         item = self._file_list_store.get_item(position)
@@ -1246,12 +1423,22 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self.file_list_stack.set_visible_child_name('empty')
             return
         if not app.system.is_archive():
-            self.file_list_stack.set_visible_child_name('not_archive')
+            suffix = archive_suffix(app.system.selected) if app.system.selected else ''
+            if suffix:
+                self._present_unknown_format_dialog()
+            else:
+                self.file_list_stack.set_visible_child_name('not_archive')
             return
         if app.system.format_category() == 'no_preview':
             self.file_list_stack.set_visible_child_name('no_preview')
             return
 
+        self._start_list_job()
+
+    def _start_list_job(self, on_error_override=None):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system'):
+            return
         selected = Path(app.system.operation_path())
         command = getattr(app, 'commands', {}).get('archive.list')
         job_queue = getattr(app, 'job_queue', None)
@@ -1272,7 +1459,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                         lambda new_password: run_list(new_password)
                     )
                     return
-                self._on_file_list_error(error)
+                if on_error_override:
+                    on_error_override(error)
+                else:
+                    self._on_file_list_error(error)
 
             job_queue.submit(
                 command,
@@ -1290,6 +1480,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if app is not None and hasattr(app, 'system') and app.system.has_selected():
             suffix = archive_suffix(app.system.selected)
+            if suffix not in ARCHIVE_SUFFIXES:
+                app.system.add_discovered_suffix(suffix)
             if suffix in ('.tar.bz2', '.tar.xz'):
                 has_real_entry = any(
                     not entry.get('Path', '').startswith('/')

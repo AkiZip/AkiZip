@@ -43,4 +43,8 @@ configure_file(
   install_dir: get_option('datadir') / 'dbus-1' / 'services'
 )
 
+install_data('akizip.nemo_action',
+  install_dir: get_option('datadir') / 'nemo' / 'actions'
+)
+
 subdir('icons')

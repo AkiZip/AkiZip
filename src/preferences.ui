@@ -28,6 +28,28 @@
       </object>
     </child>
     <child>
+      <object class="AdwPreferencesGroup" id="extract_group">
+        <property name="title" translatable="yes">Extraction</property>
+        <child>
+          <object class="AdwActionRow" id="subfolder_row">
+            <property name="title" translatable="yes">Subfolder behavior</property>
+            <property name="subtitle" translatable="yes">Controls whether to create a subfolder when extracting. "Smart" creates one only for archives with multiple top-level entries.</property>
+            <property name="activatable-widget">subfolder_combo</property>
+            <child type="suffix">
+              <object class="GtkComboBoxText" id="subfolder_combo">
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes" id="always">Always</item>
+                  <item translatable="yes" id="smart">Smart</item>
+                  <item translatable="yes" id="never">Never</item>
+                </items>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+    <child>
       <object class="AdwPreferencesGroup" id="compression_group">
         <property name="title" translatable="yes">Compression</property>
         <child>

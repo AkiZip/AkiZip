@@ -1,13 +1,14 @@
 
 import sys
 import gi
+from pathlib import Path
 
 from gettext import gettext as _
 
 gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
-from gi.repository import Gtk, Gio, Adw
+from gi.repository import GLib, Gtk, Gio, Adw
 from .window import AkizipWindow
 from .ui.window import _host_path
 
@@ -37,6 +38,15 @@ class AkizipApplication(Adw.Application):
         if not win:
             win = AkizipWindow(application=self)
         win.present()
+
+        pending = getattr(self, '_cli_pending_action', None)
+        if pending is not None:
+            action, params = pending
+            del self._cli_pending_action
+            if action == 'extract':
+                GLib.idle_add(lambda: win.butextract(None) or False)
+            elif action == 'compress':
+                GLib.idle_add(lambda: win.butadd(None) or False)
 
     def do_open(self, files, n_files, hint):
         """Called when files are opened from the desktop or file manager."""
@@ -93,6 +103,17 @@ class AkizipApplication(Adw.Application):
         threads_spin = builder.get_object('threads_spin')
         encrypt_names_switch = builder.get_object('encrypt_names_switch')
         timeout_spin = builder.get_object('timeout_spin')
+        subfolder_combo = builder.get_object('subfolder_combo')
+
+        default_subfolder = self._settings_get_string('extract-subfolder-behavior', 'smart')
+        subfolder_combo.set_active_id(default_subfolder if default_subfolder in ('always', 'smart', 'never') else 'smart')
+        subfolder_combo.connect(
+            'changed',
+            lambda combo: self._settings_set_string(
+                'extract-subfolder-behavior',
+                combo.get_active_id() or 'smart',
+            ),
+        )
 
         timeout_spin.set_value(self._settings_get_int('default-timeout', -1))
         timeout_spin.connect(

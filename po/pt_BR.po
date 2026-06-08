@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-07 00:21+0800\n"
-"PO-Revision-Date: 2026-06-06 16:17+0000\n"
+"PO-Revision-Date: 2026-06-09 05:04+0000\n"
 "Last-Translator: teste celular <teste.aparelho.mail@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "akizip/akizip/pt_BR/>\n"
@@ -275,16 +275,12 @@ msgid "_Move"
 msgstr "_Mover"
 
 #: src/ui/window.py:350 src/ui/window.py:353
-#, fuzzy
-#| msgid "Add Files"
 msgid "Add failed"
-msgstr "Adicionar arquivos"
+msgstr "Falha ao adicionar"
 
 #: src/ui/window.py:358 src/window.ui:422
-#, fuzzy
-#| msgid "Add Files"
 msgid "Add File"
-msgstr "Adicionar arquivos"
+msgstr "Adicionar arquivo"
 
 #: src/ui/window.py:358
 msgid "Add a file to the current archive."
@@ -295,16 +291,12 @@ msgid "_Add"
 msgstr "_Adicionar"
 
 #: src/ui/window.py:379
-#, fuzzy
-#| msgid "Select failed"
 msgid "Select a file"
-msgstr "Falha ao selecionar"
+msgstr "Selecionar um arquivo"
 
 #: src/ui/window.py:383
-#, fuzzy
-#| msgid "Select failed"
 msgid "Select file"
-msgstr "Falha ao selecionar"
+msgstr "Selecionar arquivo"
 
 #: src/ui/window.py:388 src/ui/window.py:579
 msgid "Select File"
@@ -315,10 +307,8 @@ msgid "_Open"
 msgstr "_Abrir"
 
 #: src/ui/window.py:418
-#, fuzzy
-#| msgid "destination"
 msgid "Destination"
-msgstr "destino"
+msgstr "Destino"
 
 #: src/ui/window.py:423 src/extract-dialog.ui:15
 msgid "Destination folder"
@@ -657,52 +647,42 @@ msgid "Move failed: "
 msgstr "Falha ao mover: "
 
 #: src/ui/window.py:1820 src/ui/window.py:1822
-#, fuzzy
-#| msgid "Add Files"
 msgid "Add "
-msgstr "Adicionar arquivos"
+msgstr "Adicionar "
 
 #: src/ui/window.py:1824
 msgid "Added "
 msgstr "Adicionado "
 
 #: src/ui/window.py:1826
-#, fuzzy
-#| msgid "Open timed out: "
 msgid "Add timed out: "
-msgstr "Tempo limite de abertura esgotado: "
+msgstr "Tempo limite esgotado ao adicionar: "
 
 #: src/ui/window.py:1828
-#, fuzzy
-#| msgid "Open cancelled: "
 msgid "Add cancelled: "
-msgstr "Abertura cancelada: "
+msgstr "Adição cancelada: "
 
 #: src/ui/window.py:1829
-#, fuzzy
-#| msgid "Open failed: "
 msgid "Add failed: "
-msgstr "Falha ao abrir: "
+msgstr "Falha ao adicionar: "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:1842
 #, python-brace-format
 msgid "Create {output} from {source}"
-msgstr ""
+msgstr "Criar {output} de {source}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
 #: src/ui/window.py:1845
-#, fuzzy, python-brace-format
-#| msgid "Parameters: "
+#, python-brace-format
 msgid "Parameters: {params}"
-msgstr "Parâmetros: "
+msgstr "Parâmetros:{params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:1851
-#, fuzzy, python-brace-format
-#| msgid "Read archive information from "
+#, python-brace-format
 msgid "Read archive information from {archive}"
-msgstr "Leia informações de arquivo de "
+msgstr "Ler informações de arquivo de {archive}"
 
 #: src/ui/window.py:1855 src/ui/window.py:1867
 msgid "folder"
@@ -710,30 +690,27 @@ msgstr "pasta"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:1857
-#, fuzzy, python-brace-format
-#| msgid "Extracted file not found"
+#, python-brace-format
 msgid "Extract {archive} to {folder}"
-msgstr "Arquivo extraído não encontrado"
+msgstr "Extrair {archive} para {folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:1862
-#, fuzzy, python-brace-format
-#| msgid "archive"
+#, python-brace-format
 msgid "Test {archive}"
-msgstr "arquivo"
+msgstr "Testar {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:1869
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
-msgstr ""
+msgstr "Extrair {file} de {archive} para {folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
 #: src/ui/window.py:1875
-#, fuzzy, python-brace-format
-#| msgid "The selected file is not an archive"
+#, python-brace-format
 msgid "Delete {file} from {archive}"
-msgstr "O arquivo selecionado não é um arquivo válido"
+msgstr "Excluir {file} de {archive}"
 
 #: src/ui/window.py:1880
 msgid "destination"
@@ -743,20 +720,17 @@ msgstr "destino"
 #: src/ui/window.py:1882
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
-msgstr ""
+msgstr "Mover {file} para {destination} em {archive}"
 
 #: src/ui/window.py:1887
-#, fuzzy
-#| msgid "(root)"
 msgid "root"
-msgstr "(raiz)"
+msgstr "raiz"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:1889
-#, fuzzy, python-brace-format
-#| msgid "Add a file to the current archive."
+#, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
-msgstr "Adicione um arquivo ao arquivo atual."
+msgstr "Adicionar {file} para {destination} em {archive}"
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"

@@ -271,7 +271,7 @@ def archive_compress_advance(output_archive, source_paths, args, timeout=-1, can
     ], timeout, cancel_event, on_progress)
 
 
-def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract(archive_path, output_dir, password=None, skip_list=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
@@ -282,11 +282,14 @@ def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_
         f'-o{output_dir}',
         '-y',
     ]
+    if skip_list:
+        for path in skip_list:
+            args.append(f'-x!{path}')
     if password:
         args.append(f'-p{password}')
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, skip_list=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
@@ -297,6 +300,9 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None
         f'-o{output_dir}',
         '-y',
     ]
+    if skip_list:
+        for path in skip_list:
+            args.append(f'-x!{path}')
     if password:
         args.append(f'-p{password}')
     args.extend(['--', str(file_name)])

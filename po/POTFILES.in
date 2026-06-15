@@ -3,6 +3,7 @@
 data/top.akizip.akizip.metainfo.xml.in
 data/top.akizip.akizip.gschema.xml
 src/main.py
+src/ui/extract_duplicate_checker.py
 src/ui/info_dialog.py
 src/ui/log_panel.py
 src/ui/window.py

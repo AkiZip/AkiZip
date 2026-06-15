@@ -31,6 +31,7 @@ from gi.repository import Pango
 from ..plugins.password import is_password_error
 from ..plugins.status import _status
 from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix
+from .extract_duplicate_checker import ExtractDuplicateChecker
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
 
@@ -544,11 +545,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Extract failed'), _('Selected path is not an archive.'), _status.ERROR)
             return
 
-        def run_extract(dest, password):
+        def run_extract(dest, password, skip_list=None):
             def on_error(error):
                 if is_password_error(error):
                     self._present_password_dialog(
-                        lambda new_password: run_extract(dest, new_password)
+                        lambda new_password: run_extract(dest, new_password, skip_list)
                     )
                     return True
                 return False
@@ -558,10 +559,24 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 selected,
                 dest / selected.stem,
                 password,
+                skip_list,
                 on_error_extra=on_error,
             )
 
-        self._present_extract_dialog(run_extract)
+        def on_extract_chosen(dest, password):
+            output_dir = dest / selected.stem
+            if not self._is_conflict_check_enabled():
+                run_extract(dest, password)
+                return
+            file_list = self._build_extract_file_list()
+            ExtractDuplicateChecker(
+                self,
+                output_dir,
+                file_list,
+                lambda skip_list: run_extract(dest, password, skip_list),
+            ).start()
+
+        self._present_extract_dialog(on_extract_chosen)
 
     def butextract_one(self, button):
         selection = getattr(self, '_file_list_selection', None)
@@ -1144,11 +1159,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if selected is None:
             return
 
-        def run_extract(dest, password):
+        file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+
+        def run_extract(dest, password, skip_list=None):
             def on_error(error):
                 if is_password_error(error):
                     self._present_password_dialog(
-                        lambda new_password: run_extract(dest, new_password)
+                        lambda new_password: run_extract(dest, new_password, skip_list)
                     )
                     return True
                 return False
@@ -1156,13 +1173,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._run_command(
                 'archive.extract_file',
                 selected,
-                item.full_path.rstrip('/') if item.is_folder else item.full_path,
+                file_name,
                 dest,
                 password,
+                skip_list,
                 on_error_extra=on_error,
             )
 
-        self._present_extract_dialog(run_extract)
+        def on_extract_chosen(dest, password):
+            if not self._is_conflict_check_enabled():
+                run_extract(dest, password)
+                return
+            ExtractDuplicateChecker(
+                self,
+                dest,
+                [file_name],
+                lambda skip_list: run_extract(dest, password, skip_list),
+            ).start()
+
+        self._present_extract_dialog(on_extract_chosen)
 
     def _on_row_activate(self, view, position):
         item = self._file_list_store.get_item(position)
@@ -1397,6 +1426,24 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._sync_address_bar()
         self._update_title()
 
+    def _build_extract_file_list(self):
+        files = []
+        for entry in self._all_entries:
+            path = entry.get('Path', '')
+            if not path:
+                continue
+            attrs = entry.get('Attributes', '')
+            folder = entry.get('Folder', '')
+            if 'D' in attrs or folder == '+':
+                continue
+            files.append(path)
+        return files
+
+    def _is_conflict_check_enabled(self):
+        app = self.get_application()
+        if app is None or not hasattr(app, '_settings_get_boolean'):
+            return False
+        return app._settings_get_boolean('experimental-conflict-check', False)
     def _on_file_list_error(self, error):
         self._all_entries = []
         self._folder_set = set()

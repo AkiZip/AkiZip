@@ -93,6 +93,7 @@ class AkizipApplication(Adw.Application):
         threads_spin = builder.get_object('threads_spin')
         encrypt_names_switch = builder.get_object('encrypt_names_switch')
         timeout_spin = builder.get_object('timeout_spin')
+        conflict_check_switch = builder.get_object('conflict_check_switch')
 
         timeout_spin.set_value(self._settings_get_int('default-timeout', -1))
         timeout_spin.connect(
@@ -193,6 +194,17 @@ class AkizipApplication(Adw.Application):
             'notify::active',
             lambda switch, pspec: self._settings_set_boolean(
                 'default-compress-encrypt-names',
+                switch.get_active(),
+            ),
+        )
+
+        conflict_check_switch.set_active(
+            self._settings_get_boolean('experimental-conflict-check', False)
+        )
+        conflict_check_switch.connect(
+            'notify::active',
+            lambda switch, pspec: self._settings_set_boolean(
+                'experimental-conflict-check',
                 switch.get_active(),
             ),
         )

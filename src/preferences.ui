@@ -159,5 +159,22 @@
         </child>
       </object>
     </child>
+    <child>
+      <object class="AdwPreferencesGroup" id="experimental_group">
+        <property name="title" translatable="yes">Experimental features</property>
+        <child>
+          <object class="AdwActionRow" id="conflict_check_row">
+            <property name="title" translatable="yes">Conflict file check</property>
+            <property name="subtitle" translatable="yes">Check for existing files before extracting and ask whether to skip or overwrite.</property>
+            <property name="activatable-widget">conflict_check_switch</property>
+            <child type="suffix">
+              <object class="GtkSwitch" id="conflict_check_switch">
+                <property name="valign">center</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>

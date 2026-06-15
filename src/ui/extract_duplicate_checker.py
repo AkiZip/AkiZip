@@ -63,7 +63,7 @@ class ExtractDuplicateChecker:
                     continue
                 self.current_path = internal_path
                 self._ensure_dialog()
-                self._update_dialog(self.index, len(self.file_list), dest_path)
+                self._update_dialog(dest_path)
                 self.dialog.present(self.parent)
                 return False
         self._finish()
@@ -84,10 +84,8 @@ class ExtractDuplicateChecker:
         )
         self.dialog.connect('response', self._on_response)
 
-    def _update_dialog(self, current, total, dest_path):
-        self.dialog.set_heading(
-            _('Conflict handling ({current}/{total})').format(current=current, total=total)
-        )
+    def _update_dialog(self, dest_path):
+        self.dialog.set_heading(_('Conflict handling'))
         self.dialog.set_body(
             _('The file "{file}" already exists in the destination.').format(
                 file=dest_path.name

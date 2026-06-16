@@ -41,8 +41,6 @@ class ExtractDuplicateChecker:
         self.auto_skip = False
         self.auto_overwrite = False
         self.index = 0
-        self.dialog = None
-        self.current_path = None
 
     def start(self):
         if not self.file_list:
@@ -61,49 +59,42 @@ class ExtractDuplicateChecker:
                     continue
                 if self.auto_overwrite:
                     continue
-                self.current_path = internal_path
-                self._ensure_dialog()
-                self._update_dialog(dest_path)
-                self.dialog.present(self.parent)
+                self._present_conflict_dialog(dest_path, internal_path)
                 return False
         self._finish()
         return False
 
-    def _ensure_dialog(self):
-        if self.dialog is not None:
-            return
-        self.dialog = Adw.AlertDialog.new('', None)
-        self.dialog.add_response('skip_all', _('Skip _All'))
-        self.dialog.add_response('overwrite_all', _('O_verwrite All'))
-        self.dialog.add_response('skip', _('_Skip'))
-        self.dialog.add_response('overwrite', _('_Overwrite'))
-        self.dialog.set_default_response('overwrite')
-        self.dialog.set_close_response('skip')
-        self.dialog.set_response_appearance(
+    def _present_conflict_dialog(self, dest_path, internal_path):
+        dialog = Adw.AlertDialog.new('', None)
+        dialog.add_response('skip_all', _('Skip _All'))
+        dialog.add_response('overwrite_all', _('O_verwrite All'))
+        dialog.add_response('skip', _('_Skip'))
+        dialog.add_response('overwrite', _('_Overwrite'))
+        dialog.set_default_response('overwrite')
+        dialog.set_close_response('skip')
+        dialog.set_response_appearance(
             'overwrite', Adw.ResponseAppearance.SUGGESTED
         )
-        self.dialog.connect('response', self._on_response)
-
-    def _update_dialog(self, dest_path):
-        self.dialog.set_heading(_('Conflict handling'))
-        self.dialog.set_body(
+        dialog.set_heading(_('Conflict handling'))
+        dialog.set_body(
             _('The file "{file}" already exists in the destination.').format(
                 file=dest_path.name
             )
         )
 
-    def _on_response(self, _dialog, response):
-        if response == 'skip':
-            self.skip_list.append(self.current_path)
-        elif response == 'skip_all':
-            self.auto_skip = True
-            self.skip_list.append(self.current_path)
-        elif response == 'overwrite_all':
-            self.auto_overwrite = True
-        # 'overwrite': do nothing for the current file.
-        GLib.idle_add(self._check_next)
+        def on_response(_dialog, response):
+            if response == 'skip':
+                self.skip_list.append(internal_path)
+            elif response == 'skip_all':
+                self.auto_skip = True
+                self.skip_list.append(internal_path)
+            elif response == 'overwrite_all':
+                self.auto_overwrite = True
+            # 'overwrite': do nothing for the current file.
+            GLib.idle_add(self._check_next)
+
+        dialog.connect('response', on_response)
+        dialog.present(self.parent)
 
     def _finish(self):
-        if self.dialog is not None:
-            self.dialog.close()
         self.on_finished(self.skip_list or None)

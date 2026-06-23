@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-07 00:21+0800\n"
-"PO-Revision-Date: 2026-05-20 14:29+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-06-24 11:01+0000\n"
+"Last-Translator: reducedradius "
+"<flytothehighest@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/akizip/akizip/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"X-Generator: Weblate 2026.7.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -509,11 +510,11 @@ msgstr "压缩超时："
 
 #: src/ui/window.py:1730
 msgid "Compress cancelled: "
-msgstr "压缩已取消："
+msgstr "压缩已取消： "
 
 #: src/ui/window.py:1731
 msgid "Compress failed: "
-msgstr "压缩失败："
+msgstr "压缩失败： "
 
 #: src/ui/window.py:1734 src/ui/window.py:1748 src/ui/window.py:1762
 #: src/ui/window.py:1835 src/ui/window.py:1849 src/ui/window.py:1854
@@ -540,7 +541,7 @@ msgstr "打开已取消："
 
 #: src/ui/window.py:1745
 msgid "Open failed: "
-msgstr "打开失败："
+msgstr "打开失败： "
 
 #: src/ui/window.py:1754 src/ui/window.py:1782
 msgid "Extracted "
@@ -616,7 +617,7 @@ msgstr "移动已取消："
 
 #: src/ui/window.py:1815
 msgid "Move failed: "
-msgstr "移动失败："
+msgstr "移动失败： "
 
 #: src/ui/window.py:1820 src/ui/window.py:1822
 msgid "Add "
@@ -642,7 +643,7 @@ msgstr "添加失败："
 #: src/ui/window.py:1842
 #, python-brace-format
 msgid "Create {output} from {source}"
-msgstr ""
+msgstr "从{source}中创建{output}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
 #: src/ui/window.py:1845

@@ -27,10 +27,10 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-07 00:21+0800\n"
-"PO-Revision-Date: 2026-06-06 16:17+0000\n"
+"PO-Revision-Date: 2026-06-10 07:01+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/es/"
-">\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/"
+"es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -474,7 +474,7 @@ msgstr ""
 
 #: src/ui/window.py:1527
 msgid "Nested archive opened"
-msgstr ""
+msgstr "Archivador anidado abierto"
 
 #: src/ui/window.py:1528
 msgid ""
@@ -486,7 +486,7 @@ msgstr ""
 
 #: src/ui/window.py:1555
 msgid "Language changed"
-msgstr ""
+msgstr "Idioma modificado"
 
 #: src/ui/window.py:1556
 msgid "Restart the application to apply the new language."
@@ -674,21 +674,19 @@ msgstr "Falló la adición: "
 #: src/ui/window.py:1842
 #, python-brace-format
 msgid "Create {output} from {source}"
-msgstr ""
+msgstr "Crear {output} desde {source}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
 #: src/ui/window.py:1845
-#, fuzzy, python-brace-format
-#| msgid "Parameters: "
+#, python-brace-format
 msgid "Parameters: {params}"
-msgstr "Parámetros: "
+msgstr "Parámetros: {params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:1851
-#, fuzzy, python-brace-format
-#| msgid "Read archive information from "
+#, python-brace-format
 msgid "Read archive information from {archive}"
-msgstr "Leer información del archivador desde "
+msgstr "Leer información del archivador desde {archive}"
 
 #: src/ui/window.py:1855 src/ui/window.py:1867
 msgid "folder"
@@ -696,30 +694,27 @@ msgstr "carpeta"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:1857
-#, fuzzy, python-brace-format
-#| msgid "Extracted file not found"
+#, python-brace-format
 msgid "Extract {archive} to {folder}"
-msgstr "No se encontró el archivo extraído"
+msgstr "Extraer {archive} en {folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:1862
-#, fuzzy, python-brace-format
-#| msgid "archive"
+#, python-brace-format
 msgid "Test {archive}"
-msgstr "archivador"
+msgstr "Probar {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:1869
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
-msgstr ""
+msgstr "Extraer {file} desde {archive} en {folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
 #: src/ui/window.py:1875
-#, fuzzy, python-brace-format
-#| msgid "The selected file is not an archive"
+#, python-brace-format
 msgid "Delete {file} from {archive}"
-msgstr "El archivo seleccionado no es un archivador"
+msgstr "Eliminar {file} de {archive}"
 
 #: src/ui/window.py:1880
 msgid "destination"
@@ -729,7 +724,7 @@ msgstr "destino"
 #: src/ui/window.py:1882
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
-msgstr ""
+msgstr "Mover {file} a {destination} en {archive}"
 
 #: src/ui/window.py:1887
 msgid "root"
@@ -737,10 +732,9 @@ msgstr "raíz"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:1889
-#, fuzzy, python-brace-format
-#| msgid "Add a file to the current archive."
+#, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
-msgstr "Añada un archivo al archivador actual."
+msgstr "Añadir {file} a {destination} en {archive}"
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"

@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.7" date="2026-06-29">
+      <description translate="no">
+        <p>New translations and 7-Zip update</p>
+        <ul>
+          <li>Added Tamil (ta) translation support</li>
+          <li>Added Russian (ru) translation support</li>
+          <li>Updated 7-Zip to 26.02</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.6" date="2026-06-06">
       <description translate="no">
         <p>Add file support and new translations</p>

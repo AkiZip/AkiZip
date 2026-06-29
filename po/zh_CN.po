@@ -7,9 +7,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-05 20:43+0800\n"
-"PO-Revision-Date: 2026-05-20 14:29+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"POT-Creation-Date: 2026-06-07 00:21+0800\n"
+"PO-Revision-Date: 2026-06-24 11:01+0000\n"
+"Last-Translator: reducedradius "
+"<flytothehighest@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/akizip/akizip/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,16 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
-
-#: data/top.akizip.akizip.desktop.in:2 data/top.akizip.akizip.metainfo.xml.in:7
-#: src/window.ui:6
-msgid "Akizip"
-msgstr "Akizip"
-
-#: data/top.akizip.akizip.desktop.in:8
-msgid "GTK;"
-msgstr "GTK;"
+"X-Generator: Weblate 2026.7.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -37,7 +29,8 @@ msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
-"Akizip 是一款基于 GTK 4 和 libadwaita 的图形化归档工具，为 GNOME 桌面带来 7-Zip 的强大功能。"
+"Akizip 是一款基于 GTK 4 和 libadwaita 的图形化归档工具，为 GNOME 桌面带来 7-"
+"Zip 的强大功能。"
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -45,7 +38,8 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
-"支持创建和解压 7z、zip 和 tar 格式的压缩包。还可以打开（只读）rar、gz、bz2、xz、tar.gz、tar.bz2 和 tar.xz 格式的压缩包。"
+"支持创建和解压 7z、zip 和 tar 格式的压缩包。还可以打开（只读）rar、gz、bz2、"
+"xz、tar.gz、tar.bz2 和 tar.xz 格式的压缩包。"
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
@@ -53,10 +47,6 @@ msgid ""
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
 "功能包括压缩包检查、可取消的后台任务及进度报告、专用日志面板和多语言支持。"
-
-#: data/top.akizip.akizip.metainfo.xml.in:16
-msgid "ckappgit"
-msgstr "ckappgit"
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
@@ -74,7 +64,7 @@ msgstr "压缩包"
 msgid "Archive information is unavailable."
 msgstr "压缩包信息不可用。"
 
-#: src/ui/info_dialog.py:61 src/ui/window.py:1848
+#: src/ui/info_dialog.py:61
 msgid "Read archive information from "
 msgstr "读取压缩包信息："
 
@@ -166,22 +156,6 @@ msgstr "文件"
 #: src/ui/info_dialog.py:197
 msgid "Unknown"
 msgstr "未知"
-
-#: src/ui/info_dialog.py:200
-msgid "B"
-msgstr "B"
-
-#: src/ui/info_dialog.py:200
-msgid "KB"
-msgstr "KB"
-
-#: src/ui/info_dialog.py:200
-msgid "MB"
-msgstr "MB"
-
-#: src/ui/info_dialog.py:200
-msgid "GB"
-msgstr "GB"
 
 #: src/ui/info_dialog.py:211
 msgid "Yes"
@@ -425,8 +399,7 @@ msgid "Failed to create temporary directory"
 msgstr "创建临时目录失败"
 
 #: src/ui/window.py:1217 src/ui/window.py:1750 src/ui/window.py:1752
-#: src/ui/window.py:1778 src/ui/window.py:1780 src/ui/window.py:1853
-#: src/ui/window.py:1863
+#: src/ui/window.py:1778 src/ui/window.py:1780
 msgid "Extract "
 msgstr "提取 "
 
@@ -518,8 +491,8 @@ msgstr "{} 个项目"
 
 #: src/ui/window.py:1719 src/ui/window.py:1776 src/ui/window.py:1790
 #: src/ui/window.py:1804 src/ui/window.py:1818 src/ui/window.py:1840
-#: src/ui/window.py:1861 src/ui/window.py:1867 src/ui/window.py:1872
-#: src/ui/window.py:1878
+#: src/ui/window.py:1866 src/ui/window.py:1873 src/ui/window.py:1879
+#: src/ui/window.py:1886
 msgid "file"
 msgstr "文件"
 
@@ -537,16 +510,16 @@ msgstr "压缩超时："
 
 #: src/ui/window.py:1730
 msgid "Compress cancelled: "
-msgstr "压缩已取消："
+msgstr "压缩已取消： "
 
 #: src/ui/window.py:1731
 msgid "Compress failed: "
-msgstr "压缩失败："
+msgstr "压缩失败： "
 
 #: src/ui/window.py:1734 src/ui/window.py:1748 src/ui/window.py:1762
-#: src/ui/window.py:1835 src/ui/window.py:1847 src/ui/window.py:1851
-#: src/ui/window.py:1856 src/ui/window.py:1860 src/ui/window.py:1866
-#: src/ui/window.py:1871 src/ui/window.py:1877
+#: src/ui/window.py:1835 src/ui/window.py:1849 src/ui/window.py:1854
+#: src/ui/window.py:1860 src/ui/window.py:1865 src/ui/window.py:1872
+#: src/ui/window.py:1878 src/ui/window.py:1885
 msgid "archive"
 msgstr "压缩包"
 
@@ -568,7 +541,7 @@ msgstr "打开已取消："
 
 #: src/ui/window.py:1745
 msgid "Open failed: "
-msgstr "打开失败："
+msgstr "打开失败： "
 
 #: src/ui/window.py:1754 src/ui/window.py:1782
 msgid "Extracted "
@@ -586,7 +559,7 @@ msgstr "提取已取消："
 msgid "Extract failed: "
 msgstr "提取失败："
 
-#: src/ui/window.py:1764 src/ui/window.py:1766 src/ui/window.py:1857
+#: src/ui/window.py:1764 src/ui/window.py:1766
 msgid "Test "
 msgstr "测试 "
 
@@ -606,7 +579,7 @@ msgstr "测试已取消："
 msgid "Test failed: "
 msgstr "测试失败："
 
-#: src/ui/window.py:1792 src/ui/window.py:1794 src/ui/window.py:1868
+#: src/ui/window.py:1792 src/ui/window.py:1794
 msgid "Delete "
 msgstr "删除 "
 
@@ -626,7 +599,7 @@ msgstr "删除已取消："
 msgid "Delete failed: "
 msgstr "删除失败："
 
-#: src/ui/window.py:1806 src/ui/window.py:1808 src/ui/window.py:1874
+#: src/ui/window.py:1806 src/ui/window.py:1808
 msgid "Move "
 msgstr "移动 "
 
@@ -644,9 +617,9 @@ msgstr "移动已取消："
 
 #: src/ui/window.py:1815
 msgid "Move failed: "
-msgstr "移动失败："
+msgstr "移动失败： "
 
-#: src/ui/window.py:1820 src/ui/window.py:1822 src/ui/window.py:1880
+#: src/ui/window.py:1820 src/ui/window.py:1822
 msgid "Add "
 msgstr "添加 "
 
@@ -666,38 +639,77 @@ msgstr "添加已取消："
 msgid "Add failed: "
 msgstr "添加失败："
 
-#: src/ui/window.py:1841
-msgid "Create "
-msgstr "创建 "
+#. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
+#: src/ui/window.py:1842
+#, python-brace-format
+msgid "Create {output} from {source}"
+msgstr "从{source}中创建{output}"
 
-#: src/ui/window.py:1841 src/ui/window.py:1863 src/ui/window.py:1868
-msgid " from "
-msgstr "，来源 "
-
-#: src/ui/window.py:1843
-msgid "Parameters: "
+#. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
+#: src/ui/window.py:1845
+#, fuzzy, python-brace-format
+#| msgid "Parameters: "
+msgid "Parameters: {params}"
 msgstr "参数："
 
-#: src/ui/window.py:1852 src/ui/window.py:1862
+#. TRANSLATORS: {archive} is the name of the archive file
+#: src/ui/window.py:1851
+#, fuzzy, python-brace-format
+#| msgid "Read archive information from "
+msgid "Read archive information from {archive}"
+msgstr "读取压缩包信息："
+
+#: src/ui/window.py:1855 src/ui/window.py:1867
 msgid "folder"
 msgstr "文件夹"
 
-#: src/ui/window.py:1853 src/ui/window.py:1863 src/ui/window.py:1874
-#: src/ui/window.py:1880
-msgid " to "
-msgstr " 到 "
+#. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
+#: src/ui/window.py:1857
+#, fuzzy, python-brace-format
+#| msgid "Extracted file not found"
+msgid "Extract {archive} to {folder}"
+msgstr "未找到解压后的文件"
 
-#: src/ui/window.py:1873
+#. TRANSLATORS: {archive} is the name of the archive file
+#: src/ui/window.py:1862
+#, fuzzy, python-brace-format
+#| msgid "archive"
+msgid "Test {archive}"
+msgstr "压缩包"
+
+#. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
+#: src/ui/window.py:1869
+#, python-brace-format
+msgid "Extract {file} from {archive} to {folder}"
+msgstr ""
+
+#. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
+#: src/ui/window.py:1875
+#, fuzzy, python-brace-format
+#| msgid "The selected file is not an archive"
+msgid "Delete {file} from {archive}"
+msgstr "所选文件不是压缩包"
+
+#: src/ui/window.py:1880
 msgid "destination"
 msgstr "目标位置"
 
-#: src/ui/window.py:1874 src/ui/window.py:1880
-msgid " in "
-msgstr " 在 "
+#. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
+#: src/ui/window.py:1882
+#, python-brace-format
+msgid "Move {file} to {destination} in {archive}"
+msgstr ""
 
-#: src/ui/window.py:1879
+#: src/ui/window.py:1887
 msgid "root"
 msgstr "根目录"
+
+#. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
+#: src/ui/window.py:1889
+#, fuzzy, python-brace-format
+#| msgid "Add a file to the current archive."
+msgid "Add {file} to {destination} in {archive}"
+msgstr "向当前压缩包添加文件。"
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"
@@ -922,6 +934,39 @@ msgstr "选择文件夹"
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
 msgstr "选择"
+
+#~ msgid "Akizip"
+#~ msgstr "Akizip"
+
+#~ msgid "GTK;"
+#~ msgstr "GTK;"
+
+#~ msgid "ckappgit"
+#~ msgstr "ckappgit"
+
+#~ msgid "B"
+#~ msgstr "B"
+
+#~ msgid "KB"
+#~ msgstr "KB"
+
+#~ msgid "MB"
+#~ msgstr "MB"
+
+#~ msgid "GB"
+#~ msgstr "GB"
+
+#~ msgid "Create "
+#~ msgstr "创建 "
+
+#~ msgid " from "
+#~ msgstr "，来源 "
+
+#~ msgid " to "
+#~ msgstr " 到 "
+
+#~ msgid " in "
+#~ msgstr " 在 "
 
 #~ msgid "_Keyboard Shortcuts"
 #~ msgstr "键盘快捷键(_K)"

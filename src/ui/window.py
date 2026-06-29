@@ -1838,46 +1838,55 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 source = _('{} items').format(len(source_paths))
             else:
                 source = Path(source_paths[0]).name if source_paths else _('file')
-            preview = _('Create ') + output + _(' from ') + source
+            # TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
+            preview = _('Create {output} from {source}').format(output=output, source=source)
             if name == 'archive.compress_advance' and len(args) > 2 and args[2]:
-                preview = preview + '\n' + _('Parameters: ') + ' '.join(args[2])
+                # TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
+                preview = preview + '\n' + _('Parameters: {params}').format(params=' '.join(args[2]))
             return preview
 
         if name == 'archive.info':
             archive = Path(args[0]).name if args else _('archive')
-            return _('Read archive information from ') + archive
+            # TRANSLATORS: {archive} is the name of the archive file
+            return _('Read archive information from {archive}').format(archive=archive)
 
         if name == 'archive.extract':
             archive = Path(args[0]).name if args else _('archive')
             output = Path(args[1]).name if len(args) > 1 else _('folder')
-            return _('Extract ') + archive + _(' to ') + output
+            # TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
+            return _('Extract {archive} to {folder}').format(archive=archive, folder=output)
 
         if name == 'archive.test':
             archive = Path(args[0]).name if args else _('archive')
-            return _('Test ') + archive
+            # TRANSLATORS: {archive} is the name of the archive file
+            return _('Test {archive}').format(archive=archive)
 
         if name == 'archive.extract_file':
             archive = Path(args[0]).name if args else _('archive')
             file_name = Path(args[1]).name if len(args) > 1 else _('file')
             output = Path(args[2]).name if len(args) > 2 else _('folder')
-            return _('Extract ') + file_name + _(' from ') + archive + _(' to ') + output
+            # TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
+            return _('Extract {file} from {archive} to {folder}').format(file=file_name, archive=archive, folder=output)
 
         if name == 'archive.delete':
             archive = Path(args[0]).name if args else _('archive')
             file_name = Path(args[1][0]).name if len(args) > 1 and args[1] else _('file')
-            return _('Delete ') + file_name + _(' from ') + archive
+            # TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
+            return _('Delete {file} from {archive}').format(file=file_name, archive=archive)
 
         if name == 'archive.move':
             archive = Path(args[0]).name if args else _('archive')
             file_name = Path(args[1]).name if len(args) > 1 else _('file')
             dst = Path(args[2]).name if len(args) > 2 else _('destination')
-            return _('Move ') + file_name + _(' to ') + dst + _(' in ') + archive
+            # TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
+            return _('Move {file} to {destination} in {archive}').format(file=file_name, destination=dst, archive=archive)
 
         if name == 'archive.add':
             archive = Path(args[0]).name if args else _('archive')
             file_name = Path(args[1]).name if len(args) > 1 else _('file')
             dst = args[2] if len(args) > 2 else _('root')
-            return _('Add ') + file_name + _(' to ') + dst + _(' in ') + archive
+            # TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
+            return _('Add {file} to {destination} in {archive}').format(file=file_name, destination=dst, archive=archive)
 
         return name
 
@@ -1911,7 +1920,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _update_extract_button_for_locale(self):
         lang = self._get_effective_locale()
-        if lang in ('pl',):
+        if lang in ('pl', 'ta'):
             self.extract_split_button.set_visible(False)
             self.extract_menu_button.set_visible(True)
         else:

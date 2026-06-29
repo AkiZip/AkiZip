@@ -4,7 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
 
-  <name>Akizip</name>
+  <name translate="no">Akizip</name>
   <summary>A modern front-end for 7-Zip on GNOME</summary>
   <description>
     <p>Akizip is a graphical archive utility built with GTK 4 and libadwaita that brings the power of 7-Zip to the GNOME desktop.</p>
@@ -13,7 +13,7 @@
   </description>
 
   <developer id="github.com">
-    <name>ckappgit</name>
+    <name translate="no">ckappgit</name>
   </developer>
 
   <url type="homepage">https://github.com/AkiZip/AkiZip</url>
@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.2.7" date="2026-06-29">
+      <description translate="no">
+        <p>New translations and 7-Zip update</p>
+        <ul>
+          <li>Added Tamil (ta) translation support</li>
+          <li>Added Russian (ru) translation support</li>
+          <li>Updated 7-Zip to 26.02</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.6" date="2026-06-06">
       <description translate="no">
         <p>Add file support and new translations</p>

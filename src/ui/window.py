@@ -1920,7 +1920,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _update_extract_button_for_locale(self):
         lang = self._get_effective_locale()
-        if lang in ('pl',):
+        if lang in ('pl', 'ta'):
             self.extract_split_button.set_visible(False)
             self.extract_menu_button.set_visible(True)
         else:

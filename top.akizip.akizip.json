@@ -27,15 +27,15 @@
             "name" : "7zip",
             "buildsystem" : "simple",
             "build-commands" : [
-                "tar -xf 7z2601-linux-x64.tar.xz",
+                "tar -xf 7z2602-linux-x64.tar.xz",
                 "install -Dm755 7zz /app/bin/7zz",
                 "install -Dm755 7zzs /app/bin/7zzs"
             ],
             "sources" : [
                 {
                     "type" : "file",
-                    "url" : "https://github.com/ip7z/7zip/releases/download/26.01/7z2601-linux-x64.tar.xz",
-                    "sha256" : "8ea0fc8a135e7b848e80a4116fe22dff56c8c4518dde1f43cce67f4e340b437a"
+                    "url" : "https://github.com/ip7z/7zip/releases/download/26.02/7z2602-linux-x64.tar.xz",
+                    "sha256" : "41aaba7b1235304ab5aa0624530c67ae829496cd29e875925271efdccc28c03e"
                 }
             ]
         },

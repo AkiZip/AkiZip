@@ -376,6 +376,16 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">es</attribute>
           </item>
+          <item>
+            <attribute name="label">Русский</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">ru</attribute>
+          </item>
+          <item>
+            <attribute name="label">தமிழ்</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">ta</attribute>
+          </item>
         </section>
       </submenu>
     </section>

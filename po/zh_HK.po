@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-07 00:21+0800\n"
-"PO-Revision-Date: 2026-05-20 14:29+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2026-07-05 05:01+0000\n"
+"Last-Translator: taketsuki <dpps93126@gmail.com>\n"
 "Language-Team: Chinese (Traditional Han script, Hong Kong) <https://"
 "hosted.weblate.org/projects/akizip/akizip/zh_Hant_HK/>\n"
 "Language: zh_HK\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.6.dev0\n"
+"X-Generator: Weblate 2026.7.1.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -65,7 +65,7 @@ msgstr "壓縮檔資訊無法使用。"
 
 #: src/ui/info_dialog.py:61
 msgid "Read archive information from "
-msgstr "讀取壓縮檔資訊："
+msgstr "讀取壓縮檔資訊： "
 
 #: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:214
 #: src/window.ui:228
@@ -642,21 +642,19 @@ msgstr "新增失敗："
 #: src/ui/window.py:1842
 #, python-brace-format
 msgid "Create {output} from {source}"
-msgstr ""
+msgstr "從{source}中建立{output}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
 #: src/ui/window.py:1845
-#, fuzzy, python-brace-format
-#| msgid "Parameters: "
+#, python-brace-format
 msgid "Parameters: {params}"
-msgstr "參數："
+msgstr "參數：{params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:1851
-#, fuzzy, python-brace-format
-#| msgid "Read archive information from "
+#, python-brace-format
 msgid "Read archive information from {archive}"
-msgstr "讀取壓縮檔資訊："
+msgstr "讀取壓縮檔資訊：{archive}"
 
 #: src/ui/window.py:1855 src/ui/window.py:1867
 msgid "folder"
@@ -664,30 +662,27 @@ msgstr "資料夾"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:1857
-#, fuzzy, python-brace-format
-#| msgid "Extracted file not found"
+#, python-brace-format
 msgid "Extract {archive} to {folder}"
-msgstr "未找到解壓縮後的檔案"
+msgstr "解壓縮{archive}到{folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:1862
-#, fuzzy, python-brace-format
-#| msgid "archive"
+#, python-brace-format
 msgid "Test {archive}"
-msgstr "壓縮檔"
+msgstr "測試{archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:1869
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
-msgstr ""
+msgstr "從{archive}解壓縮{file}到{folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
 #: src/ui/window.py:1875
-#, fuzzy, python-brace-format
-#| msgid "The selected file is not an archive"
+#, python-brace-format
 msgid "Delete {file} from {archive}"
-msgstr "所選檔案不是壓縮檔"
+msgstr "從{archive}中刪除{file}"
 
 #: src/ui/window.py:1880
 msgid "destination"
@@ -697,7 +692,7 @@ msgstr "目標位置"
 #: src/ui/window.py:1882
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
-msgstr ""
+msgstr "在{archive}內將{file}移動到{destination}"
 
 #: src/ui/window.py:1887
 msgid "root"
@@ -705,10 +700,9 @@ msgstr "根目錄"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:1889
-#, fuzzy, python-brace-format
-#| msgid "Add a file to the current archive."
+#, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
-msgstr "向目前壓縮檔新增檔案。"
+msgstr "新增{file}到{archive}的{destination}"
 
 #: src/ui/move_folder_chooser.py:85
 msgid "(root)"

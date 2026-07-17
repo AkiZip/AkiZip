@@ -83,7 +83,8 @@ class AkizipApplication(Adw.Application):
                                 translator_credits = "weblate https://hosted.weblate.org/engage/akizip/",
                                 developers=['ckappgit','HungryNeko'],
                                 copyright='© 2026 akizip',
-                                license_type=Gtk.License.GPL_3_0)
+                                license_type=Gtk.License.GPL_3_0,
+                                issue_url='https://github.com/AkiZip/AkiZip/issues')
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, parameter):

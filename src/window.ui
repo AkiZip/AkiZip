@@ -426,6 +426,22 @@
       </item>
     </section>
   </menu>
+  <menu id="context_menu">
+    <section>
+      <item>
+        <attribute name="label" translatable="yes">Extract Selected</attribute>
+        <attribute name="action">win.extract-selected</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Move</attribute>
+        <attribute name="action">win.move-selected</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Delete</attribute>
+        <attribute name="action">win.delete-selected</attribute>
+      </item>
+    </section>
+  </menu>
   <menu id="add_menu">
     <section>
       <item>

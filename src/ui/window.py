@@ -24,6 +24,8 @@ from pathlib import Path
 from gettext import gettext as _
 
 from gi.repository import Adw
+from gi.repository import Gdk
+from gi.repository import GLib
 from gi.repository import Gtk
 from gi.repository import Gio
 from gi.repository import GObject
@@ -106,6 +108,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     address_entry = Gtk.Template.Child()
     file_list_stack = Gtk.Template.Child()
     file_list_scroller = Gtk.Template.Child()
+    context_menu = Gtk.Template.Child()
 
     @Gtk.Template.Callback()
     def butadd(self, button):
@@ -1068,6 +1071,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         view.set_show_column_separators(False)
         view.connect('activate', self._on_row_activate)
 
+        gesture = Gtk.GestureClick()
+        gesture.set_button(Gdk.BUTTON_SECONDARY)
+        gesture.connect('pressed', self._on_list_right_click)
+        view.add_controller(gesture)
+
         columns = (
             (_('Path'), self._on_path_setup, self._on_path_bind, True),
             (_('Size'), self._on_text_setup, self._on_size_bind, False),
@@ -1100,6 +1108,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         box.append(image)
         box.append(label)
         list_item.set_child(box)
+        self._list_items.add(list_item)
 
     def _on_path_bind(self, factory, list_item):
         item = list_item.get_item()
@@ -1122,6 +1131,44 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         label.set_margin_top(2)
         label.set_margin_bottom(2)
         list_item.set_child(label)
+        self._list_items.add(list_item)
+
+    def _on_list_right_click(self, gesture, _n_press, x, y):
+        view = self._file_list_view
+        position = Gtk.INVALID_LIST_POSITION
+        for list_item in self._list_items:
+            pos = list_item.get_position()
+            if pos == Gtk.INVALID_LIST_POSITION:
+                continue
+            child = list_item.get_child()
+            if child is None:
+                continue
+            row = child.get_parent()
+            if row is not None:
+                row = row.get_parent()
+            if row is None:
+                continue
+            ok, bounds = row.compute_bounds(view)
+            if ok and bounds.origin.y <= y <= bounds.origin.y + bounds.size.height:
+                position = pos
+                break
+        if position == Gtk.INVALID_LIST_POSITION:
+            return
+        item = self._file_list_store.get_item(position)
+        if item is None or item.path == '..':
+            return
+        self._file_list_selection.set_selected(position)
+
+        popover = Gtk.PopoverMenu.new_from_model(self.context_menu)
+        popover.set_parent(view)
+        rect = Gdk.Rectangle()
+        rect.x = int(x)
+        rect.y = int(y)
+        rect.width = 1
+        rect.height = 1
+        popover.set_pointing_to(rect)
+        popover.connect('closed', lambda p: GLib.idle_add(p.unparent))
+        popover.popup()
 
     def _on_size_bind(self, factory, list_item):
         size = list_item.get_item().size
@@ -1423,6 +1470,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._all_entries = []
         self._folder_set = set()
         self._current_internal_path = ''
+        self._list_items = set()
 
         app = self.get_application()
         if app is not None and hasattr(app, 'settings'):
@@ -1440,6 +1488,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._add_file_action = Gio.SimpleAction.new('add-file', None)
         self._add_file_action.connect('activate', lambda _a, _p: self.butadd_file(None))
         self.add_action(self._add_file_action)
+
+        self._move_action = Gio.SimpleAction.new('move-selected', None)
+        self._move_action.connect('activate', lambda _a, _p: self.butmove(None))
+        self.add_action(self._move_action)
+
+        self._delete_action = Gio.SimpleAction.new('delete-selected', None)
+        self._delete_action.connect('activate', lambda _a, _p: self.butdelete(None))
+        self.add_action(self._delete_action)
 
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)
@@ -1547,6 +1603,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self.delete_button.set_sensitive(can_modify)
         if hasattr(self, '_add_file_action') and self._add_file_action is not None:
             self._add_file_action.set_enabled(can_modify and has_selected_archive)
+        if hasattr(self, '_move_action') and self._move_action is not None:
+            self._move_action.set_enabled(can_modify)
+        if hasattr(self, '_delete_action') and self._delete_action is not None:
+            self._delete_action.set_enabled(can_modify)
 
     def _on_language_changed(self, settings, key):
         if settings.get_string(key) == self._initial_language:

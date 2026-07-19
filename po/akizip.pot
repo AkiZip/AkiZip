@@ -22,7 +22,7 @@ msgstr ""
 "#-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-19 22:10+0800\n"
+"POT-Creation-Date: 2026-07-19 22:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,7 +33,7 @@ msgstr ""
 "#-#-#-#-#  python.pot (akizip 0.3.0)  #-#-#-#-#\n"
 "Project-Id-Version: akizip 0.3.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-19 22:10+0800\n"
+"POT-Creation-Date: 2026-07-19 22:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 "#-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-19 22:10+0800\n"
+"POT-Creation-Date: 2026-07-19 22:36+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -414,7 +414,7 @@ msgid "This archive is encrypted. Please enter the password."
 msgstr ""
 
 #: src/ui/window.py:1036 src/ui/window.py:1039 src/window.ui:117
-#: src/window.ui:132
+#: src/window.ui:132 src/window.ui:432
 msgid "Extract"
 msgstr ""
 
@@ -797,7 +797,7 @@ msgstr ""
 msgid "_About Akizip"
 msgstr ""
 
-#: src/window.ui:412 src/window.ui:424 src/window.ui:432
+#: src/window.ui:412 src/window.ui:424
 msgid "Extract Selected"
 msgstr ""
 

@@ -429,7 +429,7 @@
   <menu id="context_menu">
     <section>
       <item>
-        <attribute name="label" translatable="yes">Extract Selected</attribute>
+        <attribute name="label" translatable="yes">Extract</attribute>
         <attribute name="action">win.extract-selected</attribute>
       </item>
       <item>

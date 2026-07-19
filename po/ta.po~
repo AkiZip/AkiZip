@@ -20,11 +20,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-07 00:21+0800\n"
+"POT-Creation-Date: 2026-07-19 22:10+0800\n"
 "PO-Revision-Date: 2026-06-15 11:34+0000\n"
 "Last-Translator: தமிழ்நேரம் <tamilneram247@gmail.com>\n"
-"Language-Team: Tamil <https://hosted.weblate.org/projects/akizip/akizip/ta/>"
-"\n"
+"Language-Team: Tamil <https://hosted.weblate.org/projects/akizip/akizip/ta/"
+">\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,389 +64,388 @@ msgstr ""
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
-msgstr ""
-"காப்பக உள்ளடக்கங்கள் மற்றும் கருவிப்பட்டியைக் காட்டும் முதன்மையான சாளரம்"
+msgstr "காப்பக உள்ளடக்கங்கள் மற்றும் கருவிப்பட்டியைக் காட்டும் முதன்மையான சாளரம்"
 
-#: src/ui/info_dialog.py:13 src/ui/window.py:1490
+#: src/ui/info_dialog.py:31 src/ui/window.py:1546
 msgid "System state not found"
 msgstr "கணினி நிலை காணப்படவில்லை"
 
-#: src/ui/info_dialog.py:27 src/ui/info_dialog.py:34
+#: src/ui/info_dialog.py:45 src/ui/info_dialog.py:52
 msgid "Archive"
 msgstr "காப்பகம்"
 
-#: src/ui/info_dialog.py:27
+#: src/ui/info_dialog.py:45
 msgid "Archive information is unavailable."
 msgstr "காப்பகத் செய்தி கிடைக்கவில்லை."
 
-#: src/ui/info_dialog.py:61
+#: src/ui/info_dialog.py:79
 msgid "Read archive information from "
 msgstr "காப்பகத் தகவலைப் படிக்கவும் "
 
-#: src/ui/info_dialog.py:68 src/ui/info_dialog.py:79 src/window.ui:214
+#: src/ui/info_dialog.py:86 src/ui/info_dialog.py:97 src/window.ui:214
 #: src/window.ui:228
 msgid "Info"
 msgstr "தகவல்"
 
-#: src/ui/info_dialog.py:97
+#: src/ui/info_dialog.py:115
 msgid "Close"
 msgstr "மூடு"
 
-#: src/ui/info_dialog.py:104
+#: src/ui/info_dialog.py:122
 msgid "Name"
 msgstr "பெயர்"
 
-#: src/ui/info_dialog.py:105 src/ui/window.py:1072
+#: src/ui/info_dialog.py:123 src/ui/window.py:1080
 msgid "Path"
 msgstr "பாதை"
 
-#: src/ui/info_dialog.py:106
+#: src/ui/info_dialog.py:124
 msgid "Type"
 msgstr "வகை"
 
-#: src/ui/info_dialog.py:108 src/ui/window.py:1073
+#: src/ui/info_dialog.py:126 src/ui/window.py:1081
 msgid "Size"
 msgstr "அளவு"
 
-#: src/ui/info_dialog.py:109
+#: src/ui/info_dialog.py:127
 msgid "Can compress"
 msgstr "சுருக்க முடியும்"
 
-#: src/ui/info_dialog.py:110
+#: src/ui/info_dialog.py:128
 msgid "Can extract"
 msgstr "பிரித்தெடுக்க முடியும்"
 
-#: src/ui/info_dialog.py:136
+#: src/ui/info_dialog.py:154
 msgid "Copy"
 msgstr "நகலெடு"
 
-#: src/ui/info_dialog.py:148
+#: src/ui/info_dialog.py:166
 msgid "Copied to clipboard"
 msgstr "இடைநிலைப்பலகைக்கு நகலெடுக்கப்பட்டது"
 
-#: src/ui/info_dialog.py:157
+#: src/ui/info_dialog.py:175
 msgid "No archive information found."
 msgstr "காப்பகத் செய்தி இல்லை."
 
-#: src/ui/info_dialog.py:161
+#: src/ui/info_dialog.py:179
 msgid "Loaded"
 msgstr "ஏற்றப்பட்டது"
 
-#: src/ui/info_dialog.py:163
+#: src/ui/info_dialog.py:181
 msgid "Archive type"
 msgstr "காப்பக வகை"
 
-#: src/ui/info_dialog.py:164
+#: src/ui/info_dialog.py:182
 msgid "Archive size"
 msgstr "காப்பக அளவு"
 
-#: src/ui/info_dialog.py:165
+#: src/ui/info_dialog.py:183
 msgid "Headers size"
 msgstr "தலைப்புகளின் அளவு"
 
-#: src/ui/info_dialog.py:166
+#: src/ui/info_dialog.py:184
 msgid "Method"
 msgstr "முறை"
 
-#: src/ui/info_dialog.py:167
+#: src/ui/info_dialog.py:185
 msgid "Solid"
 msgstr "திடமான"
 
-#: src/ui/info_dialog.py:168
+#: src/ui/info_dialog.py:186
 msgid "Blocks"
 msgstr "தொகுதிகள்"
 
-#: src/ui/info_dialog.py:192
+#: src/ui/info_dialog.py:210
 msgid "Archive file"
 msgstr "காப்பக கோப்பு"
 
-#: src/ui/info_dialog.py:194
+#: src/ui/info_dialog.py:212
 msgid "Folder"
 msgstr "கோப்புறை"
 
-#: src/ui/info_dialog.py:196 src/ui/window.py:375
+#: src/ui/info_dialog.py:214 src/ui/window.py:378
 msgid "File"
 msgstr "கோப்பு"
 
-#: src/ui/info_dialog.py:197
+#: src/ui/info_dialog.py:215
 msgid "Unknown"
 msgstr "தெரியவில்லை"
 
-#: src/ui/info_dialog.py:211
+#: src/ui/info_dialog.py:229
 msgid "Yes"
 msgstr "ஆம்"
 
-#: src/ui/info_dialog.py:211
+#: src/ui/info_dialog.py:229
 msgid "No"
 msgstr "இல்லை"
 
-#: src/ui/log_panel.py:32
+#: src/ui/log_panel.py:50
 msgid "Logs"
 msgstr "பதிவுகள்"
 
-#: src/ui/log_panel.py:96 src/ui/window.py:1565
+#: src/ui/log_panel.py:114 src/ui/window.py:1625
 msgid "Cancel"
 msgstr "ரத்துசெய்"
 
-#: src/ui/log_panel.py:105
+#: src/ui/log_panel.py:123
 msgid "Cancelling..."
 msgstr "ரத்துசெய்கிறது..."
 
-#: src/ui/log_panel.py:109
+#: src/ui/log_panel.py:127
 msgid "Running"
 msgstr "ஓடுகிறது"
 
-#: src/ui/log_panel.py:110
+#: src/ui/log_panel.py:128
 msgid "Done"
 msgstr "முடிந்தது"
 
-#: src/ui/log_panel.py:111
+#: src/ui/log_panel.py:129
 msgid "Warning"
 msgstr "எச்சரிக்கை"
 
-#: src/ui/log_panel.py:112
+#: src/ui/log_panel.py:130
 msgid "Timeout"
 msgstr "நேரம் முடிந்தது"
 
-#: src/ui/log_panel.py:113
+#: src/ui/log_panel.py:131
 msgid "Error"
 msgstr "பிழை"
 
-#: src/ui/log_panel.py:114
+#: src/ui/log_panel.py:132
 msgid "Cancelled"
 msgstr "ரத்து செய்யப்பட்டது"
 
-#: src/ui/log_panel.py:115
+#: src/ui/log_panel.py:133
 msgid "Pending"
 msgstr "நிலுவையில் உள்ளது"
 
-#: src/ui/window.py:229
+#: src/ui/window.py:232
 msgid "Test failed"
 msgstr "சோதனை தோல்வியடைந்தது"
 
-#: src/ui/window.py:229 src/ui/window.py:258 src/ui/window.py:350
-#: src/ui/window.py:488 src/ui/window.py:544
+#: src/ui/window.py:232 src/ui/window.py:261 src/ui/window.py:353
+#: src/ui/window.py:491 src/ui/window.py:547
 msgid "Selected path is not an archive."
 msgstr "தேர்ந்தெடுக்கப்பட்ட பாதை ஒரு காப்பகம் அல்ல."
 
-#: src/ui/window.py:258 src/ui/window.py:261
+#: src/ui/window.py:261 src/ui/window.py:264
 msgid "Move failed"
 msgstr "நகர்த்த முடியவில்லை"
 
-#: src/ui/window.py:261 src/ui/window.py:353 src/ui/window.py:491
+#: src/ui/window.py:264 src/ui/window.py:356 src/ui/window.py:494
 msgid "This archive format does not support modification."
 msgstr "இந்தக் காப்பக வடிவம் மாற்றத்தை ஆதரிக்காது."
 
-#: src/ui/window.py:269 src/ui/window.py:459 src/ui/window.py:499
-#: src/ui/window.py:572 src/ui/window.py:1474 src/ui/window.py:1475
-#: src/ui/window.py:1478 src/ui/window.py:1479
+#: src/ui/window.py:272 src/ui/window.py:462 src/ui/window.py:502
+#: src/ui/window.py:575 src/ui/window.py:1530 src/ui/window.py:1531
+#: src/ui/window.py:1534 src/ui/window.py:1535
 msgid "No file selected"
 msgstr "கோப்பு எதுவும் தேர்ந்தெடுக்கப்படவில்லை"
 
-#: src/ui/window.py:273 src/window.ui:166 src/window.ui:180
+#: src/ui/window.py:276 src/window.ui:166 src/window.ui:180 src/window.ui:436
 msgid "Move"
 msgstr "நகர்த்தவும்"
 
-#: src/ui/window.py:273
+#: src/ui/window.py:276
 msgid "Move \"{}\" to:"
 msgstr "\"{}\" ஐ இதற்கு நகர்த்தவும்:"
 
-#: src/ui/window.py:279 src/ui/window.py:426
+#: src/ui/window.py:282 src/ui/window.py:429
 msgid "Select destination folder"
 msgstr "இலக்கு கோப்புறையைத் தேர்ந்தெடுக்கவும்"
 
-#: src/ui/window.py:307 src/ui/window.py:359 src/ui/window.py:392
-#: src/ui/window.py:504 src/ui/window.py:583 src/ui/window.py:622
-#: src/ui/window.py:689 src/ui/window.py:737 src/ui/window.py:759
-#: src/ui/window.py:790 src/ui/window.py:1012 src/ui/window.py:1035
+#: src/ui/window.py:310 src/ui/window.py:362 src/ui/window.py:395
+#: src/ui/window.py:507 src/ui/window.py:586 src/ui/window.py:625
+#: src/ui/window.py:692 src/ui/window.py:740 src/ui/window.py:762
+#: src/ui/window.py:793 src/ui/window.py:1015 src/ui/window.py:1038
 #: src/move-folder-chooser.ui:51
 msgid "_Cancel"
 msgstr "_ரத்துசெய்"
 
-#: src/ui/window.py:308
+#: src/ui/window.py:311
 msgid "_Move"
 msgstr "_நகர்த்து"
 
-#: src/ui/window.py:350 src/ui/window.py:353
+#: src/ui/window.py:353 src/ui/window.py:356
 msgid "Add failed"
 msgstr "சேர்க்க முடியவில்லை"
 
-#: src/ui/window.py:358 src/window.ui:422
+#: src/ui/window.py:361 src/window.ui:448
 msgid "Add File"
 msgstr "கோப்பைச் சேர்க்கவும்"
 
-#: src/ui/window.py:358
+#: src/ui/window.py:361
 msgid "Add a file to the current archive."
 msgstr "தற்போதைய காப்பகத்தில் ஒரு கோப்பைச் சேர்க்கவும்."
 
-#: src/ui/window.py:360 src/ui/window.py:736 src/ui/window.py:758
+#: src/ui/window.py:363 src/ui/window.py:739 src/ui/window.py:761
 msgid "_Add"
 msgstr "_சேர்"
 
-#: src/ui/window.py:379
+#: src/ui/window.py:382
 msgid "Select a file"
 msgstr "கோப்பைத் தேர்ந்தெடுக்கவும்"
 
-#: src/ui/window.py:383
+#: src/ui/window.py:386
 msgid "Select file"
 msgstr "கோப்பைத் தேர்ந்தெடு"
 
-#: src/ui/window.py:388 src/ui/window.py:579
+#: src/ui/window.py:391 src/ui/window.py:582
 msgid "Select File"
 msgstr "கோப்பைத் தேர்ந்தெடு"
 
-#: src/ui/window.py:391 src/ui/window.py:582 src/ui/window.py:621
+#: src/ui/window.py:394 src/ui/window.py:585 src/ui/window.py:624
 msgid "_Open"
 msgstr "_திற"
 
-#: src/ui/window.py:418
+#: src/ui/window.py:421
 msgid "Destination"
 msgstr "இலக்கு"
 
-#: src/ui/window.py:423 src/extract-dialog.ui:15
+#: src/ui/window.py:426 src/extract-dialog.ui:15
 msgid "Destination folder"
 msgstr "இலக்கு கோப்புறை"
 
-#: src/ui/window.py:488 src/ui/window.py:491
+#: src/ui/window.py:491 src/ui/window.py:494
 msgid "Delete failed"
 msgstr "நீக்குவது தோல்வியடைந்தது"
 
-#: src/ui/window.py:503 src/window.ui:190 src/window.ui:204
+#: src/ui/window.py:506 src/window.ui:190 src/window.ui:204 src/window.ui:440
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: src/ui/window.py:503
+#: src/ui/window.py:506
 msgid "Are you sure you want to delete \"{}\"?"
 msgstr "\"{}\" ஐ நிச்சயமாக நீக்க விரும்புகிறீர்களா?"
 
-#: src/ui/window.py:505
+#: src/ui/window.py:508
 msgid "_Delete"
 msgstr "_நீக்கு"
 
-#: src/ui/window.py:544
+#: src/ui/window.py:547
 msgid "Extract failed"
 msgstr "பிரித்தெடுக்க முடியவில்லை"
 
-#: src/ui/window.py:618 src/extract-dialog.ui:21
+#: src/ui/window.py:621 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
 msgstr "இலக்கு கோப்புறையைத் தேர்ந்தெடுக்கவும்"
 
-#: src/ui/window.py:665 src/compress-dialog.ui:182 src/preferences.ui:101
+#: src/ui/window.py:668 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
 msgstr "இயல்புநிலை"
 
-#: src/ui/window.py:687 src/ui/window.py:690 src/window.ui:67 src/window.ui:82
+#: src/ui/window.py:690 src/ui/window.py:693 src/window.ui:67 src/window.ui:82
 msgid "Compress"
 msgstr "சுருக்கவும்"
 
-#: src/ui/window.py:711
+#: src/ui/window.py:714
 msgid "Source items ({})"
 msgstr "மூலப் பொருட்கள் ({})"
 
-#: src/ui/window.py:733
+#: src/ui/window.py:736
 msgid "Select Files"
 msgstr "கோப்புகளைத் தேர்ந்தெடு"
 
-#: src/ui/window.py:755
+#: src/ui/window.py:758
 msgid "Select Folders"
 msgstr "கோப்புறைகளைத் தேர்ந்தெடு"
 
-#: src/ui/window.py:786
+#: src/ui/window.py:789
 msgid "Save Archive As"
 msgstr "காப்பகத்தை இவ்வாறு சேமி"
 
-#: src/ui/window.py:789
+#: src/ui/window.py:792
 msgid "_Save"
 msgstr "_சேமி"
 
-#: src/ui/window.py:810
+#: src/ui/window.py:813
 msgid "Overwrite is not currently supported"
 msgstr "மேலெழுதுதல் தற்போது ஆதரிக்கப்படவில்லை"
 
-#: src/ui/window.py:811 src/ui/window.py:1013 src/ui/window.py:1512
-#: src/ui/window.py:1521 src/ui/window.py:1530 src/ui/window.py:1558
+#: src/ui/window.py:814 src/ui/window.py:1016 src/ui/window.py:1568
+#: src/ui/window.py:1577 src/ui/window.py:1586 src/ui/window.py:1618
 msgid "_OK"
 msgstr "_சரி"
 
-#: src/ui/window.py:852
+#: src/ui/window.py:855
 msgid "No source items to analyze"
 msgstr "பகுப்பாய்வு செய்ய எந்த ஆதாரமும் இல்லை"
 
-#: src/ui/window.py:859
+#: src/ui/window.py:862
 msgid "Recommendation not available"
 msgstr "பரிந்துரை கிடைக்கவில்லை"
 
-#: src/ui/window.py:912
+#: src/ui/window.py:915
 msgid "Recommendation failed"
 msgstr "பரிந்துரை தோல்வியடைந்தது"
 
-#: src/ui/window.py:913
+#: src/ui/window.py:916
 msgid "Compression recommendation failed"
 msgstr "சுருக்கப் பரிந்துரை தோல்வியடைந்தது"
 
-#: src/ui/window.py:963
+#: src/ui/window.py:966
 msgid "Compression recommendation"
 msgstr "சுருக்க பரிந்துரை"
 
-#: src/ui/window.py:968
+#: src/ui/window.py:971
 msgid "Recommendation reason"
 msgstr "பரிந்துரை காரணம்"
 
-#: src/ui/window.py:1002
+#: src/ui/window.py:1005
 msgid "Password Required"
 msgstr "கடவுச்சொல் தேவை"
 
-#: src/ui/window.py:1003
+#: src/ui/window.py:1006
 msgid "This archive is encrypted. Please enter the password."
 msgstr "இந்தக் காப்பகம் குறியாக்கம் செய்யப்பட்டுள்ளது. கடவுச்சொல்லை உள்ளிடவும்."
 
-#: src/ui/window.py:1033 src/ui/window.py:1036 src/window.ui:117
+#: src/ui/window.py:1036 src/ui/window.py:1039 src/window.ui:117
 #: src/window.ui:132
 msgid "Extract"
 msgstr "பிரித்தெடுத்தல்"
 
-#: src/ui/window.py:1074
+#: src/ui/window.py:1082
 msgid "Modified"
 msgstr "மாற்றியமைக்கப்பட்ட"
 
-#: src/ui/window.py:1191
+#: src/ui/window.py:1238
 msgid "Failed to create temporary directory"
 msgstr "தற்காலிக கோப்பகத்தை உருவாக்க முடியவில்லை"
 
-#: src/ui/window.py:1217 src/ui/window.py:1750 src/ui/window.py:1752
-#: src/ui/window.py:1778 src/ui/window.py:1780
+#: src/ui/window.py:1264 src/ui/window.py:1810 src/ui/window.py:1812
+#: src/ui/window.py:1838 src/ui/window.py:1840
 msgid "Extract "
 msgstr "பிரித்தெடுத்தல் "
 
-#: src/ui/window.py:1223
+#: src/ui/window.py:1270
 msgid "Extracted file not found"
 msgstr "பிரித்தெடுக்கப்பட்ட கோப்பு கிடைக்கவில்லை"
 
-#: src/ui/window.py:1283
+#: src/ui/window.py:1330
 msgid "List "
 msgstr "பட்டியல் "
 
-#: src/ui/window.py:1404
+#: src/ui/window.py:1451
 msgid "List failed"
 msgstr "பட்டியல் தோல்வியடைந்தது"
 
-#: src/ui/window.py:1482 src/ui/window.py:1483
+#: src/ui/window.py:1538 src/ui/window.py:1539
 msgid "File not found"
 msgstr "கோப்பு கிடைக்கவில்லை"
 
-#: src/ui/window.py:1502
+#: src/ui/window.py:1558
 msgid "Select failed"
 msgstr "தேர்ந்தெடுக்க முடியவில்லை"
 
-#: src/ui/window.py:1505
+#: src/ui/window.py:1561
 msgid "Selected "
 msgstr "தேர்ந்தெடுக்கப்பட்டது "
 
-#: src/ui/window.py:1509
+#: src/ui/window.py:1565
 msgid "Format compatibility warning"
 msgstr "வடிவமைப்பு இணக்கத்தன்மை முன்னறிவிப்பு"
 
-#: src/ui/window.py:1510
+#: src/ui/window.py:1566
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
@@ -454,19 +453,19 @@ msgstr ""
 "இந்த வடிவம் இணக்கத்தன்மைக்காக சரிபார்க்கப்படவில்லை. நகர்த்துதல் மற்றும் நீக்குதல் செயல்பாடுகள் "
 "முடக்கப்பட்டுள்ளன."
 
-#: src/ui/window.py:1518
+#: src/ui/window.py:1574
 msgid "Preview not supported"
 msgstr "முன்னோட்டம் ஆதரிக்கப்படவில்லை"
 
-#: src/ui/window.py:1519
+#: src/ui/window.py:1575
 msgid "This format does not support preview. Only extract is available."
 msgstr "இந்த வடிவம் மாதிரிக்காட்சியை ஆதரிக்காது. சாறு மட்டுமே கிடைக்கிறது."
 
-#: src/ui/window.py:1527
+#: src/ui/window.py:1583
 msgid "Nested archive opened"
 msgstr "உள்ளமைக்கப்பட்ட காப்பகம் திறக்கப்பட்டது"
 
-#: src/ui/window.py:1528
+#: src/ui/window.py:1584
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
@@ -474,257 +473,257 @@ msgstr ""
 "இந்தக் காப்பகம் பெற்றோர் காப்பகத்திலிருந்து பிரித்தெடுக்கப்பட்டது. நகர்த்துதல் மற்றும் நீக்குதல் "
 "செயல்பாடுகள் முடக்கப்பட்டுள்ளன."
 
-#: src/ui/window.py:1555
+#: src/ui/window.py:1615
 msgid "Language changed"
 msgstr "மொழி மாறியது"
 
-#: src/ui/window.py:1556
+#: src/ui/window.py:1616
 msgid "Restart the application to apply the new language."
 msgstr "புதிய மொழியைப் பயன்படுத்த, பயன்பாட்டை மறுதொடக்கம் செய்யவும்."
 
-#: src/ui/window.py:1597
+#: src/ui/window.py:1657
 msgid "Calculating..."
 msgstr "கணக்கிடுகிறது..."
 
-#: src/ui/window.py:1602
+#: src/ui/window.py:1662
 #, python-format
 msgid "%d seconds remaining"
 msgstr "%d வினாடிகள் மீதமுள்ளன"
 
-#: src/ui/window.py:1603
+#: src/ui/window.py:1663
 #, python-format
 msgid "%d minutes remaining"
 msgstr "%d நிமிடங்கள் மீதமுள்ளன"
 
-#: src/ui/window.py:1620
+#: src/ui/window.py:1680
 msgid "Command not found"
 msgstr "கட்டளை கிடைக்கவில்லை"
 
-#: src/ui/window.py:1625
+#: src/ui/window.py:1685
 msgid "Job queue not found"
 msgstr "வேலை வரிசை காணப்படவில்லை"
 
-#: src/ui/window.py:1715 src/ui/window.py:1838
+#: src/ui/window.py:1775 src/ui/window.py:1898
 msgid "{} items"
 msgstr "{} உருப்படிகள்"
 
-#: src/ui/window.py:1719 src/ui/window.py:1776 src/ui/window.py:1790
-#: src/ui/window.py:1804 src/ui/window.py:1818 src/ui/window.py:1840
-#: src/ui/window.py:1866 src/ui/window.py:1873 src/ui/window.py:1879
-#: src/ui/window.py:1886
+#: src/ui/window.py:1779 src/ui/window.py:1836 src/ui/window.py:1850
+#: src/ui/window.py:1864 src/ui/window.py:1878 src/ui/window.py:1900
+#: src/ui/window.py:1926 src/ui/window.py:1933 src/ui/window.py:1939
+#: src/ui/window.py:1946
 msgid "file"
 msgstr "கோப்பு"
 
-#: src/ui/window.py:1722 src/ui/window.py:1724
+#: src/ui/window.py:1782 src/ui/window.py:1784
 msgid "Compress "
 msgstr "சுருக்கவும் "
 
-#: src/ui/window.py:1726
+#: src/ui/window.py:1786
 msgid "Compressed "
 msgstr "சுருக்கப்பட்டது "
 
-#: src/ui/window.py:1728
+#: src/ui/window.py:1788
 msgid "Compress timed out: "
 msgstr "சுருக்க நேரம் முடிந்தது: "
 
-#: src/ui/window.py:1730
+#: src/ui/window.py:1790
 msgid "Compress cancelled: "
 msgstr "சுருக்கம் ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1731
+#: src/ui/window.py:1791
 msgid "Compress failed: "
 msgstr "சுருக்க முடியவில்லை: "
 
-#: src/ui/window.py:1734 src/ui/window.py:1748 src/ui/window.py:1762
-#: src/ui/window.py:1835 src/ui/window.py:1849 src/ui/window.py:1854
-#: src/ui/window.py:1860 src/ui/window.py:1865 src/ui/window.py:1872
-#: src/ui/window.py:1878 src/ui/window.py:1885
+#: src/ui/window.py:1794 src/ui/window.py:1808 src/ui/window.py:1822
+#: src/ui/window.py:1895 src/ui/window.py:1909 src/ui/window.py:1914
+#: src/ui/window.py:1920 src/ui/window.py:1925 src/ui/window.py:1932
+#: src/ui/window.py:1938 src/ui/window.py:1945
 msgid "archive"
 msgstr "காப்பகம்"
 
-#: src/ui/window.py:1736 src/ui/window.py:1738
+#: src/ui/window.py:1796 src/ui/window.py:1798
 msgid "Open "
 msgstr "திற "
 
-#: src/ui/window.py:1740
+#: src/ui/window.py:1800
 msgid "Opened "
 msgstr "திறக்கப்பட்டது "
 
-#: src/ui/window.py:1742
+#: src/ui/window.py:1802
 msgid "Open timed out: "
 msgstr "திறக்கும் நேரம் முடிந்தது: "
 
-#: src/ui/window.py:1744
+#: src/ui/window.py:1804
 msgid "Open cancelled: "
 msgstr "திற ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1745
+#: src/ui/window.py:1805
 msgid "Open failed: "
 msgstr "திறக்க முடியவில்லை: "
 
-#: src/ui/window.py:1754 src/ui/window.py:1782
+#: src/ui/window.py:1814 src/ui/window.py:1842
 msgid "Extracted "
 msgstr "பிரித்தெடுக்கப்பட்டது "
 
-#: src/ui/window.py:1756 src/ui/window.py:1784
+#: src/ui/window.py:1816 src/ui/window.py:1844
 msgid "Extract timed out: "
 msgstr "பிரித்தெடுக்கும் நேரம் முடிந்தது: "
 
-#: src/ui/window.py:1758 src/ui/window.py:1786
+#: src/ui/window.py:1818 src/ui/window.py:1846
 msgid "Extract cancelled: "
 msgstr "பிரித்தெடுத்தல் ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1759 src/ui/window.py:1787
+#: src/ui/window.py:1819 src/ui/window.py:1847
 msgid "Extract failed: "
 msgstr "பிரித்தெடுக்க முடியவில்லை: "
 
-#: src/ui/window.py:1764 src/ui/window.py:1766
+#: src/ui/window.py:1824 src/ui/window.py:1826
 msgid "Test "
 msgstr "சோதனை "
 
-#: src/ui/window.py:1768
+#: src/ui/window.py:1828
 msgid "Tested "
 msgstr "சோதிக்கப்பட்டது "
 
-#: src/ui/window.py:1770
+#: src/ui/window.py:1830
 msgid "Test timed out: "
 msgstr "சோதனை நேரம் முடிந்தது: "
 
-#: src/ui/window.py:1772
+#: src/ui/window.py:1832
 msgid "Test cancelled: "
 msgstr "சோதனை ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1773
+#: src/ui/window.py:1833
 msgid "Test failed: "
 msgstr "சோதனை தோல்வி: "
 
-#: src/ui/window.py:1792 src/ui/window.py:1794
+#: src/ui/window.py:1852 src/ui/window.py:1854
 msgid "Delete "
 msgstr "நீக்கு "
 
-#: src/ui/window.py:1796
+#: src/ui/window.py:1856
 msgid "Deleted "
 msgstr "நீக்கப்பட்டது "
 
-#: src/ui/window.py:1798
+#: src/ui/window.py:1858
 msgid "Delete timed out: "
 msgstr "நீக்குவதற்கான நேரம் முடிந்தது: "
 
-#: src/ui/window.py:1800
+#: src/ui/window.py:1860
 msgid "Delete cancelled: "
 msgstr "நீக்குதல் ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1801
+#: src/ui/window.py:1861
 msgid "Delete failed: "
 msgstr "நீக்குவதில் தோல்வி: "
 
-#: src/ui/window.py:1806 src/ui/window.py:1808
+#: src/ui/window.py:1866 src/ui/window.py:1868
 msgid "Move "
 msgstr "நகர்த்தவும் "
 
-#: src/ui/window.py:1810
+#: src/ui/window.py:1870
 msgid "Moved "
 msgstr "நகர்த்தப்பட்டது "
 
-#: src/ui/window.py:1812
+#: src/ui/window.py:1872
 msgid "Move timed out: "
 msgstr "நகர்த்த நேரம் முடிந்தது: "
 
-#: src/ui/window.py:1814
+#: src/ui/window.py:1874
 msgid "Move cancelled: "
 msgstr "நகர்வு ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1815
+#: src/ui/window.py:1875
 msgid "Move failed: "
 msgstr "நகர்த்த முடியவில்லை: "
 
-#: src/ui/window.py:1820 src/ui/window.py:1822
+#: src/ui/window.py:1880 src/ui/window.py:1882
 msgid "Add "
 msgstr "சேர் "
 
-#: src/ui/window.py:1824
+#: src/ui/window.py:1884
 msgid "Added "
 msgstr "சேர்க்கப்பட்டது "
 
-#: src/ui/window.py:1826
+#: src/ui/window.py:1886
 msgid "Add timed out: "
 msgstr "காலாவதியானதைச் சேர்: "
 
-#: src/ui/window.py:1828
+#: src/ui/window.py:1888
 msgid "Add cancelled: "
 msgstr "சேர் ரத்து செய்யப்பட்டது: "
 
-#: src/ui/window.py:1829
+#: src/ui/window.py:1889
 msgid "Add failed: "
 msgstr "சேர்க்க முடியவில்லை: "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
-#: src/ui/window.py:1842
+#: src/ui/window.py:1902
 #, python-brace-format
 msgid "Create {output} from {source}"
 msgstr "{source} இலிருந்து {output} ஐ உருவாக்கவும்"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
-#: src/ui/window.py:1845
+#: src/ui/window.py:1905
 #, python-brace-format
 msgid "Parameters: {params}"
 msgstr "அளவுருக்கள்: {params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
-#: src/ui/window.py:1851
+#: src/ui/window.py:1911
 #, python-brace-format
 msgid "Read archive information from {archive}"
 msgstr "{archive} இலிருந்து காப்பகத் தகவலைப் படிக்கவும்"
 
-#: src/ui/window.py:1855 src/ui/window.py:1867
+#: src/ui/window.py:1915 src/ui/window.py:1927
 msgid "folder"
 msgstr "கோப்புறை"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
-#: src/ui/window.py:1857
+#: src/ui/window.py:1917
 #, python-brace-format
 msgid "Extract {archive} to {folder}"
 msgstr "{archive} {folder} லிருந்து பிரித்தெடுக்கவும்"
 
 #. TRANSLATORS: {archive} is the name of the archive file
-#: src/ui/window.py:1862
+#: src/ui/window.py:1922
 #, python-brace-format
 msgid "Test {archive}"
 msgstr "சோதனை {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
-#: src/ui/window.py:1869
+#: src/ui/window.py:1929
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
 msgstr "{folder} இலிருந்து {archive}க்கு {file} பிரித்தெடுக்கவும்"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
-#: src/ui/window.py:1875
+#: src/ui/window.py:1935
 #, python-brace-format
 msgid "Delete {file} from {archive}"
 msgstr "{archive} இலிருந்து {file} ஐ நீக்கு"
 
-#: src/ui/window.py:1880
+#: src/ui/window.py:1940
 msgid "destination"
 msgstr "இலக்கு"
 
 #. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
-#: src/ui/window.py:1882
+#: src/ui/window.py:1942
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
 msgstr "{archive} இல் {file} ஐ {destination} க்கு நகர்த்தவும்"
 
-#: src/ui/window.py:1887
+#: src/ui/window.py:1947
 msgid "root"
 msgstr "மூலம்"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
-#: src/ui/window.py:1889
+#: src/ui/window.py:1949
 #, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
 msgstr "{archive} இல் {destination} இல் {file} ஐச் சேர்க்கவும்"
 
-#: src/ui/move_folder_chooser.py:85
+#: src/ui/move_folder_chooser.py:103
 msgid "(root)"
 msgstr "(வேர்)"
 
@@ -740,7 +739,7 @@ msgstr "கோப்பை திற"
 msgid "Open"
 msgstr "திற"
 
-#: src/window.ui:92 src/window.ui:107 src/window.ui:410
+#: src/window.ui:92 src/window.ui:107 src/window.ui:420
 msgid "Extract All"
 msgstr "அனைத்தையும் பிரித்தெடுக்கவும்"
 
@@ -776,19 +775,19 @@ msgstr "_மொழி"
 msgid "System Default"
 msgstr "கணினி இயல்புநிலை"
 
-#: src/window.ui:384
+#: src/window.ui:394
 msgid "Show _Logs"
 msgstr "_பதிவுகளைக் காட்டு"
 
-#: src/window.ui:390
+#: src/window.ui:400
 msgid "_Preferences"
 msgstr "விருப்பங்கள்"
 
-#: src/window.ui:394
+#: src/window.ui:404
 msgid "_About Akizip"
 msgstr "_Akizip பற்றி"
 
-#: src/window.ui:402 src/window.ui:414
+#: src/window.ui:412 src/window.ui:424 src/window.ui:432
 msgid "Extract Selected"
 msgstr "பிரித்தெடுத்தல் தேர்ந்தெடுக்கப்பட்டது"
 

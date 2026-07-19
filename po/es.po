@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-19 22:10+0800\n"
+"POT-Creation-Date: 2026-07-19 22:36+0800\n"
 "PO-Revision-Date: 2026-06-10 07:01+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/akizip/akizip/es/"
@@ -409,7 +409,7 @@ msgid "This archive is encrypted. Please enter the password."
 msgstr "Este archivador está cifrado. Introduzca la contraseña."
 
 #: src/ui/window.py:1036 src/ui/window.py:1039 src/window.ui:117
-#: src/window.ui:132
+#: src/window.ui:132 src/window.ui:432
 msgid "Extract"
 msgstr "Extraer"
 
@@ -800,7 +800,7 @@ msgstr "_Preferencias"
 msgid "_About Akizip"
 msgstr "_Acerca de Akizip"
 
-#: src/window.ui:412 src/window.ui:424 src/window.ui:432
+#: src/window.ui:412 src/window.ui:424
 msgid "Extract Selected"
 msgstr "Extraer selección"
 

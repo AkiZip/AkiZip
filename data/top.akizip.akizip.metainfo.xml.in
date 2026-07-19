@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.0" date="2026-07-19">
+      <description translate="no">
+        <p>Context menu support and project improvements</p>
+        <ul>
+          <li>Added right-click context menu support</li>
+          <li>Added issue tracker link</li>
+          <li>Standardized license references</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.7" date="2026-06-29">
       <description translate="no">
         <p>New translations and 7-Zip update</p>

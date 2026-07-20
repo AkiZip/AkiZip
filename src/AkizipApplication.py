@@ -1,4 +1,21 @@
-
+# AkizipApplication.py
+#
+# Copyright 2026 akizip
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+#
+# SPDX-License-Identifier: GPL-3.0-or-later
 import sys
 import gi
 
@@ -61,12 +78,13 @@ class AkizipApplication(Adw.Application):
         about = Adw.AboutDialog(application_name='Akizip',
                                 application_icon='top.akizip.akizip',
                                 developer_name='akizip',
-                                version='0.2.7',
+                                version='0.3.0',
                                 # Translators: Replace "translator-credits" with your name/username, and optionally an email or URL.
                                 translator_credits = "weblate https://hosted.weblate.org/engage/akizip/",
                                 developers=['ckappgit','HungryNeko'],
                                 copyright='© 2026 akizip',
-                                license_type=Gtk.License.GPL_3_0)
+                                license_type=Gtk.License.GPL_3_0,
+                                issue_url='https://github.com/AkiZip/AkiZip/issues')
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, parameter):

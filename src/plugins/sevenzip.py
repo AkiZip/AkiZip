@@ -37,7 +37,11 @@ def _parse_progress(line):
 
 def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None):
     if on_progress is not None:
-        args = list(args) + ['-bsp2']
+        args = list(args)
+        if '--' in args:
+            args.insert(args.index('--'), '-bsp2')
+        else:
+            args.append('-bsp2')
 
     started_at = time.monotonic()
     process = subprocess.Popen(

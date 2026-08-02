@@ -18,8 +18,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 import os
 import re
+import shutil
 import signal
 import subprocess
+import tempfile
 import threading
 import time
 from pathlib import Path
@@ -394,6 +396,34 @@ def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, ca
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 
+def archive_mkdir(archive_path, folder_path, password=None, timeout=-1, cancel_event=None, task_status=None):
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
+
+    folder_path = str(folder_path).strip('/')
+    if not folder_path:
+        raise RuntimeError('Empty folder name')
+
+    temp_dir = tempfile.mkdtemp(prefix='akizip-mkdir-')
+    try:
+        staged = Path(temp_dir) / Path(folder_path).name
+        staged.mkdir()
+        args = ['a', str(archive_path), str(staged)]
+        if password:
+            args.append(f'-p{password}')
+        output = _run_7zip(args, timeout, cancel_event, on_progress)
+
+        if staged.name != folder_path:
+            rn_args = ['rn', str(archive_path), staged.name, folder_path]
+            if password:
+                rn_args.append(f'-p{password}')
+            output = _run_7zip(rn_args, timeout, cancel_event, on_progress)
+        return output
+    finally:
+        shutil.rmtree(temp_dir, ignore_errors=True)
+
+
 def register(commands):
     commands['archive.info'] = archive_info
     commands['archive.list'] = archive_list
@@ -404,3 +434,4 @@ def register(commands):
     commands['archive.add'] = archive_add
     commands['archive.test'] = archive_test
     commands['archive.move'] = archive_move
+    commands['archive.mkdir'] = archive_mkdir

@@ -343,7 +343,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
-    def butadd_file(self, button):
+    def butadd_file(self, button, prefill_path=None):
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -356,7 +356,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Add failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        source_path = None
+        source_path = prefill_path
 
         dialog = Adw.AlertDialog.new(_('Add File'), _('Add a file to the current archive.'))
         dialog.add_response('cancel', _('_Cancel'))
@@ -382,6 +382,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         source_entry.set_placeholder_text(_('Select a file'))
         source_entry.set_editable(False)
         source_entry.set_hexpand(True)
+        if prefill_path:
+            source_entry.set_text(_host_path(prefill_path))
         source_browse = Gtk.Button(icon_name='document-open-symbolic')
         source_browse.set_tooltip_text(_('Select file'))
         source_browse.set_valign(Gtk.Align.CENTER)
@@ -532,6 +534,63 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         def on_response(_d, response):
             if response == 'confirm':
                 run_delete(None)
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+    def butnew_folder(self, button):
+        selected = self._selected_path_from_input()
+        if selected is None:
+            return
+
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system') or not app.system.can_extract():
+            self._append_log(_('New folder failed'), _('Selected path is not an archive.'), _status.ERROR)
+            return
+        if not app.system.can_modify():
+            self._append_log(_('New folder failed'), _('This archive format does not support modification.'), _status.ERROR)
+            return
+
+        dialog = Adw.AlertDialog.new(_('New Folder'), _('Create a new folder in the current archive.'))
+        entry = Gtk.Entry()
+        entry.set_text(_('New Folder'))
+        entry.set_activates_default(True)
+        entry.set_hexpand(True)
+        dialog.set_extra_child(entry)
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('_Create'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+        dialog.set_close_response('cancel')
+
+        def run_mkdir(password):
+            def on_error(error):
+                if is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_mkdir(new_password)
+                    )
+                    return True
+                return False
+
+            name = entry.get_text().strip().strip('/')
+            if not name or '/' in name:
+                self._show_notification(_('Invalid folder name'), _status.ERROR)
+                return
+
+            current = self._current_internal_path.rstrip('/')
+            folder_path = current + '/' + name if current else name
+            self._run_command(
+                'archive.mkdir',
+                selected,
+                folder_path,
+                password,
+                on_success_extra=lambda _output: self._refresh_file_list(),
+                on_error_extra=on_error,
+            )
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                run_mkdir(None)
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -1497,6 +1556,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._delete_action.connect('activate', lambda _a, _p: self.butdelete(None))
         self.add_action(self._delete_action)
 
+        self._new_folder_action = Gio.SimpleAction.new('new-folder', None)
+        self._new_folder_action.connect('activate', lambda _a, _p: self.butnew_folder(None))
+        self.add_action(self._new_folder_action)
+
         self._build_file_list()
         self.address_entry.set_editable(not _IS_FLATPAK)
         self.file_list_stack.set_visible_child_name('empty')
@@ -1505,6 +1568,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._update_title()
         self._update_extract_button_for_locale()
         self.connect('destroy', self._on_destroy)
+
+        drop_target = Gtk.DropTarget.new(Gdk.FileList.__gtype__, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self._on_files_dropped)
+        self.add_controller(drop_target)
+
+    def _on_files_dropped(self, _target, value, _x, _y):
+        paths = [f.get_path() for f in value.get_files() if f.get_path()]
+        if not paths:
+            return False
+        if len(paths) > 1:
+            # TRANSLATORS: This message will be removed in the next version; no need to translate it for now.
+            self._show_notification(_('Only the first file will be added'), _status.WARNING)
+        self.butadd_file(None, prefill_path=paths[0])
+        return True
 
     def _on_destroy(self, widget):
         app = self.get_application()
@@ -1607,6 +1684,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._move_action.set_enabled(can_modify)
         if hasattr(self, '_delete_action') and self._delete_action is not None:
             self._delete_action.set_enabled(can_modify)
+        if hasattr(self, '_new_folder_action') and self._new_folder_action is not None:
+            self._new_folder_action.set_enabled(can_modify)
 
     def _on_language_changed(self, settings, key):
         if settings.get_string(key) == self._initial_language:
@@ -1688,7 +1767,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         log_id = object()
         summary = self._command_summary(name, args, _status.PENDING)
 
-        has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file', 'archive.test', 'archive.delete', 'archive.move', 'archive.add')
+        has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file', 'archive.test', 'archive.delete', 'archive.move', 'archive.add', 'archive.mkdir')
         progress_dialog = None
 
         def on_success(output):
@@ -1888,6 +1967,20 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return _('Add cancelled: ') + target
             return _('Add failed: ') + target
 
+        if name == 'archive.mkdir':
+            target = Path(args[1]).name if len(args) > 1 else _('folder')
+            if state == _status.PENDING:
+                return _('Create folder ') + target
+            if state == _status.WORKING:
+                return _('Create folder ') + target
+            if state == _status.FINISHED:
+                return _('Created folder ') + target
+            if state == _status.TIMEOUT:
+                return _('Create folder timed out: ') + target
+            if state == _status.CANCELLED:
+                return _('Create folder cancelled: ') + target
+            return _('Create folder failed: ') + target
+
         return name
 
     def _command_preview(self, name, args):
@@ -1947,6 +2040,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dst = args[2] if len(args) > 2 else _('root')
             # TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
             return _('Add {file} to {destination} in {archive}').format(file=file_name, destination=dst, archive=archive)
+
+        if name == 'archive.mkdir':
+            archive = Path(args[0]).name if args else _('archive')
+            folder_name = args[1] if len(args) > 1 else _('folder')
+            # TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
+            return _('Create folder {folder} in {archive}').format(folder=folder_name, archive=archive)
 
         return name
 

@@ -34,7 +34,7 @@ done < po/POTFILES.in
     xgettext --from-code=UTF-8 --language=Python \
         --add-comments=TRANSLATORS: \
         --keyword=_ --keyword=N_ --keyword=C_:1c,2 --keyword=NC_:1c,2 \
-        --package-name=akizip --package-version=0.3.0 \
+        --package-name=akizip --package-version=0.3.1 \
         -o "$TMPDIR/python.pot" "${PY_FILES[@]}"
 
 [[ ${#UI_FILES[@]} -gt 0 ]] && \

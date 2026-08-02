@@ -1517,6 +1517,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if not paths:
             return False
         if len(paths) > 1:
+            # TRANSLATORS: This message will be removed in the next version; no need to translate it for now.
             self._show_notification(_('Only the first file will be added'), _status.WARNING)
         self.butadd_file(None, prefill_path=paths[0])
         return True

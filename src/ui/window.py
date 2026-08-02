@@ -343,7 +343,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
-    def butadd_file(self, button):
+    def butadd_file(self, button, prefill_path=None):
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -356,7 +356,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Add failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        source_path = None
+        source_path = prefill_path
 
         dialog = Adw.AlertDialog.new(_('Add File'), _('Add a file to the current archive.'))
         dialog.add_response('cancel', _('_Cancel'))
@@ -382,6 +382,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         source_entry.set_placeholder_text(_('Select a file'))
         source_entry.set_editable(False)
         source_entry.set_hexpand(True)
+        if prefill_path:
+            source_entry.set_text(_host_path(prefill_path))
         source_browse = Gtk.Button(icon_name='document-open-symbolic')
         source_browse.set_tooltip_text(_('Select file'))
         source_browse.set_valign(Gtk.Align.CENTER)
@@ -1505,6 +1507,19 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._update_title()
         self._update_extract_button_for_locale()
         self.connect('destroy', self._on_destroy)
+
+        drop_target = Gtk.DropTarget.new(Gdk.FileList.__gtype__, Gdk.DragAction.COPY)
+        drop_target.connect('drop', self._on_files_dropped)
+        self.add_controller(drop_target)
+
+    def _on_files_dropped(self, _target, value, _x, _y):
+        paths = [f.get_path() for f in value.get_files() if f.get_path()]
+        if not paths:
+            return False
+        if len(paths) > 1:
+            self._show_notification(_('Only the first file will be added'), _status.WARNING)
+        self.butadd_file(None, prefill_path=paths[0])
+        return True
 
     def _on_destroy(self, widget):
         app = self.get_application()

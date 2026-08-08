@@ -37,7 +37,7 @@ def _parse_progress(line):
     return None
 
 
-def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None):
+def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None, cwd=None):
     if on_progress is not None:
         args = list(args)
         if '--' in args:
@@ -53,6 +53,7 @@ def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None):
         stdin=subprocess.DEVNULL,
         text=True,
         start_new_session=True,
+        cwd=cwd,
     )
 
     if on_progress is None:
@@ -405,21 +406,18 @@ def archive_mkdir(archive_path, folder_path, password=None, timeout=-1, cancel_e
     if not folder_path:
         raise RuntimeError('Empty folder name')
 
+    folder = Path(folder_path)
+    if folder.is_absolute() or '..' in folder.parts:
+        raise RuntimeError('Invalid folder name')
+
     temp_dir = tempfile.mkdtemp(prefix='akizip-mkdir-')
     try:
-        staged = Path(temp_dir) / Path(folder_path).name
-        staged.mkdir()
-        args = ['a', str(archive_path), str(staged)]
+        staged = Path(temp_dir) / folder
+        staged.mkdir(parents=True)
+        args = ['a', str(archive_path), folder_path]
         if password:
             args.append(f'-p{password}')
-        output = _run_7zip(args, timeout, cancel_event, on_progress)
-
-        if staged.name != folder_path:
-            rn_args = ['rn', str(archive_path), staged.name, folder_path]
-            if password:
-                rn_args.append(f'-p{password}')
-            output = _run_7zip(rn_args, timeout, cancel_event, on_progress)
-        return output
+        return _run_7zip(args, timeout, cancel_event, on_progress, cwd=temp_dir)
     finally:
         shutil.rmtree(temp_dir, ignore_errors=True)
 

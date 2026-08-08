@@ -351,9 +351,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if app is None or not hasattr(app, 'system') or not app.system.can_extract():
             self._append_log(_('Add failed'), _('Selected path is not an archive.'), _status.ERROR)
+            self._show_notification(_('Selected path is not an archive.'), _status.ERROR)
             return
         if not app.system.can_modify():
             self._append_log(_('Add failed'), _('This archive format does not support modification.'), _status.ERROR)
+            self._show_notification(_('This archive format does not support modification.'), _status.ERROR)
             return
 
         source_path = prefill_path

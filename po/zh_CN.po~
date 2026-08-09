@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-19 22:10+0800\n"
+"POT-Creation-Date: 2026-08-02 15:01+0800\n"
 "PO-Revision-Date: 2026-07-05 05:01+0000\n"
 "Last-Translator: taketsuki <dpps93126@gmail.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -51,7 +51,7 @@ msgstr ""
 msgid "Main window showing archive contents and toolbar"
 msgstr "显示归档内容和工具栏的主窗口"
 
-#: src/ui/info_dialog.py:31 src/ui/window.py:1546
+#: src/ui/info_dialog.py:31 src/ui/window.py:1623
 msgid "System state not found"
 msgstr "未找到系统状态"
 
@@ -80,7 +80,7 @@ msgstr "关闭"
 msgid "Name"
 msgstr "名称"
 
-#: src/ui/info_dialog.py:123 src/ui/window.py:1080
+#: src/ui/info_dialog.py:123 src/ui/window.py:1139
 msgid "Path"
 msgstr "路径"
 
@@ -88,7 +88,7 @@ msgstr "路径"
 msgid "Type"
 msgstr "类型"
 
-#: src/ui/info_dialog.py:126 src/ui/window.py:1081
+#: src/ui/info_dialog.py:126 src/ui/window.py:1140
 msgid "Size"
 msgstr "大小"
 
@@ -168,7 +168,7 @@ msgstr "否"
 msgid "Logs"
 msgstr "日志"
 
-#: src/ui/log_panel.py:114 src/ui/window.py:1625
+#: src/ui/log_panel.py:114 src/ui/window.py:1704
 msgid "Cancel"
 msgstr "取消"
 
@@ -209,7 +209,7 @@ msgid "Test failed"
 msgstr "测试失败"
 
 #: src/ui/window.py:232 src/ui/window.py:261 src/ui/window.py:353
-#: src/ui/window.py:491 src/ui/window.py:547
+#: src/ui/window.py:493 src/ui/window.py:548 src/ui/window.py:606
 msgid "Selected path is not an archive."
 msgstr "所选路径不是压缩包。"
 
@@ -217,13 +217,14 @@ msgstr "所选路径不是压缩包。"
 msgid "Move failed"
 msgstr "移动失败"
 
-#: src/ui/window.py:264 src/ui/window.py:356 src/ui/window.py:494
+#: src/ui/window.py:264 src/ui/window.py:356 src/ui/window.py:496
+#: src/ui/window.py:551
 msgid "This archive format does not support modification."
 msgstr "该压缩包格式不支持修改。"
 
-#: src/ui/window.py:272 src/ui/window.py:462 src/ui/window.py:502
-#: src/ui/window.py:575 src/ui/window.py:1530 src/ui/window.py:1531
-#: src/ui/window.py:1534 src/ui/window.py:1535
+#: src/ui/window.py:272 src/ui/window.py:464 src/ui/window.py:504
+#: src/ui/window.py:634 src/ui/window.py:1607 src/ui/window.py:1608
+#: src/ui/window.py:1611 src/ui/window.py:1612
 msgid "No file selected"
 msgstr "未选择文件"
 
@@ -235,15 +236,15 @@ msgstr "移动"
 msgid "Move \"{}\" to:"
 msgstr "移动 \"{}\" 到："
 
-#: src/ui/window.py:282 src/ui/window.py:429
+#: src/ui/window.py:282 src/ui/window.py:431
 msgid "Select destination folder"
 msgstr "选择目标文件夹"
 
-#: src/ui/window.py:310 src/ui/window.py:362 src/ui/window.py:395
-#: src/ui/window.py:507 src/ui/window.py:586 src/ui/window.py:625
-#: src/ui/window.py:692 src/ui/window.py:740 src/ui/window.py:762
-#: src/ui/window.py:793 src/ui/window.py:1015 src/ui/window.py:1038
-#: src/move-folder-chooser.ui:51
+#: src/ui/window.py:310 src/ui/window.py:362 src/ui/window.py:397
+#: src/ui/window.py:509 src/ui/window.py:560 src/ui/window.py:645
+#: src/ui/window.py:684 src/ui/window.py:751 src/ui/window.py:799
+#: src/ui/window.py:821 src/ui/window.py:852 src/ui/window.py:1074
+#: src/ui/window.py:1097 src/move-folder-chooser.ui:51
 msgid "_Cancel"
 msgstr "取消"
 
@@ -255,7 +256,7 @@ msgstr "移动"
 msgid "Add failed"
 msgstr "添加失败"
 
-#: src/ui/window.py:361 src/window.ui:448
+#: src/ui/window.py:361 src/window.ui:452
 msgid "Add File"
 msgstr "添加文件"
 
@@ -263,7 +264,7 @@ msgstr "添加文件"
 msgid "Add a file to the current archive."
 msgstr "向当前压缩包添加文件。"
 
-#: src/ui/window.py:363 src/ui/window.py:739 src/ui/window.py:761
+#: src/ui/window.py:363 src/ui/window.py:798 src/ui/window.py:820
 msgid "_Add"
 msgstr "添加"
 
@@ -271,438 +272,512 @@ msgstr "添加"
 msgid "Select a file"
 msgstr "选择文件"
 
-#: src/ui/window.py:386
+#: src/ui/window.py:388
 msgid "Select file"
 msgstr "选择文件"
 
-#: src/ui/window.py:391 src/ui/window.py:582
+#: src/ui/window.py:393 src/ui/window.py:641
 msgid "Select File"
 msgstr "选择文件"
 
-#: src/ui/window.py:394 src/ui/window.py:585 src/ui/window.py:624
+#: src/ui/window.py:396 src/ui/window.py:644 src/ui/window.py:683
 msgid "_Open"
 msgstr "打开"
 
-#: src/ui/window.py:421
+#: src/ui/window.py:423
 msgid "Destination"
 msgstr "目标位置"
 
-#: src/ui/window.py:426 src/extract-dialog.ui:15
+#: src/ui/window.py:428 src/extract-dialog.ui:15
 msgid "Destination folder"
 msgstr "目标文件夹"
 
-#: src/ui/window.py:491 src/ui/window.py:494
+#: src/ui/window.py:493 src/ui/window.py:496
 msgid "Delete failed"
 msgstr "删除失败"
 
-#: src/ui/window.py:506 src/window.ui:190 src/window.ui:204 src/window.ui:440
+#: src/ui/window.py:508 src/window.ui:190 src/window.ui:204 src/window.ui:440
 msgid "Delete"
 msgstr "删除"
 
-#: src/ui/window.py:506
+#: src/ui/window.py:508
 msgid "Are you sure you want to delete \"{}\"?"
 msgstr "确定要删除\"{}\"吗？"
 
-#: src/ui/window.py:508
+#: src/ui/window.py:510
 msgid "_Delete"
 msgstr "删除"
 
-#: src/ui/window.py:547
+#: src/ui/window.py:548 src/ui/window.py:551
+#, fuzzy
+#| msgid "Delete failed"
+msgid "New folder failed"
+msgstr "删除失败"
+
+#: src/ui/window.py:554 src/ui/window.py:556 src/window.ui:444
+#: src/window.ui:456
+#, fuzzy
+#| msgid "Folder"
+msgid "New Folder"
+msgstr "文件夹"
+
+#: src/ui/window.py:554
+#, fuzzy
+#| msgid "Add a file to the current archive."
+msgid "Create a new folder in the current archive."
+msgstr "向当前压缩包添加文件。"
+
+#: src/ui/window.py:561
+#, fuzzy
+#| msgid "Create "
+msgid "_Create"
+msgstr "创建 "
+
+#: src/ui/window.py:577
+#, fuzzy
+#| msgid "Developer name"
+msgid "Invalid folder name"
+msgstr "开发者名称"
+
+#: src/ui/window.py:606
 msgid "Extract failed"
 msgstr "提取失败"
 
-#: src/ui/window.py:621 src/extract-dialog.ui:21
+#: src/ui/window.py:680 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
 msgstr "选择目标文件夹"
 
-#: src/ui/window.py:668 src/compress-dialog.ui:182 src/preferences.ui:101
+#: src/ui/window.py:727 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
 msgstr "默认"
 
-#: src/ui/window.py:690 src/ui/window.py:693 src/window.ui:67 src/window.ui:82
+#: src/ui/window.py:749 src/ui/window.py:752 src/window.ui:67 src/window.ui:82
 msgid "Compress"
 msgstr "压缩"
 
-#: src/ui/window.py:714
+#: src/ui/window.py:773
 msgid "Source items ({})"
 msgstr "源项目 ({})"
 
-#: src/ui/window.py:736
+#: src/ui/window.py:795
 msgid "Select Files"
 msgstr "选择文件"
 
-#: src/ui/window.py:758
+#: src/ui/window.py:817
 msgid "Select Folders"
 msgstr "选择文件夹"
 
-#: src/ui/window.py:789
+#: src/ui/window.py:848
 msgid "Save Archive As"
 msgstr "另存压缩包为"
 
-#: src/ui/window.py:792
+#: src/ui/window.py:851
 msgid "_Save"
 msgstr "保存"
 
-#: src/ui/window.py:813
+#: src/ui/window.py:872
 msgid "Overwrite is not currently supported"
 msgstr "暂不支持覆盖"
 
-#: src/ui/window.py:814 src/ui/window.py:1016 src/ui/window.py:1568
-#: src/ui/window.py:1577 src/ui/window.py:1586 src/ui/window.py:1618
+#: src/ui/window.py:873 src/ui/window.py:1075 src/ui/window.py:1645
+#: src/ui/window.py:1654 src/ui/window.py:1663 src/ui/window.py:1697
 msgid "_OK"
 msgstr "确定"
 
-#: src/ui/window.py:855
+#: src/ui/window.py:914
 msgid "No source items to analyze"
 msgstr "没有可分析的源项目"
 
-#: src/ui/window.py:862
+#: src/ui/window.py:921
 msgid "Recommendation not available"
 msgstr "推荐功能不可用"
 
-#: src/ui/window.py:915
+#: src/ui/window.py:974
 msgid "Recommendation failed"
 msgstr "压缩参数推荐失败"
 
-#: src/ui/window.py:916
+#: src/ui/window.py:975
 msgid "Compression recommendation failed"
 msgstr "压缩参数推荐失败"
 
-#: src/ui/window.py:966
+#: src/ui/window.py:1025
 msgid "Compression recommendation"
 msgstr "压缩参数推荐"
 
-#: src/ui/window.py:971
+#: src/ui/window.py:1030
 msgid "Recommendation reason"
 msgstr "推荐原因"
 
-#: src/ui/window.py:1005
+#: src/ui/window.py:1064
 msgid "Password Required"
 msgstr "需要密码"
 
-#: src/ui/window.py:1006
+#: src/ui/window.py:1065
 msgid "This archive is encrypted. Please enter the password."
 msgstr "此归档已加密。请输入密码。"
 
-#: src/ui/window.py:1036 src/ui/window.py:1039 src/window.ui:117
-#: src/window.ui:132
+#: src/ui/window.py:1095 src/ui/window.py:1098 src/window.ui:117
+#: src/window.ui:132 src/window.ui:432
 msgid "Extract"
 msgstr "提取"
 
-#: src/ui/window.py:1082
+#: src/ui/window.py:1141
 msgid "Modified"
 msgstr "修改时间"
 
-#: src/ui/window.py:1238
+#: src/ui/window.py:1297
 msgid "Failed to create temporary directory"
 msgstr "创建临时目录失败"
 
-#: src/ui/window.py:1264 src/ui/window.py:1810 src/ui/window.py:1812
-#: src/ui/window.py:1838 src/ui/window.py:1840
+#: src/ui/window.py:1323 src/ui/window.py:1889 src/ui/window.py:1891
+#: src/ui/window.py:1917 src/ui/window.py:1919
 msgid "Extract "
 msgstr "提取 "
 
-#: src/ui/window.py:1270
+#: src/ui/window.py:1329
 msgid "Extracted file not found"
 msgstr "未找到解压后的文件"
 
-#: src/ui/window.py:1330
+#: src/ui/window.py:1389
 msgid "List "
 msgstr "列出 "
 
-#: src/ui/window.py:1451
+#: src/ui/window.py:1510
 msgid "List failed"
 msgstr "列出失败"
 
-#: src/ui/window.py:1538 src/ui/window.py:1539
+#. TRANSLATORS: This message will be removed in the next version; no need to translate it for now.
+#: src/ui/window.py:1582
+msgid "Only the first file will be added"
+msgstr ""
+
+#: src/ui/window.py:1615 src/ui/window.py:1616
 msgid "File not found"
 msgstr "文件未找到"
 
-#: src/ui/window.py:1558
+#: src/ui/window.py:1635
 msgid "Select failed"
 msgstr "选择失败"
 
-#: src/ui/window.py:1561
+#: src/ui/window.py:1638
 msgid "Selected "
 msgstr "已选择 "
 
-#: src/ui/window.py:1565
+#: src/ui/window.py:1642
 msgid "Format compatibility warning"
 msgstr "格式兼容性警告"
 
-#: src/ui/window.py:1566
+#: src/ui/window.py:1643
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr "该格式未经兼容性验证。移动和删除操作已被禁用。"
 
-#: src/ui/window.py:1574
+#: src/ui/window.py:1651
 msgid "Preview not supported"
 msgstr "无法预览"
 
-#: src/ui/window.py:1575
+#: src/ui/window.py:1652
 msgid "This format does not support preview. Only extract is available."
 msgstr "该类型不支持预览，仅可解压。"
 
-#: src/ui/window.py:1583
+#: src/ui/window.py:1660
 msgid "Nested archive opened"
 msgstr "嵌套压缩包已打开"
 
-#: src/ui/window.py:1584
+#: src/ui/window.py:1661
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr "该压缩包从父压缩包中提取。移动和删除操作已被禁用。"
 
-#: src/ui/window.py:1615
+#: src/ui/window.py:1694
 msgid "Language changed"
 msgstr "语言已更改"
 
-#: src/ui/window.py:1616
+#: src/ui/window.py:1695
 msgid "Restart the application to apply the new language."
 msgstr "重启应用以应用新的语言设置。"
 
-#: src/ui/window.py:1657
+#: src/ui/window.py:1736
 msgid "Calculating..."
 msgstr "正在计算..."
 
-#: src/ui/window.py:1662
+#: src/ui/window.py:1741
 #, python-format
 msgid "%d seconds remaining"
 msgstr "%d 秒剩余"
 
-#: src/ui/window.py:1663
+#: src/ui/window.py:1742
 #, python-format
 msgid "%d minutes remaining"
 msgstr "%d 分钟剩余"
 
-#: src/ui/window.py:1680
+#: src/ui/window.py:1759
 msgid "Command not found"
 msgstr "未找到命令"
 
-#: src/ui/window.py:1685
+#: src/ui/window.py:1764
 msgid "Job queue not found"
 msgstr "未找到任务队列"
 
-#: src/ui/window.py:1775 src/ui/window.py:1898
+#: src/ui/window.py:1854 src/ui/window.py:1991
 msgid "{} items"
 msgstr "{} 个项目"
 
-#: src/ui/window.py:1779 src/ui/window.py:1836 src/ui/window.py:1850
-#: src/ui/window.py:1864 src/ui/window.py:1878 src/ui/window.py:1900
-#: src/ui/window.py:1926 src/ui/window.py:1933 src/ui/window.py:1939
-#: src/ui/window.py:1946
+#: src/ui/window.py:1858 src/ui/window.py:1915 src/ui/window.py:1929
+#: src/ui/window.py:1943 src/ui/window.py:1957 src/ui/window.py:1993
+#: src/ui/window.py:2019 src/ui/window.py:2026 src/ui/window.py:2032
+#: src/ui/window.py:2039
 msgid "file"
 msgstr "文件"
 
-#: src/ui/window.py:1782 src/ui/window.py:1784
+#: src/ui/window.py:1861 src/ui/window.py:1863
 msgid "Compress "
 msgstr "压缩 "
 
-#: src/ui/window.py:1786
+#: src/ui/window.py:1865
 msgid "Compressed "
 msgstr "已压缩 "
 
-#: src/ui/window.py:1788
+#: src/ui/window.py:1867
 msgid "Compress timed out: "
 msgstr "压缩超时："
 
-#: src/ui/window.py:1790
+#: src/ui/window.py:1869
 msgid "Compress cancelled: "
 msgstr "压缩已取消： "
 
-#: src/ui/window.py:1791
+#: src/ui/window.py:1870
 msgid "Compress failed: "
 msgstr "压缩失败： "
 
-#: src/ui/window.py:1794 src/ui/window.py:1808 src/ui/window.py:1822
-#: src/ui/window.py:1895 src/ui/window.py:1909 src/ui/window.py:1914
-#: src/ui/window.py:1920 src/ui/window.py:1925 src/ui/window.py:1932
-#: src/ui/window.py:1938 src/ui/window.py:1945
+#: src/ui/window.py:1873 src/ui/window.py:1887 src/ui/window.py:1901
+#: src/ui/window.py:1988 src/ui/window.py:2002 src/ui/window.py:2007
+#: src/ui/window.py:2013 src/ui/window.py:2018 src/ui/window.py:2025
+#: src/ui/window.py:2031 src/ui/window.py:2038 src/ui/window.py:2045
 msgid "archive"
 msgstr "压缩包"
 
-#: src/ui/window.py:1796 src/ui/window.py:1798
+#: src/ui/window.py:1875 src/ui/window.py:1877
 msgid "Open "
 msgstr "打开 "
 
-#: src/ui/window.py:1800
+#: src/ui/window.py:1879
 msgid "Opened "
 msgstr "已打开 "
 
-#: src/ui/window.py:1802
+#: src/ui/window.py:1881
 msgid "Open timed out: "
 msgstr "打开超时："
 
-#: src/ui/window.py:1804
+#: src/ui/window.py:1883
 msgid "Open cancelled: "
 msgstr "打开已取消："
 
-#: src/ui/window.py:1805
+#: src/ui/window.py:1884
 msgid "Open failed: "
 msgstr "打开失败： "
 
-#: src/ui/window.py:1814 src/ui/window.py:1842
+#: src/ui/window.py:1893 src/ui/window.py:1921
 msgid "Extracted "
 msgstr "已提取 "
 
-#: src/ui/window.py:1816 src/ui/window.py:1844
+#: src/ui/window.py:1895 src/ui/window.py:1923
 msgid "Extract timed out: "
 msgstr "提取超时："
 
-#: src/ui/window.py:1818 src/ui/window.py:1846
+#: src/ui/window.py:1897 src/ui/window.py:1925
 msgid "Extract cancelled: "
 msgstr "提取已取消："
 
-#: src/ui/window.py:1819 src/ui/window.py:1847
+#: src/ui/window.py:1898 src/ui/window.py:1926
 msgid "Extract failed: "
 msgstr "提取失败："
 
-#: src/ui/window.py:1824 src/ui/window.py:1826
+#: src/ui/window.py:1903 src/ui/window.py:1905
 msgid "Test "
 msgstr "测试 "
 
-#: src/ui/window.py:1828
+#: src/ui/window.py:1907
 msgid "Tested "
 msgstr "已测试 "
 
-#: src/ui/window.py:1830
+#: src/ui/window.py:1909
 msgid "Test timed out: "
 msgstr "测试超时："
 
-#: src/ui/window.py:1832
+#: src/ui/window.py:1911
 msgid "Test cancelled: "
 msgstr "测试已取消："
 
-#: src/ui/window.py:1833
+#: src/ui/window.py:1912
 msgid "Test failed: "
 msgstr "测试失败："
 
-#: src/ui/window.py:1852 src/ui/window.py:1854
+#: src/ui/window.py:1931 src/ui/window.py:1933
 msgid "Delete "
 msgstr "删除 "
 
-#: src/ui/window.py:1856
+#: src/ui/window.py:1935
 msgid "Deleted "
 msgstr "已删除 "
 
-#: src/ui/window.py:1858
+#: src/ui/window.py:1937
 msgid "Delete timed out: "
 msgstr "删除超时："
 
-#: src/ui/window.py:1860
+#: src/ui/window.py:1939
 msgid "Delete cancelled: "
 msgstr "删除已取消："
 
-#: src/ui/window.py:1861
+#: src/ui/window.py:1940
 msgid "Delete failed: "
 msgstr "删除失败："
 
-#: src/ui/window.py:1866 src/ui/window.py:1868
+#: src/ui/window.py:1945 src/ui/window.py:1947
 msgid "Move "
 msgstr "移动 "
 
-#: src/ui/window.py:1870
+#: src/ui/window.py:1949
 msgid "Moved "
 msgstr "已移动 "
 
-#: src/ui/window.py:1872
+#: src/ui/window.py:1951
 msgid "Move timed out: "
 msgstr "移动超时："
 
-#: src/ui/window.py:1874
+#: src/ui/window.py:1953
 msgid "Move cancelled: "
 msgstr "移动已取消："
 
-#: src/ui/window.py:1875
+#: src/ui/window.py:1954
 msgid "Move failed: "
 msgstr "移动失败： "
 
-#: src/ui/window.py:1880 src/ui/window.py:1882
+#: src/ui/window.py:1959 src/ui/window.py:1961
 msgid "Add "
 msgstr "添加 "
 
-#: src/ui/window.py:1884
+#: src/ui/window.py:1963
 msgid "Added "
 msgstr "已添加 "
 
-#: src/ui/window.py:1886
+#: src/ui/window.py:1965
 msgid "Add timed out: "
 msgstr "添加超时："
 
-#: src/ui/window.py:1888
+#: src/ui/window.py:1967
 msgid "Add cancelled: "
 msgstr "添加已取消："
 
-#: src/ui/window.py:1889
+#: src/ui/window.py:1968
 msgid "Add failed: "
 msgstr "添加失败："
 
+#: src/ui/window.py:1971 src/ui/window.py:2008 src/ui/window.py:2020
+#: src/ui/window.py:2046
+msgid "folder"
+msgstr "文件夹"
+
+#: src/ui/window.py:1973 src/ui/window.py:1975
+#, fuzzy
+#| msgid "Create "
+msgid "Create folder "
+msgstr "创建 "
+
+#: src/ui/window.py:1977
+#, fuzzy
+#| msgid "Create "
+msgid "Created folder "
+msgstr "创建 "
+
+#: src/ui/window.py:1979
+#, fuzzy
+#| msgid "Delete timed out: "
+msgid "Create folder timed out: "
+msgstr "删除超时："
+
+#: src/ui/window.py:1981
+#, fuzzy
+#| msgid "Delete cancelled: "
+msgid "Create folder cancelled: "
+msgstr "删除已取消："
+
+#: src/ui/window.py:1982
+#, fuzzy
+#| msgid "Delete failed: "
+msgid "Create folder failed: "
+msgstr "删除失败："
+
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
-#: src/ui/window.py:1902
+#: src/ui/window.py:1995
 #, python-brace-format
 msgid "Create {output} from {source}"
 msgstr "从{source}中创建{output}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
-#: src/ui/window.py:1905
+#: src/ui/window.py:1998
 #, python-brace-format
 msgid "Parameters: {params}"
 msgstr "参数：{params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
-#: src/ui/window.py:1911
+#: src/ui/window.py:2004
 #, python-brace-format
 msgid "Read archive information from {archive}"
 msgstr "读取压缩包信息：{archive}"
 
-#: src/ui/window.py:1915 src/ui/window.py:1927
-msgid "folder"
-msgstr "文件夹"
-
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
-#: src/ui/window.py:1917
+#: src/ui/window.py:2010
 #, python-brace-format
 msgid "Extract {archive} to {folder}"
 msgstr "解压缩{archive}到{folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
-#: src/ui/window.py:1922
+#: src/ui/window.py:2015
 #, python-brace-format
 msgid "Test {archive}"
 msgstr "测试{archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
-#: src/ui/window.py:1929
+#: src/ui/window.py:2022
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
 msgstr "从{archive}解压缩{file}到{folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
-#: src/ui/window.py:1935
+#: src/ui/window.py:2028
 #, python-brace-format
 msgid "Delete {file} from {archive}"
 msgstr "从{archive}中删除{file}"
 
-#: src/ui/window.py:1940
+#: src/ui/window.py:2033
 msgid "destination"
 msgstr "目标位置"
 
 #. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
-#: src/ui/window.py:1942
+#: src/ui/window.py:2035
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
 msgstr "在{archive}内将{file}移动到{destination}"
 
-#: src/ui/window.py:1947
+#: src/ui/window.py:2040
 msgid "root"
 msgstr "根目录"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
-#: src/ui/window.py:1949
+#: src/ui/window.py:2042
 #, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
 msgstr "添加{file}到{archive}的{destination}"
+
+#. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
+#: src/ui/window.py:2048
+#, fuzzy, python-brace-format
+#| msgid "Delete {file} from {archive}"
+msgid "Create folder {folder} in {archive}"
+msgstr "从{archive}中删除{file}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
@@ -768,7 +843,7 @@ msgstr "首选项"
 msgid "_About Akizip"
 msgstr "关于 Akizip"
 
-#: src/window.ui:412 src/window.ui:424 src/window.ui:432
+#: src/window.ui:412 src/window.ui:424
 msgid "Extract Selected"
 msgstr "提取所选"
 
@@ -949,9 +1024,6 @@ msgstr "选择"
 #~ msgid "GB"
 #~ msgstr "GB"
 
-#~ msgid "Create "
-#~ msgstr "创建 "
-
 #~ msgid " from "
 #~ msgstr "，来源 "
 
@@ -972,9 +1044,6 @@ msgstr "选择"
 
 #~ msgid "No description"
 #~ msgstr "无描述"
-
-#~ msgid "Developer name"
-#~ msgstr "开发者名称"
 
 #~ msgid "A caption"
 #~ msgstr "说明文字"

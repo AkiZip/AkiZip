@@ -42,7 +42,7 @@
   </screenshots>
 
   <releases>
-    <release version="0.3.1" date="2026-08-02">
+    <release version="0.3.1" date="2026-08-09">
       <description translate="no">
         <p>New folder support and drag-and-drop improvements</p>
         <ul>

@@ -3,8 +3,10 @@
 data/top.akizip.akizip.metainfo.xml.in
 data/top.akizip.akizip.gschema.xml
 src/main.py
+src/ui/add_dialog.py
 src/ui/info_dialog.py
 src/ui/log_panel.py
+src/add-dialog.ui
 src/ui/window.py
 src/window.py
 src/ui/move_folder_chooser.py

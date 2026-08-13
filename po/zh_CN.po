@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-08 11:34+0800\n"
-"PO-Revision-Date: 2026-07-05 05:01+0000\n"
-"Last-Translator: taketsuki <dpps93126@gmail.com>\n"
+"PO-Revision-Date: 2026-08-14 03:22+0000\n"
+"Last-Translator: reducedradius "
+"<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
 "projects/akizip/akizip/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.7.1.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -310,23 +311,17 @@ msgid "_Delete"
 msgstr "删除"
 
 #: src/ui/window.py:550 src/ui/window.py:553
-#, fuzzy
-#| msgid "Delete failed"
 msgid "New folder failed"
-msgstr "删除失败"
+msgstr "新建文件夹失败"
 
 #: src/ui/window.py:556 src/ui/window.py:558 src/window.ui:444
 #: src/window.ui:456
-#, fuzzy
-#| msgid "Folder"
 msgid "New Folder"
-msgstr "文件夹"
+msgstr "新建文件夹"
 
 #: src/ui/window.py:556
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Create a new folder in the current archive."
-msgstr "向当前压缩包添加文件。"
+msgstr "在当前压缩包中创建一个新文件夹。"
 
 #: src/ui/window.py:563
 #, fuzzy
@@ -335,10 +330,8 @@ msgid "_Create"
 msgstr "创建 "
 
 #: src/ui/window.py:579
-#, fuzzy
-#| msgid "Developer name"
 msgid "Invalid folder name"
-msgstr "开发者名称"
+msgstr "无效文件夹名称"
 
 #: src/ui/window.py:608
 msgid "Extract failed"

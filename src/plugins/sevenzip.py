@@ -327,6 +327,32 @@ def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, ca
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 
+def archive_rename(archive_path, src_name, new_name, password=None, timeout=-1, cancel_event=None, task_status=None):
+    def on_progress(percent):
+        if task_status is not None:
+            task_status.set_progress(percent)
+
+    src_name = str(src_name).strip('/')
+    new_name = str(new_name).strip().strip('/')
+    if not src_name:
+        raise RuntimeError('Empty source name')
+    if not new_name or '/' in new_name or new_name in ('.', '..'):
+        raise RuntimeError('Invalid new name')
+
+    parent = src_name.rpartition('/')[0]
+    dst_name = parent + '/' + new_name if parent else new_name
+
+    args = [
+        'rn',
+        str(archive_path),
+        src_name,
+        dst_name,
+    ]
+    if password:
+        args.append(f'-p{password}')
+    return _run_7zip(args, timeout, cancel_event, on_progress)
+
+
 def archive_mkdir(archive_path, folder_path, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
@@ -362,4 +388,5 @@ def register(commands):
     commands['archive.add'] = archive_add
     commands['archive.test'] = archive_test
     commands['archive.move'] = archive_move
+    commands['archive.rename'] = archive_rename
     commands['archive.mkdir'] = archive_mkdir

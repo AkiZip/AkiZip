@@ -30,6 +30,7 @@ from gi.repository import Gtk
 from gi.repository import Gio
 from gi.repository import GObject
 from gi.repository import Pango
+from ..plugins.context_menu import context_menu_state
 from ..plugins.password import is_password_error
 from ..plugins.status import _status
 from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix
@@ -1193,12 +1194,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if ok and bounds.origin.y <= y <= bounds.origin.y + bounds.size.height:
                 position = pos
                 break
-        if position == Gtk.INVALID_LIST_POSITION:
-            return
-        item = self._file_list_store.get_item(position)
-        if item is None or item.path == '..':
-            return
-        self._file_list_selection.set_selected(position)
+
+        selected_count = 0
+        if position != Gtk.INVALID_LIST_POSITION:
+            item = self._file_list_store.get_item(position)
+            if item is not None and item.path != '..':
+                self._file_list_selection.set_selected(position)
+                selected_count = 1
+        if selected_count == 0:
+            self._file_list_selection.unselect_all()
+        self._context_menu_selected_count = selected_count
+        self._apply_context_menu_state(selected_count)
 
         popover = Gtk.PopoverMenu.new_from_model(self.context_menu)
         popover.set_parent(view)
@@ -1512,15 +1518,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._folder_set = set()
         self._current_internal_path = ''
         self._list_items = set()
+        self._context_menu_selected_count = 0
 
         app = self.get_application()
         if app is not None and hasattr(app, 'settings'):
             self._initial_language = app.settings.get_string('language')
             app.settings.connect('changed::language', self._on_language_changed)
 
-        action = Gio.SimpleAction.new('extract-selected', None)
-        action.connect('activate', lambda _a, _p: self.butextract_one(None))
-        self.add_action(action)
+        self._extract_selected_action = Gio.SimpleAction.new('extract-selected', None)
+        self._extract_selected_action.connect('activate', lambda _a, _p: self.butextract_one(None))
+        self.add_action(self._extract_selected_action)
 
         action = Gio.SimpleAction.new('extract-all', None)
         action.connect('activate', lambda _a, _p: self.butextract(None))
@@ -1653,24 +1660,34 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         app = self.get_application()
         if app is None or not hasattr(app, 'system'):
             can_modify = False
-            has_selected_archive = False
         else:
             can_modify = app.system.can_modify()
-            has_selected_archive = app.system.has_selected() and app.system.is_archive()
         if self.move_button is not None:
             self.move_button.set_sensitive(can_modify)
         if self.delete_button is not None:
             self.delete_button.set_sensitive(can_modify)
-        if hasattr(self, '_add_file_action') and self._add_file_action is not None:
-            self._add_file_action.set_enabled(can_modify and has_selected_archive)
-        if hasattr(self, '_move_action') and self._move_action is not None:
-            self._move_action.set_enabled(can_modify)
-        if hasattr(self, '_delete_action') and self._delete_action is not None:
-            self._delete_action.set_enabled(can_modify)
-        if hasattr(self, '_rename_action') and self._rename_action is not None:
-            self._rename_action.set_enabled(can_modify)
-        if hasattr(self, '_new_folder_action') and self._new_folder_action is not None:
-            self._new_folder_action.set_enabled(can_modify)
+        self._apply_context_menu_state(getattr(self, '_context_menu_selected_count', 0))
+
+    def _apply_context_menu_state(self, selected_count):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system'):
+            can_modify = False
+            can_extract = False
+        else:
+            can_modify = app.system.can_modify()
+            can_extract = app.system.can_extract()
+        state = context_menu_state(can_modify, can_extract, selected_count)
+        actions = (
+            ('extract-selected', getattr(self, '_extract_selected_action', None)),
+            ('move-selected', getattr(self, '_move_action', None)),
+            ('rename-selected', getattr(self, '_rename_action', None)),
+            ('delete-selected', getattr(self, '_delete_action', None)),
+            ('add-file', getattr(self, '_add_file_action', None)),
+            ('new-folder', getattr(self, '_new_folder_action', None)),
+        )
+        for name, action in actions:
+            if action is not None:
+                action.set_enabled(state[name])
 
     def _on_language_changed(self, settings, key):
         if settings.get_string(key) == self._initial_language:

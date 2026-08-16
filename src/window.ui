@@ -445,6 +445,10 @@
         <attribute name="action">win.delete-selected</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Add File</attribute>
+        <attribute name="action">win.add-file</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">New Folder</attribute>
         <attribute name="action">win.new-folder</attribute>
       </item>

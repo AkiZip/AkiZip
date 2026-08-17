@@ -52,16 +52,12 @@ msgid "Main window showing archive contents and toolbar"
 msgstr "顯示歸檔內容和工具欄的主視窗"
 
 #: src/ui/add_dialog.py:65
-#, fuzzy
-#| msgid "Archive"
 msgid "Add to Archive"
-msgstr "壓縮檔"
+msgstr "新增到壓縮檔"
 
 #: src/ui/add_dialog.py:65
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Add files and folders to the current archive."
-msgstr "向目前壓縮檔新增檔案。"
+msgstr "向目前壓縮檔新增檔案和資料夾。"
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:311
 #: src/ui/window.py:376 src/ui/window.py:492 src/ui/window.py:543
@@ -283,30 +279,24 @@ msgid "_Move"
 msgstr "移動"
 
 #: src/ui/window.py:354 src/ui/window.py:357
-#, fuzzy
-#| msgid "Delete failed"
 msgid "Rename failed"
-msgstr "刪除失敗"
+msgstr "重新命名失敗"
 
 #: src/ui/window.py:370 src/window.ui:440
 msgid "Rename"
-msgstr ""
+msgstr "重新命名"
 
 #: src/ui/window.py:370
-#, fuzzy
-#| msgid "Move \"{}\" to:"
 msgid "Rename \"{}\" to:"
-msgstr "移動 \"{}\" 到："
+msgstr "將 \"{}\" 重新命名為："
 
 #: src/ui/window.py:377
 msgid "_Rename"
-msgstr ""
+msgstr "重新命名"
 
 #: src/ui/window.py:393
-#, fuzzy
-#| msgid "Developer name"
 msgid "Invalid name"
-msgstr "開發者名稱"
+msgstr "無效名稱"
 
 #: src/ui/window.py:422 src/ui/window.py:426
 msgid "Add failed"
@@ -329,35 +319,25 @@ msgid "_Delete"
 msgstr "刪除"
 
 #: src/ui/window.py:531 src/ui/window.py:534
-#, fuzzy
-#| msgid "Delete failed"
 msgid "New folder failed"
-msgstr "刪除失敗"
+msgstr "新增資料夾失敗"
 
 #: src/ui/window.py:537 src/ui/window.py:539 src/window.ui:452
 #: src/window.ui:464
-#, fuzzy
-#| msgid "Folder"
 msgid "New Folder"
-msgstr "資料夾"
+msgstr "新增資料夾"
 
 #: src/ui/window.py:537
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Create a new folder in the current archive."
-msgstr "向目前壓縮檔新增檔案。"
+msgstr "在目前壓縮檔中建立新資料夾。"
 
 #: src/ui/window.py:544
-#, fuzzy
-#| msgid "Create "
 msgid "_Create"
-msgstr "建立 "
+msgstr "建立"
 
 #: src/ui/window.py:560
-#, fuzzy
-#| msgid "Developer name"
 msgid "Invalid folder name"
-msgstr "開發者名稱"
+msgstr "無效資料夾名稱"
 
 #: src/ui/window.py:589
 msgid "Extract failed"
@@ -669,29 +649,23 @@ msgstr "移動失敗："
 
 #: src/ui/window.py:1972 src/ui/window.py:1974
 msgid "Rename "
-msgstr ""
+msgstr "重新命名 "
 
 #: src/ui/window.py:1976
 msgid "Renamed "
-msgstr ""
+msgstr "已重新命名 "
 
 #: src/ui/window.py:1978
-#, fuzzy
-#| msgid "Open timed out: "
 msgid "Rename timed out: "
-msgstr "開啟逾時："
+msgstr "重新命名逾時："
 
 #: src/ui/window.py:1980
-#, fuzzy
-#| msgid "Open cancelled: "
 msgid "Rename cancelled: "
-msgstr "開啟已取消："
+msgstr "重新命名已取消："
 
 #: src/ui/window.py:1981
-#, fuzzy
-#| msgid "Open failed: "
 msgid "Rename failed: "
-msgstr "開啟失敗："
+msgstr "重新命名失敗："
 
 #: src/ui/window.py:1986 src/ui/window.py:1988
 msgid "Add "
@@ -719,34 +693,24 @@ msgid "folder"
 msgstr "資料夾"
 
 #: src/ui/window.py:2000 src/ui/window.py:2002
-#, fuzzy
-#| msgid "Create "
 msgid "Create folder "
-msgstr "建立 "
+msgstr "建立資料夾 "
 
 #: src/ui/window.py:2004
-#, fuzzy
-#| msgid "Create "
 msgid "Created folder "
-msgstr "建立 "
+msgstr "已建立資料夾 "
 
 #: src/ui/window.py:2006
-#, fuzzy
-#| msgid "Delete timed out: "
 msgid "Create folder timed out: "
-msgstr "刪除逾時："
+msgstr "建立資料夾逾時："
 
 #: src/ui/window.py:2008
-#, fuzzy
-#| msgid "Delete cancelled: "
 msgid "Create folder cancelled: "
-msgstr "刪除已取消："
+msgstr "建立資料夾已取消："
 
 #: src/ui/window.py:2009
-#, fuzzy
-#| msgid "Delete failed: "
 msgid "Create folder failed: "
-msgstr "刪除失敗："
+msgstr "建立資料夾失敗："
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:2022
@@ -802,14 +766,13 @@ msgstr "在{archive}內將{file}移動到{destination}"
 
 #: src/ui/window.py:2067
 msgid "new name"
-msgstr ""
+msgstr "新名稱"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2069
-#, fuzzy, python-brace-format
-#| msgid "Move {file} to {destination} in {archive}"
+#, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr "在{archive}內將{file}移動到{destination}"
+msgstr "在{archive}內將{file}重新命名為{new_name}"
 
 #: src/ui/window.py:2074
 msgid "root"
@@ -823,10 +786,9 @@ msgstr "新增{file}到{archive}的{destination}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2082
-#, fuzzy, python-brace-format
-#| msgid "Delete {file} from {archive}"
+#, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr "從{archive}中刪除{file}"
+msgstr "在{archive}中建立資料夾{folder}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
@@ -853,10 +815,8 @@ msgid "Destination"
 msgstr "目標位置"
 
 #: src/add-dialog.ui:74
-#, fuzzy
-#| msgid "Destination folder"
 msgid "Destination folder in archive"
-msgstr "目標資料夾"
+msgstr "壓縮檔內目標資料夾"
 
 #: src/window.ui:19
 msgid "Main Menu"

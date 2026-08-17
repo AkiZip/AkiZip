@@ -53,16 +53,12 @@ msgid "Main window showing archive contents and toolbar"
 msgstr "显示归档内容和工具栏的主窗口"
 
 #: src/ui/add_dialog.py:65
-#, fuzzy
-#| msgid "Archive"
 msgid "Add to Archive"
-msgstr "压缩包"
+msgstr "添加到压缩包"
 
 #: src/ui/add_dialog.py:65
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Add files and folders to the current archive."
-msgstr "向当前压缩包添加文件。"
+msgstr "向当前压缩包添加文件和文件夹。"
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:311
 #: src/ui/window.py:376 src/ui/window.py:492 src/ui/window.py:543
@@ -284,30 +280,24 @@ msgid "_Move"
 msgstr "移动"
 
 #: src/ui/window.py:354 src/ui/window.py:357
-#, fuzzy
-#| msgid "Delete failed"
 msgid "Rename failed"
-msgstr "删除失败"
+msgstr "重命名失败"
 
 #: src/ui/window.py:370 src/window.ui:440
 msgid "Rename"
-msgstr ""
+msgstr "重命名"
 
 #: src/ui/window.py:370
-#, fuzzy
-#| msgid "Move \"{}\" to:"
 msgid "Rename \"{}\" to:"
-msgstr "移动 \"{}\" 到："
+msgstr "将 \"{}\" 重命名为："
 
 #: src/ui/window.py:377
 msgid "_Rename"
-msgstr ""
+msgstr "重命名"
 
 #: src/ui/window.py:393
-#, fuzzy
-#| msgid "Invalid folder name"
 msgid "Invalid name"
-msgstr "无效文件夹名称"
+msgstr "无效名称"
 
 #: src/ui/window.py:422 src/ui/window.py:426
 msgid "Add failed"
@@ -343,10 +333,8 @@ msgid "Create a new folder in the current archive."
 msgstr "在当前压缩包中创建一个新文件夹。"
 
 #: src/ui/window.py:544
-#, fuzzy
-#| msgid "Create "
 msgid "_Create"
-msgstr "创建 "
+msgstr "创建"
 
 #: src/ui/window.py:560
 msgid "Invalid folder name"
@@ -662,29 +650,23 @@ msgstr "移动失败： "
 
 #: src/ui/window.py:1972 src/ui/window.py:1974
 msgid "Rename "
-msgstr ""
+msgstr "重命名 "
 
 #: src/ui/window.py:1976
 msgid "Renamed "
-msgstr ""
+msgstr "已重命名 "
 
 #: src/ui/window.py:1978
-#, fuzzy
-#| msgid "Open timed out: "
 msgid "Rename timed out: "
-msgstr "打开超时："
+msgstr "重命名超时："
 
 #: src/ui/window.py:1980
-#, fuzzy
-#| msgid "Open cancelled: "
 msgid "Rename cancelled: "
-msgstr "打开已取消："
+msgstr "重命名已取消："
 
 #: src/ui/window.py:1981
-#, fuzzy
-#| msgid "Open failed: "
 msgid "Rename failed: "
-msgstr "打开失败： "
+msgstr "重命名失败： "
 
 #: src/ui/window.py:1986 src/ui/window.py:1988
 msgid "Add "
@@ -712,34 +694,24 @@ msgid "folder"
 msgstr "文件夹"
 
 #: src/ui/window.py:2000 src/ui/window.py:2002
-#, fuzzy
-#| msgid "Create "
 msgid "Create folder "
-msgstr "创建 "
+msgstr "创建文件夹 "
 
 #: src/ui/window.py:2004
-#, fuzzy
-#| msgid "Create "
 msgid "Created folder "
-msgstr "创建 "
+msgstr "已创建文件夹 "
 
 #: src/ui/window.py:2006
-#, fuzzy
-#| msgid "Delete timed out: "
 msgid "Create folder timed out: "
-msgstr "删除超时："
+msgstr "创建文件夹超时："
 
 #: src/ui/window.py:2008
-#, fuzzy
-#| msgid "Delete cancelled: "
 msgid "Create folder cancelled: "
-msgstr "删除已取消："
+msgstr "创建文件夹已取消："
 
 #: src/ui/window.py:2009
-#, fuzzy
-#| msgid "Delete failed: "
 msgid "Create folder failed: "
-msgstr "删除失败："
+msgstr "创建文件夹失败："
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:2022
@@ -795,14 +767,13 @@ msgstr "在{archive}内将{file}移动到{destination}"
 
 #: src/ui/window.py:2067
 msgid "new name"
-msgstr ""
+msgstr "新名称"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2069
-#, fuzzy, python-brace-format
-#| msgid "Move {file} to {destination} in {archive}"
+#, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr "在{archive}内将{file}移动到{destination}"
+msgstr "在{archive}内将{file}重命名为{new_name}"
 
 #: src/ui/window.py:2074
 msgid "root"
@@ -816,10 +787,9 @@ msgstr "添加{file}到{archive}的{destination}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2082
-#, fuzzy, python-brace-format
-#| msgid "Delete {file} from {archive}"
+#, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr "从{archive}中删除{file}"
+msgstr "在{archive}中创建文件夹{folder}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
@@ -846,10 +816,8 @@ msgid "Destination"
 msgstr "目标位置"
 
 #: src/add-dialog.ui:74
-#, fuzzy
-#| msgid "Destination folder"
 msgid "Destination folder in archive"
-msgstr "目标文件夹"
+msgstr "压缩包内目标文件夹"
 
 #: src/window.ui:19
 msgid "Main Menu"

@@ -42,7 +42,7 @@
   </screenshots>
 
   <releases>
-    <release version="0.3.2" date="2026-08-22">
+    <release version="0.3.2" date="2026-08-17">
       <description translate="no">
         <p>Refactored add-file, rename support, and context menu improvements</p>
         <ul>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0" />
+  <object class="GtkBox" id="content">
+    <property name="orientation">vertical</property>
+    <property name="spacing">12</property>
+    <property name="margin-top">6</property>
+    <property name="margin-bottom">6</property>
+
+    <child>
+      <object class="GtkLabel" id="source_label">
+        <property name="label" translatable="yes">Source items</property>
+        <property name="xalign">0</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkScrolledWindow">
+        <property name="max-content-height">150</property>
+        <property name="propagate-natural-height">true</property>
+        <property name="vexpand">true</property>
+        <property name="child">
+          <object class="GtkListBox" id="source_list">
+            <property name="selection-mode">single</property>
+            <style>
+              <class name="navigation-sidebar" />
+            </style>
+          </object>
+        </property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkButton" id="add_files_btn">
+            <property name="label" translatable="yes">Add Files</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="add_folders_btn">
+            <property name="label" translatable="yes">Add Folders</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="remove_btn">
+            <property name="label" translatable="yes">Remove</property>
+            <property name="sensitive">false</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkSeparator" />
+    </child>
+
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">horizontal</property>
+        <property name="spacing">6</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Destination</property>
+            <property name="xalign">0</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkEntry" id="dest_entry">
+            <property name="hexpand">true</property>
+            <property name="placeholder-text" translatable="yes">Destination folder in archive</property>
+          </object>
+        </child>
+        <child>
+          <object class="GtkButton" id="dest_browse">
+            <property name="icon-name">folder-symbolic</property>
+            <property name="tooltip-text" translatable="yes">Select destination folder</property>
+            <property name="valign">center</property>
+          </object>
+        </child>
+      </object>
+    </child>
+
+  </object>
+</interface>

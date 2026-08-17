@@ -42,6 +42,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.2" date="2026-08-17">
+      <description translate="no">
+        <p>Refactored add-file, rename support, and context menu improvements</p>
+        <ul>
+          <li>Refactored the add files workflow</li>
+          <li>Added ability to rename files and folders inside archives</li>
+          <li>Right-clicking an empty area of the file list now opens the context menu</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.1" date="2026-08-09">
       <description translate="no">
         <p>New folder support and drag-and-drop improvements</p>

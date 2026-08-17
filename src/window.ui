@@ -437,8 +437,16 @@
         <attribute name="action">win.move-selected</attribute>
       </item>
       <item>
+        <attribute name="label" translatable="yes">Rename</attribute>
+        <attribute name="action">win.rename-selected</attribute>
+      </item>
+      <item>
         <attribute name="label" translatable="yes">Delete</attribute>
         <attribute name="action">win.delete-selected</attribute>
+      </item>
+      <item>
+        <attribute name="label" translatable="yes">Add File</attribute>
+        <attribute name="action">win.add-file</attribute>
       </item>
       <item>
         <attribute name="label" translatable="yes">New Folder</attribute>

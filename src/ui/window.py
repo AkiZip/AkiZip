@@ -1312,7 +1312,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             )
 
         def _on_extract_success(output):
-            extracted_path = Path(temp_dir) / display_name
+            extracted_path = Path(temp_dir) / file_name
             if not extracted_path.exists():
                 self._show_notification(_('Extracted file not found'), _status.ERROR)
                 return

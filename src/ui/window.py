@@ -367,9 +367,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
 
-        dialog = Adw.AlertDialog.new(_('Rename'), _('Rename "{}" to:').format(item.path))
+        dialog = Adw.AlertDialog.new(_('Rename'), _('Rename "{}" to:').format(item.path.rstrip('/') if item.is_folder else item.path))
         entry = Gtk.Entry()
-        entry.set_text(item.path)
+        entry.set_text(item.path.rstrip('/') if item.is_folder else item.path)
         entry.set_activates_default(True)
         entry.set_hexpand(True)
         dialog.set_extra_child(entry)
@@ -392,7 +392,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if not new_name or '/' in new_name or new_name in ('.', '..'):
                 self._show_notification(_('Invalid name'), _status.ERROR)
                 return
-            if new_name == item.path:
+            if new_name == item.path.rstrip('/'):
                 return
 
             self._run_command(

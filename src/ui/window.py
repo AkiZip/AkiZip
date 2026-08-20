@@ -1781,6 +1781,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         def on_error(error):
             self._close_progress_dialog(progress_dialog)
             if on_error_extra is not None and on_error_extra(error):
+                self._remove_pending_log(log_id)
                 return
             self._on_command_error(log_id, name, args, error)
 

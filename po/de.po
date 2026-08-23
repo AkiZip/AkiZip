@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-23 09:39+0800\n"
 "PO-Revision-Date: 2026-08-23 01:45+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Last-Translator: Jacek Zmudzki <jacek.zmudzki@gmail.com>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/akizip/akizip/de/>"
 "\n"
 "Language: de\n"
@@ -34,13 +34,16 @@ msgstr ""
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "Ein modernes Front-End für 7-Zip für GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
+"Akizip ist ein grafisches Archivverwaltungsprogramm das mit GTK 4 und "
+"libadwaita erstellt wurde, und die Fähigkeiten von 7-Zip unter GNOME "
+"bereitstellt."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -48,6 +51,9 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"Es ermöglicht das erstellen und entpacken von Archiven im 7z, zip und tar "
+"Format. tar, gz, bz2, xz, tar.gz, tar.bz2 und tar.xz Archive können geöffnet "
+"werden (nur Lesezugriff)."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
@@ -61,11 +67,11 @@ msgstr ""
 
 #: src/ui/add_dialog.py:65
 msgid "Add to Archive"
-msgstr ""
+msgstr "zu Archiv hinzufügen"
 
 #: src/ui/add_dialog.py:65
 msgid "Add files and folders to the current archive."
-msgstr ""
+msgstr "Dateien und Verzeichnisse in aktuelles Archiv einfügen"
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:311
 #: src/ui/window.py:376 src/ui/window.py:492 src/ui/window.py:543
@@ -73,16 +79,16 @@ msgstr ""
 #: src/ui/window.py:782 src/ui/window.py:804 src/ui/window.py:835
 #: src/ui/window.py:1057 src/ui/window.py:1080 src/move-folder-chooser.ui:51
 msgid "_Cancel"
-msgstr ""
+msgstr "_Abbruch"
 
 #: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:781
 #: src/ui/window.py:803
 msgid "_Add"
-msgstr ""
+msgstr "_Hinzufügen"
 
 #: src/ui/add_dialog.py:126 src/ui/window.py:756
 msgid "Source items ({})"
-msgstr ""
+msgstr "Quellelemente ({})"
 
 #: src/ui/add_dialog.py:138 src/ui/window.py:778
 msgid "Select Files"

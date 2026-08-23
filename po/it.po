@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-23 09:39+0800\n"
 "PO-Revision-Date: 2026-08-23 01:44+0000\n"
-"Last-Translator: GitHub webhook <noreply-webhook-github@weblate.org>\n"
+"Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/"
 "it/>\n"
 "Language: it\n"
@@ -493,8 +493,7 @@ msgstr "Anteprima non supportata"
 
 #: src/ui/window.py:1642
 msgid "This format does not support preview. Only extract is available."
-msgstr ""
-"Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
+msgstr "Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
 
 #: src/ui/window.py:1650
 msgid "Nested archive opened"

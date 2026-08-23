@@ -2,273 +2,22 @@
 <interface>
   <requires lib="gtk" version="4.0" />
   <object class="GtkBox" id="content">
-    <property name="orientation">vertical</property>
-    <property name="spacing">12</property>
+    <property name="orientation">horizontal</property>
+    <property name="spacing">18</property>
     <property name="margin-top">6</property>
     <property name="margin-bottom">6</property>
 
-    <child>
-      <object class="GtkLabel" id="output_label">
-        <property name="label" translatable="yes">Output archive</property>
-        <property name="xalign">0</property>
-      </object>
-    </child>
-
+    <!-- Left column: path, format, source items -->
     <child>
       <object class="GtkBox">
-        <property name="orientation">horizontal</property>
-        <property name="spacing">6</property>
-        <child>
-          <object class="GtkEntry" id="output_entry">
-            <property name="hexpand">true</property>
-            <property name="placeholder-text" translatable="yes">Select output archive path</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="output_browse">
-            <property name="icon-name">document-save-symbolic</property>
-            <property name="tooltip-text" translatable="yes">Select Output Archive</property>
-          </object>
-        </child>
-      </object>
-    </child>
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+        <property name="hexpand">true</property>
 
-    <child>
-      <object class="GtkSeparator" />
-    </child>
-
-    <child>
-      <object class="GtkBox">
-        <property name="orientation">horizontal</property>
-        <property name="spacing">6</property>
         <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Format</property>
+          <object class="GtkLabel" id="output_label">
+            <property name="label" translatable="yes">Output archive</property>
             <property name="xalign">0</property>
-            <property name="valign">center</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="format_combo">
-            <property name="hexpand">true</property>
-            <items>
-              <item translatable="no" id="7z">7z</item>
-              <item translatable="no" id="tar">tar</item>
-              <item translatable="no" id="zip">zip</item>
-            </items>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="suggest_btn">
-            <property name="label" translatable="yes">Auto Recommend</property>
-            <property name="tooltip-text" translatable="yes">Scan source files and recommend format and parameters</property>
-          </object>
-        </child>
-      </object>
-    </child>
-
-    <child>
-      <object class="GtkLabel" id="source_label">
-        <property name="label" translatable="yes">Source items</property>
-        <property name="xalign">0</property>
-      </object>
-    </child>
-
-    <child>
-      <object class="GtkScrolledWindow">
-        <property name="max-content-height">150</property>
-        <property name="propagate-natural-height">true</property>
-        <property name="vexpand">true</property>
-        <property name="child">
-          <object class="GtkListBox" id="source_list">
-            <property name="selection-mode">single</property>
-            <style>
-              <class name="navigation-sidebar" />
-            </style>
-          </object>
-        </property>
-      </object>
-    </child>
-
-    <child>
-      <object class="GtkBox">
-        <property name="orientation">horizontal</property>
-        <property name="spacing">6</property>
-        <child>
-          <object class="GtkButton" id="add_files_btn">
-            <property name="label" translatable="yes">Add Files</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="add_folders_btn">
-            <property name="label" translatable="yes">Add Folders</property>
-          </object>
-        </child>
-        <child>
-          <object class="GtkButton" id="remove_btn">
-            <property name="label" translatable="yes">Remove</property>
-            <property name="sensitive">false</property>
-          </object>
-        </child>
-      </object>
-    </child>
-
-    <child>
-      <object class="GtkSeparator" />
-    </child>
-
-    <child>
-      <object class="GtkLabel">
-        <property name="label" translatable="yes">Advanced options</property>
-        <property name="xalign">0</property>
-        <property name="margin-top">6</property>
-        <style>
-          <class name="heading"/>
-        </style>
-      </object>
-    </child>
-
-    <child>
-      <object class="GtkGrid" id="form">
-        <property name="column-spacing">12</property>
-        <property name="row-spacing">10</property>
-        <property name="margin-start">6</property>
-        <property name="margin-end">6</property>
-
-        <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Compression level</property>
-            <property name="xalign">0</property>
-            <property name="valign">center</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="row">0</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="level_combo">
-            <property name="hexpand">true</property>
-            <items>
-              <item translatable="yes" id="0">Store</item>
-              <item translatable="yes" id="1">Fastest</item>
-              <item translatable="yes" id="3">Fast</item>
-              <item translatable="yes" id="5">Normal</item>
-              <item translatable="yes" id="7">Maximum</item>
-              <item translatable="yes" id="9">Ultra</item>
-            </items>
-            <layout>
-              <property name="column">1</property>
-              <property name="row">0</property>
-            </layout>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Algorithm</property>
-            <property name="xalign">0</property>
-            <property name="valign">center</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="row">1</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkComboBoxText" id="method_combo">
-            <property name="hexpand">true</property>
-            <items>
-              <item translatable="yes" id="default">Default</item>
-              <item translatable="no" id="LZMA">LZMA</item>
-              <item translatable="no" id="PPMd">PPMd</item>
-              <item translatable="no" id="BZip2">BZip2</item>
-            </items>
-            <layout>
-              <property name="column">1</property>
-              <property name="row">1</property>
-            </layout>
-          </object>
-        </child>
-
-        <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Dictionary size (MB)</property>
-                <property name="xalign">0</property>
-                <property name="valign">center</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="row">2</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSpinButton" id="dictionary_spin">
-            <property name="hexpand">true</property>
-            <property name="tooltip-text" translatable="yes">0 uses the 7-Zip default.</property>
-            <property name="adjustment">
-              <object class="GtkAdjustment">
-                <property name="lower">0</property>
-                <property name="upper">1024</property>
-                <property name="step-increment">1</property>
-              </object>
-            </property>
-            <layout>
-              <property name="column">1</property>
-              <property name="row">2</property>
-            </layout>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Threads</property>
-            <property name="xalign">0</property>
-            <property name="valign">center</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="row">3</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkSpinButton" id="threads_spin">
-            <property name="hexpand">true</property>
-            <property name="tooltip-text" translatable="yes">0 uses the 7-Zip default.</property>
-            <property name="adjustment">
-              <object class="GtkAdjustment">
-                <property name="lower">0</property>
-                <property name="upper">64</property>
-                <property name="step-increment">1</property>
-              </object>
-            </property>
-            <layout>
-              <property name="column">1</property>
-              <property name="row">3</property>
-            </layout>
-          </object>
-        </child>
-
-        <child>
-          <object class="GtkLabel">
-            <property name="label" translatable="yes">Password</property>
-            <property name="xalign">0</property>
-            <property name="valign">center</property>
-            <layout>
-              <property name="column">0</property>
-              <property name="row">4</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkPasswordEntry" id="password_entry">
-            <property name="hexpand">true</property>
-            <property name="show-peek-icon">true</property>
-            <property name="placeholder-text" translatable="yes">Leave empty for no password</property>
-            <layout>
-              <property name="column">1</property>
-              <property name="row">4</property>
-            </layout>
           </object>
         </child>
 
@@ -276,36 +25,306 @@
           <object class="GtkBox">
             <property name="orientation">horizontal</property>
             <property name="spacing">6</property>
-            <property name="valign">center</property>
+            <child>
+              <object class="GtkEntry" id="output_entry">
+                <property name="hexpand">true</property>
+                <property name="placeholder-text" translatable="yes">Select output archive path</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="output_browse">
+                <property name="icon-name">document-save-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Select Output Archive</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkSeparator" />
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">6</property>
             <child>
               <object class="GtkLabel">
-                <property name="label" translatable="yes">Encrypt file names</property>
+                <property name="label" translatable="yes">Format</property>
                 <property name="xalign">0</property>
                 <property name="valign">center</property>
               </object>
             </child>
             <child>
-              <object class="GtkImage">
-                <property name="icon-name">dialog-warning-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Only available for 7z format</property>
+              <object class="GtkComboBoxText" id="format_combo">
+                <property name="hexpand">true</property>
+                <items>
+                  <item translatable="no" id="7z">7z</item>
+                  <item translatable="no" id="tar">tar</item>
+                  <item translatable="no" id="zip">zip</item>
+                </items>
               </object>
             </child>
-            <layout>
-              <property name="column">0</property>
-              <property name="row">5</property>
-            </layout>
-          </object>
-        </child>
-        <child>
-          <object class="GtkCheckButton" id="encrypt_names_check">
-            <property name="tooltip-text" translatable="yes">Only available for 7z format</property>
-            <layout>
-              <property name="column">1</property>
-              <property name="row">5</property>
-            </layout>
+            <child>
+              <object class="GtkButton" id="suggest_btn">
+                <property name="label" translatable="yes">Auto Recommend</property>
+                <property name="tooltip-text" translatable="yes">Scan source files and recommend format and parameters</property>
+              </object>
+            </child>
           </object>
         </child>
 
+        <child>
+          <object class="GtkLabel" id="source_label">
+            <property name="label" translatable="yes">Source items</property>
+            <property name="xalign">0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="max-content-height">150</property>
+            <property name="propagate-natural-height">true</property>
+            <property name="vexpand">true</property>
+            <property name="child">
+              <object class="GtkListBox" id="source_list">
+                <property name="selection-mode">single</property>
+                <style>
+                  <class name="navigation-sidebar" />
+                </style>
+              </object>
+            </property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkButton" id="add_files_btn">
+                <property name="label" translatable="yes">Add Files</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="add_folders_btn">
+                <property name="label" translatable="yes">Add Folders</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkButton" id="remove_btn">
+                <property name="label" translatable="yes">Remove</property>
+                <property name="sensitive">false</property>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkSeparator">
+        <property name="orientation">vertical</property>
+      </object>
+    </child>
+
+    <!-- Right column: advanced options -->
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">vertical</property>
+        <property name="spacing">12</property>
+
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Advanced options</property>
+            <property name="xalign">0</property>
+            <property name="margin-top">6</property>
+            <style>
+              <class name="heading"/>
+            </style>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkGrid" id="form">
+            <property name="column-spacing">12</property>
+            <property name="row-spacing">10</property>
+            <property name="margin-start">6</property>
+            <property name="margin-end">6</property>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Compression level</property>
+                <property name="xalign">0</property>
+                <property name="valign">center</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="level_combo">
+                <property name="hexpand">true</property>
+                <items>
+                  <item translatable="yes" id="0">Store</item>
+                  <item translatable="yes" id="1">Fastest</item>
+                  <item translatable="yes" id="3">Fast</item>
+                  <item translatable="yes" id="5">Normal</item>
+                  <item translatable="yes" id="7">Maximum</item>
+                  <item translatable="yes" id="9">Ultra</item>
+                </items>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">0</property>
+                </layout>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Algorithm</property>
+                <property name="xalign">0</property>
+                <property name="valign">center</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="method_combo">
+                <property name="hexpand">true</property>
+                <items>
+                  <item translatable="yes" id="default">Default</item>
+                  <item translatable="no" id="LZMA">LZMA</item>
+                  <item translatable="no" id="PPMd">PPMd</item>
+                  <item translatable="no" id="BZip2">BZip2</item>
+                </items>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">1</property>
+                </layout>
+              </object>
+            </child>
+
+            <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Dictionary size (MB)</property>
+                    <property name="xalign">0</property>
+                    <property name="valign">center</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="dictionary_spin">
+                <property name="hexpand">true</property>
+                <property name="tooltip-text" translatable="yes">0 uses the 7-Zip default.</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">1024</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">2</property>
+                </layout>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Threads</property>
+                <property name="xalign">0</property>
+                <property name="valign">center</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="threads_spin">
+                <property name="hexpand">true</property>
+                <property name="tooltip-text" translatable="yes">0 uses the 7-Zip default.</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">0</property>
+                    <property name="upper">64</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">3</property>
+                </layout>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Password</property>
+                <property name="xalign">0</property>
+                <property name="valign">center</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkPasswordEntry" id="password_entry">
+                <property name="hexpand">true</property>
+                <property name="show-peek-icon">true</property>
+                <property name="placeholder-text" translatable="yes">Leave empty for no password</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">4</property>
+                </layout>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">horizontal</property>
+                <property name="spacing">6</property>
+                <property name="valign">center</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="label" translatable="yes">Encrypt file names</property>
+                    <property name="xalign">0</property>
+                    <property name="valign">center</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage">
+                    <property name="icon-name">dialog-warning-symbolic</property>
+                    <property name="tooltip-text" translatable="yes">Only available for 7z format</property>
+                  </object>
+                </child>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkCheckButton" id="encrypt_names_check">
+                <property name="tooltip-text" translatable="yes">Only available for 7z format</property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+
+          </object>
+        </child>
       </object>
     </child>
   </object>

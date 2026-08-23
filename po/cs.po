@@ -22,7 +22,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-23 09:39+0800\n"
 "PO-Revision-Date: 2026-08-23 01:45+0000\n"
-"Last-Translator: Anonymous <noreply@weblate.org>\n"
+"Last-Translator: Pavel Borecki <pavel.borecki@gmail.com>\n"
 "Language-Team: Czech <https://hosted.weblate.org/projects/akizip/akizip/cs/>"
 "\n"
 "Language: cs\n"
@@ -73,12 +73,12 @@ msgstr ""
 #: src/ui/window.py:782 src/ui/window.py:804 src/ui/window.py:835
 #: src/ui/window.py:1057 src/ui/window.py:1080 src/move-folder-chooser.ui:51
 msgid "_Cancel"
-msgstr ""
+msgstr "_Zrušit"
 
 #: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:781
 #: src/ui/window.py:803
 msgid "_Add"
-msgstr ""
+msgstr "_Přidat"
 
 #: src/ui/add_dialog.py:126 src/ui/window.py:756
 msgid "Source items ({})"
@@ -98,7 +98,7 @@ msgstr ""
 
 #: src/ui/info_dialog.py:45 src/ui/info_dialog.py:52
 msgid "Archive"
-msgstr ""
+msgstr "Archiv"
 
 #: src/ui/info_dialog.py:45
 msgid "Archive information is unavailable."
@@ -800,7 +800,7 @@ msgstr ""
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
-msgstr ""
+msgstr "(kořen)"
 
 #: src/add-dialog.ui:12 src/compress-dialog.ui:79
 msgid "Source items"

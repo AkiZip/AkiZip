@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-23 09:39+0800\n"
-"PO-Revision-Date: 2026-06-09 05:04+0000\n"
+"PO-Revision-Date: 2026-08-23 01:44+0000\n"
 "Last-Translator: teste celular <teste.aparelho.mail@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "akizip/akizip/pt_BR/>\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.6\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -511,8 +511,7 @@ msgstr "Visualização não suportada"
 
 #: src/ui/window.py:1642
 msgid "This format does not support preview. Only extract is available."
-msgstr ""
-"Este formato não suporta visualização. Apenas extração está disponível."
+msgstr "Este formato não suporta visualização. Apenas extração está disponível."
 
 #: src/ui/window.py:1650
 msgid "Nested archive opened"

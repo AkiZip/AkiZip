@@ -386,6 +386,11 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">ta</attribute>
           </item>
+          <item>
+            <attribute name="label">Bahasa Indonesia</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">id</attribute>
+          </item>
         </section>
       </submenu>
     </section>

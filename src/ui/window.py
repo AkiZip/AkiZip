@@ -367,9 +367,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
 
-        dialog = Adw.AlertDialog.new(_('Rename'), _('Rename "{}" to:').format(item.path))
+        dialog = Adw.AlertDialog.new(_('Rename'), _('Rename "{}" to:').format(item.path.rstrip('/') if item.is_folder else item.path))
         entry = Gtk.Entry()
-        entry.set_text(item.path)
+        entry.set_text(item.path.rstrip('/') if item.is_folder else item.path)
         entry.set_activates_default(True)
         entry.set_hexpand(True)
         dialog.set_extra_child(entry)
@@ -392,7 +392,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if not new_name or '/' in new_name or new_name in ('.', '..'):
                 self._show_notification(_('Invalid name'), _status.ERROR)
                 return
-            if new_name == item.path:
+            if new_name == item.path.rstrip('/'):
                 return
 
             self._run_command(
@@ -1312,7 +1312,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             )
 
         def _on_extract_success(output):
-            extracted_path = Path(temp_dir) / display_name
+            extracted_path = Path(temp_dir) / file_name
             if not extracted_path.exists():
                 self._show_notification(_('Extracted file not found'), _status.ERROR)
                 return
@@ -1781,6 +1781,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         def on_error(error):
             self._close_progress_dialog(progress_dialog)
             if on_error_extra is not None and on_error_extra(error):
+                self._remove_pending_log(log_id)
                 return
             self._on_command_error(log_id, name, args, error)
 

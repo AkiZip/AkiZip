@@ -10,7 +10,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# #-#-#-#-#  python.pot (akizip 0.3.2)  #-#-#-#-#
+# #-#-#-#-#  python.pot (akizip 0.3.3)  #-#-#-#-#
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the akizip package.
@@ -26,7 +26,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-08 11:34+0800\n"
+"POT-Creation-Date: 2026-08-16 23:20+0800\n"
 "PO-Revision-Date: 2026-07-01 17:01+0000\n"
 "Last-Translator: CARVALHO Tiago <tc371946@proton.me>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/akizip/akizip/fr/"
@@ -74,7 +74,44 @@ msgid "Main window showing archive contents and toolbar"
 msgstr ""
 "Fenêtre principale affichant le contenu des archives et la barre d'outils"
 
-#: src/ui/info_dialog.py:31 src/ui/window.py:1625
+#: src/ui/add_dialog.py:65
+#, fuzzy
+#| msgid "Archive"
+msgid "Add to Archive"
+msgstr "Archive"
+
+#: src/ui/add_dialog.py:65
+#, fuzzy
+#| msgid "Add a file to the current archive."
+msgid "Add files and folders to the current archive."
+msgstr "Ajouter un fichier à l'archive actuelle."
+
+#: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:311
+#: src/ui/window.py:376 src/ui/window.py:492 src/ui/window.py:543
+#: src/ui/window.py:628 src/ui/window.py:667 src/ui/window.py:734
+#: src/ui/window.py:782 src/ui/window.py:804 src/ui/window.py:835
+#: src/ui/window.py:1057 src/ui/window.py:1080 src/move-folder-chooser.ui:51
+msgid "_Cancel"
+msgstr "_Annuler"
+
+#: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:781
+#: src/ui/window.py:803
+msgid "_Add"
+msgstr "_Ajouter"
+
+#: src/ui/add_dialog.py:126 src/ui/window.py:756
+msgid "Source items ({})"
+msgstr "Éléments source ({})"
+
+#: src/ui/add_dialog.py:138 src/ui/window.py:778
+msgid "Select Files"
+msgstr "Sélectionner des Fichiers"
+
+#: src/ui/add_dialog.py:144 src/ui/window.py:800
+msgid "Select Folders"
+msgstr "Sélectionner des Dossiers"
+
+#: src/ui/info_dialog.py:31 src/ui/window.py:1613
 msgid "System state not found"
 msgstr "État du système introuvable"
 
@@ -103,7 +140,7 @@ msgstr "Fermer"
 msgid "Name"
 msgstr "Nom"
 
-#: src/ui/info_dialog.py:123 src/ui/window.py:1141
+#: src/ui/info_dialog.py:123 src/ui/window.py:1122
 msgid "Path"
 msgstr "Chemin"
 
@@ -111,7 +148,7 @@ msgstr "Chemin"
 msgid "Type"
 msgstr "Type"
 
-#: src/ui/info_dialog.py:126 src/ui/window.py:1142
+#: src/ui/info_dialog.py:126 src/ui/window.py:1123
 msgid "Size"
 msgstr "Taille"
 
@@ -171,7 +208,7 @@ msgstr "Fichier archive"
 msgid "Folder"
 msgstr "Dossier"
 
-#: src/ui/info_dialog.py:214 src/ui/window.py:380
+#: src/ui/info_dialog.py:214
 msgid "File"
 msgstr "Fichier"
 
@@ -227,269 +264,240 @@ msgstr "Annulé"
 msgid "Pending"
 msgstr "En attente"
 
-#: src/ui/window.py:232
+#: src/ui/window.py:233
 msgid "Test failed"
 msgstr "Échec du test"
 
-#: src/ui/window.py:232 src/ui/window.py:261 src/ui/window.py:353
-#: src/ui/window.py:354 src/ui/window.py:495 src/ui/window.py:550
-#: src/ui/window.py:608
+#: src/ui/window.py:233 src/ui/window.py:262 src/ui/window.py:354
+#: src/ui/window.py:422 src/ui/window.py:423 src/ui/window.py:476
+#: src/ui/window.py:531 src/ui/window.py:589
 msgid "Selected path is not an archive."
 msgstr "Le chemin sélectionné n'est pas une archive."
 
-#: src/ui/window.py:261 src/ui/window.py:264
+#: src/ui/window.py:262 src/ui/window.py:265
 msgid "Move failed"
 msgstr "Échec du déplacement"
 
-#: src/ui/window.py:264 src/ui/window.py:357 src/ui/window.py:358
-#: src/ui/window.py:498 src/ui/window.py:553
+#: src/ui/window.py:265 src/ui/window.py:357 src/ui/window.py:426
+#: src/ui/window.py:427 src/ui/window.py:479 src/ui/window.py:534
 msgid "This archive format does not support modification."
 msgstr "Ce format d'archive ne peut pas être modifié."
 
-#: src/ui/window.py:272 src/ui/window.py:466 src/ui/window.py:506
-#: src/ui/window.py:636 src/ui/window.py:1609 src/ui/window.py:1610
-#: src/ui/window.py:1613 src/ui/window.py:1614
+#: src/ui/window.py:273 src/ui/window.py:365 src/ui/window.py:449
+#: src/ui/window.py:487 src/ui/window.py:617 src/ui/window.py:1597
+#: src/ui/window.py:1598 src/ui/window.py:1601 src/ui/window.py:1602
 msgid "No file selected"
 msgstr "Aucun fichier sélectionné"
 
-#: src/ui/window.py:276 src/window.ui:166 src/window.ui:180 src/window.ui:436
+#: src/ui/window.py:277 src/window.ui:166 src/window.ui:180 src/window.ui:436
 msgid "Move"
 msgstr "Déplacer"
 
-#: src/ui/window.py:276
+#: src/ui/window.py:277
 msgid "Move \"{}\" to:"
 msgstr "Déplacer « {} » vers :"
 
-#: src/ui/window.py:282 src/ui/window.py:433
+#: src/ui/window.py:283 src/add-dialog.ui:80
 msgid "Select destination folder"
 msgstr "Sélectionner le dossier de destination"
 
-#: src/ui/window.py:310 src/ui/window.py:364 src/ui/window.py:399
-#: src/ui/window.py:511 src/ui/window.py:562 src/ui/window.py:647
-#: src/ui/window.py:686 src/ui/window.py:753 src/ui/window.py:801
-#: src/ui/window.py:823 src/ui/window.py:854 src/ui/window.py:1076
-#: src/ui/window.py:1099 src/move-folder-chooser.ui:51
-msgid "_Cancel"
-msgstr "_Annuler"
-
-#: src/ui/window.py:311
+#: src/ui/window.py:312
 msgid "_Move"
 msgstr "_Déplacer"
 
-#: src/ui/window.py:353 src/ui/window.py:357
+#: src/ui/window.py:354 src/ui/window.py:357
+#, fuzzy
+#| msgid "Delete failed"
+msgid "Rename failed"
+msgstr "Échec de la suppression"
+
+#: src/ui/window.py:370 src/window.ui:440
+msgid "Rename"
+msgstr ""
+
+#: src/ui/window.py:370
+#, fuzzy
+#| msgid "Move \"{}\" to:"
+msgid "Rename \"{}\" to:"
+msgstr "Déplacer « {} » vers :"
+
+#: src/ui/window.py:377
+msgid "_Rename"
+msgstr ""
+
+#: src/ui/window.py:393
+msgid "Invalid name"
+msgstr ""
+
+#: src/ui/window.py:422 src/ui/window.py:426
 msgid "Add failed"
 msgstr "Échec de l'ajout"
 
-#: src/ui/window.py:363 src/window.ui:452
-msgid "Add File"
-msgstr "Ajouter un fichier"
-
-#: src/ui/window.py:363
-msgid "Add a file to the current archive."
-msgstr "Ajouter un fichier à l'archive actuelle."
-
-#: src/ui/window.py:365 src/ui/window.py:800 src/ui/window.py:822
-msgid "_Add"
-msgstr "_Ajouter"
-
-#: src/ui/window.py:384
-msgid "Select a file"
-msgstr "Sélectionnez un fichier"
-
-#: src/ui/window.py:390
-msgid "Select file"
-msgstr "Sélectionner un fichier"
-
-#: src/ui/window.py:395 src/ui/window.py:643
-msgid "Select File"
-msgstr "Sélectionner Fichier"
-
-#: src/ui/window.py:398 src/ui/window.py:646 src/ui/window.py:685
-msgid "_Open"
-msgstr "_Ouvrir"
-
-#: src/ui/window.py:425
-msgid "Destination"
-msgstr "Destination"
-
-#: src/ui/window.py:430 src/extract-dialog.ui:15
-msgid "Destination folder"
-msgstr "Dossier de destination"
-
-#: src/ui/window.py:495 src/ui/window.py:498
+#: src/ui/window.py:476 src/ui/window.py:479
 msgid "Delete failed"
 msgstr "Échec de la suppression"
 
-#: src/ui/window.py:510 src/window.ui:190 src/window.ui:204 src/window.ui:440
+#: src/ui/window.py:491 src/window.ui:190 src/window.ui:204 src/window.ui:444
 msgid "Delete"
 msgstr "Supprimer"
 
-#: src/ui/window.py:510
+#: src/ui/window.py:491
 msgid "Are you sure you want to delete \"{}\"?"
 msgstr "Êtes-vous sûr de vouloir supprimer « {} » ?"
 
-#: src/ui/window.py:512
+#: src/ui/window.py:493
 msgid "_Delete"
 msgstr "_Supprimer"
 
-#: src/ui/window.py:550 src/ui/window.py:553
+#: src/ui/window.py:531 src/ui/window.py:534
 #, fuzzy
 #| msgid "Delete failed"
 msgid "New folder failed"
 msgstr "Échec de la suppression"
 
-#: src/ui/window.py:556 src/ui/window.py:558 src/window.ui:444
-#: src/window.ui:456
+#: src/ui/window.py:537 src/ui/window.py:539 src/window.ui:452
+#: src/window.ui:464
 #, fuzzy
 #| msgid "Folder"
 msgid "New Folder"
 msgstr "Dossier"
 
-#: src/ui/window.py:556
+#: src/ui/window.py:537
 #, fuzzy
 #| msgid "Add a file to the current archive."
 msgid "Create a new folder in the current archive."
 msgstr "Ajouter un fichier à l'archive actuelle."
 
-#: src/ui/window.py:563
+#: src/ui/window.py:544
 #, fuzzy
 #| msgid "Create "
 msgid "_Create"
 msgstr "Création "
 
-#: src/ui/window.py:579
+#: src/ui/window.py:560
 msgid "Invalid folder name"
 msgstr ""
 
-#: src/ui/window.py:608
+#: src/ui/window.py:589
 msgid "Extract failed"
 msgstr "Échec extraction"
 
-#: src/ui/window.py:682 src/extract-dialog.ui:21
+#: src/ui/window.py:624
+msgid "Select File"
+msgstr "Sélectionner Fichier"
+
+#: src/ui/window.py:627 src/ui/window.py:666
+msgid "_Open"
+msgstr "_Ouvrir"
+
+#: src/ui/window.py:663 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
 msgstr "Sélectionner le Dossier de Destination"
 
-#: src/ui/window.py:729 src/compress-dialog.ui:182 src/preferences.ui:101
+#: src/ui/window.py:710 src/compress-dialog.ui:182 src/preferences.ui:101
 msgid "Default"
 msgstr "Par défaut"
 
-#: src/ui/window.py:751 src/ui/window.py:754 src/window.ui:67 src/window.ui:82
+#: src/ui/window.py:732 src/ui/window.py:735 src/window.ui:67 src/window.ui:82
 msgid "Compress"
 msgstr "Compresser"
 
-#: src/ui/window.py:775
-msgid "Source items ({})"
-msgstr "Éléments source ({})"
-
-#: src/ui/window.py:797
-msgid "Select Files"
-msgstr "Sélectionner des Fichiers"
-
-#: src/ui/window.py:819
-msgid "Select Folders"
-msgstr "Sélectionner des Dossiers"
-
-#: src/ui/window.py:850
+#: src/ui/window.py:831
 msgid "Save Archive As"
 msgstr "Enregistrer l'Archive Sous"
 
-#: src/ui/window.py:853
+#: src/ui/window.py:834
 msgid "_Save"
 msgstr "_Enregistrer"
 
-#: src/ui/window.py:874
+#: src/ui/window.py:855
 msgid "Overwrite is not currently supported"
 msgstr "L'écrasement des données n'est actuellement pas pris en charge"
 
-#: src/ui/window.py:875 src/ui/window.py:1077 src/ui/window.py:1647
-#: src/ui/window.py:1656 src/ui/window.py:1665 src/ui/window.py:1699
+#: src/ui/window.py:856 src/ui/window.py:1058 src/ui/window.py:1635
+#: src/ui/window.py:1644 src/ui/window.py:1653 src/ui/window.py:1699
 msgid "_OK"
 msgstr "_OK"
 
-#: src/ui/window.py:916
+#: src/ui/window.py:897
 msgid "No source items to analyze"
 msgstr "Aucun élément source à analyser"
 
-#: src/ui/window.py:923
+#: src/ui/window.py:904
 msgid "Recommendation not available"
 msgstr "Recommandation non disponible"
 
-#: src/ui/window.py:976
+#: src/ui/window.py:957
 msgid "Recommendation failed"
 msgstr "Échec Recommandation"
 
-#: src/ui/window.py:977
+#: src/ui/window.py:958
 msgid "Compression recommendation failed"
 msgstr "Échec de la recommandation de compression"
 
-#: src/ui/window.py:1027
+#: src/ui/window.py:1008
 msgid "Compression recommendation"
 msgstr "Recommandation de compression"
 
-#: src/ui/window.py:1032
+#: src/ui/window.py:1013
 msgid "Recommendation reason"
 msgstr "Motif de la recommandation"
 
-#: src/ui/window.py:1066
+#: src/ui/window.py:1047
 msgid "Password Required"
 msgstr "Mot de passe requis"
 
-#: src/ui/window.py:1067
+#: src/ui/window.py:1048
 msgid "This archive is encrypted. Please enter the password."
 msgstr "Cette archive est cryptée. Veuillez saisir le mot de passe."
 
-#: src/ui/window.py:1097 src/ui/window.py:1100 src/window.ui:117
+#: src/ui/window.py:1078 src/ui/window.py:1081 src/window.ui:117
 #: src/window.ui:132 src/window.ui:432
 msgid "Extract"
 msgstr "Extraire"
 
-#: src/ui/window.py:1143
+#: src/ui/window.py:1124
 msgid "Modified"
 msgstr "Modifié"
 
-#: src/ui/window.py:1299
+#: src/ui/window.py:1285
 msgid "Failed to create temporary directory"
 msgstr "Échec création du répertoire temporaire"
 
-#: src/ui/window.py:1325 src/ui/window.py:1891 src/ui/window.py:1893
-#: src/ui/window.py:1919 src/ui/window.py:1921
+#: src/ui/window.py:1311 src/ui/window.py:1902 src/ui/window.py:1904
+#: src/ui/window.py:1930 src/ui/window.py:1932
 msgid "Extract "
 msgstr "Extraire "
 
-#: src/ui/window.py:1331
+#: src/ui/window.py:1317
 msgid "Extracted file not found"
 msgstr "Fichier décompressé introuvable"
 
-#: src/ui/window.py:1391
+#: src/ui/window.py:1377
 msgid "List "
 msgstr "Liste "
 
-#: src/ui/window.py:1512
+#: src/ui/window.py:1498
 msgid "List failed"
 msgstr "Échec de la liste"
 
-#. TRANSLATORS: This message will be removed in the next version; no need to translate it for now.
-#: src/ui/window.py:1584
-msgid "Only the first file will be added"
-msgstr ""
-
-#: src/ui/window.py:1617 src/ui/window.py:1618
+#: src/ui/window.py:1605 src/ui/window.py:1606
 msgid "File not found"
 msgstr "Fichier introuvable"
 
-#: src/ui/window.py:1637
+#: src/ui/window.py:1625
 msgid "Select failed"
 msgstr "Échec de la sélection"
 
-#: src/ui/window.py:1640
+#: src/ui/window.py:1628
 msgid "Selected "
 msgstr "Sélectionné "
 
-#: src/ui/window.py:1644
+#: src/ui/window.py:1632
 msgid "Format compatibility warning"
 msgstr "Avertissement compatibilité format"
 
-#: src/ui/window.py:1645
+#: src/ui/window.py:1633
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
@@ -497,20 +505,20 @@ msgstr ""
 "La compatibilité de ce format n'a pas été vérifiée. Les opérations de "
 "déplacement et de suppression sont désactivées."
 
-#: src/ui/window.py:1653
+#: src/ui/window.py:1641
 msgid "Preview not supported"
 msgstr "Aperçu non pris en charge"
 
-#: src/ui/window.py:1654
+#: src/ui/window.py:1642
 msgid "This format does not support preview. Only extract is available."
 msgstr ""
 "Ce format ne prend pas en charge l'aperçu. Seul l'extrait est disponible."
 
-#: src/ui/window.py:1662
+#: src/ui/window.py:1650
 msgid "Nested archive opened"
 msgstr "Ouverture d'archive imbriquée"
 
-#: src/ui/window.py:1663
+#: src/ui/window.py:1651
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
@@ -549,262 +557,300 @@ msgstr "Commande introuvable"
 msgid "Job queue not found"
 msgstr "File d'attente des tâches introuvable"
 
-#: src/ui/window.py:1856 src/ui/window.py:1993
-msgid "{} items"
-msgstr "{} éléments"
-
-#: src/ui/window.py:1860 src/ui/window.py:1917 src/ui/window.py:1931
-#: src/ui/window.py:1945 src/ui/window.py:1959 src/ui/window.py:1995
-#: src/ui/window.py:2021 src/ui/window.py:2028 src/ui/window.py:2034
-#: src/ui/window.py:2041
+#: src/ui/window.py:1854 src/ui/window.py:1859 src/ui/window.py:1871
+#: src/ui/window.py:1928 src/ui/window.py:1942 src/ui/window.py:1956
+#: src/ui/window.py:1970 src/ui/window.py:2020 src/ui/window.py:2046
+#: src/ui/window.py:2053 src/ui/window.py:2059 src/ui/window.py:2066
 msgid "file"
 msgstr "fichier"
 
-#: src/ui/window.py:1863 src/ui/window.py:1865
+#: src/ui/window.py:1857 src/ui/window.py:1867 src/ui/window.py:2018
+msgid "{} items"
+msgstr "{} éléments"
+
+#: src/ui/window.py:1874 src/ui/window.py:1876
 msgid "Compress "
 msgstr "Compression "
 
-#: src/ui/window.py:1867
+#: src/ui/window.py:1878
 msgid "Compressed "
 msgstr "Compressé "
 
-#: src/ui/window.py:1869
+#: src/ui/window.py:1880
 msgid "Compress timed out: "
 msgstr "Délai compression expiré : "
 
-#: src/ui/window.py:1871
+#: src/ui/window.py:1882
 msgid "Compress cancelled: "
 msgstr "Compression annulée : "
 
-#: src/ui/window.py:1872
+#: src/ui/window.py:1883
 msgid "Compress failed: "
 msgstr "Compression échouée : "
 
-#: src/ui/window.py:1875 src/ui/window.py:1889 src/ui/window.py:1903
-#: src/ui/window.py:1990 src/ui/window.py:2004 src/ui/window.py:2009
-#: src/ui/window.py:2015 src/ui/window.py:2020 src/ui/window.py:2027
-#: src/ui/window.py:2033 src/ui/window.py:2040 src/ui/window.py:2047
+#: src/ui/window.py:1886 src/ui/window.py:1900 src/ui/window.py:1914
+#: src/ui/window.py:2015 src/ui/window.py:2029 src/ui/window.py:2034
+#: src/ui/window.py:2040 src/ui/window.py:2045 src/ui/window.py:2052
+#: src/ui/window.py:2058 src/ui/window.py:2065 src/ui/window.py:2072
+#: src/ui/window.py:2079
 msgid "archive"
 msgstr "archive"
 
-#: src/ui/window.py:1877 src/ui/window.py:1879
+#: src/ui/window.py:1888 src/ui/window.py:1890
 msgid "Open "
 msgstr "Ouvrir "
 
-#: src/ui/window.py:1881
+#: src/ui/window.py:1892
 msgid "Opened "
 msgstr "Ouvert "
 
-#: src/ui/window.py:1883
+#: src/ui/window.py:1894
 msgid "Open timed out: "
 msgstr "Délai d'ouverture expiré : "
 
-#: src/ui/window.py:1885
+#: src/ui/window.py:1896
 msgid "Open cancelled: "
 msgstr "Ouverture annulée : "
 
-#: src/ui/window.py:1886
+#: src/ui/window.py:1897
 msgid "Open failed: "
 msgstr "Ouverture échouée : "
 
-#: src/ui/window.py:1895 src/ui/window.py:1923
+#: src/ui/window.py:1906 src/ui/window.py:1934
 msgid "Extracted "
 msgstr "Extrait "
 
-#: src/ui/window.py:1897 src/ui/window.py:1925
+#: src/ui/window.py:1908 src/ui/window.py:1936
 msgid "Extract timed out: "
 msgstr "Extraction délai expirée : "
 
-#: src/ui/window.py:1899 src/ui/window.py:1927
+#: src/ui/window.py:1910 src/ui/window.py:1938
 msgid "Extract cancelled: "
 msgstr "Extraction annulée : "
 
-#: src/ui/window.py:1900 src/ui/window.py:1928
+#: src/ui/window.py:1911 src/ui/window.py:1939
 msgid "Extract failed: "
 msgstr "Extraction échouée : "
 
-#: src/ui/window.py:1905 src/ui/window.py:1907
+#: src/ui/window.py:1916 src/ui/window.py:1918
 msgid "Test "
 msgstr "Test "
 
-#: src/ui/window.py:1909
+#: src/ui/window.py:1920
 msgid "Tested "
 msgstr "Testé "
 
-#: src/ui/window.py:1911
+#: src/ui/window.py:1922
 msgid "Test timed out: "
 msgstr "Test délai expiré : "
 
-#: src/ui/window.py:1913
+#: src/ui/window.py:1924
 msgid "Test cancelled: "
 msgstr "Test annulé : "
 
-#: src/ui/window.py:1914
+#: src/ui/window.py:1925
 msgid "Test failed: "
 msgstr "Échec du test : "
 
-#: src/ui/window.py:1933 src/ui/window.py:1935
+#: src/ui/window.py:1944 src/ui/window.py:1946
 msgid "Delete "
 msgstr "Supprimer "
 
-#: src/ui/window.py:1937
+#: src/ui/window.py:1948
 msgid "Deleted "
 msgstr "Supprimé "
 
-#: src/ui/window.py:1939
+#: src/ui/window.py:1950
 msgid "Delete timed out: "
 msgstr "Échec suppression délai expiré : "
 
-#: src/ui/window.py:1941
+#: src/ui/window.py:1952
 msgid "Delete cancelled: "
 msgstr "Suppression annulée : "
 
-#: src/ui/window.py:1942
+#: src/ui/window.py:1953
 msgid "Delete failed: "
 msgstr "Échec de la suppression : "
 
-#: src/ui/window.py:1947 src/ui/window.py:1949
+#: src/ui/window.py:1958 src/ui/window.py:1960
 msgid "Move "
 msgstr "Déplacer "
 
-#: src/ui/window.py:1951
+#: src/ui/window.py:1962
 msgid "Moved "
 msgstr "Déplacé "
 
-#: src/ui/window.py:1953
+#: src/ui/window.py:1964
 msgid "Move timed out: "
 msgstr "Déplacement délai expiré : "
 
-#: src/ui/window.py:1955
+#: src/ui/window.py:1966
 msgid "Move cancelled: "
 msgstr "Déplacement annulée : "
 
-#: src/ui/window.py:1956
+#: src/ui/window.py:1967
 msgid "Move failed: "
 msgstr "Échec déplacement : "
 
-#: src/ui/window.py:1961 src/ui/window.py:1963
+#: src/ui/window.py:1972 src/ui/window.py:1974
+msgid "Rename "
+msgstr ""
+
+#: src/ui/window.py:1976
+msgid "Renamed "
+msgstr ""
+
+#: src/ui/window.py:1978
+#, fuzzy
+#| msgid "Open timed out: "
+msgid "Rename timed out: "
+msgstr "Délai d'ouverture expiré : "
+
+#: src/ui/window.py:1980
+#, fuzzy
+#| msgid "Open cancelled: "
+msgid "Rename cancelled: "
+msgstr "Ouverture annulée : "
+
+#: src/ui/window.py:1981
+#, fuzzy
+#| msgid "Open failed: "
+msgid "Rename failed: "
+msgstr "Ouverture échouée : "
+
+#: src/ui/window.py:1986 src/ui/window.py:1988
 msgid "Add "
 msgstr "Ajouter "
 
-#: src/ui/window.py:1965
+#: src/ui/window.py:1990
 msgid "Added "
 msgstr "Ajouté "
 
-#: src/ui/window.py:1967
+#: src/ui/window.py:1992
 #, fuzzy
 #| msgid "Open timed out: "
 msgid "Add timed out: "
 msgstr "Délai d'ouverture expiré : "
 
-#: src/ui/window.py:1969
+#: src/ui/window.py:1994
 msgid "Add cancelled: "
 msgstr "Ajout annulé : "
 
-#: src/ui/window.py:1970
+#: src/ui/window.py:1995
 msgid "Add failed: "
 msgstr "Échec de l'ajout "
 
-#: src/ui/window.py:1973 src/ui/window.py:2010 src/ui/window.py:2022
-#: src/ui/window.py:2048
+#: src/ui/window.py:1998 src/ui/window.py:2035 src/ui/window.py:2047
+#: src/ui/window.py:2080
 msgid "folder"
 msgstr "dossier"
 
-#: src/ui/window.py:1975 src/ui/window.py:1977
+#: src/ui/window.py:2000 src/ui/window.py:2002
 #, fuzzy
 #| msgid "Create "
 msgid "Create folder "
 msgstr "Création "
 
-#: src/ui/window.py:1979
+#: src/ui/window.py:2004
 #, fuzzy
 #| msgid "Create "
 msgid "Created folder "
 msgstr "Création "
 
-#: src/ui/window.py:1981
+#: src/ui/window.py:2006
 #, fuzzy
 #| msgid "Delete timed out: "
 msgid "Create folder timed out: "
 msgstr "Échec suppression délai expiré : "
 
-#: src/ui/window.py:1983
+#: src/ui/window.py:2008
 #, fuzzy
 #| msgid "Delete cancelled: "
 msgid "Create folder cancelled: "
 msgstr "Suppression annulée : "
 
-#: src/ui/window.py:1984
+#: src/ui/window.py:2009
 #, fuzzy
 #| msgid "Delete failed: "
 msgid "Create folder failed: "
 msgstr "Échec de la suppression : "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
-#: src/ui/window.py:1997
+#: src/ui/window.py:2022
 #, python-brace-format
 msgid "Create {output} from {source}"
 msgstr "Créer {output} à partir de {source}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
-#: src/ui/window.py:2000
+#: src/ui/window.py:2025
 #, python-brace-format
 msgid "Parameters: {params}"
 msgstr "Paramètres: {params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
-#: src/ui/window.py:2006
+#: src/ui/window.py:2031
 #, python-brace-format
 msgid "Read archive information from {archive}"
 msgstr "Consulter les informations d'archive depuis {archive}"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
-#: src/ui/window.py:2012
+#: src/ui/window.py:2037
 #, python-brace-format
 msgid "Extract {archive} to {folder}"
 msgstr "Extraire {archive} vers {folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
-#: src/ui/window.py:2017
+#: src/ui/window.py:2042
 #, fuzzy, python-brace-format
 #| msgid "archive"
 msgid "Test {archive}"
 msgstr "Test {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
-#: src/ui/window.py:2024
+#: src/ui/window.py:2049
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
 msgstr "Extraire {file} de {archive} vers {folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
-#: src/ui/window.py:2030
+#: src/ui/window.py:2055
 #, python-brace-format
 msgid "Delete {file} from {archive}"
 msgstr "Supprimer {file} de {archive}"
 
-#: src/ui/window.py:2035
+#: src/ui/window.py:2060
 msgid "destination"
 msgstr "destination"
 
 #. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
-#: src/ui/window.py:2037
+#: src/ui/window.py:2062
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
 msgstr "Déplacer {file} vers {destination} dans {archive}"
 
-#: src/ui/window.py:2042
+#: src/ui/window.py:2067
+msgid "new name"
+msgstr ""
+
+#. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
+#: src/ui/window.py:2069
+#, fuzzy, python-brace-format
+#| msgid "Move {file} to {destination} in {archive}"
+msgid "Rename {file} to {new_name} in {archive}"
+msgstr "Déplacer {file} vers {destination} dans {archive}"
+
+#: src/ui/window.py:2074
 msgid "root"
 msgstr "racine"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
-#: src/ui/window.py:2044
+#: src/ui/window.py:2076
 #, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
 msgstr "Ajouter {file} à {destination} dans {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
-#: src/ui/window.py:2050
+#: src/ui/window.py:2082
 #, fuzzy, python-brace-format
 #| msgid "Delete {file} from {archive}"
 msgid "Create folder {folder} in {archive}"
@@ -813,6 +859,32 @@ msgstr "Supprimer {file} de {archive}"
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
 msgstr ""
+
+#: src/add-dialog.ui:12 src/compress-dialog.ui:72
+msgid "Source items"
+msgstr "Éléments sources"
+
+#: src/add-dialog.ui:39 src/compress-dialog.ui:99
+msgid "Add Files"
+msgstr "Ajouter des Fichiers"
+
+#: src/add-dialog.ui:44 src/compress-dialog.ui:104
+msgid "Add Folders"
+msgstr "Ajouter des Dossiers"
+
+#: src/add-dialog.ui:49 src/compress-dialog.ui:109
+msgid "Remove"
+msgstr "Enlever"
+
+#: src/add-dialog.ui:66
+msgid "Destination"
+msgstr "Destination"
+
+#: src/add-dialog.ui:74
+#, fuzzy
+#| msgid "Destination folder"
+msgid "Destination folder in archive"
+msgstr "Dossier de destination"
 
 #: src/window.ui:19
 msgid "Main Menu"
@@ -878,6 +950,10 @@ msgstr "_À propos d'Akizip"
 msgid "Extract Selected"
 msgstr "Extraire la sélection"
 
+#: src/window.ui:448 src/window.ui:460
+msgid "Add File"
+msgstr "Ajouter un fichier"
+
 #: src/compress-dialog.ui:12
 msgid "Output archive"
 msgstr "Fichier d'archive"
@@ -902,22 +978,6 @@ msgstr "Recommandation automatique"
 msgid "Scan source files and recommend format and parameters"
 msgstr ""
 "Analyser les fichiers source et recommander un format et des paramètres"
-
-#: src/compress-dialog.ui:72
-msgid "Source items"
-msgstr "Éléments sources"
-
-#: src/compress-dialog.ui:99
-msgid "Add Files"
-msgstr "Ajouter des Fichiers"
-
-#: src/compress-dialog.ui:104
-msgid "Add Folders"
-msgstr "Ajouter des Dossiers"
-
-#: src/compress-dialog.ui:109
-msgid "Remove"
-msgstr "Enlever"
 
 #: src/compress-dialog.ui:122
 msgid "Advanced options"
@@ -984,6 +1044,10 @@ msgstr "Chiffrer les noms de fichiers"
 msgid "Only available for 7z format"
 msgstr "Disponible uniquement au format 7z"
 
+#: src/extract-dialog.ui:15
+msgid "Destination folder"
+msgstr "Dossier de destination"
+
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
 msgstr "Ne rien indiquer s'il n'y a pas de mot de passe"
@@ -1038,6 +1102,12 @@ msgstr "Sélectionner un Dossier"
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
 msgstr "_Sélectionner"
+
+#~ msgid "Select a file"
+#~ msgstr "Sélectionnez un fichier"
+
+#~ msgid "Select file"
+#~ msgstr "Sélectionner un fichier"
 
 #~ msgid "Akizip"
 #~ msgstr "Akizip"

@@ -1,35 +1,48 @@
-# Chinese translations for PACKAGE package.
-# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
+# #-#-#-#-#  metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Automatically generated, 2026.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  python.pot (akizip 0.3.3)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the akizip package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  ui.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-23 09:39+0800\n"
-"PO-Revision-Date: 2026-07-05 05:01+0000\n"
-"Last-Translator: taketsuki <dpps93126@gmail.com>\n"
-"Language-Team: Chinese (Traditional Han script, Hong Kong) <https://"
-"hosted.weblate.org/projects/akizip/akizip/zh_Hant_HK/>\n"
-"Language: zh_HK\n"
+"PO-Revision-Date: 2026-08-25 01:51+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/akizip/akizip/"
+"id/>\n"
+"Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.7.1.dev0\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr "GNOME 上 7-Zip 的現代化前端"
+msgstr "Antarmuka modern untuk 7-Zip di GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
-"Akizip 是一款基於 GTK 4 和 libadwaita 的圖形化歸檔工具，為 GNOME 桌面帶來 7-"
-"Zip 的強大功能。"
+"Akizip adalah utilitas arsip grafis yang dibangun dengan GTK 4 dan "
+"libadwaita yang menghadirkan kemampuan 7-Zip ke desktop GNOME."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -37,27 +50,30 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
-"支援建立和解壓縮 7z、zip 和 tar 格式的壓縮檔。還可以開啟（唯讀）rar、gz、"
-"bz2、xz、tar.gz、tar.bz2 和 tar.xz 格式的壓縮檔。"
+"Aplikasi ini mendukung pembuatan dan ekstraksi arsip dalam format 7z, zip, "
+"dan tar. Aplikasi ini juga dapat membuka (hanya baca) arsip rar, gz, bz2, "
+"xz, tar.gz, tar.bz2, dan tar.xz."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
-"功能包括壓縮檔檢查、可取消的後台工作及進度報告、專用日誌面板和多語言支援。"
+"Fitur mencakup inspeksi arsip, pekerjaan latar belakang yang dapat "
+"dibatalkan dengan pelaporan progres, panel log khusus, dan dukungan "
+"multibahasa."
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
-msgstr "顯示歸檔內容和工具欄的主視窗"
+msgstr "Jendela utama menampilkan konten arsip dan bilah alat"
 
 #: src/ui/add_dialog.py:65
 msgid "Add to Archive"
-msgstr "新增到壓縮檔"
+msgstr "Tambahkan ke Arsip"
 
 #: src/ui/add_dialog.py:65
 msgid "Add files and folders to the current archive."
-msgstr "向目前壓縮檔新增檔案和資料夾。"
+msgstr "Tambahkan file dan folder ke arsip saat ini."
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:311
 #: src/ui/window.py:376 src/ui/window.py:492 src/ui/window.py:543
@@ -65,483 +81,487 @@ msgstr "向目前壓縮檔新增檔案和資料夾。"
 #: src/ui/window.py:782 src/ui/window.py:804 src/ui/window.py:835
 #: src/ui/window.py:1057 src/ui/window.py:1080 src/move-folder-chooser.ui:51
 msgid "_Cancel"
-msgstr "取消"
+msgstr "_Batalkan"
 
 #: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:781
 #: src/ui/window.py:803
 msgid "_Add"
-msgstr "添加"
+msgstr "_Tambahkan"
 
 #: src/ui/add_dialog.py:126 src/ui/window.py:756
 msgid "Source items ({})"
-msgstr "來源項目 ({})"
+msgstr "Item sumber ({})"
 
 #: src/ui/add_dialog.py:138 src/ui/window.py:778
 msgid "Select Files"
-msgstr "選擇檔案"
+msgstr "Pilih File"
 
 #: src/ui/add_dialog.py:144 src/ui/window.py:800
 msgid "Select Folders"
-msgstr "選擇資料夾"
+msgstr "Pilih Folder"
 
 #: src/ui/info_dialog.py:31 src/ui/window.py:1613
 msgid "System state not found"
-msgstr "找不到系統狀態"
+msgstr "Status sistem tidak ditemukan"
 
 #: src/ui/info_dialog.py:45 src/ui/info_dialog.py:52
 msgid "Archive"
-msgstr "壓縮檔"
+msgstr "Arsip"
 
 #: src/ui/info_dialog.py:45
 msgid "Archive information is unavailable."
-msgstr "壓縮檔資訊無法使用。"
+msgstr "Informasi arsip tidak tersedia."
 
 #: src/ui/info_dialog.py:79
 msgid "Read archive information from "
-msgstr "讀取壓縮檔資訊： "
+msgstr "Baca informasi arsip dari "
 
 #: src/ui/info_dialog.py:86 src/ui/info_dialog.py:97 src/window.ui:214
 #: src/window.ui:228
 msgid "Info"
-msgstr "資訊"
+msgstr "Info"
 
 #: src/ui/info_dialog.py:115
 msgid "Close"
-msgstr "關閉"
+msgstr "Tutup"
 
 #: src/ui/info_dialog.py:122
 msgid "Name"
-msgstr "名稱"
+msgstr "Nama"
 
 #: src/ui/info_dialog.py:123 src/ui/window.py:1122
 msgid "Path"
-msgstr "路徑"
+msgstr "Jalur"
 
 #: src/ui/info_dialog.py:124
 msgid "Type"
-msgstr "類型"
+msgstr "Tipe"
 
 #: src/ui/info_dialog.py:126 src/ui/window.py:1123
 msgid "Size"
-msgstr "大小"
+msgstr "Ukuran"
 
 #: src/ui/info_dialog.py:127
 msgid "Can compress"
-msgstr "可壓縮"
+msgstr "Dapat dikompresi"
 
 #: src/ui/info_dialog.py:128
 msgid "Can extract"
-msgstr "可解壓縮"
+msgstr "Dapat diekstrak"
 
 #: src/ui/info_dialog.py:154
 msgid "Copy"
-msgstr "複製"
+msgstr "Salin"
 
 #: src/ui/info_dialog.py:166
 msgid "Copied to clipboard"
-msgstr "已複製到剪貼簿"
+msgstr "Disalin ke papan klip"
 
 #: src/ui/info_dialog.py:175
 msgid "No archive information found."
-msgstr "找不到壓縮檔資訊。"
+msgstr "Tidak ada informasi arsip yang ditemukan."
 
 #: src/ui/info_dialog.py:179
 msgid "Loaded"
-msgstr "已載入"
+msgstr "Dimuat"
 
 #: src/ui/info_dialog.py:181
 msgid "Archive type"
-msgstr "壓縮檔類型"
+msgstr "Tipe arsip"
 
 #: src/ui/info_dialog.py:182
 msgid "Archive size"
-msgstr "壓縮檔大小"
+msgstr "Ukuran arsip"
 
 #: src/ui/info_dialog.py:183
 msgid "Headers size"
-msgstr "標頭大小"
+msgstr "Ukuran header"
 
 #: src/ui/info_dialog.py:184
 msgid "Method"
-msgstr "方法"
+msgstr "Metode"
 
 #: src/ui/info_dialog.py:185
 msgid "Solid"
-msgstr "固實"
+msgstr "Solid"
 
 #: src/ui/info_dialog.py:186
 msgid "Blocks"
-msgstr "區塊"
+msgstr "Blok"
 
 #: src/ui/info_dialog.py:210
 msgid "Archive file"
-msgstr "壓縮檔案"
+msgstr "File arsip"
 
 #: src/ui/info_dialog.py:212
 msgid "Folder"
-msgstr "資料夾"
+msgstr "Folder"
 
 #: src/ui/info_dialog.py:214
 msgid "File"
-msgstr "檔案"
+msgstr "File"
 
 #: src/ui/info_dialog.py:215
 msgid "Unknown"
-msgstr "未知"
+msgstr "Tidak diketahui"
 
 #: src/ui/info_dialog.py:229
 msgid "Yes"
-msgstr "是"
+msgstr "Ya"
 
 #: src/ui/info_dialog.py:229
 msgid "No"
-msgstr "否"
+msgstr "Tidak"
 
 #: src/ui/log_panel.py:50
 msgid "Logs"
-msgstr "日誌"
+msgstr "Log"
 
 #: src/ui/log_panel.py:114 src/ui/window.py:1706
 msgid "Cancel"
-msgstr "取消"
+msgstr "Batal"
 
 #: src/ui/log_panel.py:123
 msgid "Cancelling..."
-msgstr "正在取消..."
+msgstr "Membatalkan..."
 
 #: src/ui/log_panel.py:127
 msgid "Running"
-msgstr "執行中"
+msgstr "Berjalan"
 
 #: src/ui/log_panel.py:128
 msgid "Done"
-msgstr "完成"
+msgstr "Selesai"
 
 #: src/ui/log_panel.py:129
 msgid "Warning"
-msgstr "警告"
+msgstr "Peringatan"
 
 #: src/ui/log_panel.py:130
 msgid "Timeout"
-msgstr "逾時"
+msgstr "Waktu habis"
 
 #: src/ui/log_panel.py:131
 msgid "Error"
-msgstr "錯誤"
+msgstr "Kesalahan"
 
 #: src/ui/log_panel.py:132
 msgid "Cancelled"
-msgstr "已取消"
+msgstr "Dibatalkan"
 
 #: src/ui/log_panel.py:133
 msgid "Pending"
-msgstr "等候中"
+msgstr "Tertunda"
 
 #: src/ui/window.py:233
 msgid "Test failed"
-msgstr "測試失敗"
+msgstr "Pengujian gagal"
 
 #: src/ui/window.py:233 src/ui/window.py:262 src/ui/window.py:354
 #: src/ui/window.py:422 src/ui/window.py:423 src/ui/window.py:476
 #: src/ui/window.py:531 src/ui/window.py:589
 msgid "Selected path is not an archive."
-msgstr "所選路徑不是壓縮檔。"
+msgstr "Jalur yang dipilih bukan arsip."
 
 #: src/ui/window.py:262 src/ui/window.py:265
 msgid "Move failed"
-msgstr "移動失敗"
+msgstr "Pemindahan gagal"
 
 #: src/ui/window.py:265 src/ui/window.py:357 src/ui/window.py:426
 #: src/ui/window.py:427 src/ui/window.py:479 src/ui/window.py:534
 msgid "This archive format does not support modification."
-msgstr "該壓縮包格式不支援修改。"
+msgstr "Format arsip ini tidak mendukung modifikasi."
 
 #: src/ui/window.py:273 src/ui/window.py:365 src/ui/window.py:449
 #: src/ui/window.py:487 src/ui/window.py:617 src/ui/window.py:1597
 #: src/ui/window.py:1598 src/ui/window.py:1601 src/ui/window.py:1602
 msgid "No file selected"
-msgstr "未選擇檔案"
+msgstr "Tidak ada file yang dipilih"
 
 #: src/ui/window.py:277 src/window.ui:166 src/window.ui:180 src/window.ui:436
 msgid "Move"
-msgstr "移動"
+msgstr "Pindahkan"
 
 #: src/ui/window.py:277
 msgid "Move \"{}\" to:"
-msgstr "移動 \"{}\" 到："
+msgstr "Pindahkan \"{}\" ke:"
 
 #: src/ui/window.py:283 src/add-dialog.ui:80
 msgid "Select destination folder"
-msgstr "選擇目標資料夾"
+msgstr "Pilih folder tujuan"
 
 #: src/ui/window.py:312
 msgid "_Move"
-msgstr "移動"
+msgstr "_Pindahkan"
 
 #: src/ui/window.py:354 src/ui/window.py:357
 msgid "Rename failed"
-msgstr "重新命名失敗"
+msgstr "Pengubahan nama gagal"
 
 #: src/ui/window.py:370 src/window.ui:440
 msgid "Rename"
-msgstr "重新命名"
+msgstr "Ubah Nama"
 
 #: src/ui/window.py:370
 msgid "Rename \"{}\" to:"
-msgstr "將 \"{}\" 重新命名為："
+msgstr "Ubah nama \"{}\" menjadi:"
 
 #: src/ui/window.py:377
 msgid "_Rename"
-msgstr "重新命名"
+msgstr "_Ubah Nama"
 
 #: src/ui/window.py:393
 msgid "Invalid name"
-msgstr "無效名稱"
+msgstr "Nama tidak valid"
 
 #: src/ui/window.py:422 src/ui/window.py:426
 msgid "Add failed"
-msgstr "新增失敗"
+msgstr "Penambahan gagal"
 
 #: src/ui/window.py:476 src/ui/window.py:479
 msgid "Delete failed"
-msgstr "刪除失敗"
+msgstr "Penghapusan gagal"
 
 #: src/ui/window.py:491 src/window.ui:190 src/window.ui:204 src/window.ui:444
 msgid "Delete"
-msgstr "刪除"
+msgstr "Hapus"
 
 #: src/ui/window.py:491
 msgid "Are you sure you want to delete \"{}\"?"
-msgstr "確定要刪除\"{}\"嗎？"
+msgstr "Apakah Anda yakin ingin menghapus \"{}\"?"
 
 #: src/ui/window.py:493
 msgid "_Delete"
-msgstr "刪除"
+msgstr "_Hapus"
 
 #: src/ui/window.py:531 src/ui/window.py:534
 msgid "New folder failed"
-msgstr "新增資料夾失敗"
+msgstr "Pembuatan folder baru gagal"
 
 #: src/ui/window.py:537 src/ui/window.py:539 src/window.ui:452
 #: src/window.ui:464
 msgid "New Folder"
-msgstr "新增資料夾"
+msgstr "Folder Baru"
 
 #: src/ui/window.py:537
 msgid "Create a new folder in the current archive."
-msgstr "在目前壓縮檔中建立新資料夾。"
+msgstr "Buat folder baru di dalam arsip saat ini."
 
 #: src/ui/window.py:544
 msgid "_Create"
-msgstr "建立"
+msgstr "_Buat"
 
 #: src/ui/window.py:560
 msgid "Invalid folder name"
-msgstr "無效資料夾名稱"
+msgstr "Nama folder tidak valid"
 
 #: src/ui/window.py:589
 msgid "Extract failed"
-msgstr "解壓縮失敗"
+msgstr "Ekstraksi gagal"
 
 #: src/ui/window.py:624
 msgid "Select File"
-msgstr "選擇檔案"
+msgstr "Pilih File"
 
 #: src/ui/window.py:627 src/ui/window.py:666
 msgid "_Open"
-msgstr "開啟"
+msgstr "_Buka"
 
 #: src/ui/window.py:663 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr "選擇目標資料夾"
+msgstr "Pilih Folder Tujuan"
 
 #: src/ui/window.py:710 src/compress-dialog.ui:199 src/preferences.ui:101
 msgid "Default"
-msgstr "預設"
+msgstr "Default"
 
 #: src/ui/window.py:732 src/ui/window.py:735 src/window.ui:67 src/window.ui:82
 msgid "Compress"
-msgstr "壓縮"
+msgstr "Kompres"
 
 #: src/ui/window.py:831
 msgid "Save Archive As"
-msgstr "另存壓縮檔為"
+msgstr "Simpan Arsip Sebagai"
 
 #: src/ui/window.py:834
 msgid "_Save"
-msgstr "保存"
+msgstr "_Simpan"
 
 #: src/ui/window.py:855
 msgid "Overwrite is not currently supported"
-msgstr "暫不支援覆寫"
+msgstr "Penimpaan saat ini tidak didukung"
 
 #: src/ui/window.py:856 src/ui/window.py:1058 src/ui/window.py:1635
 #: src/ui/window.py:1644 src/ui/window.py:1653 src/ui/window.py:1699
 msgid "_OK"
-msgstr "確定"
+msgstr "_OK"
 
 #: src/ui/window.py:897
 msgid "No source items to analyze"
-msgstr "沒有可分析的源項目"
+msgstr "Tidak ada item sumber untuk dianalisis"
 
 #: src/ui/window.py:904
 msgid "Recommendation not available"
-msgstr "推薦功能無法使用"
+msgstr "Rekomendasi tidak tersedia"
 
 #: src/ui/window.py:957
 msgid "Recommendation failed"
-msgstr "壓縮參數推薦失敗"
+msgstr "Rekomendasi gagal"
 
 #: src/ui/window.py:958
 msgid "Compression recommendation failed"
-msgstr "壓縮參數推薦失敗"
+msgstr "Rekomendasi kompresi gagal"
 
 #: src/ui/window.py:1008
 msgid "Compression recommendation"
-msgstr "壓縮參數推薦"
+msgstr "Rekomendasi kompresi"
 
 #: src/ui/window.py:1013
 msgid "Recommendation reason"
-msgstr "推薦原因"
+msgstr "Alasan rekomendasi"
 
 #: src/ui/window.py:1047
 msgid "Password Required"
-msgstr "需要密碼"
+msgstr "Kata Sandi Diperlukan"
 
 #: src/ui/window.py:1048
 msgid "This archive is encrypted. Please enter the password."
-msgstr "此歸檔已加密。請輸入密碼。"
+msgstr "Arsip ini dienkripsi. Silakan masukkan kata sandi."
 
 #: src/ui/window.py:1078 src/ui/window.py:1081 src/window.ui:117
 #: src/window.ui:132 src/window.ui:432
 msgid "Extract"
-msgstr "解壓縮"
+msgstr "Ekstrak"
 
 #: src/ui/window.py:1124
 msgid "Modified"
-msgstr "修改時間"
+msgstr "Dimodifikasi"
 
 #: src/ui/window.py:1285
 msgid "Failed to create temporary directory"
-msgstr "創建臨時目錄失敗"
+msgstr "Gagal membuat direktori sementara"
 
 #: src/ui/window.py:1311 src/ui/window.py:1903 src/ui/window.py:1905
 #: src/ui/window.py:1931 src/ui/window.py:1933
 msgid "Extract "
-msgstr "解壓縮 "
+msgstr "Ekstrak "
 
 #: src/ui/window.py:1317
 msgid "Extracted file not found"
-msgstr "未找到解壓縮後的檔案"
+msgstr "File yang diekstrak tidak ditemukan"
 
 #: src/ui/window.py:1377
 msgid "List "
-msgstr "列出 "
+msgstr "Daftar "
 
 #: src/ui/window.py:1498
 msgid "List failed"
-msgstr "列出失敗"
+msgstr "Pembuatan daftar gagal"
 
 #: src/ui/window.py:1605 src/ui/window.py:1606
 msgid "File not found"
-msgstr "找不到檔案"
+msgstr "File tidak ditemukan"
 
 #: src/ui/window.py:1625
 msgid "Select failed"
-msgstr "選擇失敗"
+msgstr "Pemilihan gagal"
 
 #: src/ui/window.py:1628
 msgid "Selected "
-msgstr "已選擇 "
+msgstr "Dipilih "
 
 #: src/ui/window.py:1632
 msgid "Format compatibility warning"
-msgstr "格式相容性警告"
+msgstr "Peringatan kompatibilitas format"
 
 #: src/ui/window.py:1633
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
-msgstr "該格式未經相容性驗證。移動和刪除操作已被停用。"
+msgstr ""
+"Format ini belum diverifikasi kompatibilitasnya. Operasi pindahkan dan hapus "
+"dinonaktifkan."
 
 #: src/ui/window.py:1641
 msgid "Preview not supported"
-msgstr "無法預覽"
+msgstr "Pratinjau tidak didukung"
 
 #: src/ui/window.py:1642
 msgid "This format does not support preview. Only extract is available."
-msgstr "該類型不支援預覽，僅可解壓縮。"
+msgstr "Format ini tidak mendukung pratinjau. Hanya ekstraksi yang tersedia."
 
 #: src/ui/window.py:1650
 msgid "Nested archive opened"
-msgstr "嵌套壓縮檔已開啟"
+msgstr "Arsip bersarang dibuka"
 
 #: src/ui/window.py:1651
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
-msgstr "該壓縮檔從父壓縮檔中提取。移動和刪除操作已被停用。"
+msgstr ""
+"Arsip ini diekstrak dari arsip induk. Operasi pindahkan dan hapus "
+"dinonaktifkan."
 
 #: src/ui/window.py:1696
 msgid "Language changed"
-msgstr "語言已變更"
+msgstr "Bahasa diubah"
 
 #: src/ui/window.py:1697
 msgid "Restart the application to apply the new language."
-msgstr "請重新啟動應用程式以套用新的語言設定。"
+msgstr "Mulai ulang aplikasi untuk menerapkan bahasa baru."
 
 #: src/ui/window.py:1738
 msgid "Calculating..."
-msgstr "正在計算..."
+msgstr "Menghitung..."
 
 #: src/ui/window.py:1743
 #, python-format
 msgid "%d seconds remaining"
-msgstr "%d 秒剩餘"
+msgstr "%d detik tersisa"
 
 #: src/ui/window.py:1744
 #, python-format
 msgid "%d minutes remaining"
-msgstr "%d 分鐘剩餘"
+msgstr "%d menit tersisa"
 
 #: src/ui/window.py:1761
 msgid "Command not found"
-msgstr "找不到指令"
+msgstr "Perintah tidak ditemukan"
 
 #: src/ui/window.py:1766
 msgid "Job queue not found"
-msgstr "找不到工作佇列"
+msgstr "Antrean pekerjaan tidak ditemukan"
 
 #: src/ui/window.py:1855 src/ui/window.py:1860 src/ui/window.py:1872
 #: src/ui/window.py:1929 src/ui/window.py:1943 src/ui/window.py:1957
 #: src/ui/window.py:1971 src/ui/window.py:2021 src/ui/window.py:2047
 #: src/ui/window.py:2054 src/ui/window.py:2060 src/ui/window.py:2067
 msgid "file"
-msgstr "檔案"
+msgstr "file"
 
 #: src/ui/window.py:1858 src/ui/window.py:1868 src/ui/window.py:2019
 msgid "{} items"
-msgstr "{} 個項目"
+msgstr "{} item"
 
 #: src/ui/window.py:1875 src/ui/window.py:1877
 msgid "Compress "
-msgstr "壓縮 "
+msgstr "Kompres "
 
 #: src/ui/window.py:1879
 msgid "Compressed "
-msgstr "已壓縮 "
+msgstr "Dikompres "
 
 #: src/ui/window.py:1881
 msgid "Compress timed out: "
-msgstr "壓縮逾時："
+msgstr "Kompres waktu habis: "
 
 #: src/ui/window.py:1883
 msgid "Compress cancelled: "
-msgstr "壓縮已取消："
+msgstr "Kompres dibatalkan: "
 
 #: src/ui/window.py:1884
 msgid "Compress failed: "
-msgstr "壓縮失敗："
+msgstr "Kompres gagal: "
 
 #: src/ui/window.py:1887 src/ui/window.py:1901 src/ui/window.py:1915
 #: src/ui/window.py:2016 src/ui/window.py:2030 src/ui/window.py:2035
@@ -549,546 +569,485 @@ msgstr "壓縮失敗："
 #: src/ui/window.py:2059 src/ui/window.py:2066 src/ui/window.py:2073
 #: src/ui/window.py:2080
 msgid "archive"
-msgstr "壓縮檔"
+msgstr "arsip"
 
 #: src/ui/window.py:1889 src/ui/window.py:1891
 msgid "Open "
-msgstr "開啟 "
+msgstr "Buka "
 
 #: src/ui/window.py:1893
 msgid "Opened "
-msgstr "已開啟 "
+msgstr "Dibuka "
 
 #: src/ui/window.py:1895
 msgid "Open timed out: "
-msgstr "開啟逾時："
+msgstr "Buka waktu habis: "
 
 #: src/ui/window.py:1897
 msgid "Open cancelled: "
-msgstr "開啟已取消："
+msgstr "Buka dibatalkan: "
 
 #: src/ui/window.py:1898
 msgid "Open failed: "
-msgstr "開啟失敗："
+msgstr "Buka gagal: "
 
 #: src/ui/window.py:1907 src/ui/window.py:1935
 msgid "Extracted "
-msgstr "已解壓縮 "
+msgstr "Diekstrak "
 
 #: src/ui/window.py:1909 src/ui/window.py:1937
 msgid "Extract timed out: "
-msgstr "解壓縮逾時："
+msgstr "Ekstrak waktu habis: "
 
 #: src/ui/window.py:1911 src/ui/window.py:1939
 msgid "Extract cancelled: "
-msgstr "解壓縮已取消："
+msgstr "Ekstrak dibatalkan: "
 
 #: src/ui/window.py:1912 src/ui/window.py:1940
 msgid "Extract failed: "
-msgstr "解壓縮失敗："
+msgstr "Ekstrak gagal: "
 
 #: src/ui/window.py:1917 src/ui/window.py:1919
 msgid "Test "
-msgstr "測試 "
+msgstr "Uji "
 
 #: src/ui/window.py:1921
 msgid "Tested "
-msgstr "已測試 "
+msgstr "Diuji "
 
 #: src/ui/window.py:1923
 msgid "Test timed out: "
-msgstr "測試逾時："
+msgstr "Uji waktu habis: "
 
 #: src/ui/window.py:1925
 msgid "Test cancelled: "
-msgstr "測試已取消："
+msgstr "Uji dibatalkan: "
 
 #: src/ui/window.py:1926
 msgid "Test failed: "
-msgstr "測試失敗："
+msgstr "Uji gagal: "
 
 #: src/ui/window.py:1945 src/ui/window.py:1947
 msgid "Delete "
-msgstr "刪除 "
+msgstr "Hapus "
 
 #: src/ui/window.py:1949
 msgid "Deleted "
-msgstr "已刪除 "
+msgstr "Dihapus "
 
 #: src/ui/window.py:1951
 msgid "Delete timed out: "
-msgstr "刪除逾時："
+msgstr "Hapus waktu habis: "
 
 #: src/ui/window.py:1953
 msgid "Delete cancelled: "
-msgstr "刪除已取消："
+msgstr "Hapus dibatalkan: "
 
 #: src/ui/window.py:1954
 msgid "Delete failed: "
-msgstr "刪除失敗："
+msgstr "Hapus gagal: "
 
 #: src/ui/window.py:1959 src/ui/window.py:1961
 msgid "Move "
-msgstr "移動 "
+msgstr "Pindahkan "
 
 #: src/ui/window.py:1963
 msgid "Moved "
-msgstr "已移動 "
+msgstr "Dipindahkan "
 
 #: src/ui/window.py:1965
 msgid "Move timed out: "
-msgstr "移動逾時："
+msgstr "Pindahkan waktu habis: "
 
 #: src/ui/window.py:1967
 msgid "Move cancelled: "
-msgstr "移動已取消："
+msgstr "Pindahkan dibatalkan: "
 
 #: src/ui/window.py:1968
 msgid "Move failed: "
-msgstr "移動失敗："
+msgstr "Pindahkan gagal: "
 
 #: src/ui/window.py:1973 src/ui/window.py:1975
 msgid "Rename "
-msgstr "重新命名 "
+msgstr "Ubah Nama "
 
 #: src/ui/window.py:1977
 msgid "Renamed "
-msgstr "已重新命名 "
+msgstr "Dinamai Ulang "
 
 #: src/ui/window.py:1979
 msgid "Rename timed out: "
-msgstr "重新命名逾時："
+msgstr "Ubah nama waktu habis: "
 
 #: src/ui/window.py:1981
 msgid "Rename cancelled: "
-msgstr "重新命名已取消："
+msgstr "Ubah nama dibatalkan: "
 
 #: src/ui/window.py:1982
 msgid "Rename failed: "
-msgstr "重新命名失敗："
+msgstr "Ubah nama gagal: "
 
 #: src/ui/window.py:1987 src/ui/window.py:1989
 msgid "Add "
-msgstr "新增 "
+msgstr "Tambahkan "
 
 #: src/ui/window.py:1991
 msgid "Added "
-msgstr "已新增 "
+msgstr "Ditambahkan "
 
 #: src/ui/window.py:1993
 msgid "Add timed out: "
-msgstr "新增逾時："
+msgstr "Tambahkan waktu habis: "
 
 #: src/ui/window.py:1995
 msgid "Add cancelled: "
-msgstr "新增已取消："
+msgstr "Tambahkan dibatalkan: "
 
 #: src/ui/window.py:1996
 msgid "Add failed: "
-msgstr "新增失敗："
+msgstr "Tambahkan gagal: "
 
 #: src/ui/window.py:1999 src/ui/window.py:2036 src/ui/window.py:2048
 #: src/ui/window.py:2081
 msgid "folder"
-msgstr "資料夾"
+msgstr "folder"
 
 #: src/ui/window.py:2001 src/ui/window.py:2003
 msgid "Create folder "
-msgstr "建立資料夾 "
+msgstr "Buat folder "
 
 #: src/ui/window.py:2005
 msgid "Created folder "
-msgstr "已建立資料夾 "
+msgstr "Folder dibuat "
 
 #: src/ui/window.py:2007
 msgid "Create folder timed out: "
-msgstr "建立資料夾逾時："
+msgstr "Pembuatan folder waktu habis: "
 
 #: src/ui/window.py:2009
 msgid "Create folder cancelled: "
-msgstr "建立資料夾已取消："
+msgstr "Pembuatan folder dibatalkan: "
 
 #: src/ui/window.py:2010
 msgid "Create folder failed: "
-msgstr "建立資料夾失敗："
+msgstr "Pembuatan folder gagal: "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:2023
 #, python-brace-format
 msgid "Create {output} from {source}"
-msgstr "從{source}中建立{output}"
+msgstr "Buat {output} dari {source}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
 #: src/ui/window.py:2026
 #, python-brace-format
 msgid "Parameters: {params}"
-msgstr "參數：{params}"
+msgstr "Parameter: {params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:2032
 #, python-brace-format
 msgid "Read archive information from {archive}"
-msgstr "讀取壓縮檔資訊：{archive}"
+msgstr "Baca informasi arsip dari {archive}"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:2038
 #, python-brace-format
 msgid "Extract {archive} to {folder}"
-msgstr "解壓縮{archive}到{folder}"
+msgstr "Ekstrak {archive} ke {folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:2043
 #, python-brace-format
 msgid "Test {archive}"
-msgstr "測試{archive}"
+msgstr "Uji {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:2050
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
-msgstr "從{archive}解壓縮{file}到{folder}"
+msgstr "Ekstrak {file} dari {archive} ke {folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
 #: src/ui/window.py:2056
 #, python-brace-format
 msgid "Delete {file} from {archive}"
-msgstr "從{archive}中刪除{file}"
+msgstr "Hapus {file} dari {archive}"
 
 #: src/ui/window.py:2061
 msgid "destination"
-msgstr "目標位置"
+msgstr "tujuan"
 
 #. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2063
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
-msgstr "在{archive}內將{file}移動到{destination}"
+msgstr "Pindahkan {file} ke {destination} di {archive}"
 
 #: src/ui/window.py:2068
 msgid "new name"
-msgstr "新名稱"
+msgstr "nama baru"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2070
 #, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr "在{archive}內將{file}重新命名為{new_name}"
+msgstr "Ubah nama {file} menjadi {new_name} di {archive}"
 
 #: src/ui/window.py:2075
 msgid "root"
-msgstr "根目錄"
+msgstr "root"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:2077
 #, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
-msgstr "新增{file}到{archive}的{destination}"
+msgstr "Tambahkan {file} ke {destination} di {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2083
 #, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr "在{archive}中建立資料夾{folder}"
+msgstr "Buat folder {folder} di {archive}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
-msgstr "（根目錄）"
+msgstr "(root)"
 
 #: src/add-dialog.ui:12 src/compress-dialog.ui:79
 msgid "Source items"
-msgstr "來源項目"
+msgstr "Item sumber"
 
 #: src/add-dialog.ui:39 src/compress-dialog.ui:106
 msgid "Add Files"
-msgstr "添加檔案"
+msgstr "Tambahkan File"
 
 #: src/add-dialog.ui:44 src/compress-dialog.ui:111
 msgid "Add Folders"
-msgstr "添加資料夾"
+msgstr "Tambahkan Folder"
 
 #: src/add-dialog.ui:49 src/compress-dialog.ui:116
 msgid "Remove"
-msgstr "移除"
+msgstr "Hapus"
 
 #: src/add-dialog.ui:66
 msgid "Destination"
-msgstr "目標位置"
+msgstr "Tujuan"
 
 #: src/add-dialog.ui:74
 msgid "Destination folder in archive"
-msgstr "壓縮檔內目標資料夾"
+msgstr "Folder tujuan di dalam arsip"
 
 #: src/window.ui:19
 msgid "Main Menu"
-msgstr "主選單"
+msgstr "Menu Utama"
 
 #: src/window.ui:43
 msgid "Open File"
-msgstr "開啟檔案"
+msgstr "Buka File"
 
 #: src/window.ui:57
 msgid "Open"
-msgstr "開啟"
+msgstr "Buka"
 
 #: src/window.ui:92 src/window.ui:107 src/window.ui:420
 msgid "Extract All"
-msgstr "全部解壓縮"
+msgstr "Ekstrak Semua"
 
 #: src/window.ui:142 src/window.ui:156
 msgid "Test"
-msgstr "測試"
+msgstr "Uji"
 
 #: src/window.ui:240
 msgid "Path or archive"
-msgstr "路徑或壓縮檔"
+msgstr "Jalur atau arsip"
 
 #: src/window.ui:255
 msgid "Open an archive to view its contents"
-msgstr "開啟壓縮檔以檢視其內容"
+msgstr "Buka arsip untuk melihat kontennya"
 
 #: src/window.ui:266
 msgid "The selected file is not an archive"
-msgstr "所選檔案不是壓縮檔"
+msgstr "File yang dipilih bukan arsip"
 
 #: src/window.ui:291
 msgid "This archive is empty"
-msgstr "該壓縮檔為空"
+msgstr "Arsip ini kosong"
 
 #: src/window.ui:302
 msgid "This format does not support preview"
-msgstr "該類型不支援預覽"
+msgstr "Format ini tidak mendukung pratinjau"
 
 #: src/window.ui:330
 msgid "_Language"
-msgstr "語言"
+msgstr "_Bahasa"
 
 #: src/window.ui:333
 msgid "System Default"
-msgstr "跟隨系統"
+msgstr "Default Sistem"
 
 #: src/window.ui:394
 msgid "Show _Logs"
-msgstr "顯示日誌"
+msgstr "Tampilkan _Log"
 
 #: src/window.ui:400
 msgid "_Preferences"
-msgstr "偏好設定"
+msgstr "_Preferensi"
 
 #: src/window.ui:404
 msgid "_About Akizip"
-msgstr "關於 Akizip"
+msgstr "_Tentang Akizip"
 
 #: src/window.ui:412 src/window.ui:424
 msgid "Extract Selected"
-msgstr "解壓縮所選"
+msgstr "Ekstrak yang Dipilih"
 
 #: src/window.ui:448 src/window.ui:460
 msgid "Add File"
-msgstr "新增檔案"
+msgstr "Tambahkan File"
 
 #: src/compress-dialog.ui:19
 msgid "Output archive"
-msgstr "輸出壓縮檔"
+msgstr "Arsip keluaran"
 
 #: src/compress-dialog.ui:31
 msgid "Select output archive path"
-msgstr "選擇輸出壓縮檔路徑"
+msgstr "Pilih jalur arsip keluaran"
 
 #: src/compress-dialog.ui:37
 msgid "Select Output Archive"
-msgstr "選擇輸出壓縮檔"
+msgstr "Pilih Arsip Keluaran"
 
 #: src/compress-dialog.ui:53 src/preferences.ui:60
 msgid "Format"
-msgstr "格式"
+msgstr "Format"
 
 #: src/compress-dialog.ui:70
 msgid "Auto Recommend"
-msgstr "自動推薦"
+msgstr "Rekomendasi Otomatis"
 
 #: src/compress-dialog.ui:71
 msgid "Scan source files and recommend format and parameters"
-msgstr "掃描源文件並推薦格式和參數"
+msgstr "Pindai file sumber dan rekomendasikan format serta parameter"
 
 #: src/compress-dialog.ui:139
 msgid "Advanced options"
-msgstr "進階選項"
+msgstr "Opsi lanjutan"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:76
 msgid "Compression level"
-msgstr "壓縮等級"
+msgstr "Tingkat kompresi"
 
 #: src/compress-dialog.ui:170 src/preferences.ui:82
 msgid "Store"
-msgstr "僅儲存"
+msgstr "Simpan"
 
 #: src/compress-dialog.ui:171 src/preferences.ui:83
 msgid "Fastest"
-msgstr "最快"
+msgstr "Tercepat"
 
 #: src/compress-dialog.ui:172 src/preferences.ui:84
 msgid "Fast"
-msgstr "快速"
+msgstr "Cepat"
 
 #: src/compress-dialog.ui:173 src/preferences.ui:85
 msgid "Normal"
-msgstr "一般"
+msgstr "Normal"
 
 #: src/compress-dialog.ui:174 src/preferences.ui:86
 msgid "Maximum"
-msgstr "最大"
+msgstr "Maksimal"
 
 #: src/compress-dialog.ui:175 src/preferences.ui:87
 msgid "Ultra"
-msgstr "極限"
+msgstr "Ultra"
 
 #: src/compress-dialog.ui:186 src/preferences.ui:95
 msgid "Algorithm"
-msgstr "演算法"
+msgstr "Algoritma"
 
 #: src/compress-dialog.ui:213 src/preferences.ui:112
 msgid "Dictionary size (MB)"
-msgstr "字典大小 (MB)"
+msgstr "Ukuran kamus (MB)"
 
 #: src/compress-dialog.ui:225 src/compress-dialog.ui:254 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
-msgstr "0 使用 7-Zip 預設值。"
+msgstr "0 menggunakan default 7-Zip."
 
 #: src/compress-dialog.ui:242 src/preferences.ui:131
 msgid "Threads"
-msgstr "執行緒數"
+msgstr "Thread"
 
 #: src/compress-dialog.ui:271
 msgid "Password"
-msgstr "密碼"
+msgstr "Kata Sandi"
 
 #: src/compress-dialog.ui:284
 msgid "Leave empty for no password"
-msgstr "留空表示無密碼"
+msgstr "Kosongkan jika tidak ada kata sandi"
 
 #: src/compress-dialog.ui:299 src/preferences.ui:150
 msgid "Encrypt file names"
-msgstr "加密檔案名稱"
+msgstr "Enkripsi nama file"
 
 #: src/compress-dialog.ui:307 src/compress-dialog.ui:318
 msgid "Only available for 7z format"
-msgstr "僅 7z 格式可用"
+msgstr "Hanya tersedia untuk format 7z"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
-msgstr "目標資料夾"
+msgstr "Folder tujuan"
 
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
-msgstr "如無密碼請留空"
+msgstr "Kosongkan jika tidak ada kata sandi"
 
 #: src/preferences.ui:8
 msgid "General"
-msgstr "通用"
+msgstr "Umum"
 
 #: src/preferences.ui:11
 msgid "Timeout (seconds)"
-msgstr "逾時（秒）"
+msgstr "Waktu habis (detik)"
 
 #: src/preferences.ui:12
 msgid "-1 means no timeout."
-msgstr "-1 表示無逾時。"
+msgstr "-1 berarti tanpa waktu habis."
 
 #: src/preferences.ui:32
 msgid "Compression"
-msgstr "壓縮"
+msgstr "Kompresi"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
-msgstr "掃描深度"
+msgstr "Kedalaman pemindaian"
 
 #: src/preferences.ui:36
 msgid ""
 "Maximum folder depth to scan for compression recommendations. Deeper scans "
 "may improve suggestions but take longer."
 msgstr ""
-"掃描資料夾以取得壓縮建議的最大深度。更深的掃描可能提升建議品質，但耗時更長。"
+"Kedalaman folder maksimum untuk memindai rekomendasi kompresi. Pemindaian "
+"yang lebih dalam dapat meningkatkan saran tetapi membutuhkan waktu lebih "
+"lama."
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
-msgstr "預設壓縮參數"
+msgstr "Parameter kompresi default"
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
-msgstr "用於普通壓縮和推薦回退。"
+msgstr "Digunakan untuk kompresi normal dan fallback rekomendasi."
 
 #: src/preferences.ui:151
 msgid "Only available for 7z format."
-msgstr "僅 7z 格式可用。"
+msgstr "Hanya tersedia untuk format 7z."
 
 #: src/move-folder-chooser.ui:6
 msgid "Select Folder"
-msgstr "選擇資料夾"
+msgstr "Pilih Folder"
 
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
-msgstr "選擇"
-
-#~ msgid "Select a file"
-#~ msgstr "選擇檔案"
-
-#~ msgid "Select file"
-#~ msgstr "選擇檔案"
-
-#~ msgid "Akizip"
-#~ msgstr "Akizip"
-
-#~ msgid "GTK;"
-#~ msgstr "GTK;"
-
-#~ msgid "ckappgit"
-#~ msgstr "ckappgit"
-
-#~ msgid "B"
-#~ msgstr "B"
-
-#~ msgid "KB"
-#~ msgstr "KB"
-
-#~ msgid "MB"
-#~ msgstr "MB"
-
-#~ msgid "GB"
-#~ msgstr "GB"
-
-#~ msgid " from "
-#~ msgstr "，來源 "
-
-#~ msgid " to "
-#~ msgstr " 到 "
-
-#~ msgid " in "
-#~ msgstr " 在 "
-
-#~ msgid "_Keyboard Shortcuts"
-#~ msgstr "鍵盤快捷鍵(_K)"
-
-#~ msgid "Maximum folder levels to scan for recommendations."
-#~ msgstr "掃描推薦的最大資料夾層級。"
-
-#~ msgid "Keep the summary shorter, between 10 and 35 characters"
-#~ msgstr "請將摘要控制在 10 至 35 個字元之間"
-
-#~ msgid "No description"
-#~ msgstr "沒有描述"
-
-#~ msgid "A caption"
-#~ msgstr "說明文字"
-
-#~ msgid "Reading..."
-#~ msgstr "正在讀取..."
-
-#~ msgid "Default parameters"
-#~ msgstr "預設參數"
-
-#~ msgid "Use compression recommendations"
-#~ msgstr "使用壓縮參數推薦"
-
-#~ msgid "Automatically choose 7-Zip parameters before compressing."
-#~ msgstr "在壓縮前自動選擇 7-Zip 參數。"
+msgstr "_Pilih"

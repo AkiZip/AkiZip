@@ -42,6 +42,18 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.3" date="2026-08-25">
+      <description translate="no">
+        <p>New compress UI and bug fixes</p>
+        <ul>
+          <li>Added Indonesian (id) translation support</li>
+          <li>Redesigned the compress dialog UI</li>
+          <li>Fixed nested archives not opening from within subfolders</li>
+          <li>Renaming a folder no longer pre-fills the trailing slash</li>
+          <li>Fixed stale pending log entries not being cleared on password errors</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.2" date="2026-08-17">
       <description translate="no">
         <p>Refactored add-file, rename support, and context menu improvements</p>

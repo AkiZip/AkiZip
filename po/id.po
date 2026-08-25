@@ -21,24 +21,28 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-08-23 09:39+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-08-25 01:51+0000\n"
+"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/akizip/akizip/"
+"id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 2026.9.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "Antarmuka modern untuk 7-Zip di GNOME"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
+"Akizip adalah utilitas arsip grafis yang dibangun dengan GTK 4 dan "
+"libadwaita yang menghadirkan kemampuan 7-Zip ke desktop GNOME."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -46,24 +50,30 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"Aplikasi ini mendukung pembuatan dan ekstraksi arsip dalam format 7z, zip, "
+"dan tar. Aplikasi ini juga dapat membuka (hanya baca) arsip rar, gz, bz2, "
+"xz, tar.gz, tar.bz2, dan tar.xz."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
+"Fitur mencakup inspeksi arsip, pekerjaan latar belakang yang dapat "
+"dibatalkan dengan pelaporan progres, panel log khusus, dan dukungan "
+"multibahasa."
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
-msgstr ""
+msgstr "Jendela utama menampilkan konten arsip dan bilah alat"
 
 #: src/ui/add_dialog.py:65
 msgid "Add to Archive"
-msgstr ""
+msgstr "Tambahkan ke Arsip"
 
 #: src/ui/add_dialog.py:65
 msgid "Add files and folders to the current archive."
-msgstr ""
+msgstr "Tambahkan file dan folder ke arsip saat ini."
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:311
 #: src/ui/window.py:376 src/ui/window.py:492 src/ui/window.py:543
@@ -71,483 +81,487 @@ msgstr ""
 #: src/ui/window.py:782 src/ui/window.py:804 src/ui/window.py:835
 #: src/ui/window.py:1057 src/ui/window.py:1080 src/move-folder-chooser.ui:51
 msgid "_Cancel"
-msgstr ""
+msgstr "_Batalkan"
 
 #: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:781
 #: src/ui/window.py:803
 msgid "_Add"
-msgstr ""
+msgstr "_Tambahkan"
 
 #: src/ui/add_dialog.py:126 src/ui/window.py:756
 msgid "Source items ({})"
-msgstr ""
+msgstr "Item sumber ({})"
 
 #: src/ui/add_dialog.py:138 src/ui/window.py:778
 msgid "Select Files"
-msgstr ""
+msgstr "Pilih File"
 
 #: src/ui/add_dialog.py:144 src/ui/window.py:800
 msgid "Select Folders"
-msgstr ""
+msgstr "Pilih Folder"
 
 #: src/ui/info_dialog.py:31 src/ui/window.py:1613
 msgid "System state not found"
-msgstr ""
+msgstr "Status sistem tidak ditemukan"
 
 #: src/ui/info_dialog.py:45 src/ui/info_dialog.py:52
 msgid "Archive"
-msgstr ""
+msgstr "Arsip"
 
 #: src/ui/info_dialog.py:45
 msgid "Archive information is unavailable."
-msgstr ""
+msgstr "Informasi arsip tidak tersedia."
 
 #: src/ui/info_dialog.py:79
 msgid "Read archive information from "
-msgstr ""
+msgstr "Baca informasi arsip dari "
 
 #: src/ui/info_dialog.py:86 src/ui/info_dialog.py:97 src/window.ui:214
 #: src/window.ui:228
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #: src/ui/info_dialog.py:115
 msgid "Close"
-msgstr ""
+msgstr "Tutup"
 
 #: src/ui/info_dialog.py:122
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: src/ui/info_dialog.py:123 src/ui/window.py:1122
 msgid "Path"
-msgstr ""
+msgstr "Jalur"
 
 #: src/ui/info_dialog.py:124
 msgid "Type"
-msgstr ""
+msgstr "Tipe"
 
 #: src/ui/info_dialog.py:126 src/ui/window.py:1123
 msgid "Size"
-msgstr ""
+msgstr "Ukuran"
 
 #: src/ui/info_dialog.py:127
 msgid "Can compress"
-msgstr ""
+msgstr "Dapat dikompresi"
 
 #: src/ui/info_dialog.py:128
 msgid "Can extract"
-msgstr ""
+msgstr "Dapat diekstrak"
 
 #: src/ui/info_dialog.py:154
 msgid "Copy"
-msgstr ""
+msgstr "Salin"
 
 #: src/ui/info_dialog.py:166
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Disalin ke papan klip"
 
 #: src/ui/info_dialog.py:175
 msgid "No archive information found."
-msgstr ""
+msgstr "Tidak ada informasi arsip yang ditemukan."
 
 #: src/ui/info_dialog.py:179
 msgid "Loaded"
-msgstr ""
+msgstr "Dimuat"
 
 #: src/ui/info_dialog.py:181
 msgid "Archive type"
-msgstr ""
+msgstr "Tipe arsip"
 
 #: src/ui/info_dialog.py:182
 msgid "Archive size"
-msgstr ""
+msgstr "Ukuran arsip"
 
 #: src/ui/info_dialog.py:183
 msgid "Headers size"
-msgstr ""
+msgstr "Ukuran header"
 
 #: src/ui/info_dialog.py:184
 msgid "Method"
-msgstr ""
+msgstr "Metode"
 
 #: src/ui/info_dialog.py:185
 msgid "Solid"
-msgstr ""
+msgstr "Solid"
 
 #: src/ui/info_dialog.py:186
 msgid "Blocks"
-msgstr ""
+msgstr "Blok"
 
 #: src/ui/info_dialog.py:210
 msgid "Archive file"
-msgstr ""
+msgstr "File arsip"
 
 #: src/ui/info_dialog.py:212
 msgid "Folder"
-msgstr ""
+msgstr "Folder"
 
 #: src/ui/info_dialog.py:214
 msgid "File"
-msgstr ""
+msgstr "File"
 
 #: src/ui/info_dialog.py:215
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak diketahui"
 
 #: src/ui/info_dialog.py:229
 msgid "Yes"
-msgstr ""
+msgstr "Ya"
 
 #: src/ui/info_dialog.py:229
 msgid "No"
-msgstr ""
+msgstr "Tidak"
 
 #: src/ui/log_panel.py:50
 msgid "Logs"
-msgstr ""
+msgstr "Log"
 
 #: src/ui/log_panel.py:114 src/ui/window.py:1706
 msgid "Cancel"
-msgstr ""
+msgstr "Batal"
 
 #: src/ui/log_panel.py:123
 msgid "Cancelling..."
-msgstr ""
+msgstr "Membatalkan..."
 
 #: src/ui/log_panel.py:127
 msgid "Running"
-msgstr ""
+msgstr "Berjalan"
 
 #: src/ui/log_panel.py:128
 msgid "Done"
-msgstr ""
+msgstr "Selesai"
 
 #: src/ui/log_panel.py:129
 msgid "Warning"
-msgstr ""
+msgstr "Peringatan"
 
 #: src/ui/log_panel.py:130
 msgid "Timeout"
-msgstr ""
+msgstr "Waktu habis"
 
 #: src/ui/log_panel.py:131
 msgid "Error"
-msgstr ""
+msgstr "Kesalahan"
 
 #: src/ui/log_panel.py:132
 msgid "Cancelled"
-msgstr ""
+msgstr "Dibatalkan"
 
 #: src/ui/log_panel.py:133
 msgid "Pending"
-msgstr ""
+msgstr "Tertunda"
 
 #: src/ui/window.py:233
 msgid "Test failed"
-msgstr ""
+msgstr "Pengujian gagal"
 
 #: src/ui/window.py:233 src/ui/window.py:262 src/ui/window.py:354
 #: src/ui/window.py:422 src/ui/window.py:423 src/ui/window.py:476
 #: src/ui/window.py:531 src/ui/window.py:589
 msgid "Selected path is not an archive."
-msgstr ""
+msgstr "Jalur yang dipilih bukan arsip."
 
 #: src/ui/window.py:262 src/ui/window.py:265
 msgid "Move failed"
-msgstr ""
+msgstr "Pemindahan gagal"
 
 #: src/ui/window.py:265 src/ui/window.py:357 src/ui/window.py:426
 #: src/ui/window.py:427 src/ui/window.py:479 src/ui/window.py:534
 msgid "This archive format does not support modification."
-msgstr ""
+msgstr "Format arsip ini tidak mendukung modifikasi."
 
 #: src/ui/window.py:273 src/ui/window.py:365 src/ui/window.py:449
 #: src/ui/window.py:487 src/ui/window.py:617 src/ui/window.py:1597
 #: src/ui/window.py:1598 src/ui/window.py:1601 src/ui/window.py:1602
 msgid "No file selected"
-msgstr ""
+msgstr "Tidak ada file yang dipilih"
 
 #: src/ui/window.py:277 src/window.ui:166 src/window.ui:180 src/window.ui:436
 msgid "Move"
-msgstr ""
+msgstr "Pindahkan"
 
 #: src/ui/window.py:277
 msgid "Move \"{}\" to:"
-msgstr ""
+msgstr "Pindahkan \"{}\" ke:"
 
 #: src/ui/window.py:283 src/add-dialog.ui:80
 msgid "Select destination folder"
-msgstr ""
+msgstr "Pilih folder tujuan"
 
 #: src/ui/window.py:312
 msgid "_Move"
-msgstr ""
+msgstr "_Pindahkan"
 
 #: src/ui/window.py:354 src/ui/window.py:357
 msgid "Rename failed"
-msgstr ""
+msgstr "Pengubahan nama gagal"
 
 #: src/ui/window.py:370 src/window.ui:440
 msgid "Rename"
-msgstr ""
+msgstr "Ubah Nama"
 
 #: src/ui/window.py:370
 msgid "Rename \"{}\" to:"
-msgstr ""
+msgstr "Ubah nama \"{}\" menjadi:"
 
 #: src/ui/window.py:377
 msgid "_Rename"
-msgstr ""
+msgstr "_Ubah Nama"
 
 #: src/ui/window.py:393
 msgid "Invalid name"
-msgstr ""
+msgstr "Nama tidak valid"
 
 #: src/ui/window.py:422 src/ui/window.py:426
 msgid "Add failed"
-msgstr ""
+msgstr "Penambahan gagal"
 
 #: src/ui/window.py:476 src/ui/window.py:479
 msgid "Delete failed"
-msgstr ""
+msgstr "Penghapusan gagal"
 
 #: src/ui/window.py:491 src/window.ui:190 src/window.ui:204 src/window.ui:444
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 #: src/ui/window.py:491
 msgid "Are you sure you want to delete \"{}\"?"
-msgstr ""
+msgstr "Apakah Anda yakin ingin menghapus \"{}\"?"
 
 #: src/ui/window.py:493
 msgid "_Delete"
-msgstr ""
+msgstr "_Hapus"
 
 #: src/ui/window.py:531 src/ui/window.py:534
 msgid "New folder failed"
-msgstr ""
+msgstr "Pembuatan folder baru gagal"
 
 #: src/ui/window.py:537 src/ui/window.py:539 src/window.ui:452
 #: src/window.ui:464
 msgid "New Folder"
-msgstr ""
+msgstr "Folder Baru"
 
 #: src/ui/window.py:537
 msgid "Create a new folder in the current archive."
-msgstr ""
+msgstr "Buat folder baru di dalam arsip saat ini."
 
 #: src/ui/window.py:544
 msgid "_Create"
-msgstr ""
+msgstr "_Buat"
 
 #: src/ui/window.py:560
 msgid "Invalid folder name"
-msgstr ""
+msgstr "Nama folder tidak valid"
 
 #: src/ui/window.py:589
 msgid "Extract failed"
-msgstr ""
+msgstr "Ekstraksi gagal"
 
 #: src/ui/window.py:624
 msgid "Select File"
-msgstr ""
+msgstr "Pilih File"
 
 #: src/ui/window.py:627 src/ui/window.py:666
 msgid "_Open"
-msgstr ""
+msgstr "_Buka"
 
 #: src/ui/window.py:663 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
-msgstr ""
+msgstr "Pilih Folder Tujuan"
 
 #: src/ui/window.py:710 src/compress-dialog.ui:199 src/preferences.ui:101
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 #: src/ui/window.py:732 src/ui/window.py:735 src/window.ui:67 src/window.ui:82
 msgid "Compress"
-msgstr ""
+msgstr "Kompres"
 
 #: src/ui/window.py:831
 msgid "Save Archive As"
-msgstr ""
+msgstr "Simpan Arsip Sebagai"
 
 #: src/ui/window.py:834
 msgid "_Save"
-msgstr ""
+msgstr "_Simpan"
 
 #: src/ui/window.py:855
 msgid "Overwrite is not currently supported"
-msgstr ""
+msgstr "Penimpaan saat ini tidak didukung"
 
 #: src/ui/window.py:856 src/ui/window.py:1058 src/ui/window.py:1635
 #: src/ui/window.py:1644 src/ui/window.py:1653 src/ui/window.py:1699
 msgid "_OK"
-msgstr ""
+msgstr "_OK"
 
 #: src/ui/window.py:897
 msgid "No source items to analyze"
-msgstr ""
+msgstr "Tidak ada item sumber untuk dianalisis"
 
 #: src/ui/window.py:904
 msgid "Recommendation not available"
-msgstr ""
+msgstr "Rekomendasi tidak tersedia"
 
 #: src/ui/window.py:957
 msgid "Recommendation failed"
-msgstr ""
+msgstr "Rekomendasi gagal"
 
 #: src/ui/window.py:958
 msgid "Compression recommendation failed"
-msgstr ""
+msgstr "Rekomendasi kompresi gagal"
 
 #: src/ui/window.py:1008
 msgid "Compression recommendation"
-msgstr ""
+msgstr "Rekomendasi kompresi"
 
 #: src/ui/window.py:1013
 msgid "Recommendation reason"
-msgstr ""
+msgstr "Alasan rekomendasi"
 
 #: src/ui/window.py:1047
 msgid "Password Required"
-msgstr ""
+msgstr "Kata Sandi Diperlukan"
 
 #: src/ui/window.py:1048
 msgid "This archive is encrypted. Please enter the password."
-msgstr ""
+msgstr "Arsip ini dienkripsi. Silakan masukkan kata sandi."
 
 #: src/ui/window.py:1078 src/ui/window.py:1081 src/window.ui:117
 #: src/window.ui:132 src/window.ui:432
 msgid "Extract"
-msgstr ""
+msgstr "Ekstrak"
 
 #: src/ui/window.py:1124
 msgid "Modified"
-msgstr ""
+msgstr "Dimodifikasi"
 
 #: src/ui/window.py:1285
 msgid "Failed to create temporary directory"
-msgstr ""
+msgstr "Gagal membuat direktori sementara"
 
 #: src/ui/window.py:1311 src/ui/window.py:1903 src/ui/window.py:1905
 #: src/ui/window.py:1931 src/ui/window.py:1933
 msgid "Extract "
-msgstr ""
+msgstr "Ekstrak "
 
 #: src/ui/window.py:1317
 msgid "Extracted file not found"
-msgstr ""
+msgstr "File yang diekstrak tidak ditemukan"
 
 #: src/ui/window.py:1377
 msgid "List "
-msgstr ""
+msgstr "Daftar "
 
 #: src/ui/window.py:1498
 msgid "List failed"
-msgstr ""
+msgstr "Pembuatan daftar gagal"
 
 #: src/ui/window.py:1605 src/ui/window.py:1606
 msgid "File not found"
-msgstr ""
+msgstr "File tidak ditemukan"
 
 #: src/ui/window.py:1625
 msgid "Select failed"
-msgstr ""
+msgstr "Pemilihan gagal"
 
 #: src/ui/window.py:1628
 msgid "Selected "
-msgstr ""
+msgstr "Dipilih "
 
 #: src/ui/window.py:1632
 msgid "Format compatibility warning"
-msgstr ""
+msgstr "Peringatan kompatibilitas format"
 
 #: src/ui/window.py:1633
 msgid ""
 "This format has not been verified for compatibility. Move and delete "
 "operations are disabled."
 msgstr ""
+"Format ini belum diverifikasi kompatibilitasnya. Operasi pindahkan dan hapus "
+"dinonaktifkan."
 
 #: src/ui/window.py:1641
 msgid "Preview not supported"
-msgstr ""
+msgstr "Pratinjau tidak didukung"
 
 #: src/ui/window.py:1642
 msgid "This format does not support preview. Only extract is available."
-msgstr ""
+msgstr "Format ini tidak mendukung pratinjau. Hanya ekstraksi yang tersedia."
 
 #: src/ui/window.py:1650
 msgid "Nested archive opened"
-msgstr ""
+msgstr "Arsip bersarang dibuka"
 
 #: src/ui/window.py:1651
 msgid ""
 "This archive was extracted from a parent archive. Move and delete operations "
 "are disabled."
 msgstr ""
+"Arsip ini diekstrak dari arsip induk. Operasi pindahkan dan hapus "
+"dinonaktifkan."
 
 #: src/ui/window.py:1696
 msgid "Language changed"
-msgstr ""
+msgstr "Bahasa diubah"
 
 #: src/ui/window.py:1697
 msgid "Restart the application to apply the new language."
-msgstr ""
+msgstr "Mulai ulang aplikasi untuk menerapkan bahasa baru."
 
 #: src/ui/window.py:1738
 msgid "Calculating..."
-msgstr ""
+msgstr "Menghitung..."
 
 #: src/ui/window.py:1743
 #, python-format
 msgid "%d seconds remaining"
-msgstr ""
+msgstr "%d detik tersisa"
 
 #: src/ui/window.py:1744
 #, python-format
 msgid "%d minutes remaining"
-msgstr ""
+msgstr "%d menit tersisa"
 
 #: src/ui/window.py:1761
 msgid "Command not found"
-msgstr ""
+msgstr "Perintah tidak ditemukan"
 
 #: src/ui/window.py:1766
 msgid "Job queue not found"
-msgstr ""
+msgstr "Antrean pekerjaan tidak ditemukan"
 
 #: src/ui/window.py:1855 src/ui/window.py:1860 src/ui/window.py:1872
 #: src/ui/window.py:1929 src/ui/window.py:1943 src/ui/window.py:1957
 #: src/ui/window.py:1971 src/ui/window.py:2021 src/ui/window.py:2047
 #: src/ui/window.py:2054 src/ui/window.py:2060 src/ui/window.py:2067
 msgid "file"
-msgstr ""
+msgstr "file"
 
 #: src/ui/window.py:1858 src/ui/window.py:1868 src/ui/window.py:2019
 msgid "{} items"
-msgstr ""
+msgstr "{} item"
 
 #: src/ui/window.py:1875 src/ui/window.py:1877
 msgid "Compress "
-msgstr ""
+msgstr "Kompres "
 
 #: src/ui/window.py:1879
 msgid "Compressed "
-msgstr ""
+msgstr "Dikompres "
 
 #: src/ui/window.py:1881
 msgid "Compress timed out: "
-msgstr ""
+msgstr "Kompres waktu habis: "
 
 #: src/ui/window.py:1883
 msgid "Compress cancelled: "
-msgstr ""
+msgstr "Kompres dibatalkan: "
 
 #: src/ui/window.py:1884
 msgid "Compress failed: "
-msgstr ""
+msgstr "Kompres gagal: "
 
 #: src/ui/window.py:1887 src/ui/window.py:1901 src/ui/window.py:1915
 #: src/ui/window.py:2016 src/ui/window.py:2030 src/ui/window.py:2035
@@ -555,482 +569,485 @@ msgstr ""
 #: src/ui/window.py:2059 src/ui/window.py:2066 src/ui/window.py:2073
 #: src/ui/window.py:2080
 msgid "archive"
-msgstr ""
+msgstr "arsip"
 
 #: src/ui/window.py:1889 src/ui/window.py:1891
 msgid "Open "
-msgstr ""
+msgstr "Buka "
 
 #: src/ui/window.py:1893
 msgid "Opened "
-msgstr ""
+msgstr "Dibuka "
 
 #: src/ui/window.py:1895
 msgid "Open timed out: "
-msgstr ""
+msgstr "Buka waktu habis: "
 
 #: src/ui/window.py:1897
 msgid "Open cancelled: "
-msgstr ""
+msgstr "Buka dibatalkan: "
 
 #: src/ui/window.py:1898
 msgid "Open failed: "
-msgstr ""
+msgstr "Buka gagal: "
 
 #: src/ui/window.py:1907 src/ui/window.py:1935
 msgid "Extracted "
-msgstr ""
+msgstr "Diekstrak "
 
 #: src/ui/window.py:1909 src/ui/window.py:1937
 msgid "Extract timed out: "
-msgstr ""
+msgstr "Ekstrak waktu habis: "
 
 #: src/ui/window.py:1911 src/ui/window.py:1939
 msgid "Extract cancelled: "
-msgstr ""
+msgstr "Ekstrak dibatalkan: "
 
 #: src/ui/window.py:1912 src/ui/window.py:1940
 msgid "Extract failed: "
-msgstr ""
+msgstr "Ekstrak gagal: "
 
 #: src/ui/window.py:1917 src/ui/window.py:1919
 msgid "Test "
-msgstr ""
+msgstr "Uji "
 
 #: src/ui/window.py:1921
 msgid "Tested "
-msgstr ""
+msgstr "Diuji "
 
 #: src/ui/window.py:1923
 msgid "Test timed out: "
-msgstr ""
+msgstr "Uji waktu habis: "
 
 #: src/ui/window.py:1925
 msgid "Test cancelled: "
-msgstr ""
+msgstr "Uji dibatalkan: "
 
 #: src/ui/window.py:1926
 msgid "Test failed: "
-msgstr ""
+msgstr "Uji gagal: "
 
 #: src/ui/window.py:1945 src/ui/window.py:1947
 msgid "Delete "
-msgstr ""
+msgstr "Hapus "
 
 #: src/ui/window.py:1949
 msgid "Deleted "
-msgstr ""
+msgstr "Dihapus "
 
 #: src/ui/window.py:1951
 msgid "Delete timed out: "
-msgstr ""
+msgstr "Hapus waktu habis: "
 
 #: src/ui/window.py:1953
 msgid "Delete cancelled: "
-msgstr ""
+msgstr "Hapus dibatalkan: "
 
 #: src/ui/window.py:1954
 msgid "Delete failed: "
-msgstr ""
+msgstr "Hapus gagal: "
 
 #: src/ui/window.py:1959 src/ui/window.py:1961
 msgid "Move "
-msgstr ""
+msgstr "Pindahkan "
 
 #: src/ui/window.py:1963
 msgid "Moved "
-msgstr ""
+msgstr "Dipindahkan "
 
 #: src/ui/window.py:1965
 msgid "Move timed out: "
-msgstr ""
+msgstr "Pindahkan waktu habis: "
 
 #: src/ui/window.py:1967
 msgid "Move cancelled: "
-msgstr ""
+msgstr "Pindahkan dibatalkan: "
 
 #: src/ui/window.py:1968
 msgid "Move failed: "
-msgstr ""
+msgstr "Pindahkan gagal: "
 
 #: src/ui/window.py:1973 src/ui/window.py:1975
 msgid "Rename "
-msgstr ""
+msgstr "Ubah Nama "
 
 #: src/ui/window.py:1977
 msgid "Renamed "
-msgstr ""
+msgstr "Dinamai Ulang "
 
 #: src/ui/window.py:1979
 msgid "Rename timed out: "
-msgstr ""
+msgstr "Ubah nama waktu habis: "
 
 #: src/ui/window.py:1981
 msgid "Rename cancelled: "
-msgstr ""
+msgstr "Ubah nama dibatalkan: "
 
 #: src/ui/window.py:1982
 msgid "Rename failed: "
-msgstr ""
+msgstr "Ubah nama gagal: "
 
 #: src/ui/window.py:1987 src/ui/window.py:1989
 msgid "Add "
-msgstr ""
+msgstr "Tambahkan "
 
 #: src/ui/window.py:1991
 msgid "Added "
-msgstr ""
+msgstr "Ditambahkan "
 
 #: src/ui/window.py:1993
 msgid "Add timed out: "
-msgstr ""
+msgstr "Tambahkan waktu habis: "
 
 #: src/ui/window.py:1995
 msgid "Add cancelled: "
-msgstr ""
+msgstr "Tambahkan dibatalkan: "
 
 #: src/ui/window.py:1996
 msgid "Add failed: "
-msgstr ""
+msgstr "Tambahkan gagal: "
 
 #: src/ui/window.py:1999 src/ui/window.py:2036 src/ui/window.py:2048
 #: src/ui/window.py:2081
 msgid "folder"
-msgstr ""
+msgstr "folder"
 
 #: src/ui/window.py:2001 src/ui/window.py:2003
 msgid "Create folder "
-msgstr ""
+msgstr "Buat folder "
 
 #: src/ui/window.py:2005
 msgid "Created folder "
-msgstr ""
+msgstr "Folder dibuat "
 
 #: src/ui/window.py:2007
 msgid "Create folder timed out: "
-msgstr ""
+msgstr "Pembuatan folder waktu habis: "
 
 #: src/ui/window.py:2009
 msgid "Create folder cancelled: "
-msgstr ""
+msgstr "Pembuatan folder dibatalkan: "
 
 #: src/ui/window.py:2010
 msgid "Create folder failed: "
-msgstr ""
+msgstr "Pembuatan folder gagal: "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:2023
 #, python-brace-format
 msgid "Create {output} from {source}"
-msgstr ""
+msgstr "Buat {output} dari {source}"
 
 #. TRANSLATORS: {params} are the compression parameters, for example "-mx=9 -mmt=2"
 #: src/ui/window.py:2026
 #, python-brace-format
 msgid "Parameters: {params}"
-msgstr ""
+msgstr "Parameter: {params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:2032
 #, python-brace-format
 msgid "Read archive information from {archive}"
-msgstr ""
+msgstr "Baca informasi arsip dari {archive}"
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:2038
 #, python-brace-format
 msgid "Extract {archive} to {folder}"
-msgstr ""
+msgstr "Ekstrak {archive} ke {folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:2043
 #, python-brace-format
 msgid "Test {archive}"
-msgstr ""
+msgstr "Uji {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:2050
 #, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
-msgstr ""
+msgstr "Ekstrak {file} dari {archive} ke {folder}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
 #: src/ui/window.py:2056
 #, python-brace-format
 msgid "Delete {file} from {archive}"
-msgstr ""
+msgstr "Hapus {file} dari {archive}"
 
 #: src/ui/window.py:2061
 msgid "destination"
-msgstr ""
+msgstr "tujuan"
 
 #. TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2063
 #, python-brace-format
 msgid "Move {file} to {destination} in {archive}"
-msgstr ""
+msgstr "Pindahkan {file} ke {destination} di {archive}"
 
 #: src/ui/window.py:2068
 msgid "new name"
-msgstr ""
+msgstr "nama baru"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2070
 #, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr ""
+msgstr "Ubah nama {file} menjadi {new_name} di {archive}"
 
 #: src/ui/window.py:2075
 msgid "root"
-msgstr ""
+msgstr "root"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:2077
 #, python-brace-format
 msgid "Add {file} to {destination} in {archive}"
-msgstr ""
+msgstr "Tambahkan {file} ke {destination} di {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2083
 #, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr ""
+msgstr "Buat folder {folder} di {archive}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
-msgstr ""
+msgstr "(root)"
 
 #: src/add-dialog.ui:12 src/compress-dialog.ui:79
 msgid "Source items"
-msgstr ""
+msgstr "Item sumber"
 
 #: src/add-dialog.ui:39 src/compress-dialog.ui:106
 msgid "Add Files"
-msgstr ""
+msgstr "Tambahkan File"
 
 #: src/add-dialog.ui:44 src/compress-dialog.ui:111
 msgid "Add Folders"
-msgstr ""
+msgstr "Tambahkan Folder"
 
 #: src/add-dialog.ui:49 src/compress-dialog.ui:116
 msgid "Remove"
-msgstr ""
+msgstr "Hapus"
 
 #: src/add-dialog.ui:66
 msgid "Destination"
-msgstr ""
+msgstr "Tujuan"
 
 #: src/add-dialog.ui:74
 msgid "Destination folder in archive"
-msgstr ""
+msgstr "Folder tujuan di dalam arsip"
 
 #: src/window.ui:19
 msgid "Main Menu"
-msgstr ""
+msgstr "Menu Utama"
 
 #: src/window.ui:43
 msgid "Open File"
-msgstr ""
+msgstr "Buka File"
 
 #: src/window.ui:57
 msgid "Open"
-msgstr ""
+msgstr "Buka"
 
 #: src/window.ui:92 src/window.ui:107 src/window.ui:420
 msgid "Extract All"
-msgstr ""
+msgstr "Ekstrak Semua"
 
 #: src/window.ui:142 src/window.ui:156
 msgid "Test"
-msgstr ""
+msgstr "Uji"
 
 #: src/window.ui:240
 msgid "Path or archive"
-msgstr ""
+msgstr "Jalur atau arsip"
 
 #: src/window.ui:255
 msgid "Open an archive to view its contents"
-msgstr ""
+msgstr "Buka arsip untuk melihat kontennya"
 
 #: src/window.ui:266
 msgid "The selected file is not an archive"
-msgstr ""
+msgstr "File yang dipilih bukan arsip"
 
 #: src/window.ui:291
 msgid "This archive is empty"
-msgstr ""
+msgstr "Arsip ini kosong"
 
 #: src/window.ui:302
 msgid "This format does not support preview"
-msgstr ""
+msgstr "Format ini tidak mendukung pratinjau"
 
 #: src/window.ui:330
 msgid "_Language"
-msgstr ""
+msgstr "_Bahasa"
 
 #: src/window.ui:333
 msgid "System Default"
-msgstr ""
+msgstr "Default Sistem"
 
 #: src/window.ui:394
 msgid "Show _Logs"
-msgstr ""
+msgstr "Tampilkan _Log"
 
 #: src/window.ui:400
 msgid "_Preferences"
-msgstr ""
+msgstr "_Preferensi"
 
 #: src/window.ui:404
 msgid "_About Akizip"
-msgstr ""
+msgstr "_Tentang Akizip"
 
 #: src/window.ui:412 src/window.ui:424
 msgid "Extract Selected"
-msgstr ""
+msgstr "Ekstrak yang Dipilih"
 
 #: src/window.ui:448 src/window.ui:460
 msgid "Add File"
-msgstr ""
+msgstr "Tambahkan File"
 
 #: src/compress-dialog.ui:19
 msgid "Output archive"
-msgstr ""
+msgstr "Arsip keluaran"
 
 #: src/compress-dialog.ui:31
 msgid "Select output archive path"
-msgstr ""
+msgstr "Pilih jalur arsip keluaran"
 
 #: src/compress-dialog.ui:37
 msgid "Select Output Archive"
-msgstr ""
+msgstr "Pilih Arsip Keluaran"
 
 #: src/compress-dialog.ui:53 src/preferences.ui:60
 msgid "Format"
-msgstr ""
+msgstr "Format"
 
 #: src/compress-dialog.ui:70
 msgid "Auto Recommend"
-msgstr ""
+msgstr "Rekomendasi Otomatis"
 
 #: src/compress-dialog.ui:71
 msgid "Scan source files and recommend format and parameters"
-msgstr ""
+msgstr "Pindai file sumber dan rekomendasikan format serta parameter"
 
 #: src/compress-dialog.ui:139
 msgid "Advanced options"
-msgstr ""
+msgstr "Opsi lanjutan"
 
 #: src/compress-dialog.ui:157 src/preferences.ui:76
 msgid "Compression level"
-msgstr ""
+msgstr "Tingkat kompresi"
 
 #: src/compress-dialog.ui:170 src/preferences.ui:82
 msgid "Store"
-msgstr ""
+msgstr "Simpan"
 
 #: src/compress-dialog.ui:171 src/preferences.ui:83
 msgid "Fastest"
-msgstr ""
+msgstr "Tercepat"
 
 #: src/compress-dialog.ui:172 src/preferences.ui:84
 msgid "Fast"
-msgstr ""
+msgstr "Cepat"
 
 #: src/compress-dialog.ui:173 src/preferences.ui:85
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: src/compress-dialog.ui:174 src/preferences.ui:86
 msgid "Maximum"
-msgstr ""
+msgstr "Maksimal"
 
 #: src/compress-dialog.ui:175 src/preferences.ui:87
 msgid "Ultra"
-msgstr ""
+msgstr "Ultra"
 
 #: src/compress-dialog.ui:186 src/preferences.ui:95
 msgid "Algorithm"
-msgstr ""
+msgstr "Algoritma"
 
 #: src/compress-dialog.ui:213 src/preferences.ui:112
 msgid "Dictionary size (MB)"
-msgstr ""
+msgstr "Ukuran kamus (MB)"
 
 #: src/compress-dialog.ui:225 src/compress-dialog.ui:254 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
-msgstr ""
+msgstr "0 menggunakan default 7-Zip."
 
 #: src/compress-dialog.ui:242 src/preferences.ui:131
 msgid "Threads"
-msgstr ""
+msgstr "Thread"
 
 #: src/compress-dialog.ui:271
 msgid "Password"
-msgstr ""
+msgstr "Kata Sandi"
 
 #: src/compress-dialog.ui:284
 msgid "Leave empty for no password"
-msgstr ""
+msgstr "Kosongkan jika tidak ada kata sandi"
 
 #: src/compress-dialog.ui:299 src/preferences.ui:150
 msgid "Encrypt file names"
-msgstr ""
+msgstr "Enkripsi nama file"
 
 #: src/compress-dialog.ui:307 src/compress-dialog.ui:318
 msgid "Only available for 7z format"
-msgstr ""
+msgstr "Hanya tersedia untuk format 7z"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
-msgstr ""
+msgstr "Folder tujuan"
 
 #: src/extract-dialog.ui:31
 msgid "Leave empty if no password"
-msgstr ""
+msgstr "Kosongkan jika tidak ada kata sandi"
 
 #: src/preferences.ui:8
 msgid "General"
-msgstr ""
+msgstr "Umum"
 
 #: src/preferences.ui:11
 msgid "Timeout (seconds)"
-msgstr ""
+msgstr "Waktu habis (detik)"
 
 #: src/preferences.ui:12
 msgid "-1 means no timeout."
-msgstr ""
+msgstr "-1 berarti tanpa waktu habis."
 
 #: src/preferences.ui:32
 msgid "Compression"
-msgstr ""
+msgstr "Kompresi"
 
 #: src/preferences.ui:35
 msgid "Scan depth"
-msgstr ""
+msgstr "Kedalaman pemindaian"
 
 #: src/preferences.ui:36
 msgid ""
 "Maximum folder depth to scan for compression recommendations. Deeper scans "
 "may improve suggestions but take longer."
 msgstr ""
+"Kedalaman folder maksimum untuk memindai rekomendasi kompresi. Pemindaian "
+"yang lebih dalam dapat meningkatkan saran tetapi membutuhkan waktu lebih "
+"lama."
 
 #: src/preferences.ui:56
 msgid "Default compression parameters"
-msgstr ""
+msgstr "Parameter kompresi default"
 
 #: src/preferences.ui:57
 msgid "Used for normal compression and recommendation fallback."
-msgstr ""
+msgstr "Digunakan untuk kompresi normal dan fallback rekomendasi."
 
 #: src/preferences.ui:151
 msgid "Only available for 7z format."
-msgstr ""
+msgstr "Hanya tersedia untuk format 7z."
 
 #: src/move-folder-chooser.ui:6
 msgid "Select Folder"
-msgstr ""
+msgstr "Pilih Folder"
 
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
-msgstr ""
+msgstr "_Pilih"

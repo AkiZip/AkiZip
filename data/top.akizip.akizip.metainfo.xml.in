@@ -42,10 +42,11 @@
   </screenshots>
 
   <releases>
-    <release version="0.3.3" date="2026-08-23">
+    <release version="0.3.3" date="2026-08-25">
       <description translate="no">
         <p>New compress UI and bug fixes</p>
         <ul>
+          <li>Added Indonesian (id) translation support</li>
           <li>Redesigned the compress dialog UI</li>
           <li>Fixed nested archives not opening from within subfolders</li>
           <li>Renaming a folder no longer pre-fills the trailing slash</li>

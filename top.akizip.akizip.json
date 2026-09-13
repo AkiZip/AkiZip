@@ -27,7 +27,7 @@
             "name" : "7zip",
             "buildsystem" : "simple",
             "build-commands" : [
-                "tar -xf 7z2602-linux-x64.tar.xz",
+                "tar -xf 7z2603-linux-x64.tar.xz",
                 "install -Dm755 7zz /app/bin/7zz",
                 "install -Dm755 7zzs /app/bin/7zzs"
             ],

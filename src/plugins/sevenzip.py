@@ -222,6 +222,7 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None
         str(archive_path),
         f'-o{output_dir}',
         '-y',
+        '-spd',
     ]
     if password:
         args.append(f'-p{password}')
@@ -235,13 +236,17 @@ def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_e
 
     if isinstance(file_names, (str, Path)):
         file_names = [file_names]
+    # Entry names come from untrusted archive listings: keep every switch
+    # (including -p) before '--' so a name like '-p...' stays an operand, and
+    # use -spd so a literal '*' name cannot act as a wildcard.
     args = [
         'd',
         str(archive_path),
-        *[str(name) for name in file_names],
+        '-spd',
     ]
     if password:
         args.append(f'-p{password}')
+    args.extend(['--', *[str(name) for name in file_names]])
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 
@@ -285,9 +290,10 @@ def archive_add(archive_path, source_paths, dest_folder='', password=None, timeo
             os.symlink(source, link_path)
             staged_names.append(str(dest / name) if dest_folder else name)
 
-        args = ['a', str(archive_path), *staged_names]
+        args = ['a', str(archive_path), '-spd']
         if password:
             args.append(f'-p{password}')
+        args.extend(['--', *staged_names])
 
         return _run_7zip(args, timeout, cancel_event, on_progress, cwd=temp_dir)
     finally:
@@ -319,11 +325,11 @@ def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, ca
     args = [
         'rn',
         str(archive_path),
-        str(src_name),
-        str(dst_name),
+        '-spd',
     ]
     if password:
         args.append(f'-p{password}')
+    args.extend(['--', str(src_name), str(dst_name)])
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 
@@ -345,11 +351,11 @@ def archive_rename(archive_path, src_name, new_name, password=None, timeout=-1, 
     args = [
         'rn',
         str(archive_path),
-        src_name,
-        dst_name,
+        '-spd',
     ]
     if password:
         args.append(f'-p{password}')
+    args.extend(['--', src_name, dst_name])
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 
@@ -370,9 +376,10 @@ def archive_mkdir(archive_path, folder_path, password=None, timeout=-1, cancel_e
     try:
         staged = Path(temp_dir) / folder
         staged.mkdir(parents=True)
-        args = ['a', str(archive_path), folder_path]
+        args = ['a', str(archive_path), '-spd']
         if password:
             args.append(f'-p{password}')
+        args.extend(['--', folder_path])
         return _run_7zip(args, timeout, cancel_event, on_progress, cwd=temp_dir)
     finally:
         shutil.rmtree(temp_dir, ignore_errors=True)

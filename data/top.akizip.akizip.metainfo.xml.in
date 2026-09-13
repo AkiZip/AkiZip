@@ -42,6 +42,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.3.4" date="2026-09-13">
+      <description translate="no">
+        <p>Security fix and 7-Zip update</p>
+        <ul>
+          <li>Fixed security vulnerability GHSA-pxfq-f5pr-6crv</li>
+          <li>Updated 7-Zip to 26.03</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.3" date="2026-08-25">
       <description translate="no">
         <p>New compress UI and bug fixes</p>

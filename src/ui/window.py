@@ -265,18 +265,21 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Move failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
-            return
-        item = selection.get_selected_item()
-        if item is None or item.path == '..':
+        entries = self._selected_entries()
+        if not entries:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
 
+        if len(entries) == 1:
+            self._present_move_dialog(selected, entries[0])
+        else:
+            self._present_move_many_dialog(selected, entries)
+
+    def _present_move_dialog(self, selected, item):
         target_name = item.path
         dialog = Adw.AlertDialog.new(_('Move'), _('Move "{}" to:').format(target_name))
         entry = Gtk.Entry()
-        entry.set_text(item.full_path.rstrip('/') if item.is_folder else item.full_path)
+        entry.set_text(self._entry_command_name(item))
         entry.set_activates_default(True)
 
         browse_button = Gtk.Button(icon_name='folder-symbolic')
@@ -326,12 +329,89 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dst_path = entry.get_text().strip().lstrip('/').rstrip('/')
             if not dst_path:
                 dst_path = item.path.rstrip('/')
-            src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+            src_path = self._entry_command_name(item)
             self._run_command(
                 'archive.move',
                 selected,
-                src_path,
-                dst_path,
+                [(src_path, dst_path)],
+                password,
+                on_success_extra=lambda _output: self._refresh_file_list(),
+                on_error_extra=on_error,
+            )
+
+        def on_response(_d, response):
+            if response == 'confirm':
+                run_move(None)
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
+
+    def _present_move_many_dialog(self, selected, entries):
+        # TRANSLATORS: {} is the number of selected archive entries
+        dialog = Adw.AlertDialog.new(_('Move'), _('Move {} items to folder:').format(len(entries)))
+        entry = Gtk.Entry()
+        entry.set_text(self._current_internal_path.rstrip('/'))
+        entry.set_activates_default(True)
+
+        browse_button = Gtk.Button(icon_name='folder-symbolic')
+        browse_button.set_tooltip_text(_('Select destination folder'))
+        browse_button.set_valign(Gtk.Align.CENTER)
+
+        def on_browse_clicked(_btn):
+            from .move_folder_chooser import FolderChooserDialog
+            chooser = FolderChooserDialog(self)
+            chooser.set_folders(self._folder_set)
+            chooser.set_current_path('')
+
+            def on_selected(path):
+                entry.set_text(path or '')
+
+            chooser.connect_select(on_selected)
+            chooser.present()
+
+        browse_button.connect('clicked', on_browse_clicked)
+
+        entry.set_hexpand(True)
+        box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
+        box.set_hexpand(True)
+        box.append(entry)
+        box.append(browse_button)
+        dialog.set_extra_child(box)
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('confirm', _('_Move'))
+        dialog.set_response_appearance('confirm', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('confirm')
+        dialog.set_close_response('cancel')
+
+        def run_move(password):
+            def on_error(error):
+                if is_password_error(error):
+                    self._present_password_dialog(
+                        lambda new_password: run_move(new_password)
+                    )
+                    return True
+                return False
+
+            dest_folder = entry.get_text().strip().strip('/')
+            pairs = []
+            for move_item in entries:
+                src_path = self._entry_command_name(move_item)
+                if move_item.is_folder and (
+                        dest_folder == src_path
+                        or dest_folder.startswith(src_path + '/')):
+                    self._show_notification(
+                        _('Cannot move a folder into itself'), _status.ERROR)
+                    return
+                base_name = move_item.path.rstrip('/')
+                dst_path = dest_folder + '/' + base_name if dest_folder else base_name
+                if dst_path != src_path:
+                    pairs.append((src_path, dst_path))
+            if not pairs:
+                return
+            self._run_command(
+                'archive.move',
+                selected,
+                pairs,
                 password,
                 on_success_extra=lambda _output: self._refresh_file_list(),
                 on_error_extra=on_error,
@@ -357,15 +437,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Rename failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
+        entries = self._selected_entries()
+        if len(entries) != 1:
+            self._show_notification(_('Select exactly one item to rename'), _status.ERROR)
             return
-        item = selection.get_selected_item()
-        if item is None or item.path == '..':
-            self._show_notification(_('No file selected'), _status.ERROR)
-            return
+        item = entries[0]
 
-        src_path = item.full_path.rstrip('/') if item.is_folder else item.full_path
+        src_path = self._entry_command_name(item)
 
         dialog = Adw.AlertDialog.new(_('Rename'), _('Rename "{}" to:').format(item.path.rstrip('/') if item.is_folder else item.path))
         entry = Gtk.Entry()
@@ -479,16 +557,17 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._append_log(_('Delete failed'), _('This archive format does not support modification.'), _status.ERROR)
             return
 
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
-            return
-        item = selection.get_selected_item()
-        if item is None or item.path == '..':
+        entries = self._selected_entries()
+        if not entries:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
 
-        target_name = item.path
-        dialog = Adw.AlertDialog.new(_('Delete'), _('Are you sure you want to delete "{}"?').format(target_name))
+        if len(entries) == 1:
+            body = _('Are you sure you want to delete "{}"?').format(entries[0].path)
+        else:
+            # TRANSLATORS: {} is the number of selected archive entries
+            body = _('Are you sure you want to delete {} items?').format(len(entries))
+        dialog = Adw.AlertDialog.new(_('Delete'), body)
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('confirm', _('_Delete'))
         dialog.set_response_appearance('confirm', Adw.ResponseAppearance.DESTRUCTIVE)
@@ -504,11 +583,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return True
                 return False
 
-            file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+            file_names = [self._entry_command_name(item) for item in entries]
             self._run_command(
                 'archive.delete',
                 selected,
-                [file_name],
+                file_names,
                 password,
                 on_success_extra=lambda _output: self._refresh_file_list(),
                 on_error_extra=on_error,
@@ -609,14 +688,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._present_extract_dialog(run_extract)
 
     def butextract_one(self, button):
-        selection = getattr(self, '_file_list_selection', None)
-        if selection is None:
-            return
-        item = selection.get_selected_item()
-        if item is None:
+        names = self._selected_command_names()
+        if not names:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
-        self._on_extract_entry_clicked(item)
+        self._on_extract_entry_clicked(names)
 
     @Gtk.Template.Callback()
     def on_choose_file(self, button):
@@ -1107,7 +1183,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _build_file_list(self):
         self._file_list_store = Gio.ListStore(item_type=ArchiveEntry)
-        selection = Gtk.SingleSelection(model=self._file_list_store)
+        selection = Gtk.MultiSelection(model=self._file_list_store)
         view = Gtk.ColumnView(model=selection)
         view.set_show_row_separators(True)
         view.set_show_column_separators(False)
@@ -1135,6 +1211,28 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.file_list_scroller.set_child(view)
         self._file_list_view = view
         self._file_list_selection = selection
+
+    def _selected_entries(self):
+        """Return the selected ArchiveEntry items, excluding the '..' row."""
+        selection = getattr(self, '_file_list_selection', None)
+        if selection is None:
+            return []
+        bitset = selection.get_selection()
+        if bitset.is_empty():
+            return []
+        entries = []
+        for index in range(bitset.get_size()):
+            item = self._file_list_store.get_item(bitset.get_nth(index))
+            if item is not None and item.path != '..':
+                entries.append(item)
+        return entries
+
+    def _entry_command_name(self, item):
+        """Normalize an entry to its 7zz operand form (no trailing slash)."""
+        return item.full_path.rstrip('/') if item.is_folder else item.full_path
+
+    def _selected_command_names(self):
+        return [self._entry_command_name(item) for item in self._selected_entries()]
 
     def _on_path_setup(self, factory, list_item):
         box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=6)
@@ -1195,12 +1293,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 position = pos
                 break
 
-        selected_count = 0
         if position != Gtk.INVALID_LIST_POSITION:
             item = self._file_list_store.get_item(position)
             if item is not None and item.path != '..':
-                self._file_list_selection.set_selected(position)
-                selected_count = 1
+                if not self._file_list_selection.is_selected(position):
+                    # Clicked outside the current selection: select just this row.
+                    self._file_list_selection.select_item(position, True)
+                # Clicked inside the selection: keep the multi-selection.
+        selected_count = len(self._selected_entries())
         if selected_count == 0:
             self._file_list_selection.unselect_all()
         self._context_menu_selected_count = selected_count
@@ -1230,8 +1330,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _on_modified_bind(self, factory, list_item):
         list_item.get_child().set_text(list_item.get_item().modified)
 
-    def _on_extract_entry_clicked(self, item):
-        if item is None or item.path == '..':
+    def _on_extract_entry_clicked(self, names):
+        if not names:
             return
 
         selected = self._selected_path_from_input()
@@ -1250,7 +1350,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._run_command(
                 'archive.extract_file',
                 selected,
-                item.full_path.rstrip('/') if item.is_folder else item.full_path,
+                names,
                 dest,
                 password,
                 on_error_extra=on_error,
@@ -1926,7 +2026,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return _('Test failed: ') + target
 
         if name == 'archive.extract_file':
-            target = Path(args[1]).name if len(args) > 1 else _('file')
+            target = self._add_target_label(args[1] if len(args) > 1 else None)
             if state == _status.PENDING:
                 return _('Extract ') + target
             if state == _status.WORKING:
@@ -1940,7 +2040,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return _('Extract failed: ') + target
 
         if name == 'archive.delete':
-            target = Path(args[1][0]).name if len(args) > 1 and args[1] else _('file')
+            target = self._add_target_label(args[1] if len(args) > 1 else None)
             if state == _status.PENDING:
                 return _('Delete ') + target
             if state == _status.WORKING:
@@ -1954,7 +2054,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return _('Delete failed: ') + target
 
         if name == 'archive.move':
-            target = Path(args[1]).name if len(args) > 1 else _('file')
+            pairs = args[1] if len(args) > 1 else []
+            if len(pairs) > 1:
+                target = _('{} items').format(len(pairs))
+            elif pairs:
+                target = Path(pairs[0][0]).name
+            else:
+                target = _('file')
             if state == _status.PENDING:
                 return _('Move ') + target
             if state == _status.WORKING:
@@ -2044,21 +2150,29 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         if name == 'archive.extract_file':
             archive = Path(args[0]).name if args else _('archive')
-            file_name = Path(args[1]).name if len(args) > 1 else _('file')
+            file_name = self._add_target_label(args[1] if len(args) > 1 else None)
             output = Path(args[2]).name if len(args) > 2 else _('folder')
             # TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
             return _('Extract {file} from {archive} to {folder}').format(file=file_name, archive=archive, folder=output)
 
         if name == 'archive.delete':
             archive = Path(args[0]).name if args else _('archive')
-            file_name = Path(args[1][0]).name if len(args) > 1 and args[1] else _('file')
+            file_name = self._add_target_label(args[1] if len(args) > 1 else None)
             # TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name
             return _('Delete {file} from {archive}').format(file=file_name, archive=archive)
 
         if name == 'archive.move':
             archive = Path(args[0]).name if args else _('archive')
-            file_name = Path(args[1]).name if len(args) > 1 else _('file')
-            dst = Path(args[2]).name if len(args) > 2 else _('destination')
+            pairs = args[1] if len(args) > 1 else []
+            if len(pairs) > 1:
+                file_name = _('{} items').format(len(pairs))
+                dst = pairs[0][1].rpartition('/')[0] or _('root')
+            elif pairs:
+                file_name = Path(pairs[0][0]).name
+                dst = Path(pairs[0][1]).name
+            else:
+                file_name = _('file')
+                dst = _('destination')
             # TRANSLATORS: {file} is the file inside the archive, {destination} is the destination path inside the archive, {archive} is the archive name
             return _('Move {file} to {destination} in {archive}').format(file=file_name, destination=dst, archive=archive)
 

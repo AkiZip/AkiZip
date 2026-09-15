@@ -330,6 +330,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if not dst_path:
                 dst_path = item.path.rstrip('/')
             src_path = self._entry_command_name(item)
+            if dst_path == src_path:
+                self._show_notification(
+                    _('Source and destination are the same'), _status.ERROR)
+                return
             self._run_command(
                 'archive.move',
                 selected,
@@ -350,7 +354,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         # TRANSLATORS: {} is the number of selected archive entries
         dialog = Adw.AlertDialog.new(_('Move'), _('Move {} items to folder:').format(len(entries)))
         entry = Gtk.Entry()
-        entry.set_text(self._current_internal_path.rstrip('/'))
+        entry.set_text(self._current_internal_path.rstrip('/') or '/')
         entry.set_activates_default(True)
 
         browse_button = Gtk.Button(icon_name='folder-symbolic')
@@ -364,7 +368,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             chooser.set_current_path('')
 
             def on_selected(path):
-                entry.set_text(path or '')
+                entry.set_text(path or '/')
 
             chooser.connect_select(on_selected)
             chooser.present()
@@ -407,6 +411,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 if dst_path != src_path:
                     pairs.append((src_path, dst_path))
             if not pairs:
+                self._show_notification(
+                    _('Source and destination are the same'), _status.ERROR)
                 return
             self._run_command(
                 'archive.move',

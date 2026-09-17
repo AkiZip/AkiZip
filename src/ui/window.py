@@ -281,6 +281,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = Gtk.Entry()
         entry.set_text(self._entry_command_name(item))
         entry.set_activates_default(True)
+        destination_from_browser = True
+
+        def on_destination_changed(_entry):
+            nonlocal destination_from_browser
+            destination_from_browser = False
+
+        entry.connect('changed', on_destination_changed)
 
         browse_button = Gtk.Button(icon_name='folder-symbolic')
         browse_button.set_tooltip_text(_('Select destination folder'))
@@ -295,10 +302,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             chooser.set_current_path('')
 
             def on_selected(path):
+                nonlocal destination_from_browser
                 if path:
                     entry.set_text(path + '/' + item.path)
                 else:
                     entry.set_text(item.path)
+                # set_text emits changed; restore the source after updating it.
+                destination_from_browser = True
 
             chooser.connect_select(on_selected)
             chooser.present()
@@ -327,6 +337,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return False
 
             dst_path = entry.get_text().strip().lstrip('/').rstrip('/')
+            if not destination_from_browser and '..' in dst_path.split('/'):
+                self._show_notification(
+                    _("Manual destination paths cannot contain '..'. Choose an existing folder using the folder button."),
+                    _status.ERROR)
+                return
             if not dst_path:
                 dst_path = item.path.rstrip('/')
             src_path = self._entry_command_name(item)
@@ -356,6 +371,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry = Gtk.Entry()
         entry.set_text(self._current_internal_path.rstrip('/') or '/')
         entry.set_activates_default(True)
+        destination_from_browser = True
+
+        def on_destination_changed(_entry):
+            nonlocal destination_from_browser
+            destination_from_browser = False
+
+        entry.connect('changed', on_destination_changed)
 
         browse_button = Gtk.Button(icon_name='folder-symbolic')
         browse_button.set_tooltip_text(_('Select destination folder'))
@@ -368,7 +390,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             chooser.set_current_path('')
 
             def on_selected(path):
+                nonlocal destination_from_browser
                 entry.set_text(path or '/')
+                # set_text emits changed; restore the source after updating it.
+                destination_from_browser = True
 
             chooser.connect_select(on_selected)
             chooser.present()
@@ -397,6 +422,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return False
 
             dest_folder = entry.get_text().strip().strip('/')
+            if not destination_from_browser and '..' in dest_folder.split('/'):
+                self._show_notification(
+                    _("Manual destination paths cannot contain '..'. Choose an existing folder using the folder button."),
+                    _status.ERROR)
+                return
             pairs = []
             for move_item in entries:
                 src_path = self._entry_command_name(move_item)
@@ -773,6 +803,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         content = builder.get_object('content')
         output_entry = builder.get_object('output_entry')
         output_entry.set_editable(not _IS_FLATPAK)
+        output_hidden_warning = builder.get_object('output_hidden_warning')
         output_browse = builder.get_object('output_browse')
         source_label = builder.get_object('source_label')
         source_list = builder.get_object('source_list')
@@ -842,6 +873,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         def on_output_changed(_entry):
             text = output_entry.get_text().strip()
+            output_hidden_warning.set_visible(text.rsplit('/', 1)[-1].startswith('.'))
             confirm_sensitive = len(source_paths) > 0 and text
             dialog.set_response_enabled('confirm', confirm_sensitive)
             suffix = Path(text).suffix.lstrip('.').lower()
@@ -1217,6 +1249,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.file_list_scroller.set_child(view)
         self._file_list_view = view
         self._file_list_selection = selection
+        selection.connect('selection-changed', self._on_file_list_selection_changed)
+        # Removing selected rows can emit only items-changed.
+        selection.connect('items-changed', self._on_file_list_selection_changed)
+
+    def _on_file_list_selection_changed(self, _selection, *_args):
+        self._update_selection_actions()
 
     def _selected_entries(self):
         """Return the selected ArchiveEntry items, excluding the '..' row."""
@@ -1309,8 +1347,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         selected_count = len(self._selected_entries())
         if selected_count == 0:
             self._file_list_selection.unselect_all()
-        self._context_menu_selected_count = selected_count
-        self._apply_context_menu_state(selected_count)
+        self._update_selection_actions()
 
         popover = Gtk.PopoverMenu.new_from_model(self.context_menu)
         popover.set_parent(view)
@@ -1624,7 +1661,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._folder_set = set()
         self._current_internal_path = ''
         self._list_items = set()
-        self._context_menu_selected_count = 0
 
         app = self.get_application()
         if app is not None and hasattr(app, 'settings'):
@@ -1772,9 +1808,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self.move_button.set_sensitive(can_modify)
         if self.delete_button is not None:
             self.delete_button.set_sensitive(can_modify)
-        self._apply_context_menu_state(getattr(self, '_context_menu_selected_count', 0))
+        self._update_selection_actions()
 
-    def _apply_context_menu_state(self, selected_count):
+    def _update_selection_actions(self):
         app = self.get_application()
         if app is None or not hasattr(app, 'system'):
             can_modify = False
@@ -1782,7 +1818,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         else:
             can_modify = app.system.can_modify()
             can_extract = app.system.can_extract()
-        state = context_menu_state(can_modify, can_extract, selected_count)
+        state = context_menu_state(can_modify, can_extract, len(self._selected_entries()))
         actions = (
             ('extract-selected', getattr(self, '_extract_selected_action', None)),
             ('move-selected', getattr(self, '_move_action', None)),

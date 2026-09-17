@@ -41,6 +41,35 @@
         </child>
 
         <child>
+          <object class="GtkBox" id="output_hidden_warning">
+            <property name="visible">false</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkImage">
+                <property name="icon-name">dialog-warning-symbolic</property>
+                <property name="valign">start</property>
+                <style>
+                  <class name="warning" />
+                </style>
+              </object>
+            </child>
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">This filename starts with "." and will be hidden. In your file manager, enable "Show Hidden Files" (usually Ctrl+H).</property>
+                <property name="xalign">0</property>
+                <property name="wrap">true</property>
+                <property name="max-width-chars">42</property>
+                <property name="hexpand">true</property>
+                <style>
+                  <class name="caption" />
+                  <class name="warning" />
+                </style>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
           <object class="GtkSeparator" />
         </child>
 

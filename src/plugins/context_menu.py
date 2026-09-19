@@ -35,7 +35,9 @@ def context_menu_state(can_modify, can_extract, selected_count):
     return {
         'extract-selected': bool(has_selection and can_extract),
         'move-selected': bool(has_selection and can_modify),
-        'rename-selected': bool(has_selection and can_modify),
+        # Renaming is a single-entry operation: only enable it for exactly
+        # one selected entry.
+        'rename-selected': bool(selected_count == 1 and can_modify),
         'delete-selected': bool(has_selection and can_modify),
         'add-file': bool(can_modify),
         'new-folder': bool(can_modify),

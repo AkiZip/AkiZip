@@ -42,6 +42,17 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.0" date="2026-09-19">
+      <description translate="no">
+        <p>Multi-select support and move operation fixes</p>
+        <ul>
+          <li>Added multi-selection support in the file list</li>
+          <li>Fixed missing error when moving files into the current directory</li>
+          <li>Added a warning when creating an archive whose name starts with a dot (hidden file)</li>
+          <li>Restricted the use of ".." in move destination paths</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.4" date="2026-09-13">
       <description translate="no">
         <p>Security fix and 7-Zip update</p>

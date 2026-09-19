@@ -264,7 +264,7 @@ msgstr "该压缩包格式不支持修改。"
 msgid "No file selected"
 msgstr "未选择文件"
 
-#. #-#-#-#-#  python.pot (akizip 0.3.4)  #-#-#-#-#
+#. #-#-#-#-#  python.pot (akizip 0.4.0)  #-#-#-#-#
 #. TRANSLATORS: {} is the number of selected archive entries
 #: src/ui/window.py:280 src/ui/window.py:370 src/window.ui:166
 #: src/window.ui:180 src/window.ui:441

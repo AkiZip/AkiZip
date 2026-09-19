@@ -898,6 +898,12 @@ msgstr "選擇輸出壓縮檔路徑"
 msgid "Select Output Archive"
 msgstr "選擇輸出壓縮檔"
 
+#: src/compress-dialog.ui:58
+msgid ""
+"This filename starts with \".\" and will be hidden. In your file manager, "
+"enable \"Show Hidden Files\" (usually Ctrl+H)."
+msgstr "此檔案名稱以「.」開頭，儲存後會被隱藏。請在檔案管理員中啟用「顯示隱藏檔案」（通常按 Ctrl+H）。"
+
 #: src/compress-dialog.ui:53 src/preferences.ui:60
 msgid "Format"
 msgstr "格式"

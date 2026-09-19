@@ -212,11 +212,15 @@ def archive_extract(archive_path, output_dir, password=None, timeout=-1, cancel_
         args.append(f'-p{password}')
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
-def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
+def archive_extract_FileInZip(archive_path, file_names, output_dir, password=None, timeout=-1, cancel_event=None, task_status=None):
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
 
+    if isinstance(file_names, (str, Path)):
+        file_names = [file_names]
+    # See archive_delete: every switch stays before '--' and -spd disables
+    # wildcards so untrusted entry names remain plain operands.
     args = [
         'x',
         str(archive_path),
@@ -226,7 +230,7 @@ def archive_extract_FileInZip(archive_path, file_name, output_dir, password=None
     ]
     if password:
         args.append(f'-p{password}')
-    args.extend(['--', str(file_name)])
+    args.extend(['--', *[str(name) for name in file_names]])
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 def archive_delete(archive_path, file_names, password=None, timeout=-1, cancel_event=None, task_status=None):
@@ -317,10 +321,21 @@ def archive_test(archive_path, password=None, timeout=-1, cancel_event=None, tas
     return output
 
 
-def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, cancel_event=None, task_status=None):
+def archive_move(archive_path, pairs, password=None, timeout=-1, cancel_event=None, task_status=None):
+    """Move/rename entries inside an archive.
+
+    pairs is a list of (src_name, dst_name) tuples; all pairs are applied by
+    a single 'rn' invocation so the archive is rewritten only once.
+    """
     def on_progress(percent):
         if task_status is not None:
             task_status.set_progress(percent)
+
+    operands = []
+    for src_name, dst_name in pairs:
+        operands.extend([str(src_name), str(dst_name)])
+    if not operands:
+        raise RuntimeError('No move pairs')
 
     args = [
         'rn',
@@ -329,7 +344,7 @@ def archive_move(archive_path, src_name, dst_name, password=None, timeout=-1, ca
     ]
     if password:
         args.append(f'-p{password}')
-    args.extend(['--', str(src_name), str(dst_name)])
+    args.extend(['--', *operands])
     return _run_7zip(args, timeout, cancel_event, on_progress)
 
 

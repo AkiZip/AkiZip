@@ -927,6 +927,12 @@ msgstr ""
 msgid "Select Output Archive"
 msgstr ""
 
+#: src/compress-dialog.ui:58
+msgid ""
+"This filename starts with \".\" and will be hidden. In your file manager, "
+"enable \"Show Hidden Files\" (usually Ctrl+H)."
+msgstr ""
+
 #: src/compress-dialog.ui:53 src/preferences.ui:60
 msgid "Format"
 msgstr ""

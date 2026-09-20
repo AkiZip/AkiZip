@@ -3,13 +3,12 @@
 <img src="https://raw.githubusercontent.com/AkiZip/AkiZip/refs/heads/master/data/icons/hicolor/scalable/apps/top.akizip.akizip.svg" alt="Logo di Akizip" width="128" height="128" />
 
 # Akizip
+Un gestore grafico di archivi 7-Zip per Linux
 
-Un moderno gestore di archivi per GNOME, realizzato con GTK 4 e libadwaita.
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-[![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
+[![Licenza: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
+[![Piattaforma](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
-[![Stato della traduzione](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
+[![Stato traduzione](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
 [![Blog](https://img.shields.io/badge/blog-akizip.top-orange.svg)](https://blog.akizip.top/)
 
 **Lingue:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
@@ -18,102 +17,105 @@ Un moderno gestore di archivi per GNOME, realizzato con GTK 4 e libadwaita.
 
 ---
 
-## Schermata
-
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/AkiZip/AkiZip/refs/heads/master/docs/shotcut.png" alt="Schermata di Akizip" />
+<img src="https://raw.githubusercontent.com/AkiZip/AkiZip/refs/heads/master/docs/shotcut.png" alt="Schermata di Akizip" width="800" />
 
 </div>
 
-## Informazioni
+# Informazioni
 
-**Akizip** è un'utilità grafica per archivi destinata al desktop GNOME, realizzata con GTK 4 e libadwaita. È distribuita come Flatpak (`top.akizip.akizip`) e include un binario `7zz` integrato per gestire 7z e altri formati di archivio.
+### Introduzione
 
-Akizip è un'applicazione grafica, non una libreria: per tutte le operazioni sugli archivi richiama l'eseguibile `7zz` incluso e supporta i formati forniti dal motore 7-Zip originale.
+- Un gestore grafico di archivi 7-Zip per Linux.
+- Realizzato con GTK 4 e libadwaita nel rispetto delle linee guida per l'interfaccia umana di GNOME.
+- Distribuito come Flatpak, con accesso sicuro ai file scelti dall'utente tramite il selettore di file e con autorizzazioni ridotte per quanto possibile.
 
-## Funzionalità
+### Funzionalità
 
-- **Esperienza GNOME nativa** — realizzata con GTK 4 e libadwaita, seguendo le GNOME Human Interface Guidelines.
-- **Ampio supporto dei formati** — `.7z`, `.zip`, `.tar`, `.tar.gz`, `.gz`, `.rar` (sola lettura) e molti altri tramite il motore 7-Zip incluso.
-- **Compressione ed estrazione** — crea nuovi archivi o estrae quelli esistenti con indicazione dell'avanzamento.
-- **Ispezione degli archivi** — visualizza metadati e contenuti dell'archivio senza estrarre.
-- **Operazioni annullabili e non bloccanti** — le operazioni lunghe vengono eseguite in un thread di lavoro in background e possono essere annullate in qualsiasi momento.
-- **Pannello dei log** — una finestra dedicata e agganciabile per ispezionare output dei comandi e diagnostica.
-- **Interfaccia multilingue** — include traduzioni in più di 10 lingue (tra cui inglese, cinese, spagnolo, francese, italiano, russo e altre), contribuite tramite [Weblate](https://hosted.weblate.org/engage/akizip/).
-- **Sandbox per impostazione predefinita** — distribuita come Flatpak con permessi minimi.
+- **Formati supportati** — Consente di creare archivi `.7z`, `.zip` e `.tar`; estrarre `.rar`, `.gz`, `.bz2`, `.xz`, `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.cab`, `.iso`, `.dmg`, `.wim`, `.arj`, `.lzh` e molti altri formati; permette inoltre di esplorare direttamente il contenuto della maggior parte dei formati supportati.
+- **Suggerimenti intelligenti** — Suggerisce automaticamente i parametri dell'archivio in base alla composizione dei file sorgente.
+- **Impostazioni di compressione** — Consente di regolare manualmente i parametri di compressione e il numero di thread; supporta la protezione con password e la crittografia dei nomi dei file 7z.
+- **Gestione degli archivi** — Permette di visualizzare, creare, spostare ed eliminare file all'interno degli archivi senza estrarli, consultare l'elenco dei file e i metadati e aprire archivi nidificati.
+- **Estrazione e verifica di integrità** — Consente di estrarre l'intero archivio o solo gli elementi selezionati, gestire archivi protetti da password e verificarne l'integrità prima dell'estrazione.
+- **Attività in background** — Esegue le operazioni complesse in background con avanzamento in tempo reale, tempo residuo stimato, timeout configurabili e annullamento; il pannello dei registri consente di consultare l'output dei comandi e le informazioni diagnostiche.
+- **Più lingue** — Offre l'interfaccia in oltre 10 lingue e permette di contribuire alle traduzioni tramite [Weblate](https://hosted.weblate.org/engage/akizip/).
 
-## Installazione
+### Installazione
 
-Akizip è distribuita esclusivamente come Flatpak. Compila e installa dal manifest:
+- Akizip è distribuito esclusivamente come Flatpak. Compilalo e installalo dal manifesto:
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.json
 flatpak run top.akizip.akizip
 ```
+<br>
 
-## Traduzioni
 
-Il lavoro di traduzione è gestito da un piccolo script shell, non da Meson:
+# Sviluppo
 
-```bash
-./update-po.sh                              # estrae le stringhe in po/akizip.pot ed esegue msgmerge su tutti i cataloghi in po/LINGUAS
-msgfmt --check po/zh_CN.po -o /dev/null     # valida un catalogo senza compilarlo
-```
-
-`po/POTFILES.in` elenca gli input. `update-po.sh` smista in base all'estensione: sorgenti Python tramite `xgettext --language=Python`, file `.ui` tramite Glade e `.desktop.in` / `.metainfo.xml.in` tramite il file ITS di GNOME. Le stringhe in `.gschema.xml` sono elencate ma saltate durante l'estrazione (vengono tradotte a runtime da GLib).
-
-Per aggiungere una nuova lingua, aggiungi il relativo codice a `po/LINGUAS`, esegui `./update-po.sh` e traduci il file `.po` generato.
-
-Le traduzioni possono essere contribuite anche tramite [Weblate](https://hosted.weblate.org/engage/akizip/).
-
-## Struttura del progetto
+### Struttura del progetto
 
 ```
 akizip/
-├── data/                      # metadati AppStream, .desktop, schema GSettings, servizio D-Bus, icone
-├── docs/                      # schermate e note di progettazione
-├── po/                        # cataloghi di traduzione (POTFILES.in, LINGUAS, *.po)
-├── readmes/                   # versioni localizzate di questo README
-├── scripts/                   # script di supporto (es. controllo della formattazione)
+├── data/                      # Metadati AppStream, .desktop, schema GSettings, servizio D-Bus e icone
+├── docs/                      # Schermate e note di progettazione
+├── po/                        # Cataloghi di traduzione (POTFILES.in, LINGUAS, *.po)
+├── readmes/                   # Versioni tradotte di questo README
+├── scripts/                   # Script di supporto, come i controlli di formato
 ├── src/
-│   ├── akizip.in              # launcher di ingresso (configurato da meson)
-│   ├── akizip.gresource.xml   # manifest GResource che include i file .ui
-│   ├── AkizipApplication.py   # singleton Adw.Application
-│   ├── main.py                # ingresso del processo
-│   ├── job_queue.py           # worker in background a singolo thread
-│   ├── window.py / window.ui  # finestra principale
-│   ├── *.ui                   # dialoghi: aggiungi, comprimi, estrai, preferenze, scorciatoie, selettore cartella di destinazione
-│   ├── plugins/               # plugin di stato e di lunga durata (sevenzip, system, status, password, context_menu, ...)
-│   └── ui/                    # mixin della finestra (pannello log, dialogo informazioni, dialogo aggiungi, ...)
-├── top.akizip.akizip.json     # manifest Flatpak
-├── update-po.sh               # pipeline di traduzione
+│   ├── akizip.in              # Avvio del punto di ingresso configurato da Meson
+│   ├── akizip.gresource.xml   # Manifesto GResource che include i file .ui
+│   ├── AkizipApplication.py   # Istanza singola di Adw.Application
+│   ├── main.py                # Punto di ingresso del processo
+│   ├── job_queue.py           # Worker in background a thread singolo
+│   ├── window.py / window.ui  # Finestra principale
+│   ├── *.ui                   # Finestre per aggiunta, compressione, estrazione, preferenze, scorciatoie e scelta cartella
+│   ├── plugins/               # Plugin di stato e attività lunghe (sevenzip, system, status, password, context_menu, ecc.)
+│   └── ui/                    # Mixin della finestra per registri, informazioni, aggiunta e altro
+├── top.akizip.akizip.json     # Manifesto Flatpak
+├── update-po.sh               # Flusso di traduzione
 └── meson.build
 ```
 
-### Architettura in breve
+### Panoramica dell'architettura
 
-- `AkizipApplication` è un singleton `Adw.Application` che possiede tre elementi fratelli: `app.commands` (un dizionario `"group.action" → callable`), `app.job_queue` (il worker in background) e `app.system` (un'istanza `sysop()` che conserva lo stato della selezione corrente).
-- I **plugin immediati** (`plugins/system.py`, `plugins/status.py`) sono normali oggetti Python chiamati in modo sincrono dall'interfaccia. Non devono bloccare.
-- I **plugin di lunga durata** (`plugins/sevenzip.py`, `plugins/system_job.py`) espongono una funzione `register(commands)` e inviano lavoro tramite `JobQueue`. Ogni callable accetta `timeout=-1` e `cancel_event=None`, controlla periodicamente l'evento di annullamento e rispetta la scadenza.
-- Il template della finestra si trova in `src/window.ui` ed è incluso in un GResource in fase di build. I mixin in `src/ui/` compongono la finestra principale: `LogPanelMixin` possiede una finestra log separata, mentre `InfoDialogMixin` costruisce il dialogo informazioni sull'archivio.
+Akizip utilizza un'architettura basata su plugin composta da tre parti principali: l'interfaccia, una coda di attività e i plugin funzionali.
 
-Per indicazioni più approfondite sull'estensione del sistema di plugin, consulta [`src/plugins/readme.md`](../src/plugins/readme.md).
+- **Interfaccia** — `src/window.ui` definisce la finestra principale, mentre `src/ui/` gestisce interazioni come l'elenco dei file, le finestre di dialogo e il pannello dei registri.
+- **Gestione dell'applicazione** — `AkizipApplication` collega l'interfaccia alle diverse funzioni e tiene traccia del file selezionato, dei comandi disponibili e delle attività in background.
+- **Attività in background** — `JobQueue` esegue in ordine e in background le operazioni che richiedono tempo, come compressione ed estrazione, mantenendo reattiva l'interfaccia e gestendo avanzamento, annullamento e timeout.
+- **Plugin funzionali** — Ogni plugin registra le proprie funzioni come comandi dell'applicazione, che l'interfaccia richiama quando necessario. Ad esempio, `plugins/sevenzip.py` usa 7-Zip per le operazioni sugli archivi, mentre `plugins/system_job.py` gestisce la scansione dei file, i suggerimenti intelligenti di compressione e lo spostamento dei file.
 
-## Licenza
+In breve: l'utente avvia un'operazione nell'interfaccia → l'applicazione trova la funzione corrispondente → l'attività viene eseguita in background → avanzamento e risultati tornano all'interfaccia.
 
-Akizip è rilasciato sotto la **GNU General Public License v3.0 or later**. Consulta [`COPYING`](../COPYING) per il testo completo.
+Per una guida più approfondita su come estendere il sistema di plugin, consulta [`src/plugins/readme.md`](../src/plugins/readme.md).
 
-Il binario `7zz` incluso è fornito dal progetto originale [7-Zip](https://www.7-zip.org/) (www.7-zip.org). Parti del software possono usare codice con licenza GNU LGPL.
+### Traduzioni
 
-## Ringraziamenti
+Per aggiungere una nuova impostazione locale, aggiungi il relativo codice a `po/LINGUAS`, esegui `./update-po.sh` e traduci il file `.po` generato.
 
-- [7-Zip](https://www.7-zip.org/) — il motore di archiviazione open source. 7-Zip è un marchio commerciale di Igor Pavlov. Questo progetto non è affiliato al progetto 7-Zip né approvato da esso.
-- [GTK](https://www.gtk.org/) e [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — il toolkit e la libreria di design. GTK è un marchio commerciale della GNOME Foundation.
-- [PyGObject](https://pygobject.readthedocs.io/) — binding Python per GTK e componenti correlati.
+Puoi contribuire alle traduzioni anche tramite [Weblate](https://hosted.weblate.org/engage/akizip/).
 
-*Akizip è un progetto comunitario indipendente e non è affiliato, approvato o sponsorizzato dal progetto GNOME o dalla GNOME Foundation. GNOME e il logo GNOME sono marchi commerciali della GNOME Foundation.*
+<br>
 
----
+
+# Licenza e ringraziamenti
+
+### Licenza
+
+Akizip è distribuito secondo la **GNU General Public License v3.0 or later**. Consulta [`COPYING`](../COPYING) per il testo completo.
+
+Il file binario `7zz` incluso è fornito dal progetto upstream [7-Zip](https://www.7-zip.org/) (www.7-zip.org). Alcune parti del software potrebbero usare codice con licenza GNU LGPL.
+
+### Ringraziamenti
+
+- [7-Zip](https://www.7-zip.org/) — il motore di archiviazione open source. 7-Zip è un marchio di Igor Pavlov. Questo progetto non è affiliato al progetto 7-Zip né è da esso approvato.
+- [GTK](https://www.gtk.org/) e [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — il toolkit e la libreria di progettazione. GTK è un marchio di GNOME Foundation.
+- [PyGObject](https://pygobject.readthedocs.io/) — collegamenti Python per GTK e i componenti correlati.
+
+### Avvisi
+
+*Akizip è un progetto comunitario indipendente e non è affiliato, approvato o sponsorizzato da GNOME Project o GNOME Foundation. GNOME e il logo GNOME sono marchi di GNOME Foundation.*
 
 *Questo README è stato tradotto dall'IA. In caso di conflitto o discrepanza con la versione inglese, prevale la [versione inglese](../README.md).*

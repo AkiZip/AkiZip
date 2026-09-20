@@ -10,6 +10,7 @@
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
 [![翻译状态](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
+[![博客](https://img.shields.io/badge/blog-akizip.top-orange.svg)](https://blog.akizip.top/)
 
 **语言：** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
@@ -39,44 +40,24 @@ Akizip 是图形化应用程序，不是库——它会为所有归档工作调�
 - **归档检查**——无需解压即可查看归档元数据和内容。
 - **可取消、非阻塞的任务**——长时间运行的操作会在后台工作线程中运行，并可随时取消。
 - **日志面板**——提供专用的可停靠窗口，用于查看命令输出和诊断信息。
-- **多语言界面**——目前随附英语、简体中文（`zh_CN`）和繁体中文（`zh_HK`）翻译。
+- **多语言界面**——随附 10 多种语言的翻译（包括英语、中文、西班牙语、法语、意大利语、俄语等），通过 [Weblate](https://hosted.weblate.org/engage/akizip/) 贡献。
 - **默认沙盒化**——以 Flatpak 形式分发，并使用最小权限。
 
 ## 安装
 
-### Flatpak（推荐）
-
-从清单构建并安装 Flatpak：
+Akizip 仅以 Flatpak 形式分发。从清单构建并安装：
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.json
 flatpak run top.akizip.akizip
 ```
 
-
-## 从源代码构建
-
-你需要 `meson`、`ninja`、GTK 4 开发头文件、libadwaita 开发头文件、PyGObject 和 `gettext`。
-
-```bash
-meson setup build
-meson compile -C build
-meson test    -C build                              # 验证 desktop 文件、AppStream 元信息、GSettings schema
-meson install -C build --destdir=/tmp/akizip-stage  # 然后运行 /tmp/akizip-stage/usr/local/bin/akizip
-```
-
-启动器（`src/akizip.in`，配置后会变成 `build/src/akizip`）是标准入口点。直接从源代码树运行 `python3 -m akizip.main` 将**无法**工作，因为必须先加载 GResource bundle。
-
-### 在宿主机上运行
-
-`plugins/sevenzip.py` 将随附二进制文件路径硬编码为 `/app/bin/7zz`，该路径只存在于 Flatpak 沙盒内。若要在宿主机上运行，请将 `7zz` 安装到该路径（或创建符号链接），或者临时编辑 `SEVENZIP_PATH` 常量。
-
 ## 翻译
 
 翻译工作由一个小型 shell 脚本驱动，而不是由 Meson 驱动：
 
 ```bash
-./update-po.sh                              # 将字符串提取到 po/akizip.pot，并 msgmerge zh_CN.po 和 zh_HK.po
+./update-po.sh                              # 将字符串提取到 po/akizip.pot，并 msgmerge po/LINGUAS 中的所有目录文件
 msgfmt --check po/zh_CN.po -o /dev/null     # 验证目录文件而不编译
 ```
 
@@ -90,17 +71,21 @@ msgfmt --check po/zh_CN.po -o /dev/null     # 验证目录文件而不编译
 
 ```
 akizip/
-├── data/                      # AppStream 元信息、.desktop、GSettings schema、图标
+├── data/                      # AppStream 元信息、.desktop、GSettings schema、D-Bus service、图标
 ├── docs/                      # 截图和设计说明
-├── po/                        # 翻译目录
+├── po/                        # 翻译目录（POTFILES.in、LINGUAS、*.po）
+├── readmes/                   # 本 README 的多语言版本
+├── scripts/                   # 辅助脚本（如格式检查）
 ├── src/
 │   ├── akizip.in              # 入口启动器（由 meson 配置）
+│   ├── akizip.gresource.xml   # 打包 .ui 文件的 GResource 清单
 │   ├── AkizipApplication.py   # Adw.Application 单例
 │   ├── main.py                # 进程入口
 │   ├── job_queue.py           # 单线程后台工作器
 │   ├── window.py / window.ui  # 主窗口
-│   ├── plugins/               # 状态和长时间运行的插件
-│   └── ui/                    # 窗口 mixin（日志、信息对话框等）
+│   ├── *.ui                   # 对话框：添加、压缩、解压、首选项、快捷键、移动文件夹选择器
+│   ├── plugins/               # 状态和长时间运行的插件（sevenzip、system、status、password、context_menu 等）
+│   └── ui/                    # 窗口 mixin（日志面板、信息对话框、添加对话框等）
 ├── top.akizip.akizip.json     # Flatpak 清单
 ├── update-po.sh               # 翻译流水线
 └── meson.build
@@ -127,4 +112,8 @@ Akizip 以 **GNU General Public License v3.0 or later** 发布。完整文本请
 - [GTK](https://www.gtk.org/) 和 [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita)——工具包和设计库。GTK 是 GNOME Foundation 的商标。
 - [PyGObject](https://pygobject.readthedocs.io/)——GTK 及相关组件的 Python 绑定。
 
-*GNOME 和 GNOME 标志是 GNOME Foundation 的商标。*
+*Akizip 是独立的社区项目，不隶属于 GNOME 项目或 GNOME Foundation，也未获得其认可或赞助。GNOME 和 GNOME 标志是 GNOME Foundation 的商标。*
+
+---
+
+*本 README 由 AI 翻译。如与英语版本存在任何冲突或不一致，以[英语版本](../README.md)为准。*

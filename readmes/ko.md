@@ -10,6 +10,7 @@ GTK 4와 libadwaita로 만든 GNOME용 현대적인 아카이브 관리자입니
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
 [![번역 상태](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
+[![블로그](https://img.shields.io/badge/blog-akizip.top-orange.svg)](https://blog.akizip.top/)
 
 **언어:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
@@ -39,44 +40,24 @@ Akizip은 라이브러리가 아니라 그래픽 애플리케이션입니다. �
 - **아카이브 검사** — 추출하지 않고 아카이브 메타데이터와 내용을 볼 수 있습니다.
 - **취소 가능하고 비차단 방식의 작업** — 오래 실행되는 작업은 백그라운드 워커 스레드에서 실행되며 언제든지 취소할 수 있습니다.
 - **로그 패널** — 명령 출력과 진단 정보를 확인하기 위한 전용 도킹 가능 창을 제공합니다.
-- **다국어 UI** — 현재 영어, 중국어 간체(`zh_CN`), 중국어 번체(`zh_HK`) 번역을 함께 제공합니다.
+- **다국어 UI** — 영어, 중국어, 스페인어, 프랑스어, 이탈리아어, 러시아어 등 10개 이상의 언어 번역을 제공하며, [Weblate](https://hosted.weblate.org/engage/akizip/)를 통해 기여되고 있습니다.
 - **기본 샌드박스 적용** — 최소 권한을 가진 Flatpak으로 배포됩니다.
 
 ## 설치
 
-### Flatpak(권장)
-
-매니페스트에서 Flatpak을 빌드하고 설치합니다.
+Akizip은 Flatpak으로만 배포됩니다. 매니페스트에서 빌드하고 설치하세요.
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.json
 flatpak run top.akizip.akizip
 ```
 
-
-## 소스에서 빌드
-
-`meson`, `ninja`, GTK 4 개발 헤더, libadwaita 개발 헤더, PyGObject, `gettext`가 필요합니다.
-
-```bash
-meson setup build
-meson compile -C build
-meson test    -C build                              # desktop 파일, AppStream 메타정보, GSettings schema 검증
-meson install -C build --destdir=/tmp/akizip-stage  # 이후 /tmp/akizip-stage/usr/local/bin/akizip 실행
-```
-
-런처(`src/akizip.in`, 설정 후 `build/src/akizip`이 됨)가 표준 진입점입니다. GResource bundle을 먼저 로드해야 하므로 소스 트리에서 `python3 -m akizip.main`을 직접 실행하면 **동작하지 않습니다**.
-
-### 호스트에서 실행
-
-`plugins/sevenzip.py`는 함께 제공되는 바이너리 경로를 `/app/bin/7zz`로 하드코딩합니다. 이 경로는 Flatpak 샌드박스 안에만 존재합니다. 호스트에서 실행하려면 해당 경로에 `7zz`를 설치하거나 심볼릭 링크를 만들고, 또는 `SEVENZIP_PATH` 상수를 임시로 편집하세요.
-
 ## 번역
 
 번역 작업은 Meson이 아니라 작은 shell 스크립트가 담당합니다.
 
 ```bash
-./update-po.sh                              # 문자열을 po/akizip.pot으로 추출하고 zh_CN.po와 zh_HK.po를 msgmerge
+./update-po.sh                              # 문자열을 po/akizip.pot으로 추출하고 po/LINGUAS의 모든 카탈로그를 msgmerge
 msgfmt --check po/zh_CN.po -o /dev/null     # 컴파일하지 않고 카탈로그 검증
 ```
 
@@ -90,17 +71,21 @@ msgfmt --check po/zh_CN.po -o /dev/null     # 컴파일하지 않고 카탈로�
 
 ```
 akizip/
-├── data/                      # AppStream 메타정보, .desktop, GSettings schema, 아이콘
+├── data/                      # AppStream 메타정보, .desktop, GSettings schema, D-Bus 서비스, 아이콘
 ├── docs/                      # 스크린샷 및 설계 노트
-├── po/                        # 번역 카탈로그
+├── po/                        # 번역 카탈로그(POTFILES.in, LINGUAS, *.po)
+├── readmes/                   # 이 README의 다국어 버전
+├── scripts/                   # 보조 스크립트(형식 검사 등)
 ├── src/
 │   ├── akizip.in              # 진입점 런처(meson으로 설정)
+│   ├── akizip.gresource.xml   # .ui 파일을 번들하는 GResource 매니페스트
 │   ├── AkizipApplication.py   # Adw.Application 싱글턴
 │   ├── main.py                # 프로세스 진입점
 │   ├── job_queue.py           # 단일 스레드 백그라운드 워커
 │   ├── window.py / window.ui  # 기본 창
-│   ├── plugins/               # 상태 및 오래 실행되는 플러그인
-│   └── ui/                    # 창 mixin(로그, 정보 대화상자 등)
+│   ├── *.ui                   # 대화상자: 추가, 압축, 추출, 기본 설정, 단축키, 이동 폴터 선택기
+│   ├── plugins/               # 상태 및 오래 실행되는 플러그인(sevenzip, system, status, password, context_menu 등)
+│   └── ui/                    # 창 mixin(로그 패널, 정보 대화상자, 추가 대화상자 등)
 ├── top.akizip.akizip.json     # Flatpak 매니페스트
 ├── update-po.sh               # 번역 파이프라인
 └── meson.build
@@ -127,4 +112,8 @@ Akizip은 **GNU General Public License v3.0 or later**로 배포됩니다. 전�
 - [GTK](https://www.gtk.org/)와 [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — 툴킷과 디자인 라이브러리입니다. GTK는 GNOME Foundation의 상표입니다.
 - [PyGObject](https://pygobject.readthedocs.io/) — GTK 및 관련 구성 요소를 위한 Python 바인딩입니다.
 
-*GNOME 및 GNOME 로고는 GNOME Foundation의 상표입니다.*
+*Akizip은 독립적인 커뮤니티 프로젝트이며, GNOME 프로젝트 또는 GNOME Foundation과 제휴, 보증 또는 후원 관계에 있지 않습니다. GNOME 및 GNOME 로고는 GNOME Foundation의 상표입니다.*
+
+---
+
+*이 README는 AI로 번역되었습니다. 영어 버전과 충돌하거나 불일치하는 부분이 있는 경우 [영어 버전](../README.md)이 우선합니다.*

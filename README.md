@@ -10,6 +10,7 @@ A modern archive manager for GNOME, built with GTK 4 and libadwaita.
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
 [![Translation status](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
+[![Blog](https://img.shields.io/badge/blog-akizip.top-orange.svg)](https://blog.akizip.top/)
 
 **Languages:** [English](README.md) | [简体中文](readmes/zh-CN.md) | [繁體中文](readmes/zh-HK.md) | [日本語](readmes/ja.md) | [한국어](readmes/ko.md) | [Español](readmes/es.md) | [Italiano](readmes/it.md)
 
@@ -39,44 +40,24 @@ Akizip is a graphical application, not a library — it shells out to the bundle
 - **Archive inspection** — view archive metadata and contents without extracting.
 - **Cancellable, non-blocking jobs** — long-running operations run on a background worker thread and can be cancelled at any time.
 - **Logs panel** — a dedicated, dockable window for inspecting command output and diagnostics.
-- **Multilingual UI** — currently ships with English, Simplified Chinese (`zh_CN`), and Traditional Chinese (`zh_HK`) translations.
+- **Multilingual UI** — ships with translations for 10+ languages (including English, Chinese, Spanish, French, Italian, Russian, and more), contributed via [Weblate](https://hosted.weblate.org/engage/akizip/).
 - **Sandboxed by default** — distributed as a Flatpak with minimal permissions.
 
 ## Installation
 
-### Flatpak (recommended)
-
-Build and install the Flatpak from the manifest:
+Akizip is distributed exclusively as a Flatpak. Build and install it from the manifest:
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.json
 flatpak run top.akizip.akizip
 ```
 
-
-## Building from source
-
-You will need `meson`, `ninja`, GTK 4 development headers, libadwaita development headers, PyGObject, and `gettext`.
-
-```bash
-meson setup build
-meson compile -C build
-meson test    -C build                              # validates desktop file, AppStream metainfo, GSettings schema
-meson install -C build --destdir=/tmp/akizip-stage  # then run /tmp/akizip-stage/usr/local/bin/akizip
-```
-
-The launcher (`src/akizip.in`, becomes `build/src/akizip` after configuration) is the canonical entry point. Running `python3 -m akizip.main` directly from the source tree will **not** work, because the GResource bundle must be loaded first.
-
-### Running on the host
-
-`plugins/sevenzip.py` hard-codes the bundled binary path at `/app/bin/7zz`, which only exists inside the Flatpak sandbox. To run on the host, install `7zz` to that path (or symlink it), or temporarily edit the `SEVENZIP_PATH` constant.
-
 ## Translations
 
 Translation work is driven by a small shell script, not by Meson:
 
 ```bash
-./update-po.sh                              # extract strings into po/akizip.pot, msgmerge zh_CN.po and zh_HK.po
+./update-po.sh                              # extract strings into po/akizip.pot and msgmerge all catalogs in po/LINGUAS
 msgfmt --check po/zh_CN.po -o /dev/null     # validate a catalog without compiling
 ```
 
@@ -90,17 +71,21 @@ Translations can also be contributed through [Weblate](https://hosted.weblate.or
 
 ```
 akizip/
-├── data/                      # AppStream metainfo, .desktop, GSettings schema, icons
+├── data/                      # AppStream metainfo, .desktop, GSettings schema, D-Bus service, icons
 ├── docs/                      # screenshots and design notes
-├── po/                        # translation catalogs
+├── po/                        # translation catalogs (POTFILES.in, LINGUAS, *.po)
+├── readmes/                   # localized versions of this README
+├── scripts/                   # helper scripts (e.g. format checking)
 ├── src/
 │   ├── akizip.in              # entry-point launcher (configured by meson)
+│   ├── akizip.gresource.xml   # GResource manifest bundling the .ui files
 │   ├── AkizipApplication.py   # Adw.Application singleton
 │   ├── main.py                # process entry
 │   ├── job_queue.py           # single-thread background worker
 │   ├── window.py / window.ui  # main window
-│   ├── plugins/               # state and long-running plugins
-│   └── ui/                    # window mixins (logs, info dialog, ...)
+│   ├── *.ui                   # dialogs: add, compress, extract, preferences, shortcuts, move-folder chooser
+│   ├── plugins/               # state and long-running plugins (sevenzip, system, status, password, context_menu, ...)
+│   └── ui/                    # window mixins (logs panel, info dialog, add dialog, ...)
 ├── top.akizip.akizip.json     # Flatpak manifest
 ├── update-po.sh               # translation pipeline
 └── meson.build
@@ -127,4 +112,4 @@ The bundled `7zz` binary is provided by the upstream [7-Zip project](https://www
 - [GTK](https://www.gtk.org/) and [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — the toolkit and design library. GTK is a trademark of the GNOME Foundation.
 - [PyGObject](https://pygobject.readthedocs.io/) — Python bindings for GTK and friends.
 
-*GNOME and the GNOME logo are trademarks of the GNOME Foundation.*
+*Akizip is an independent community project and is not affiliated with, endorsed by, or sponsored by the GNOME Project or the GNOME Foundation. GNOME and the GNOME logo are trademarks of the GNOME Foundation.*

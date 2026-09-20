@@ -10,6 +10,7 @@ Un moderno gestore di archivi per GNOME, realizzato con GTK 4 e libadwaita.
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
 [![Stato della traduzione](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
+[![Blog](https://img.shields.io/badge/blog-akizip.top-orange.svg)](https://blog.akizip.top/)
 
 **Lingue:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
@@ -39,44 +40,24 @@ Akizip è un'applicazione grafica, non una libreria: per tutte le operazioni sug
 - **Ispezione degli archivi** — visualizza metadati e contenuti dell'archivio senza estrarre.
 - **Operazioni annullabili e non bloccanti** — le operazioni lunghe vengono eseguite in un thread di lavoro in background e possono essere annullate in qualsiasi momento.
 - **Pannello dei log** — una finestra dedicata e agganciabile per ispezionare output dei comandi e diagnostica.
-- **Interfaccia multilingue** — attualmente include traduzioni in inglese, cinese semplificato (`zh_CN`) e cinese tradizionale (`zh_HK`).
+- **Interfaccia multilingue** — include traduzioni in più di 10 lingue (tra cui inglese, cinese, spagnolo, francese, italiano, russo e altre), contribuite tramite [Weblate](https://hosted.weblate.org/engage/akizip/).
 - **Sandbox per impostazione predefinita** — distribuita come Flatpak con permessi minimi.
 
 ## Installazione
 
-### Flatpak (consigliato)
-
-Compila e installa il Flatpak dal manifest:
+Akizip è distribuita esclusivamente come Flatpak. Compila e installa dal manifest:
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.json
 flatpak run top.akizip.akizip
 ```
 
-
-## Compilazione dal sorgente
-
-Ti serviranno `meson`, `ninja`, gli header di sviluppo di GTK 4, gli header di sviluppo di libadwaita, PyGObject e `gettext`.
-
-```bash
-meson setup build
-meson compile -C build
-meson test    -C build                              # valida il file desktop, i metadati AppStream e lo schema GSettings
-meson install -C build --destdir=/tmp/akizip-stage  # poi esegui /tmp/akizip-stage/usr/local/bin/akizip
-```
-
-Il launcher (`src/akizip.in`, che diventa `build/src/akizip` dopo la configurazione) è il punto di ingresso canonico. Eseguire `python3 -m akizip.main` direttamente dall'albero sorgente **non** funzionerà, perché il GResource bundle deve essere caricato prima.
-
-### Esecuzione sull'host
-
-`plugins/sevenzip.py` definisce in modo fisso il percorso del binario incluso come `/app/bin/7zz`, che esiste solo all'interno della sandbox Flatpak. Per eseguirlo sull'host, installa `7zz` in quel percorso (o crea un collegamento simbolico), oppure modifica temporaneamente la costante `SEVENZIP_PATH`.
-
 ## Traduzioni
 
 Il lavoro di traduzione è gestito da un piccolo script shell, non da Meson:
 
 ```bash
-./update-po.sh                              # estrae le stringhe in po/akizip.pot ed esegue msgmerge su zh_CN.po e zh_HK.po
+./update-po.sh                              # estrae le stringhe in po/akizip.pot ed esegue msgmerge su tutti i cataloghi in po/LINGUAS
 msgfmt --check po/zh_CN.po -o /dev/null     # valida un catalogo senza compilarlo
 ```
 
@@ -90,17 +71,21 @@ Le traduzioni possono essere contribuite anche tramite [Weblate](https://hosted.
 
 ```
 akizip/
-├── data/                      # metadati AppStream, .desktop, schema GSettings, icone
+├── data/                      # metadati AppStream, .desktop, schema GSettings, servizio D-Bus, icone
 ├── docs/                      # schermate e note di progettazione
-├── po/                        # cataloghi di traduzione
+├── po/                        # cataloghi di traduzione (POTFILES.in, LINGUAS, *.po)
+├── readmes/                   # versioni localizzate di questo README
+├── scripts/                   # script di supporto (es. controllo della formattazione)
 ├── src/
 │   ├── akizip.in              # launcher di ingresso (configurato da meson)
+│   ├── akizip.gresource.xml   # manifest GResource che include i file .ui
 │   ├── AkizipApplication.py   # singleton Adw.Application
 │   ├── main.py                # ingresso del processo
 │   ├── job_queue.py           # worker in background a singolo thread
 │   ├── window.py / window.ui  # finestra principale
-│   ├── plugins/               # plugin di stato e di lunga durata
-│   └── ui/                    # mixin della finestra (log, dialogo informazioni, ...)
+│   ├── *.ui                   # dialoghi: aggiungi, comprimi, estrai, preferenze, scorciatoie, selettore cartella di destinazione
+│   ├── plugins/               # plugin di stato e di lunga durata (sevenzip, system, status, password, context_menu, ...)
+│   └── ui/                    # mixin della finestra (pannello log, dialogo informazioni, dialogo aggiungi, ...)
 ├── top.akizip.akizip.json     # manifest Flatpak
 ├── update-po.sh               # pipeline di traduzione
 └── meson.build
@@ -127,4 +112,8 @@ Il binario `7zz` incluso è fornito dal progetto originale [7-Zip](https://www.7
 - [GTK](https://www.gtk.org/) e [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — il toolkit e la libreria di design. GTK è un marchio commerciale della GNOME Foundation.
 - [PyGObject](https://pygobject.readthedocs.io/) — binding Python per GTK e componenti correlati.
 
-*GNOME e il logo GNOME sono marchi commerciali della GNOME Foundation.*
+*Akizip è un progetto comunitario indipendente e non è affiliato, approvato o sponsorizzato dal progetto GNOME o dalla GNOME Foundation. GNOME e il logo GNOME sono marchi commerciali della GNOME Foundation.*
+
+---
+
+*Questo README è stato tradotto dall'IA. In caso di conflitto o discrepanza con la versione inglese, prevale la [versione inglese](../README.md).*

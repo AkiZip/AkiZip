@@ -10,6 +10,7 @@ GTK 4 と libadwaita で構築された、GNOME 向けのモダンなアーカ�
 [![Platform](https://img.shields.io/badge/platform-Linux-green.svg)](https://flatpak.org)
 [![Flatpak](https://img.shields.io/badge/distribution-Flatpak-blueviolet.svg)](https://flatpak.org)
 [![翻訳状況](https://hosted.weblate.org/widget/akizip/akizip/svg-badge.svg)](https://hosted.weblate.org/engage/akizip/)
+[![ブログ](https://img.shields.io/badge/blog-akizip.top-orange.svg)](https://blog.akizip.top/)
 
 **言語:** [English](../README.md) | [简体中文](zh-CN.md) | [繁體中文](zh-HK.md) | [日本語](ja.md) | [한국어](ko.md) | [Español](es.md) | [Italiano](it.md)
 
@@ -39,44 +40,24 @@ Akizip はライブラリではなくグラフィカルアプリケーション�
 - **アーカイブの確認** — 展開せずにアーカイブのメタデータと内容を表示できます。
 - **キャンセル可能で非ブロッキングなジョブ** — 長時間実行される操作はバックグラウンドワーカースレッドで実行され、いつでもキャンセルできます。
 - **ログパネル** — コマンド出力と診断情報を確認するための専用のドッキング可能なウィンドウを備えています。
-- **多言語 UI** — 現在、英語、簡体字中国語（`zh_CN`）、繁体字中国語（`zh_HK`）の翻訳を同梱しています。
+- **多言語 UI** — 英語、中国語、スペイン語、フランス語、イタリア語、ロシア語など、10 以上の言語の翻訳を同梱しています。[Weblate](https://hosted.weblate.org/engage/akizip/) を通じて貢献されています。
 - **デフォルトでサンドボックス化** — 最小限の権限を持つ Flatpak として配布されます。
 
 ## インストール
 
-### Flatpak（推奨）
-
-マニフェストから Flatpak をビルドしてインストールします。
+Akizip は Flatpak 専用に配布されています。マニフェストからビルドしてインストールしてください。
 
 ```bash
 flatpak-builder --user --install --force-clean build-flatpak top.akizip.akizip.json
 flatpak run top.akizip.akizip
 ```
 
-
-## ソースからビルド
-
-`meson`、`ninja`、GTK 4 開発ヘッダー、libadwaita 開発ヘッダー、PyGObject、`gettext` が必要です。
-
-```bash
-meson setup build
-meson compile -C build
-meson test    -C build                              # desktop ファイル、AppStream メタ情報、GSettings schema を検証
-meson install -C build --destdir=/tmp/akizip-stage  # その後 /tmp/akizip-stage/usr/local/bin/akizip を実行
-```
-
-ランチャー（`src/akizip.in`。設定後は `build/src/akizip` になります）が正式なエントリーポイントです。ソースツリーから `python3 -m akizip.main` を直接実行しても、GResource bundle を先に読み込む必要があるため**動作しません**。
-
-### ホスト上で実行
-
-`plugins/sevenzip.py` は同梱バイナリのパスを `/app/bin/7zz` にハードコードしています。このパスは Flatpak サンドボックス内にのみ存在します。ホスト上で実行するには、そのパスに `7zz` をインストールする（またはシンボリックリンクを作成する）か、`SEVENZIP_PATH` 定数を一時的に編集してください。
-
 ## 翻訳
 
 翻訳作業は Meson ではなく、小さな shell スクリプトで行います。
 
 ```bash
-./update-po.sh                              # 文字列を po/akizip.pot に抽出し、zh_CN.po と zh_HK.po を msgmerge する
+./update-po.sh                              # 文字列を po/akizip.pot に抽出し、po/LINGUAS の全カタログを msgmerge する
 msgfmt --check po/zh_CN.po -o /dev/null     # コンパイルせずにカタログを検証する
 ```
 
@@ -90,17 +71,21 @@ msgfmt --check po/zh_CN.po -o /dev/null     # コンパイルせずにカタロ�
 
 ```
 akizip/
-├── data/                      # AppStream メタ情報、.desktop、GSettings schema、アイコン
+├── data/                      # AppStream メタ情報、.desktop、GSettings schema、D-Bus サービス、アイコン
 ├── docs/                      # スクリーンショットと設計メモ
-├── po/                        # 翻訳カタログ
+├── po/                        # 翻訳カタログ（POTFILES.in、LINGUAS、*.po）
+├── readmes/                   # この README の各国語版
+├── scripts/                   # ヘルパースクリプト（フォーマットチェックなど）
 ├── src/
 │   ├── akizip.in              # エントリーポイントランチャー（meson により設定）
+│   ├── akizip.gresource.xml   # .ui ファイルをバンドルする GResource マニフェスト
 │   ├── AkizipApplication.py   # Adw.Application シングルトン
 │   ├── main.py                # プロセスエントリー
 │   ├── job_queue.py           # 単一スレッドのバックグラウンドワーカー
 │   ├── window.py / window.ui  # メインウィンドウ
-│   ├── plugins/               # 状態と長時間実行プラグイン
-│   └── ui/                    # ウィンドウ mixin（ログ、情報ダイアログなど）
+│   ├── *.ui                   # ダイアログ：追加、圧縮、展開、設定、ショートカット、移動先フォルダー選択
+│   ├── plugins/               # 状態と長時間実行プラグイン（sevenzip、system、status、password、context_menu など）
+│   └── ui/                    # ウィンドウ mixin（ログパネル、情報ダイアログ、追加ダイアログなど）
 ├── top.akizip.akizip.json     # Flatpak マニフェスト
 ├── update-po.sh               # 翻訳パイプライン
 └── meson.build
@@ -127,4 +112,8 @@ Akizip は **GNU General Public License v3.0 or later** の下で公開されて
 - [GTK](https://www.gtk.org/) と [libadwaita](https://gitlab.gnome.org/GNOME/libadwaita) — ツールキットとデザインライブラリです。GTK は GNOME Foundation の商標です。
 - [PyGObject](https://pygobject.readthedocs.io/) — GTK と関連コンポーネントの Python バインディングです。
 
-*GNOME および GNOME ロゴは GNOME Foundation の商標です。*
+*Akizip は独立したコミュニティプロジェクトであり、GNOME プロジェクトまたは GNOME Foundation と提携、承認、またはスポンサー関係にはありません。GNOME および GNOME ロゴは GNOME Foundation の商標です。*
+
+---
+
+*この README は AI によって翻訳されました。英語版と矛盾または相違がある場合は、[英語版](../README.md)が優先されます。*

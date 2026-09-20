@@ -117,5 +117,3 @@ The bundled `7zz` binary is provided by the upstream [7-Zip project](https://www
 ### Notices
 
 *Akizip is an independent community project and is not affiliated with, endorsed by, or sponsored by the GNOME Project or the GNOME Foundation. GNOME and the GNOME logo are trademarks of the GNOME Foundation.*
-
-*Translations of this README may be assisted by AI. If a translated version conflicts with or differs from this English version, this English version takes precedence.*

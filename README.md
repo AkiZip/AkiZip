@@ -33,7 +33,7 @@ A visual 7-Zip archive manager for Linux
 
 ### Features
 
-- **Format support** — Create `.7z`, `.zip`, and `.tar` archives; extract `.rar`, `.gz`, `.bz2`, `.xz`, `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.cab`, `.iso`, `.dmg`, `.wim`, `.arj`, `.lzh`, and many other formats; and browse the contents of most supported formats.
+- **Format support** — Create `.7z`, `.zip`, and `.tar` archives; extract `.rar`, `.gz`, `.bz2`, `.xz`, `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.iso`, and many other formats; and browse the contents of most supported formats.
 - **Smart recommendations** — Automatically recommend archive parameters based on the composition of the source files.
 - **Compression settings** — Manually adjust compression parameters and thread count; use password protection and 7z file-name encryption.
 - **Archive management** — View, create, move, and delete files inside archives without extracting them; inspect file lists and archive metadata; and open nested archives.

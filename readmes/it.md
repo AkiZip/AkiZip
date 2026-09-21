@@ -33,7 +33,7 @@ Un gestore grafico di archivi 7-Zip per Linux
 
 ### Funzionalità
 
-- **Formati supportati** — Consente di creare archivi `.7z`, `.zip` e `.tar`; estrarre `.rar`, `.gz`, `.bz2`, `.xz`, `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.cab`, `.iso`, `.dmg`, `.wim`, `.arj`, `.lzh` e molti altri formati; permette inoltre di esplorare direttamente il contenuto della maggior parte dei formati supportati.
+- **Formati supportati** — Consente di creare archivi `.7z`, `.zip` e `.tar`; estrarre `.rar`, `.gz`, `.bz2`, `.xz`, `.tar.gz`, `.tar.bz2`, `.tar.xz`, `.iso` e molti altri formati; permette inoltre di esplorare direttamente il contenuto della maggior parte dei formati supportati.
 - **Suggerimenti intelligenti** — Suggerisce automaticamente i parametri dell'archivio in base alla composizione dei file sorgente.
 - **Impostazioni di compressione** — Consente di regolare manualmente i parametri di compressione e il numero di thread; supporta la protezione con password e la crittografia dei nomi dei file 7z.
 - **Gestione degli archivi** — Permette di visualizzare, creare, spostare ed eliminare file all'interno degli archivi senza estrarli, consultare l'elenco dei file e i metadati e aprire archivi nidificati.

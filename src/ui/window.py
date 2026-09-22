@@ -1371,7 +1371,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         list_item.get_child().set_text(text)
 
     def _on_modified_bind(self, factory, list_item):
-        list_item.get_child().set_text(list_item.get_item().modified)
+        modified = list_item.get_item().modified.split('.', 1)[0]
+        list_item.get_child().set_text(modified)
 
     def _on_extract_entry_clicked(self, names):
         if not names:

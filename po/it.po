@@ -525,6 +525,7 @@ msgid "Preview not supported"
 msgstr "Anteprima non supportata"
 
 #: src/ui/window.py:1784
+#, fuzzy
 msgid "This format does not support preview. Only extract is available."
 msgstr "Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
 

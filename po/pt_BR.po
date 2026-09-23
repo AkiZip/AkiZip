@@ -222,6 +222,7 @@ msgid "No"
 msgstr "Não"
 
 #: src/ui/log_panel.py:50
+#, fuzzy
 msgid "Logs"
 msgstr "Relatórios"
 
@@ -834,7 +835,7 @@ msgstr "novo nome"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2226
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
 msgstr "Mover {file} para {new_name} em {archive}"
 
@@ -846,7 +847,7 @@ msgstr "Adicionar {file} para {destination} em {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2239
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Create folder {folder} in {archive}"
 msgstr "Excluir {folder} de {archive}"
 
@@ -907,6 +908,7 @@ msgid "Open an archive to view its contents"
 msgstr "Abrir um arquivo para visualizar seu conteúdo"
 
 #: src/window.ui:266
+#, fuzzy
 msgid "The selected file is not an archive"
 msgstr "O arquivo selecionado não é um arquivo válido"
 
@@ -1024,6 +1026,7 @@ msgid "0 uses the 7-Zip default."
 msgstr "0 utiliza os parâmetros padrão do 7-Zip."
 
 #: src/compress-dialog.ui:271 src/preferences.ui:131
+#, fuzzy
 msgid "Threads"
 msgstr "Processos"
 

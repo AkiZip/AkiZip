@@ -534,6 +534,7 @@ msgid "Preview not supported"
 msgstr "முன்னோட்டம் ஆதரிக்கப்படவில்லை"
 
 #: src/ui/window.py:1784
+#, fuzzy
 msgid "This format does not support preview. Only extract is available."
 msgstr "இந்த வடிவம் மாதிரிக்காட்சியை ஆதரிக்காது. சாறு மட்டுமே கிடைக்கிறது."
 
@@ -749,6 +750,7 @@ msgid "Added "
 msgstr "சேர்க்கப்பட்டது "
 
 #: src/ui/window.py:2141
+#, fuzzy
 msgid "Add timed out: "
 msgstr "காலாவதியானதைச் சேர்: "
 
@@ -815,7 +817,7 @@ msgstr "{archive} இலிருந்து காப்பகத் தகவ
 
 #. TRANSLATORS: {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:2186
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Extract {archive} to {folder}"
 msgstr "{archive} {folder} லிருந்து பிரித்தெடுக்கவும்"
 
@@ -827,7 +829,7 @@ msgstr "சோதனை {archive}"
 
 #. TRANSLATORS: {file} is the file inside the archive, {archive} is the archive name, {folder} is the destination folder
 #: src/ui/window.py:2198
-#, python-brace-format
+#, fuzzy, python-brace-format
 msgid "Extract {file} from {archive} to {folder}"
 msgstr "{folder} இலிருந்து {archive}க்கு {file} பிரித்தெடுக்கவும்"
 
@@ -838,6 +840,7 @@ msgid "Delete {file} from {archive}"
 msgstr "{archive} இலிருந்து {file} ஐ நீக்கு"
 
 #: src/ui/window.py:2211 src/ui/window.py:2231
+#, fuzzy
 msgid "root"
 msgstr "மூலம்"
 
@@ -906,6 +909,7 @@ msgid "Destination folder in archive"
 msgstr "இலக்கு கோப்புறை"
 
 #: src/window.ui:19
+#, fuzzy
 msgid "Main Menu"
 msgstr "ப்ளே பட்டியல்"
 
@@ -966,6 +970,7 @@ msgid "_About Akizip"
 msgstr "_Akizip பற்றி"
 
 #: src/window.ui:417 src/window.ui:429
+#, fuzzy
 msgid "Extract Selected"
 msgstr "பிரித்தெடுத்தல் தேர்ந்தெடுக்கப்பட்டது"
 
@@ -1012,6 +1017,7 @@ msgid "Compression level"
 msgstr "சுருக்க நிலை"
 
 #: src/compress-dialog.ui:199 src/preferences.ui:82
+#, fuzzy
 msgid "Store"
 msgstr "கடை"
 

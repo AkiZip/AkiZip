@@ -543,6 +543,7 @@ msgid "Preview not supported"
 msgstr "Aperçu non pris en charge"
 
 #: src/ui/window.py:1784
+#, fuzzy
 msgid "This format does not support preview. Only extract is available."
 msgstr ""
 "Ce format ne prend pas en charge l'aperçu. Seul l'extrait est disponible."
@@ -1064,6 +1065,7 @@ msgid "0 uses the 7-Zip default."
 msgstr "0 utilise les paramètres par défaut de 7-Zip."
 
 #: src/compress-dialog.ui:271 src/preferences.ui:131
+#, fuzzy
 msgid "Threads"
 msgstr "Processus"
 

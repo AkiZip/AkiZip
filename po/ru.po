@@ -197,6 +197,7 @@ msgid "Blocks"
 msgstr "Блоки"
 
 #: src/ui/info_dialog.py:210
+#, fuzzy
 msgid "Archive file"
 msgstr "Архивировать файл"
 

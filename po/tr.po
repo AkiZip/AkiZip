@@ -21,24 +21,29 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-19 12:58+0800\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2026-09-23 16:10+0000\n"
+"Last-Translator: Melih <mustafamelihbilsem05@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/akizip/akizip/"
+"tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
+#, fuzzy
 msgid "A modern front-end for 7-Zip on GNOME"
-msgstr ""
+msgstr "GNOME üzerinde 7-Zip için modern bir ön yüz"
 
 #: data/top.akizip.akizip.metainfo.xml.in:10
 msgid ""
 "Akizip is a graphical archive utility built with GTK 4 and libadwaita that "
 "brings the power of 7-Zip to the GNOME desktop."
 msgstr ""
+"Akizip, 7-Zip'in gücünü GNOME platformuna getiren GTK 4 ve libadwaita ile "
+"oluşturulmuş bir grafiksel arşiv aracıdır."
 
 #: data/top.akizip.akizip.metainfo.xml.in:11
 msgid ""
@@ -46,24 +51,29 @@ msgid ""
 "can also open (read-only) rar, gz, bz2, xz, tar.gz, tar.bz2, and tar.xz "
 "archives."
 msgstr ""
+"7z, zip ve tar formatlarında arşivler oluşturup ayıklamayı sağlar. Ayrıca "
+"yalnızca salt okunur biçimde rar, gz, bz2, xz, tar.gz, tar.bz2 ve tar.xz "
+"arşivlerini de açabilir."
 
 #: data/top.akizip.akizip.metainfo.xml.in:12
 msgid ""
 "Features include archive inspection, cancellable background jobs with "
 "progress reporting, a dedicated logs panel, and multilingual support."
 msgstr ""
+"Arşiv denetleme, ilerleme bildirimli ve iptal-edilebilir arka plan "
+"işlemleri, özel bir log paneli ve farklı dillerde destek içerir."
 
 #: data/top.akizip.akizip.metainfo.xml.in:40
 msgid "Main window showing archive contents and toolbar"
-msgstr ""
+msgstr "Ana pencere arşiv içeriklerini ve araç kutusunu göstermekte"
 
 #: src/ui/add_dialog.py:65
 msgid "Add to Archive"
-msgstr ""
+msgstr "Arşive ekle"
 
 #: src/ui/add_dialog.py:65
 msgid "Add files and folders to the current archive."
-msgstr ""
+msgstr "Bu arşive dosyaları ve klasörleri ekle."
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:324
 #: src/ui/window.py:409 src/ui/window.py:490 src/ui/window.py:607
@@ -72,101 +82,101 @@ msgstr ""
 #: src/ui/window.py:949 src/ui/window.py:1171 src/ui/window.py:1194
 #: src/move-folder-chooser.ui:51
 msgid "_Cancel"
-msgstr ""
+msgstr "_İptal et"
 
 #: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:895
 #: src/ui/window.py:917
 msgid "_Add"
-msgstr ""
+msgstr "_Ekle"
 
 #: src/ui/add_dialog.py:126 src/ui/window.py:869
 msgid "Source items ({})"
-msgstr ""
+msgstr "Kaynak eşyaları ({})"
 
 #: src/ui/add_dialog.py:138 src/ui/window.py:892
 msgid "Select Files"
-msgstr ""
+msgstr "Dosyaları seç"
 
 #: src/ui/add_dialog.py:144 src/ui/window.py:914
 msgid "Select Folders"
-msgstr ""
+msgstr "Klasörleri seç"
 
 #: src/ui/info_dialog.py:31 src/ui/window.py:1755
 msgid "System state not found"
-msgstr ""
+msgstr "Sistem durumu bulunamadı"
 
 #: src/ui/info_dialog.py:45 src/ui/info_dialog.py:52
 msgid "Archive"
-msgstr ""
+msgstr "Arşiv"
 
 #: src/ui/info_dialog.py:45
 msgid "Archive information is unavailable."
-msgstr ""
+msgstr "Arşiv bilgisi mevcut değil."
 
 #: src/ui/info_dialog.py:79
 msgid "Read archive information from "
-msgstr ""
+msgstr "Arşiv bilgisini şuradan oku "
 
 #: src/ui/info_dialog.py:86 src/ui/info_dialog.py:97 src/window.ui:214
 #: src/window.ui:228
 msgid "Info"
-msgstr ""
+msgstr "Bilgi"
 
 #: src/ui/info_dialog.py:115
 msgid "Close"
-msgstr ""
+msgstr "Kapat"
 
 #: src/ui/info_dialog.py:122
 msgid "Name"
-msgstr ""
+msgstr "Ad"
 
 #: src/ui/info_dialog.py:123 src/ui/window.py:1236
 msgid "Path"
-msgstr ""
+msgstr "Yol"
 
 #: src/ui/info_dialog.py:124
 msgid "Type"
-msgstr ""
+msgstr "Tür"
 
 #: src/ui/info_dialog.py:126 src/ui/window.py:1237
 msgid "Size"
-msgstr ""
+msgstr "Boyut"
 
 #: src/ui/info_dialog.py:127
 msgid "Can compress"
-msgstr ""
+msgstr "Sıkıştırılabilir"
 
 #: src/ui/info_dialog.py:128
 msgid "Can extract"
-msgstr ""
+msgstr "Ayıklanabilir"
 
 #: src/ui/info_dialog.py:154
 msgid "Copy"
-msgstr ""
+msgstr "Kopyala"
 
 #: src/ui/info_dialog.py:166
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "Panoya kopyalandı"
 
 #: src/ui/info_dialog.py:175
 msgid "No archive information found."
-msgstr ""
+msgstr "Hiçbir arşiv bilgisi bulunamadı."
 
 #: src/ui/info_dialog.py:179
 msgid "Loaded"
-msgstr ""
+msgstr "Yüklendi"
 
 #: src/ui/info_dialog.py:181
 msgid "Archive type"
-msgstr ""
+msgstr "Arşiv türü"
 
 #: src/ui/info_dialog.py:182
 msgid "Archive size"
-msgstr ""
+msgstr "Arşiv boyutu"
 
 #: src/ui/info_dialog.py:183
 msgid "Headers size"
-msgstr ""
+msgstr "Başlık boyutu"
 
 #: src/ui/info_dialog.py:184
 msgid "Method"

@@ -21,8 +21,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-19 12:58+0800\n"
-"PO-Revision-Date: 2026-08-25 01:51+0000\n"
-"Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
+"PO-Revision-Date: 2026-09-22 01:51+0000\n"
+"Last-Translator: Stysusss <158248053+stysus@users.noreply.github.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/akizip/akizip/"
 "id/>\n"
 "Language: id\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.9.dev0\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -303,18 +303,20 @@ msgid ""
 "Manual destination paths cannot contain '..'. Choose an existing folder "
 "using the folder button."
 msgstr ""
+"Jalur tujuan yang dimasukkan secara manual tidak boleh mengandung karakter "
+"‘..’. Pilih folder yang sudah ada menggunakan tombol folder."
 
 #: src/ui/window.py:350 src/ui/window.py:445
 msgid "Source and destination are the same"
-msgstr ""
+msgstr "Asal dan tujuan sama"
 
 #: src/ui/window.py:370
 msgid "Move {} items to folder:"
-msgstr ""
+msgstr "Pindahkan {} item ke folder:"
 
 #: src/ui/window.py:437
 msgid "Cannot move a folder into itself"
-msgstr ""
+msgstr "Tidak bisa memindahkan folder ke dalam dirinya sendiri"
 
 #: src/ui/window.py:470 src/ui/window.py:473
 msgid "Rename failed"
@@ -322,7 +324,7 @@ msgstr "Pengubahan nama gagal"
 
 #: src/ui/window.py:478
 msgid "Select exactly one item to rename"
-msgstr ""
+msgstr "Pilih tepat satu item untuk diganti namanya"
 
 #: src/ui/window.py:484 src/window.ui:445
 msgid "Rename"
@@ -354,10 +356,8 @@ msgstr "Apakah Anda yakin ingin menghapus \"{}\"?"
 
 #. TRANSLATORS: {} is the number of selected archive entries
 #: src/ui/window.py:605
-#, fuzzy
-#| msgid "Are you sure you want to delete \"{}\"?"
 msgid "Are you sure you want to delete {} items?"
-msgstr "Apakah Anda yakin ingin menghapus \"{}\"?"
+msgstr "Apakah Anda yakin ingin menghapus {} item?"
 
 #: src/ui/window.py:606 src/window.ui:190 src/window.ui:204 src/window.ui:449
 msgid "Delete"
@@ -956,6 +956,9 @@ msgid ""
 "This filename starts with \".\" and will be hidden. In your file manager, "
 "enable \"Show Hidden Files\" (usually Ctrl+H)."
 msgstr ""
+"Nama file ini diawali dengan “.” dan akan disembunyikan. Di pengelola file "
+"Anda, aktifkan opsi “Tampilkan File Tersembunyi” (biasanya dengan menekan "
+"Ctrl+H)."
 
 #: src/compress-dialog.ui:82 src/preferences.ui:60
 msgid "Format"

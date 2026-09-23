@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-19 12:58+0800\n"
-"PO-Revision-Date: 2026-06-09 05:04+0000\n"
+"PO-Revision-Date: 2026-09-22 01:51+0000\n"
 "Last-Translator: teste celular <teste.aparelho.mail@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "akizip/akizip/pt_BR/>\n"
@@ -36,7 +36,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.6\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -75,16 +75,12 @@ msgstr ""
 "Janela principal mostrando o conteúdo do arquivo e a barra de ferramentas"
 
 #: src/ui/add_dialog.py:65
-#, fuzzy
-#| msgid "Archive"
 msgid "Add to Archive"
-msgstr "Arquivo"
+msgstr "Adicionar ao Arquivo"
 
 #: src/ui/add_dialog.py:65
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Add files and folders to the current archive."
-msgstr "Adicione um arquivo ao arquivo atual."
+msgstr "Adicionar arquivos e pastas ao arquivo atual."
 
 #: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:324
 #: src/ui/window.py:409 src/ui/window.py:490 src/ui/window.py:607
@@ -314,46 +310,44 @@ msgid ""
 "Manual destination paths cannot contain '..'. Choose an existing folder "
 "using the folder button."
 msgstr ""
+"Os caminhos de destino manuais não podem conter '..'. Escolha uma pasta "
+"existente usando o botão pasta."
 
 #: src/ui/window.py:350 src/ui/window.py:445
 msgid "Source and destination are the same"
-msgstr ""
+msgstr "Origem e destino são iguais"
 
 #: src/ui/window.py:370
 msgid "Move {} items to folder:"
-msgstr ""
+msgstr "Mover {} itens para a pasta:"
 
 #: src/ui/window.py:437
 msgid "Cannot move a folder into itself"
-msgstr ""
+msgstr "Não é possível mover uma pasta para dentro de si mesma"
 
 #: src/ui/window.py:470 src/ui/window.py:473
-#, fuzzy
-#| msgid "Delete failed"
 msgid "Rename failed"
-msgstr "Falha ao excluir"
+msgstr "Falha ao renomear"
 
 #: src/ui/window.py:478
 msgid "Select exactly one item to rename"
-msgstr ""
+msgstr "Selecione exatamente um item para renomear"
 
 #: src/ui/window.py:484 src/window.ui:445
 msgid "Rename"
-msgstr ""
+msgstr "Renomear"
 
 #: src/ui/window.py:484
-#, fuzzy
-#| msgid "Move \"{}\" to:"
 msgid "Rename \"{}\" to:"
-msgstr "Mover \"{}\" para:"
+msgstr "Renomear \"{}\" para:"
 
 #: src/ui/window.py:491
 msgid "_Rename"
-msgstr ""
+msgstr "_Renomear"
 
 #: src/ui/window.py:507
 msgid "Invalid name"
-msgstr ""
+msgstr "Nome inválido"
 
 #: src/ui/window.py:536 src/ui/window.py:540
 msgid "Add failed"
@@ -369,10 +363,8 @@ msgstr "Tem certeza de que deseja excluir \"{}\"?"
 
 #. TRANSLATORS: {} is the number of selected archive entries
 #: src/ui/window.py:605
-#, fuzzy
-#| msgid "Are you sure you want to delete \"{}\"?"
 msgid "Are you sure you want to delete {} items?"
-msgstr "Tem certeza de que deseja excluir \"{}\"?"
+msgstr "Tem certeza de que deseja excluir \"{}\" itens?"
 
 #: src/ui/window.py:606 src/window.ui:190 src/window.ui:204 src/window.ui:449
 msgid "Delete"
@@ -383,33 +375,25 @@ msgid "_Delete"
 msgstr "_Excluir"
 
 #: src/ui/window.py:646 src/ui/window.py:649
-#, fuzzy
-#| msgid "Delete failed"
 msgid "New folder failed"
-msgstr "Falha ao excluir"
+msgstr "Falha ao criar nova pasta"
 
 #: src/ui/window.py:652 src/ui/window.py:654 src/window.ui:457
 #: src/window.ui:469
-#, fuzzy
-#| msgid "Folder"
 msgid "New Folder"
-msgstr "Pasta"
+msgstr "Nova Pasta"
 
 #: src/ui/window.py:652
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Create a new folder in the current archive."
-msgstr "Adicione um arquivo ao arquivo atual."
+msgstr "Criar um nova pasta ao arquivo atual."
 
 #: src/ui/window.py:659
-#, fuzzy
-#| msgid "Create "
 msgid "_Create"
-msgstr "Criar "
+msgstr "_Criar"
 
 #: src/ui/window.py:675
 msgid "Invalid folder name"
-msgstr ""
+msgstr "Nome de pasta inválido"
 
 #: src/ui/window.py:704
 msgid "Extract failed"
@@ -726,29 +710,23 @@ msgstr "Falha ao mover: "
 
 #: src/ui/window.py:2121 src/ui/window.py:2123
 msgid "Rename "
-msgstr ""
+msgstr "Renomear "
 
 #: src/ui/window.py:2125
 msgid "Renamed "
-msgstr ""
+msgstr "Renomeado "
 
 #: src/ui/window.py:2127
-#, fuzzy
-#| msgid "Open timed out: "
 msgid "Rename timed out: "
-msgstr "Tempo limite de abertura esgotado: "
+msgstr "Tempo limite para renomear esgotado: "
 
 #: src/ui/window.py:2129
-#, fuzzy
-#| msgid "Open cancelled: "
 msgid "Rename cancelled: "
-msgstr "Abertura cancelada: "
+msgstr "Renomear cancelado: "
 
 #: src/ui/window.py:2130
-#, fuzzy
-#| msgid "Open failed: "
 msgid "Rename failed: "
-msgstr "Falha ao abrir: "
+msgstr "Falha ao renomear: "
 
 #: src/ui/window.py:2135 src/ui/window.py:2137
 msgid "Add "
@@ -776,34 +754,24 @@ msgid "folder"
 msgstr "pasta"
 
 #: src/ui/window.py:2149 src/ui/window.py:2151
-#, fuzzy
-#| msgid "Create "
 msgid "Create folder "
-msgstr "Criar "
+msgstr "Criar pasta "
 
 #: src/ui/window.py:2153
-#, fuzzy
-#| msgid "Create "
 msgid "Created folder "
-msgstr "Criar "
+msgstr "Pasta criada "
 
 #: src/ui/window.py:2155
-#, fuzzy
-#| msgid "Delete timed out: "
 msgid "Create folder timed out: "
-msgstr "Tempo limite de exclusão esgotado: "
+msgstr "Tempo limite de criação de pasta esgotado: "
 
 #: src/ui/window.py:2157
-#, fuzzy
-#| msgid "Delete cancelled: "
 msgid "Create folder cancelled: "
-msgstr "Exclusão cancelada: "
+msgstr "Criação de pasta cancelada: "
 
 #: src/ui/window.py:2158
-#, fuzzy
-#| msgid "Delete failed: "
 msgid "Create folder failed: "
-msgstr "Falha ao excluir: "
+msgstr "Falha ao criar pasta: "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:2171
@@ -863,14 +831,13 @@ msgstr "Mover {file} para {destination} em {archive}"
 
 #: src/ui/window.py:2224
 msgid "new name"
-msgstr ""
+msgstr "novo nome"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2226
-#, fuzzy, python-brace-format
-#| msgid "Move {file} to {destination} in {archive}"
+#, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr "Mover {file} para {destination} em {archive}"
+msgstr "Mover {file} para {new_name} em {archive}"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:2233
@@ -880,10 +847,9 @@ msgstr "Adicionar {file} para {destination} em {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2239
-#, fuzzy, python-brace-format
-#| msgid "Delete {file} from {archive}"
+#, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr "Excluir {file} de {archive}"
+msgstr "Excluir {folder} de {archive}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
@@ -910,10 +876,8 @@ msgid "Destination"
 msgstr "Destino"
 
 #: src/add-dialog.ui:74
-#, fuzzy
-#| msgid "Destination folder"
 msgid "Destination folder in archive"
-msgstr "Pasta de destino"
+msgstr "Pasta de destino no arquivo"
 
 #: src/window.ui:19
 msgid "Main Menu"
@@ -1000,6 +964,8 @@ msgid ""
 "This filename starts with \".\" and will be hidden. In your file manager, "
 "enable \"Show Hidden Files\" (usually Ctrl+H)."
 msgstr ""
+"Este nome de arquivo começa com \".\" e ficará oculto. No seu gerenciador de "
+"arquivos, ative \"Mostrar arquivos ocultos\" (geralmente Ctrl+H)."
 
 #: src/compress-dialog.ui:82 src/preferences.ui:60
 msgid "Format"

@@ -1110,13 +1110,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     folder = Path(folder_text).expanduser()
                 fmt = format_combo.get_active_id() or '7z'
                 output_path = folder / f'{name}.{fmt}'
-                if output_path.exists():
-                    overwrite_dialog = Adw.AlertDialog.new(_('Overwrite is not currently supported'), None)
-                    overwrite_dialog.add_response('ok', _('_OK'))
-                    overwrite_dialog.set_default_response('ok')
-                    overwrite_dialog.set_close_response('ok')
-                    overwrite_dialog.present(self)
-                    return
                 paths = [Path(p) for p in source_paths]
                 options = {
                     'format': fmt,
@@ -1127,7 +1120,38 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     'password': password_entry.get_text(),
                     'encrypt_names': encrypt_names_check.get_active(),
                 }
-                self._run_advanced_compress_multi(output_path, paths, options)
+
+                def start_compress():
+                    self._run_advanced_compress_multi(output_path, paths, options)
+
+                if not output_path.exists():
+                    start_compress()
+                    return
+
+                replace_dialog = Adw.AlertDialog.new(
+                    _('Replace existing file?'),
+                    # TRANSLATORS: {} is the archive filename
+                    _('A file named "{}" already exists. It will be permanently deleted and replaced.').format(output_path.name),
+                )
+                replace_dialog.add_response('cancel', _('_Cancel'))
+                replace_dialog.add_response('replace', _('_Replace'))
+                replace_dialog.set_response_appearance('replace', Adw.ResponseAppearance.DESTRUCTIVE)
+                replace_dialog.set_default_response('cancel')
+                replace_dialog.set_close_response('cancel')
+
+                def on_replace_response(_rd, replace_response):
+                    if replace_response != 'replace':
+                        return
+                    try:
+                        output_path.unlink()
+                    except OSError as error:
+                        self._append_log(_('Delete failed'), str(error), _status.ERROR)
+                        self._show_notification(_('Delete failed'), _status.ERROR)
+                        return
+                    start_compress()
+
+                replace_dialog.connect('response', on_replace_response)
+                replace_dialog.present(self)
 
         dialog.connect('response', on_response)
         dialog.present(self)

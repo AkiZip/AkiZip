@@ -149,7 +149,7 @@ class FolderChooserDialog:
         self._update_entry()
 
     def _on_list_pressed(self, _gesture, n_press, _x, y):
-        if n_press != 2:
+        if n_press % 2 != 0:
             return
         row = self.folder_list.get_row_at_y(int(y))
         if row is not None:

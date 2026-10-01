@@ -1091,8 +1091,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         add_folders_btn.connect('clicked', on_add_folders)
         remove_btn.connect('clicked', on_remove)
         folder_browse.connect('clicked', on_browse_folder)
-        folder_entry.connect('activate', lambda _e: dialog.response('confirm'))
-        filename_entry.connect('activate', lambda _e: dialog.response('confirm'))
+        folder_entry.set_activates_default(True)
+        filename_entry.set_activates_default(True)
         suggest_btn.connect('clicked', on_suggest)
 
         def on_response(_d, response):
@@ -1204,7 +1204,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         browse_button.connect('clicked',
             lambda _btn: self._open_folder_chooser_for_entry(entry, on_picked=on_picked))
-        entry.connect('activate', lambda _e: dialog.response('confirm'))
+        entry.set_activates_default(True)
 
         def on_response(_d, response):
             if response == 'confirm':

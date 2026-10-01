@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-09-19 12:58+0800\n"
-"PO-Revision-Date: 2026-09-23 16:32+0000\n"
+"PO-Revision-Date: 2026-09-28 05:54+0000\n"
 "Last-Translator: teste celular <teste.aparelho.mail@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "akizip/akizip/pt_BR/>\n"
@@ -222,9 +222,8 @@ msgid "No"
 msgstr "Não"
 
 #: src/ui/log_panel.py:50
-#, fuzzy
 msgid "Logs"
-msgstr "Relatórios"
+msgstr "Registros"
 
 #: src/ui/log_panel.py:114 src/ui/window.py:1848
 msgid "Cancel"
@@ -316,7 +315,7 @@ msgstr ""
 
 #: src/ui/window.py:350 src/ui/window.py:445
 msgid "Source and destination are the same"
-msgstr "Origem e destino são iguais"
+msgstr "Origem e destino são os mesmos"
 
 #: src/ui/window.py:370
 msgid "Move {} items to folder:"
@@ -835,9 +834,9 @@ msgstr "novo nome"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2226
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr "Mover {file} para {new_name} em {archive}"
+msgstr "Renomear {file} para {new_name} em {archive}"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:2233
@@ -847,9 +846,9 @@ msgstr "Adicionar {file} para {destination} em {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2239
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr "Excluir {folder} de {archive}"
+msgstr "Criar pasta {folder} em {archive}"
 
 #: src/ui/move_folder_chooser.py:103
 msgid "(root)"
@@ -908,9 +907,8 @@ msgid "Open an archive to view its contents"
 msgstr "Abrir um arquivo para visualizar seu conteúdo"
 
 #: src/window.ui:266
-#, fuzzy
 msgid "The selected file is not an archive"
-msgstr "O arquivo selecionado não é um arquivo válido"
+msgstr "O arquivo selecionado não é um arquivo"
 
 #: src/window.ui:291
 msgid "This archive is empty"
@@ -1010,7 +1008,7 @@ msgstr "Máximo"
 
 #: src/compress-dialog.ui:204 src/preferences.ui:87
 msgid "Ultra"
-msgstr "Ultra"
+msgstr "Ultra rápido"
 
 #: src/compress-dialog.ui:215 src/preferences.ui:95
 msgid "Algorithm"
@@ -1026,9 +1024,8 @@ msgid "0 uses the 7-Zip default."
 msgstr "0 utiliza os parâmetros padrão do 7-Zip."
 
 #: src/compress-dialog.ui:271 src/preferences.ui:131
-#, fuzzy
 msgid "Threads"
-msgstr "Processos"
+msgstr "Subprocessos"
 
 #: src/compress-dialog.ui:300
 msgid "Password"

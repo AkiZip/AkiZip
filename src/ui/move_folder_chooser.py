@@ -18,7 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 from gettext import gettext as _
 
-from gi.repository import Gtk
+from gi.repository import Gdk, Gtk
 
 
 class FolderChooserDialog:
@@ -33,12 +33,19 @@ class FolderChooserDialog:
 
         self._folder_set = set()
         self._current_path = ''
+        self._browse_path = ''
         self._source_path = ''
         self._on_select = None
         self._row_paths = {}
-        self._last_activated_row = None
 
-        self.folder_list.connect('row-activated', self._on_row_activated)
+        self.folder_list.connect('row-selected', self._on_row_selected)
+        click_gesture = Gtk.GestureClick()
+        click_gesture.set_button(0)
+        click_gesture.connect('pressed', self._on_list_pressed)
+        self.folder_list.add_controller(click_gesture)
+        key_controller = Gtk.EventControllerKey()
+        key_controller.connect('key-pressed', self._on_list_key_pressed)
+        self.folder_list.add_controller(key_controller)
         self.cancel_button.connect('clicked', self._on_cancel_clicked)
         self.select_button.connect('clicked', self._on_select_clicked)
 
@@ -47,6 +54,7 @@ class FolderChooserDialog:
 
     def set_current_path(self, path):
         self._current_path = path
+        self._browse_path = path
         self._render()
 
     def set_source_path(self, path):
@@ -91,11 +99,9 @@ class FolderChooserDialog:
 
     def _render(self):
         self._clear_list()
-        self._last_activated_row = None
-        display_path = '/' + self._current_path if self._current_path else '/'
-        self.current_path_entry.set_text(display_path)
+        self._update_entry()
 
-        if self._current_path:
+        if self._browse_path:
             row = self._make_row('..', 'go-up-symbolic')
             self._row_paths[row] = '..'
             self.folder_list.append(row)
@@ -104,7 +110,7 @@ class FolderChooserDialog:
             self._row_paths[row] = ''
             self.folder_list.append(row)
 
-        for child in self._get_direct_children(self._current_path):
+        for child in self._get_direct_children(self._browse_path):
             name = child.split('/')[-1]
             row = self._make_row(name, 'folder-symbolic')
             self._row_paths[row] = child
@@ -128,32 +134,53 @@ class FolderChooserDialog:
         row.set_child(box)
         return row
 
-    def _on_row_activated(self, listbox, row):
+    def _update_entry(self):
+        display_path = '/' + self._current_path if self._current_path else '/'
+        self.current_path_entry.set_text(display_path)
+
+    def _on_row_selected(self, _listbox, row):
+        if row is None:
+            return
+        path = self._row_paths.get(row)
+        if path in ('..', ''):
+            self._current_path = self._browse_path
+        elif path:
+            self._current_path = path
+        self._update_entry()
+
+    def _on_list_pressed(self, _gesture, n_press, _x, y):
+        if n_press % 2 != 0:
+            return
+        row = self.folder_list.get_row_at_y(int(y))
+        if row is not None:
+            self._enter_row(row)
+
+    def _on_list_key_pressed(self, _controller, keyval, _keycode, _state):
+        if keyval in (Gdk.KEY_Return, Gdk.KEY_KP_Enter):
+            row = self.folder_list.get_selected_row()
+            if row is not None:
+                self._enter_row(row)
+                return True
+        return False
+
+    def _enter_row(self, row):
         path = self._row_paths.get(row)
         if path in ('..', ''):
             if path == '..':
-                self._current_path = self._parent_path(self._current_path)
+                self._navigate_to(self._parent_path(self._browse_path))
             else:
-                self._current_path = ''
-            self._last_activated_row = None
-            self._render()
+                self._navigate_to('')
             return
 
         if self._source_path and (path == self._source_path or path.startswith(self._source_path + '/')):
             return
 
-        if self._last_activated_row == row:
-            if path and self._get_direct_children(path):
-                self._current_path = path
-                self._last_activated_row = None
-                self._render()
-        else:
-            self._last_activated_row = row
-            listbox.select_row(row)
-            if path:
-                self._current_path = path
-            display_path = '/' + self._current_path if self._current_path else '/'
-            self.current_path_entry.set_text(display_path)
+        self._navigate_to(path)
+
+    def _navigate_to(self, path):
+        self._browse_path = path
+        self._current_path = path
+        self._render()
 
     def _on_cancel_clicked(self, _button):
         self.window.destroy()

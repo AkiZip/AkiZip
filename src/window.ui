@@ -391,6 +391,11 @@
             <attribute name="action">app.language</attribute>
             <attribute name="target">id</attribute>
           </item>
+          <item>
+            <attribute name="label">Türkçe</attribute>
+            <attribute name="action">app.language</attribute>
+            <attribute name="target">tr</attribute>
+          </item>
         </section>
       </submenu>
     </section>

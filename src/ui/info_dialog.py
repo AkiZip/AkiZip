@@ -186,7 +186,13 @@ class InfoDialogMixin:
             ('Blocks', _('Blocks')),
         ):
             if key in archive_info:
-                self._add_info_row(grid, label, archive_info[key])
+                value = archive_info[key]
+                if key in ('Physical Size', 'Headers Size'):
+                    try:
+                        value = self._format_size(value)
+                    except (TypeError, ValueError):
+                        pass
+                self._add_info_row(grid, label, value)
 
     def _parse_archive_info(self, output):
         info = {}

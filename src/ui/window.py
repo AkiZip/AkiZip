@@ -116,9 +116,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._present_compress_dialog()
 
 
-    def _default_compress_format(self):
-        return self._default_compress_options()['format']
-
     def _default_compress_options(self):
         options = {
             'format': '7z',
@@ -796,15 +793,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _present_compress_dialog(self):
         source_paths = []
-        last_output = {'display': None, 'op': None}
+        last_folder = {'display': None, 'op': None}
         default_options = self._default_compress_options()
 
         builder = Gtk.Builder.new_from_resource('/top/akizip/akizip/compress-dialog.ui')
         content = builder.get_object('content')
-        output_entry = builder.get_object('output_entry')
-        output_entry.set_editable(not _IS_FLATPAK)
+        folder_entry = builder.get_object('folder_entry')
+        folder_entry.set_editable(not _IS_FLATPAK)
+        filename_entry = builder.get_object('filename_entry')
         output_hidden_warning = builder.get_object('output_hidden_warning')
-        output_browse = builder.get_object('output_browse')
+        folder_browse = builder.get_object('folder_browse')
         source_label = builder.get_object('source_label')
         source_list = builder.get_object('source_list')
         add_files_btn = builder.get_object('add_files_btn')
@@ -850,6 +848,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.set_default_response('confirm')
         dialog.set_close_response('cancel')
 
+        def update_confirm():
+            confirm_sensitive = (len(source_paths) > 0
+                                 and bool(folder_entry.get_text().strip())
+                                 and bool(filename_entry.get_text().strip()))
+            dialog.set_response_enabled('confirm', confirm_sensitive)
+
         def update_source_list():
             while True:
                 row = source_list.get_first_child()
@@ -868,19 +872,19 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 source_list.append(label)
             source_label.set_label(_('Source items ({})').format(len(source_paths)))
             remove_btn.set_sensitive(False)
-            confirm_sensitive = len(source_paths) > 0 and output_entry.get_text().strip()
-            dialog.set_response_enabled('confirm', confirm_sensitive)
+            update_confirm()
 
-        def on_output_changed(_entry):
-            text = output_entry.get_text().strip()
-            output_hidden_warning.set_visible(text.rsplit('/', 1)[-1].startswith('.'))
-            confirm_sensitive = len(source_paths) > 0 and text
-            dialog.set_response_enabled('confirm', confirm_sensitive)
-            suffix = Path(text).suffix.lstrip('.').lower()
-            if suffix in ('7z', 'tar', 'zip') and format_combo.get_active_id() != suffix:
-                format_combo.set_active_id(suffix)
+        def on_folder_changed(_entry):
+            update_confirm()
 
-        output_entry.connect('changed', on_output_changed)
+        def on_filename_changed(_entry):
+            text = filename_entry.get_text().strip()
+            output_hidden_warning.set_visible(text.startswith('.'))
+            update_confirm()
+
+        folder_entry.connect('changed', on_folder_changed)
+        filename_entry.connect('changed', on_filename_changed)
+        update_confirm()
 
         def on_source_selected(_list, row):
             remove_btn.set_sensitive(row is not None)
@@ -940,45 +944,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 source_paths.pop(idx)
                 update_source_list()
 
-        def on_browse_output(_btn):
-            chooser = Gtk.FileChooserNative.new(
-                _('Save Archive As'),
-                self,
-                Gtk.FileChooserAction.SAVE,
-                _('_Save'),
-                _('_Cancel'),
-            )
-            if source_paths:
-                archive_format = format_combo.get_active_id() or self._default_compress_format()
-                default_name = Path(source_paths[0]).name + f'.{archive_format}'
-                chooser.set_current_name(default_name)
+        def on_browse_folder(_btn):
+            def on_picked(display, op):
+                last_folder['display'] = display
+                last_folder['op'] = op
 
-            def on_response(c, response):
-                if response == Gtk.ResponseType.ACCEPT:
-                    file = c.get_file()
-                    if file is not None:
-                        op = file.get_path()
-                        if op is not None:
-                            display = _host_path(op)
-                            display_path = Path(display)
-                            suffix = display_path.suffix.lstrip('.').lower()
-                            if suffix not in ('7z', 'tar', 'zip'):
-                                op = str(Path(op).with_suffix('.7z'))
-                                display = str(display_path.with_suffix('.7z'))
-                            if Path(op).exists():
-                                dialog = Adw.AlertDialog.new(_('Overwrite is not currently supported'), None)
-                                dialog.add_response('ok', _('_OK'))
-                                dialog.set_default_response('ok')
-                                dialog.set_close_response('ok')
-                                dialog.present(self)
-                            else:
-                                output_entry.set_text(display)
-                                last_output['display'] = display
-                                last_output['op'] = op
-                c.destroy()
-
-            chooser.connect('response', on_response)
-            chooser.show()
+            self._open_folder_chooser_for_entry(folder_entry, on_picked=on_picked)
 
         def on_format_changed(combo):
             fmt = combo.get_active_id() or '7z'
@@ -992,16 +963,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             encrypt_names_check.set_sensitive(fmt == '7z')
             if fmt != '7z':
                 encrypt_names_check.set_active(False)
-            text = output_entry.get_text().strip()
-            if text:
-                op_path = Path(text)
-                suffix = op_path.suffix.lstrip('.').lower()
-                if suffix in ('7z', 'tar', 'zip') and suffix != fmt:
-                    new_text = str(op_path.with_suffix(f'.{fmt}'))
-                    output_entry.set_text(new_text)
-                    if last_output['display'] == text and last_output['op']:
-                        last_output['display'] = new_text
-                        last_output['op'] = str(Path(last_output['op']).with_suffix(f'.{fmt}'))
 
         format_combo.connect('changed', on_format_changed)
         on_format_changed(format_combo)
@@ -1129,22 +1090,29 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         add_files_btn.connect('clicked', on_add_files)
         add_folders_btn.connect('clicked', on_add_folders)
         remove_btn.connect('clicked', on_remove)
-        output_browse.connect('clicked', on_browse_output)
-        output_entry.connect('activate', lambda _e: dialog.response('confirm'))
+        folder_browse.connect('clicked', on_browse_folder)
+        folder_entry.set_activates_default(True)
+        filename_entry.set_activates_default(True)
         suggest_btn.connect('clicked', on_suggest)
 
         def on_response(_d, response):
             if response == 'confirm':
-                text = output_entry.get_text().strip()
-                if not text or not source_paths:
+                folder_text = folder_entry.get_text().strip()
+                name = filename_entry.get_text().strip().strip('/')
+                if not folder_text or not name or not source_paths:
                     return
-                if last_output['display'] == text and last_output['op']:
-                    output_path = Path(last_output['op'])
+                if '/' in name or name in ('.', '..'):
+                    self._show_notification(_('Invalid name'), _status.ERROR)
+                    return
+                if last_folder['display'] == folder_text and last_folder['op']:
+                    folder = Path(last_folder['op'])
                 else:
-                    output_path = Path(text).expanduser()
+                    folder = Path(folder_text).expanduser()
+                fmt = format_combo.get_active_id() or '7z'
+                output_path = folder / f'{name}.{fmt}'
                 paths = [Path(p) for p in source_paths]
                 options = {
-                    'format': format_combo.get_active_id() or '7z',
+                    'format': fmt,
                     'level': int(level_combo.get_active_id() or '5'),
                     'method': method_combo.get_active_id() or 'default',
                     'dictionary_size': dictionary_spin.get_value_as_int(),
@@ -1152,7 +1120,38 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     'password': password_entry.get_text(),
                     'encrypt_names': encrypt_names_check.get_active(),
                 }
-                self._run_advanced_compress_multi(output_path, paths, options)
+
+                def start_compress():
+                    self._run_advanced_compress_multi(output_path, paths, options)
+
+                if not output_path.exists():
+                    start_compress()
+                    return
+
+                replace_dialog = Adw.AlertDialog.new(
+                    _('Replace existing file?'),
+                    # TRANSLATORS: {} is the archive filename
+                    _('A file named "{}" already exists. It will be permanently deleted and replaced.').format(output_path.name),
+                )
+                replace_dialog.add_response('cancel', _('_Cancel'))
+                replace_dialog.add_response('replace', _('_Replace'))
+                replace_dialog.set_response_appearance('replace', Adw.ResponseAppearance.DESTRUCTIVE)
+                replace_dialog.set_default_response('cancel')
+                replace_dialog.set_close_response('cancel')
+
+                def on_replace_response(_rd, replace_response):
+                    if replace_response != 'replace':
+                        return
+                    try:
+                        output_path.unlink()
+                    except OSError as error:
+                        self._append_log(_('Delete failed'), str(error), _status.ERROR)
+                        self._show_notification(_('Delete failed'), _status.ERROR)
+                        return
+                    start_compress()
+
+                replace_dialog.connect('response', on_replace_response)
+                replace_dialog.present(self)
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -1205,7 +1204,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         browse_button.connect('clicked',
             lambda _btn: self._open_folder_chooser_for_entry(entry, on_picked=on_picked))
-        entry.connect('activate', lambda _e: dialog.response('confirm'))
+        entry.set_activates_default(True)
 
         def on_response(_d, response):
             if response == 'confirm':
@@ -1371,7 +1370,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         list_item.get_child().set_text(text)
 
     def _on_modified_bind(self, factory, list_item):
-        list_item.get_child().set_text(list_item.get_item().modified)
+        modified = list_item.get_item().modified.split('.', 1)[0]
+        list_item.get_child().set_text(modified)
 
     def _on_extract_entry_clicked(self, names):
         if not names:

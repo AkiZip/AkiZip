@@ -15,8 +15,8 @@
         <property name="hexpand">true</property>
 
         <child>
-          <object class="GtkLabel" id="output_label">
-            <property name="label" translatable="yes">Output archive</property>
+          <object class="GtkLabel" id="folder_label">
+            <property name="label" translatable="yes">Output folder</property>
             <property name="xalign">0</property>
           </object>
         </child>
@@ -26,15 +26,44 @@
             <property name="orientation">horizontal</property>
             <property name="spacing">6</property>
             <child>
-              <object class="GtkEntry" id="output_entry">
+              <object class="GtkEntry" id="folder_entry">
                 <property name="hexpand">true</property>
-                <property name="placeholder-text" translatable="yes">Select output archive path</property>
+                <property name="placeholder-text" translatable="yes">Select output folder</property>
               </object>
             </child>
             <child>
-              <object class="GtkButton" id="output_browse">
-                <property name="icon-name">document-save-symbolic</property>
-                <property name="tooltip-text" translatable="yes">Select Output Archive</property>
+              <object class="GtkButton" id="folder_browse">
+                <property name="icon-name">folder-open-symbolic</property>
+                <property name="tooltip-text" translatable="yes">Select Output Folder</property>
+              </object>
+            </child>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkLabel" id="filename_label">
+            <property name="label" translatable="yes">Filename</property>
+            <property name="xalign">0</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">horizontal</property>
+            <property name="spacing">6</property>
+            <child>
+              <object class="GtkEntry" id="filename_entry">
+                <property name="hexpand">true</property>
+                <property name="placeholder-text" translatable="yes">Archive filename</property>
+              </object>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="format_combo">
+                <items>
+                  <item translatable="no" id="7z">.7z</item>
+                  <item translatable="no" id="tar">.tar</item>
+                  <item translatable="no" id="zip">.zip</item>
+                </items>
               </object>
             </child>
           </object>
@@ -71,36 +100,6 @@
 
         <child>
           <object class="GtkSeparator" />
-        </child>
-
-        <child>
-          <object class="GtkBox">
-            <property name="orientation">horizontal</property>
-            <property name="spacing">6</property>
-            <child>
-              <object class="GtkLabel">
-                <property name="label" translatable="yes">Format</property>
-                <property name="xalign">0</property>
-                <property name="valign">center</property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="format_combo">
-                <property name="hexpand">true</property>
-                <items>
-                  <item translatable="no" id="7z">7z</item>
-                  <item translatable="no" id="tar">tar</item>
-                  <item translatable="no" id="zip">zip</item>
-                </items>
-              </object>
-            </child>
-            <child>
-              <object class="GtkButton" id="suggest_btn">
-                <property name="label" translatable="yes">Auto Recommend</property>
-                <property name="tooltip-text" translatable="yes">Scan source files and recommend format and parameters</property>
-              </object>
-            </child>
-          </object>
         </child>
 
         <child>
@@ -352,6 +351,20 @@
               </object>
             </child>
 
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkBox">
+            <property name="vexpand">true</property>
+          </object>
+        </child>
+
+        <child>
+          <object class="GtkButton" id="suggest_btn">
+            <property name="label" translatable="yes">Auto Recommend</property>
+            <property name="tooltip-text" translatable="yes">Scan source files and recommend format and parameters</property>
+            <property name="hexpand">true</property>
           </object>
         </child>
       </object>

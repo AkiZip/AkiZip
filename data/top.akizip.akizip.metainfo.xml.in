@@ -42,6 +42,19 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.1" date="2026-10-02">
+      <description translate="no">
+        <p>Compress UI refresh, overwrite support, and bug fixes</p>
+        <ul>
+          <li>Lightly refactored the compress UI</li>
+          <li>Added support for overwriting archives when compressing</li>
+          <li>Reworked the double-click logic of the internal folder chooser</li>
+          <li>Fixed time display in the home page table</li>
+          <li>Fixed unformatted file sizes on the details page</li>
+          <li>Added Turkish (tr) translation support</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.0" date="2026-09-19">
       <description translate="no">
         <p>Multi-select support and move operation fixes</p>

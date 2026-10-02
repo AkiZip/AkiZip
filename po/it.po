@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-19 12:58+0800\n"
-"PO-Revision-Date: 2026-06-07 20:01+0000\n"
+"POT-Creation-Date: 2026-10-01 12:44+0800\n"
+"PO-Revision-Date: 2026-09-23 16:32+0000\n"
 "Last-Translator: albanobattistella <albano_battistella@hotmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/akizip/akizip/it/"
 ">\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.6\n"
+"X-Generator: Weblate 2026.10.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -68,29 +68,29 @@ msgstr "Archivio"
 msgid "Add files and folders to the current archive."
 msgstr "Aggiungi un file all'archivio corrente."
 
-#: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:324
-#: src/ui/window.py:409 src/ui/window.py:490 src/ui/window.py:607
-#: src/ui/window.py:658 src/ui/window.py:740 src/ui/window.py:779
-#: src/ui/window.py:847 src/ui/window.py:896 src/ui/window.py:918
-#: src/ui/window.py:949 src/ui/window.py:1171 src/ui/window.py:1194
+#: src/ui/add_dialog.py:70 src/ui/add_dialog.py:154 src/ui/window.py:321
+#: src/ui/window.py:406 src/ui/window.py:487 src/ui/window.py:604
+#: src/ui/window.py:655 src/ui/window.py:737 src/ui/window.py:776
+#: src/ui/window.py:845 src/ui/window.py:900 src/ui/window.py:922
+#: src/ui/window.py:1136 src/ui/window.py:1170 src/ui/window.py:1193
 #: src/move-folder-chooser.ui:51
 msgid "_Cancel"
 msgstr "_Annulla"
 
-#: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:895
-#: src/ui/window.py:917
+#: src/ui/add_dialog.py:71 src/ui/add_dialog.py:153 src/ui/window.py:899
+#: src/ui/window.py:921
 msgid "_Add"
 msgstr "_Aggiungi"
 
-#: src/ui/add_dialog.py:126 src/ui/window.py:869
+#: src/ui/add_dialog.py:126 src/ui/window.py:873
 msgid "Source items ({})"
 msgstr "Elementi sorgente ({})"
 
-#: src/ui/add_dialog.py:138 src/ui/window.py:892
+#: src/ui/add_dialog.py:138 src/ui/window.py:896
 msgid "Select Files"
 msgstr "Seleziona file"
 
-#: src/ui/add_dialog.py:144 src/ui/window.py:914
+#: src/ui/add_dialog.py:144 src/ui/window.py:918
 msgid "Select Folders"
 msgstr "Seleziona cartella"
 
@@ -123,7 +123,7 @@ msgstr "Chiudi"
 msgid "Name"
 msgstr "Nome"
 
-#: src/ui/info_dialog.py:123 src/ui/window.py:1236
+#: src/ui/info_dialog.py:123 src/ui/window.py:1235
 msgid "Path"
 msgstr "Percorso"
 
@@ -131,7 +131,7 @@ msgstr "Percorso"
 msgid "Type"
 msgstr "Tipo"
 
-#: src/ui/info_dialog.py:126 src/ui/window.py:1237
+#: src/ui/info_dialog.py:126 src/ui/window.py:1236
 msgid "Size"
 msgstr "Dimensione"
 
@@ -183,27 +183,27 @@ msgstr "Solido"
 msgid "Blocks"
 msgstr "Blocchi"
 
-#: src/ui/info_dialog.py:210
+#: src/ui/info_dialog.py:216
 msgid "Archive file"
 msgstr "File d'archivio"
 
-#: src/ui/info_dialog.py:212
+#: src/ui/info_dialog.py:218
 msgid "Folder"
 msgstr "Cartella"
 
-#: src/ui/info_dialog.py:214
+#: src/ui/info_dialog.py:220
 msgid "File"
 msgstr "File"
 
-#: src/ui/info_dialog.py:215
+#: src/ui/info_dialog.py:221
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: src/ui/info_dialog.py:229
+#: src/ui/info_dialog.py:235
 msgid "Yes"
 msgstr "Sì"
 
-#: src/ui/info_dialog.py:229
+#: src/ui/info_dialog.py:235
 msgid "No"
 msgstr "No"
 
@@ -247,231 +247,235 @@ msgstr "Annullato"
 msgid "Pending"
 msgstr "In attesa"
 
-#: src/ui/window.py:233
+#: src/ui/window.py:230
 msgid "Test failed"
 msgstr "Test fallito"
 
-#: src/ui/window.py:233 src/ui/window.py:262 src/ui/window.py:470
-#: src/ui/window.py:536 src/ui/window.py:537 src/ui/window.py:590
-#: src/ui/window.py:646 src/ui/window.py:704
+#: src/ui/window.py:230 src/ui/window.py:259 src/ui/window.py:467
+#: src/ui/window.py:533 src/ui/window.py:534 src/ui/window.py:587
+#: src/ui/window.py:643 src/ui/window.py:701
 msgid "Selected path is not an archive."
 msgstr "Il percorso selezionato non è un archivio."
 
-#: src/ui/window.py:262 src/ui/window.py:265
+#: src/ui/window.py:259 src/ui/window.py:262
 msgid "Move failed"
 msgstr "Spostamento fallito"
 
-#: src/ui/window.py:265 src/ui/window.py:473 src/ui/window.py:540
-#: src/ui/window.py:541 src/ui/window.py:593 src/ui/window.py:649
+#: src/ui/window.py:262 src/ui/window.py:470 src/ui/window.py:537
+#: src/ui/window.py:538 src/ui/window.py:590 src/ui/window.py:646
 msgid "This archive format does not support modification."
 msgstr "Questo formato di archivio non supporta la modifica."
 
-#: src/ui/window.py:270 src/ui/window.py:563 src/ui/window.py:598
-#: src/ui/window.py:729 src/ui/window.py:1739 src/ui/window.py:1740
+#: src/ui/window.py:267 src/ui/window.py:560 src/ui/window.py:595
+#: src/ui/window.py:726 src/ui/window.py:1739 src/ui/window.py:1740
 #: src/ui/window.py:1743 src/ui/window.py:1744
 msgid "No file selected"
 msgstr "Nessun file selezionato"
 
-#. #-#-#-#-#  python.pot (akizip 0.4.0)  #-#-#-#-#
+#. #-#-#-#-#  python.pot (akizip 0.4.1)  #-#-#-#-#
 #. TRANSLATORS: {} is the number of selected archive entries
-#: src/ui/window.py:280 src/ui/window.py:370 src/window.ui:166
-#: src/window.ui:180 src/window.ui:441
+#: src/ui/window.py:277 src/ui/window.py:367 src/window.ui:166
+#: src/window.ui:180 src/window.ui:446
 msgid "Move"
 msgstr "Sposta"
 
-#: src/ui/window.py:280
+#: src/ui/window.py:277
 msgid "Move \"{}\" to:"
 msgstr "Sposta \"{}\" in:"
 
-#: src/ui/window.py:293 src/ui/window.py:383 src/add-dialog.ui:80
+#: src/ui/window.py:290 src/ui/window.py:380 src/add-dialog.ui:80
 msgid "Select destination folder"
 msgstr "Seleziona cartella di destinazione"
 
-#: src/ui/window.py:325 src/ui/window.py:410
+#: src/ui/window.py:322 src/ui/window.py:407
 msgid "_Move"
 msgstr "_Sposta"
 
-#: src/ui/window.py:342 src/ui/window.py:427
+#: src/ui/window.py:339 src/ui/window.py:424
 msgid ""
 "Manual destination paths cannot contain '..'. Choose an existing folder "
 "using the folder button."
 msgstr ""
 
-#: src/ui/window.py:350 src/ui/window.py:445
+#: src/ui/window.py:347 src/ui/window.py:442
 msgid "Source and destination are the same"
 msgstr ""
 
-#: src/ui/window.py:370
+#: src/ui/window.py:367
 msgid "Move {} items to folder:"
 msgstr ""
 
-#: src/ui/window.py:437
+#: src/ui/window.py:434
 msgid "Cannot move a folder into itself"
 msgstr ""
 
-#: src/ui/window.py:470 src/ui/window.py:473
+#: src/ui/window.py:467 src/ui/window.py:470
 #, fuzzy
 #| msgid "Delete failed"
 msgid "Rename failed"
 msgstr "Eliminazione fallita"
 
-#: src/ui/window.py:478
+#: src/ui/window.py:475
 msgid "Select exactly one item to rename"
 msgstr ""
 
-#: src/ui/window.py:484 src/window.ui:445
+#: src/ui/window.py:481 src/window.ui:450
 msgid "Rename"
 msgstr ""
 
-#: src/ui/window.py:484
+#: src/ui/window.py:481
 #, fuzzy
 #| msgid "Move \"{}\" to:"
 msgid "Rename \"{}\" to:"
 msgstr "Sposta \"{}\" in:"
 
-#: src/ui/window.py:491
+#: src/ui/window.py:488
 msgid "_Rename"
 msgstr ""
 
-#: src/ui/window.py:507
+#: src/ui/window.py:504 src/ui/window.py:1105
 msgid "Invalid name"
 msgstr ""
 
-#: src/ui/window.py:536 src/ui/window.py:540
+#: src/ui/window.py:533 src/ui/window.py:537
 msgid "Add failed"
 msgstr "Aggiunta non riuscita"
 
-#: src/ui/window.py:590 src/ui/window.py:593
+#: src/ui/window.py:587 src/ui/window.py:590 src/ui/window.py:1148
+#: src/ui/window.py:1149
 msgid "Delete failed"
 msgstr "Eliminazione fallita"
 
-#: src/ui/window.py:602
+#: src/ui/window.py:599
 msgid "Are you sure you want to delete \"{}\"?"
 msgstr "Sei sicuro di voler eliminare \"{}\"?"
 
 #. TRANSLATORS: {} is the number of selected archive entries
-#: src/ui/window.py:605
+#: src/ui/window.py:602
 #, fuzzy
 #| msgid "Are you sure you want to delete \"{}\"?"
 msgid "Are you sure you want to delete {} items?"
 msgstr "Sei sicuro di voler eliminare \"{}\"?"
 
-#: src/ui/window.py:606 src/window.ui:190 src/window.ui:204 src/window.ui:449
+#: src/ui/window.py:603 src/window.ui:190 src/window.ui:204 src/window.ui:454
 msgid "Delete"
 msgstr "Elimina"
 
-#: src/ui/window.py:608
+#: src/ui/window.py:605
 msgid "_Delete"
 msgstr "_Elimina"
 
-#: src/ui/window.py:646 src/ui/window.py:649
+#: src/ui/window.py:643 src/ui/window.py:646
 #, fuzzy
 #| msgid "Delete failed"
 msgid "New folder failed"
 msgstr "Eliminazione fallita"
 
-#: src/ui/window.py:652 src/ui/window.py:654 src/window.ui:457
-#: src/window.ui:469
+#: src/ui/window.py:649 src/ui/window.py:651 src/window.ui:462
+#: src/window.ui:474
 #, fuzzy
 #| msgid "Folder"
 msgid "New Folder"
 msgstr "Cartella"
 
-#: src/ui/window.py:652
+#: src/ui/window.py:649
 #, fuzzy
 #| msgid "Add a file to the current archive."
 msgid "Create a new folder in the current archive."
 msgstr "Aggiungi un file all'archivio corrente."
 
-#: src/ui/window.py:659
+#: src/ui/window.py:656
 #, fuzzy
 #| msgid "Create "
 msgid "_Create"
 msgstr "Crea "
 
-#: src/ui/window.py:675
+#: src/ui/window.py:672
 msgid "Invalid folder name"
 msgstr ""
 
-#: src/ui/window.py:704
+#: src/ui/window.py:701
 msgid "Extract failed"
 msgstr "Estrazione fallita"
 
-#: src/ui/window.py:736
+#: src/ui/window.py:733
 msgid "Select File"
 msgstr "Seleziona file"
 
-#: src/ui/window.py:739 src/ui/window.py:778
+#: src/ui/window.py:736 src/ui/window.py:775
 msgid "_Open"
 msgstr "_Apri"
 
-#: src/ui/window.py:775 src/extract-dialog.ui:21
+#: src/ui/window.py:772 src/extract-dialog.ui:21
 msgid "Select Destination Folder"
 msgstr "Seleziona cartella di destinazione"
 
-#: src/ui/window.py:823 src/compress-dialog.ui:228 src/preferences.ui:101
+#: src/ui/window.py:821 src/compress-dialog.ui:227 src/preferences.ui:101
 msgid "Default"
 msgstr "Predefinito"
 
-#: src/ui/window.py:845 src/ui/window.py:848 src/window.ui:67 src/window.ui:82
+#: src/ui/window.py:843 src/ui/window.py:846 src/window.ui:67 src/window.ui:82
 msgid "Compress"
 msgstr "Comprimi"
 
-#: src/ui/window.py:945
-msgid "Save Archive As"
-msgstr "Salva archivio come"
-
-#: src/ui/window.py:948
-msgid "_Save"
-msgstr "_Salva"
-
-#: src/ui/window.py:969
-msgid "Overwrite is not currently supported"
-msgstr "La sovrascrittura non è attualmente supportata"
-
-#: src/ui/window.py:970 src/ui/window.py:1172 src/ui/window.py:1777
-#: src/ui/window.py:1786 src/ui/window.py:1795 src/ui/window.py:1841
-msgid "_OK"
-msgstr "_OK"
-
-#: src/ui/window.py:1011
+#: src/ui/window.py:972
 msgid "No source items to analyze"
 msgstr "Nessun elemento sorgente da analizzare"
 
-#: src/ui/window.py:1018
+#: src/ui/window.py:979
 msgid "Recommendation not available"
 msgstr "Raccomandazione non disponibile"
 
-#: src/ui/window.py:1071
+#: src/ui/window.py:1032
 msgid "Recommendation failed"
 msgstr "Generazione suggerimento fallita"
 
-#: src/ui/window.py:1072
+#: src/ui/window.py:1033
 msgid "Compression recommendation failed"
 msgstr "Suggerimento di compressione fallito"
 
-#: src/ui/window.py:1122
+#: src/ui/window.py:1083
 msgid "Compression recommendation"
 msgstr "Suggerimento di compressione"
 
-#: src/ui/window.py:1127
+#: src/ui/window.py:1088
 msgid "Recommendation reason"
 msgstr "Motivo del suggerimento"
 
-#: src/ui/window.py:1161
+#: src/ui/window.py:1132
+msgid "Replace existing file?"
+msgstr ""
+
+#. TRANSLATORS: {} is the archive filename
+#: src/ui/window.py:1134
+msgid ""
+"A file named \"{}\" already exists. It will be permanently deleted and "
+"replaced."
+msgstr ""
+
+#: src/ui/window.py:1137
+msgid "_Replace"
+msgstr ""
+
+#: src/ui/window.py:1160
 msgid "Password Required"
 msgstr "Password richiesta"
 
-#: src/ui/window.py:1162
+#: src/ui/window.py:1161
 msgid "This archive is encrypted. Please enter the password."
 msgstr "Questo archivio è cifrato. Inserire la password."
 
-#: src/ui/window.py:1192 src/ui/window.py:1195 src/window.ui:117
-#: src/window.ui:132 src/window.ui:437
+#: src/ui/window.py:1171 src/ui/window.py:1777 src/ui/window.py:1786
+#: src/ui/window.py:1795 src/ui/window.py:1841
+msgid "_OK"
+msgstr "_OK"
+
+#: src/ui/window.py:1191 src/ui/window.py:1194 src/window.ui:117
+#: src/window.ui:132 src/window.ui:442
 msgid "Extract"
 msgstr "Estrazione"
 
-#: src/ui/window.py:1238
+#: src/ui/window.py:1237
 msgid "Modified"
 msgstr "Modificato"
 
@@ -525,6 +529,7 @@ msgid "Preview not supported"
 msgstr "Anteprima non supportata"
 
 #: src/ui/window.py:1784
+#, fuzzy
 msgid "This format does not support preview. Only extract is available."
 msgstr ""
 "Questo formato non supporta l'anteprima. È disponibile solo l'estratto."
@@ -867,23 +872,23 @@ msgstr "Aggiungi {file} a {destination} in {archive}"
 msgid "Create folder {folder} in {archive}"
 msgstr "Elimina {file} da {archive}"
 
-#: src/ui/move_folder_chooser.py:103
+#: src/ui/move_folder_chooser.py:109
 msgid "(root)"
 msgstr "(root)"
 
-#: src/add-dialog.ui:12 src/compress-dialog.ui:108
+#: src/add-dialog.ui:12 src/compress-dialog.ui:107
 msgid "Source items"
 msgstr "Elementi sorgente"
 
-#: src/add-dialog.ui:39 src/compress-dialog.ui:135
+#: src/add-dialog.ui:39 src/compress-dialog.ui:134
 msgid "Add Files"
 msgstr "Aggiungi file"
 
-#: src/add-dialog.ui:44 src/compress-dialog.ui:140
+#: src/add-dialog.ui:44 src/compress-dialog.ui:139
 msgid "Add Folders"
 msgstr "Aggiungi cartelle"
 
-#: src/add-dialog.ui:49 src/compress-dialog.ui:145
+#: src/add-dialog.ui:49 src/compress-dialog.ui:144
 msgid "Remove"
 msgstr "Rimuovi"
 
@@ -909,7 +914,7 @@ msgstr "Apri file"
 msgid "Open"
 msgstr "Apri"
 
-#: src/window.ui:92 src/window.ui:107 src/window.ui:425
+#: src/window.ui:92 src/window.ui:107 src/window.ui:430
 msgid "Extract All"
 msgstr "Estrai tutto"
 
@@ -945,120 +950,134 @@ msgstr "_Lingua"
 msgid "System Default"
 msgstr "Predefinita di sistema"
 
-#: src/window.ui:399
+#: src/window.ui:404
 msgid "Show _Logs"
 msgstr "Mostra _log"
 
-#: src/window.ui:405
+#: src/window.ui:410
 msgid "_Preferences"
 msgstr "_Preferenze"
 
-#: src/window.ui:409
+#: src/window.ui:414
 msgid "_About Akizip"
 msgstr "Infor_mazioni su Akizip"
 
-#: src/window.ui:417 src/window.ui:429
+#: src/window.ui:422 src/window.ui:434
 msgid "Extract Selected"
 msgstr "Estrai selezionati"
 
-#: src/window.ui:453 src/window.ui:465
+#: src/window.ui:458 src/window.ui:470
 msgid "Add File"
 msgstr "Aggiungi file"
 
 #: src/compress-dialog.ui:19
-msgid "Output archive"
-msgstr "Archivio di destinazione"
+#, fuzzy
+#| msgid "folder"
+msgid "Output folder"
+msgstr "cartella"
 
 #: src/compress-dialog.ui:31
-msgid "Select output archive path"
-msgstr "Seleziona il percorso dell'archivio di destinazione"
+#, fuzzy
+#| msgid "Select Folder"
+msgid "Select output folder"
+msgstr "Seleziona cartella"
 
 #: src/compress-dialog.ui:37
-msgid "Select Output Archive"
-msgstr "Seleziona archivio di destinazione"
+#, fuzzy
+#| msgid "Select Folder"
+msgid "Select Output Folder"
+msgstr "Seleziona cartella"
 
-#: src/compress-dialog.ui:58
+#: src/compress-dialog.ui:45
+#, fuzzy
+#| msgid "File"
+msgid "Filename"
+msgstr "File"
+
+#: src/compress-dialog.ui:57
+#, fuzzy
+#| msgid "Archive file"
+msgid "Archive filename"
+msgstr "File d'archivio"
+
+#: src/compress-dialog.ui:87
 msgid ""
 "This filename starts with \".\" and will be hidden. In your file manager, "
 "enable \"Show Hidden Files\" (usually Ctrl+H)."
 msgstr ""
 
-#: src/compress-dialog.ui:82 src/preferences.ui:60
-msgid "Format"
-msgstr "Formato"
-
-#: src/compress-dialog.ui:99
-msgid "Auto Recommend"
-msgstr "Consiglio automatico"
-
-#: src/compress-dialog.ui:100
-msgid "Scan source files and recommend format and parameters"
-msgstr "Scansiona i file sorgente e consiglia formato e parametri"
-
-#: src/compress-dialog.ui:168
+#: src/compress-dialog.ui:167
 msgid "Advanced options"
 msgstr "Opzioni avanzate"
 
-#: src/compress-dialog.ui:186 src/preferences.ui:76
+#: src/compress-dialog.ui:185 src/preferences.ui:76
 msgid "Compression level"
 msgstr "Livello di compressione"
 
-#: src/compress-dialog.ui:199 src/preferences.ui:82
+#: src/compress-dialog.ui:198 src/preferences.ui:82
 msgid "Store"
 msgstr "Memorizzazione"
 
-#: src/compress-dialog.ui:200 src/preferences.ui:83
+#: src/compress-dialog.ui:199 src/preferences.ui:83
 msgid "Fastest"
 msgstr "Rapidissima"
 
-#: src/compress-dialog.ui:201 src/preferences.ui:84
+#: src/compress-dialog.ui:200 src/preferences.ui:84
 msgid "Fast"
 msgstr "Rapida"
 
-#: src/compress-dialog.ui:202 src/preferences.ui:85
+#: src/compress-dialog.ui:201 src/preferences.ui:85
 msgid "Normal"
 msgstr "Normale"
 
-#: src/compress-dialog.ui:203 src/preferences.ui:86
+#: src/compress-dialog.ui:202 src/preferences.ui:86
 msgid "Maximum"
 msgstr "Massima"
 
-#: src/compress-dialog.ui:204 src/preferences.ui:87
+#: src/compress-dialog.ui:203 src/preferences.ui:87
 msgid "Ultra"
 msgstr "Ultra"
 
-#: src/compress-dialog.ui:215 src/preferences.ui:95
+#: src/compress-dialog.ui:214 src/preferences.ui:95
 msgid "Algorithm"
 msgstr "Algoritmo"
 
-#: src/compress-dialog.ui:242 src/preferences.ui:112
+#: src/compress-dialog.ui:241 src/preferences.ui:112
 msgid "Dictionary size (MB)"
 msgstr "Dimensione dizionario (MB)"
 
-#: src/compress-dialog.ui:254 src/compress-dialog.ui:283 src/preferences.ui:113
+#: src/compress-dialog.ui:253 src/compress-dialog.ui:282 src/preferences.ui:113
 #: src/preferences.ui:132
 msgid "0 uses the 7-Zip default."
 msgstr "0 utilizza il valore predefinito di 7-Zip."
 
-#: src/compress-dialog.ui:271 src/preferences.ui:131
+#: src/compress-dialog.ui:270 src/preferences.ui:131
 msgid "Threads"
 msgstr "Thread"
 
-#: src/compress-dialog.ui:300
+#: src/compress-dialog.ui:299
 msgid "Password"
 msgstr "Password"
 
-#: src/compress-dialog.ui:313
+#: src/compress-dialog.ui:312
 msgid "Leave empty for no password"
 msgstr "Lasciare vuoto per nessuna password"
 
-#: src/compress-dialog.ui:328 src/preferences.ui:150
+#: src/compress-dialog.ui:327 src/preferences.ui:150
 msgid "Encrypt file names"
 msgstr "Cifra i nomi dei file"
 
-#: src/compress-dialog.ui:336 src/compress-dialog.ui:347
+#: src/compress-dialog.ui:335 src/compress-dialog.ui:346
 msgid "Only available for 7z format"
 msgstr "Disponibile solo per il formato 7z"
+
+#: src/compress-dialog.ui:365
+msgid "Auto Recommend"
+msgstr "Consiglio automatico"
+
+#: src/compress-dialog.ui:366
+msgid "Scan source files and recommend format and parameters"
+msgstr "Scansiona i file sorgente e consiglia formato e parametri"
 
 #: src/extract-dialog.ui:15
 msgid "Destination folder"
@@ -1107,6 +1126,10 @@ msgstr ""
 "Utilizzati per la compressione normale e come alternativa in mancanza di "
 "consigli."
 
+#: src/preferences.ui:60
+msgid "Format"
+msgstr "Formato"
+
 #: src/preferences.ui:151
 msgid "Only available for 7z format."
 msgstr "Disponibile solo per il formato 7z."
@@ -1118,6 +1141,24 @@ msgstr "Seleziona cartella"
 #: src/move-folder-chooser.ui:57
 msgid "_Select"
 msgstr "_Seleziona"
+
+#~ msgid "Save Archive As"
+#~ msgstr "Salva archivio come"
+
+#~ msgid "_Save"
+#~ msgstr "_Salva"
+
+#~ msgid "Overwrite is not currently supported"
+#~ msgstr "La sovrascrittura non è attualmente supportata"
+
+#~ msgid "Output archive"
+#~ msgstr "Archivio di destinazione"
+
+#~ msgid "Select output archive path"
+#~ msgstr "Seleziona il percorso dell'archivio di destinazione"
+
+#~ msgid "Select Output Archive"
+#~ msgstr "Seleziona archivio di destinazione"
 
 #~ msgid "Select a file"
 #~ msgstr "Seleziona un file"

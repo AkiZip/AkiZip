@@ -27,8 +27,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-01 12:44+0800\n"
-"PO-Revision-Date: 2026-09-28 05:54+0000\n"
-"Last-Translator: teste celular <teste.aparelho.mail@gmail.com>\n"
+"PO-Revision-Date: 2026-10-12 16:56+0000\n"
+"Last-Translator: teste celular "
+"<teste.aparelho.mail@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "akizip/akizip/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -36,7 +37,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -446,7 +447,7 @@ msgstr "Motivo da sugestão"
 
 #: src/ui/window.py:1132
 msgid "Replace existing file?"
-msgstr ""
+msgstr "Substituir arquivo existente?"
 
 #. TRANSLATORS: {} is the archive filename
 #: src/ui/window.py:1134
@@ -454,10 +455,12 @@ msgid ""
 "A file named \"{}\" already exists. It will be permanently deleted and "
 "replaced."
 msgstr ""
+"Um arquivo chamado \"{}\" já existe. Ele será excluído e substituído "
+"permanentemente."
 
 #: src/ui/window.py:1137
 msgid "_Replace"
-msgstr ""
+msgstr "_Substituir"
 
 #: src/ui/window.py:1160
 msgid "Password Required"
@@ -952,34 +955,24 @@ msgid "Add File"
 msgstr "Adicionar arquivo"
 
 #: src/compress-dialog.ui:19
-#, fuzzy
-#| msgid "folder"
 msgid "Output folder"
-msgstr "pasta"
+msgstr "Pasta de saída"
 
 #: src/compress-dialog.ui:31
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select output folder"
-msgstr "Selecionar pasta"
+msgstr "Selecione a pasta de saída"
 
 #: src/compress-dialog.ui:37
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select Output Folder"
-msgstr "Selecionar pasta"
+msgstr "Selecione a pasta de destino"
 
 #: src/compress-dialog.ui:45
-#, fuzzy
-#| msgid "Rename"
 msgid "Filename"
-msgstr "Renomear"
+msgstr "Nome do arquivo"
 
 #: src/compress-dialog.ui:57
-#, fuzzy
-#| msgid "Archive file"
 msgid "Archive filename"
-msgstr "Arquivo de arquivo"
+msgstr "Nome do arquivo compactado"
 
 #: src/compress-dialog.ui:87
 msgid ""

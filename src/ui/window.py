@@ -205,6 +205,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             args.append(f"-md={options['dictionary_size']}m")
         if options['threads'] > 0:
             args.append(f"-mmt={options['threads']}")
+        if options.get('volume_size', 0) > 0:
+            args.append(f"-v{options['volume_size']}m")
         password = options.get('password', '')
         if password:
             args.append(f"-p{password}")
@@ -810,6 +812,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
+        volume_spin = builder.get_object('volume_spin')
         password_entry = builder.get_object('password_entry')
         encrypt_names_check = builder.get_object('encrypt_names_check')
         suggest_btn = builder.get_object('suggest_btn')
@@ -835,6 +838,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         _populate_method_combo(default_options['format'], default_options['method'])
         dictionary_spin.set_value(default_options['dictionary_size'])
         threads_spin.set_value(default_options['threads'])
+        volume_spin.set_value(0)
         encrypt_names_check.set_active(default_options.get('encrypt_names', False))
 
         dialog = Adw.AlertDialog.new(_('Compress'), None)
@@ -956,6 +960,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
             dictionary_spin.set_sensitive(fmt == '7z')
             threads_spin.set_sensitive(fmt in ('7z', 'zip'))
+            volume_spin.set_sensitive(fmt in ('7z', 'zip'))
             password_entry.set_sensitive(fmt != 'tar')
             encrypt_names_check.set_sensitive(fmt == '7z')
             if fmt != '7z':
@@ -1114,6 +1119,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     'method': method_combo.get_active_id() or 'default',
                     'dictionary_size': dictionary_spin.get_value_as_int(),
                     'threads': threads_spin.get_value_as_int(),
+                    'volume_size': volume_spin.get_value_as_int(),
                     'password': password_entry.get_text(),
                     'encrypt_names': encrypt_names_check.get_active(),
                 }

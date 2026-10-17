@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 import sys
 from .AkizipApplication import AkizipApplication
+from .error_report import install_excepthook
 from .job_queue import JobQueue
 from .plugins import register_plugins
 from .plugins.system import sysop
@@ -25,6 +26,7 @@ from .plugins.system import sysop
 
 def main(version):
     """The application's entry point."""
+    install_excepthook(version)
     app = AkizipApplication()
     app.commands = {}
     app.job_queue = JobQueue(default_timeout=app.settings.get_int('default-timeout'))

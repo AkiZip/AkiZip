@@ -1744,6 +1744,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         )
         dialog.add_response('cancel', _('_Cancel'))
         dialog.add_response('authorize', _('_Authorize'))
+        dialog.set_response_appearance('authorize', Adw.ResponseAppearance.SUGGESTED)
         dialog.set_default_response('authorize')
         dialog.set_close_response('cancel')
 

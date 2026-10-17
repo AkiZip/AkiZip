@@ -26,7 +26,7 @@ from gettext import gettext as _
 from gi.repository import Adw, Gtk
 
 REPORT_URL = 'https://debug.akizip.top/upload'
-_ERROR_LIMIT = 6000
+_ERROR_LIMIT = 4000
 
 
 def build_report_url(version, error):

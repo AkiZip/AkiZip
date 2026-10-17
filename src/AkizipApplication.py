@@ -67,10 +67,7 @@ class AkizipApplication(Adw.Application):
             if path is None:
                 continue
             display_path = _host_path(path)
-            if win._select_path(path, display_path):
-                win._refresh_file_list()
-                win._update_title()
-                win._sync_address_bar()
+            win._open_path_with_volume_check(path, display_path)
             break
 
     def on_about_action(self, *args):

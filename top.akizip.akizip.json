@@ -5,7 +5,6 @@
     "sdk" : "org.gnome.Sdk",
     "command" : "akizip",
     "finish-args" : [
-        "--share=network",
         "--share=ipc",
         "--socket=fallback-x11",
         "--device=dri",
@@ -27,15 +26,15 @@
             "name" : "7zip",
             "buildsystem" : "simple",
             "build-commands" : [
-                "tar -xf 7z2603-linux-x64.tar.xz",
+                "tar -xf 7z2604-linux-x64.tar.xz",
                 "install -Dm755 7zz /app/bin/7zz",
                 "install -Dm755 7zzs /app/bin/7zzs"
             ],
             "sources" : [
                 {
                     "type" : "file",
-                    "url" : "https://github.com/ip7z/7zip/releases/download/26.03/7z2603-linux-x64.tar.xz",
-                    "sha256" : "dc99eff5008f1ab79bd7084c68513701547a808a89502bf4133683535ab3c695"
+                    "url" : "https://github.com/ip7z/7zip/releases/download/26.04/7z2604-linux-x64.tar.xz",
+                    "sha256" : "fc0327ba27e89bd086cf426dff17d77de582953cdbbc10a6576540a06853ffcd"
                 }
             ]
         },

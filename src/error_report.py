@@ -29,6 +29,15 @@ REPORT_URL = 'https://debug.akizip.top/upload'
 _ERROR_LIMIT = 4000
 
 
+def _build_payload(version, error):
+    """Build the diagnostic report JSON payload."""
+    return json.dumps(
+        {'version': version, 'error': error},
+        ensure_ascii=False,
+        indent=2,
+    )
+
+
 def build_report_url(version, error):
     """Build the upload URL with the report payload encoded as base64url.
 
@@ -36,11 +45,9 @@ def build_report_url(version, error):
     be carried in a query parameter; the server turns it back into standard
     base64 with data.replace('-', '+').replace('_', '/').
     """
-    payload = json.dumps(
-        {'version': version, 'error': error},
-        ensure_ascii=False,
-    )
-    encoded = base64.urlsafe_b64encode(payload.encode('utf-8')).decode('ascii')
+    encoded = base64.urlsafe_b64encode(
+        _build_payload(version, error).encode('utf-8')
+    ).decode('ascii')
     return '{}?data={}'.format(REPORT_URL, encoded)
 
 
@@ -67,10 +74,42 @@ def _offer_report(version, exc_type, exc_value, exc_tb):
     stack = ''.join(traceback.format_exception(exc_type, exc_value, exc_tb))
     error = stack if len(stack) <= _ERROR_LIMIT else '...[truncated]...\n' + stack[-_ERROR_LIMIT:]
 
-    lines = [line for line in stack.rstrip().splitlines() if line.strip()]
-    summary = lines[-1] if lines else repr(exc_value)
+    payload = _build_payload(version, error)
 
-    dialog = Adw.AlertDialog.new(_('Unexpected Error'), summary)
+    body = _(
+        'akizip encountered an unexpected error. Sending this diagnostic '
+        'report helps us fix it. Reports are designed to be anonymous and '
+        'are only accessible to core developers. They rarely contain '
+        'sensitive data, but you can review the details before sending.'
+    )
+
+    dialog = Adw.AlertDialog.new(_('Send Error Report?'), None)
+
+    scrolled = Gtk.ScrolledWindow(
+        hscrollbar_policy=Gtk.PolicyType.NEVER,
+        max_content_height=200,
+        propagate_natural_height=True,
+        hexpand=True,
+        vexpand=True,
+    )
+    text_view = Gtk.TextView(
+        buffer=Gtk.TextBuffer(text=payload),
+        editable=False,
+        cursor_visible=False,
+        monospace=True,
+        wrap_mode=Gtk.WrapMode.WORD_CHAR,
+        top_margin=6,
+        bottom_margin=6,
+        left_margin=6,
+        right_margin=6,
+    )
+    scrolled.set_child(text_view)
+
+    box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+    box.append(Gtk.Label(label=body, wrap=True, xalign=0))
+    box.append(scrolled)
+    dialog.set_extra_child(box)
+
     dialog.add_response('close', _('_Close'))
     dialog.add_response('upload', _('_Upload Error Report'))
     dialog.set_response_appearance('upload', Adw.ResponseAppearance.SUGGESTED)

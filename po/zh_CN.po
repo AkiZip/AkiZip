@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-01 12:44+0800\n"
-"PO-Revision-Date: 2026-09-29 10:51+0000\n"
+"PO-Revision-Date: 2026-10-23 11:51+0000\n"
 "Last-Translator: reducedradius "
 "<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.11.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -422,18 +422,18 @@ msgstr "推荐原因"
 
 #: src/ui/window.py:1132
 msgid "Replace existing file?"
-msgstr ""
+msgstr "要替换已存在的文件吗？"
 
 #. TRANSLATORS: {} is the archive filename
 #: src/ui/window.py:1134
 msgid ""
 "A file named \"{}\" already exists. It will be permanently deleted and "
 "replaced."
-msgstr ""
+msgstr "已经有一个名为“{}”的文件存在。它将被永久删除并替换。"
 
 #: src/ui/window.py:1137
 msgid "_Replace"
-msgstr ""
+msgstr "替换"
 
 #: src/ui/window.py:1160
 msgid "Password Required"

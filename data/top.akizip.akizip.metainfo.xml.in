@@ -20,6 +20,7 @@
   <url type="vcs-browser">https://github.com/AkiZip/AkiZip</url>
   <url type="bugtracker">https://github.com/AkiZip/AkiZip/issues</url>
   <url type="translate">https://hosted.weblate.org/engage/akizip/</url>
+  <url type="contact">https://matrix.to/#/#akizip:matrix.org</url>
 
   <translation type="gettext">akizip</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.

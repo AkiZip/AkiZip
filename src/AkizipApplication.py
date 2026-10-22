@@ -82,6 +82,8 @@ class AkizipApplication(Adw.Application):
                                 copyright='© 2026 akizip',
                                 license_type=Gtk.License.GPL_3_0,
                                 issue_url='https://github.com/AkiZip/AkiZip/issues')
+        about.add_link('Matrix', 'https://matrix.to/#/#akizip:matrix.org')
+        about.add_link('Mastodon', 'https://mastodon.social/@akizip')
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, parameter):

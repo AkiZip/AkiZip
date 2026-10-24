@@ -28,6 +28,7 @@ configure_file(
 
 akizip_sources = [
   '__init__.py',
+  'error_report.py',
   'job_queue.py',
   'main.py',
   'window.py',

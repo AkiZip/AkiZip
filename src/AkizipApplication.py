@@ -67,10 +67,7 @@ class AkizipApplication(Adw.Application):
             if path is None:
                 continue
             display_path = _host_path(path)
-            if win._select_path(path, display_path):
-                win._refresh_file_list()
-                win._update_title()
-                win._sync_address_bar()
+            win._open_path_with_volume_check(path, display_path)
             break
 
     def on_about_action(self, *args):
@@ -85,6 +82,8 @@ class AkizipApplication(Adw.Application):
                                 copyright='© 2026 akizip',
                                 license_type=Gtk.License.GPL_3_0,
                                 issue_url='https://github.com/AkiZip/AkiZip/issues')
+        about.add_link('Matrix', 'https://matrix.to/#/#akizip:matrix.org')
+        about.add_link('Mastodon', 'https://mastodon.social/@akizip')
         about.present(self.props.active_window)
 
     def on_preferences_action(self, widget, parameter):

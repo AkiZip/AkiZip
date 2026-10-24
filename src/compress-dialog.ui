@@ -4,14 +4,14 @@
   <object class="GtkBox" id="content">
     <property name="orientation">horizontal</property>
     <property name="spacing">18</property>
-    <property name="margin-top">6</property>
-    <property name="margin-bottom">6</property>
+    <property name="margin-top">4</property>
+    <property name="margin-bottom">4</property>
 
     <!-- Left column: path, format, source items -->
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <property name="spacing">12</property>
+        <property name="spacing">8</property>
         <property name="hexpand">true</property>
 
         <child>
@@ -111,7 +111,7 @@
 
         <child>
           <object class="GtkScrolledWindow">
-            <property name="max-content-height">150</property>
+            <property name="max-content-height">120</property>
             <property name="propagate-natural-height">true</property>
             <property name="vexpand">true</property>
             <property name="child">
@@ -160,7 +160,7 @@
     <child>
       <object class="GtkBox">
         <property name="orientation">vertical</property>
-        <property name="spacing">12</property>
+        <property name="spacing">8</property>
 
         <child>
           <object class="GtkLabel">
@@ -176,7 +176,7 @@
         <child>
           <object class="GtkGrid" id="form">
             <property name="column-spacing">12</property>
-            <property name="row-spacing">10</property>
+            <property name="row-spacing">8</property>
             <property name="margin-start">6</property>
             <property name="margin-end">6</property>
 
@@ -347,6 +347,35 @@
                 <layout>
                   <property name="column">1</property>
                   <property name="row">5</property>
+                </layout>
+              </object>
+            </child>
+
+            <child>
+              <object class="GtkLabel">
+                <property name="label" translatable="yes">Volume size (MB)</property>
+                <property name="xalign">0</property>
+                <property name="valign">center</property>
+                <layout>
+                  <property name="column">0</property>
+                  <property name="row">6</property>
+                </layout>
+              </object>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="volume_spin">
+                <property name="hexpand">true</property>
+                <property name="tooltip-text" translatable="yes">0 or a negative value disables splitting into volumes.</property>
+                <property name="adjustment">
+                  <object class="GtkAdjustment">
+                    <property name="lower">-1</property>
+                    <property name="upper">4096</property>
+                    <property name="step-increment">1</property>
+                  </object>
+                </property>
+                <layout>
+                  <property name="column">1</property>
+                  <property name="row">6</property>
                 </layout>
               </object>
             </child>

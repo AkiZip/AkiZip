@@ -16,9 +16,22 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+import re
 import shutil
 import time
 from pathlib import Path
+
+
+_FIRST_VOLUME_PATTERNS = (
+    re.compile(r'\.001$', re.IGNORECASE),
+    re.compile(r'\.part0*1\.rar$', re.IGNORECASE),
+)
+
+
+def is_first_volume_name(name):
+    """Return True if a file name looks like the first volume of a
+    multi-volume archive (e.g. 'a.7z.001' or 'a.part1.rar')."""
+    return any(pattern.search(name) for pattern in _FIRST_VOLUME_PATTERNS)
 
 
 FULL_FEATURE_SUFFIXES = {
@@ -52,6 +65,18 @@ ARCHIVE_SUFFIXES = {
 
 def archive_suffix(path):
     """Return the archive suffix for a path, handling multi-part extensions like .tar.gz."""
+    name = path.name if isinstance(path, Path) else str(path)
+    if is_first_volume_name(name):
+        # Multi-volume archives are opened via their first volume; map the
+        # volume name back to the underlying archive format.
+        lowered = name.lower()
+        if lowered.endswith('.rar') and '.part' in lowered:
+            return '.rar'
+        base = lowered[:-len('.001')]
+        for suffix in sorted(ARCHIVE_SUFFIXES, key=len, reverse=True):
+            if base.endswith(suffix):
+                return suffix
+        return '.7z'
     suffixes = path.suffixes
     if len(suffixes) >= 2:
         combined = ''.join(suffixes[-2:]).lower()
@@ -196,6 +221,10 @@ class sysop:
             return None
         if self.is_nested:
             return 'nested'
+        if is_first_volume_name(self.selected.name):
+            # Multi-volume archives are opened read-only; modifications could
+            # corrupt the whole volume set.
+            return 'readonly'
         suffix = archive_suffix(self.selected)
         if suffix in FULL_FEATURE_SUFFIXES:
             return 'full'
@@ -206,7 +235,9 @@ class sysop:
         return 'unverified'
 
     def can_modify(self):
-        return self.is_archive() and not self.is_nested and archive_suffix(self.selected) in FULL_FEATURE_SUFFIXES
+        return (self.is_archive() and not self.is_nested
+                and not is_first_volume_name(self.selected.name)
+                and archive_suffix(self.selected) in FULL_FEATURE_SUFFIXES)
 
     def is_zip(self):
         return self.is_file() and archive_suffix(self.selected) == ".zip"

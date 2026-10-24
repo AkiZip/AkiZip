@@ -20,6 +20,7 @@
   <url type="vcs-browser">https://github.com/AkiZip/AkiZip</url>
   <url type="bugtracker">https://github.com/AkiZip/AkiZip/issues</url>
   <url type="translate">https://hosted.weblate.org/engage/akizip/</url>
+  <url type="contact">https://matrix.to/#/#akizip:matrix.org</url>
 
   <translation type="gettext">akizip</translation>
   <!-- All graphical applications having a desktop file must have this tag in the MetaInfo.
@@ -42,6 +43,16 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.2" date="2026-10-24">
+      <description translate="no">
+        <p>Multi-volume archive support, error reporting, and 7-Zip update</p>
+        <ul>
+          <li>Added support for multi-volume archives</li>
+          <li>Added support for uploading error reports</li>
+          <li>Updated 7-Zip to 26.05</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.1" date="2026-10-02">
       <description translate="no">
         <p>Compress UI refresh, overwrite support, and bug fixes</p>

@@ -33,7 +33,7 @@ from gi.repository import Pango
 from ..plugins.context_menu import context_menu_state
 from ..plugins.password import is_password_error
 from ..plugins.status import _status
-from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix
+from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix, is_first_volume_name
 from .info_dialog import InfoDialogMixin
 from .log_panel import LogPanelMixin
 
@@ -205,6 +205,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             args.append(f"-md={options['dictionary_size']}m")
         if options['threads'] > 0:
             args.append(f"-mmt={options['threads']}")
+        if options.get('volume_size', 0) > 0:
+            args.append(f"-v{options['volume_size']}m")
         password = options.get('password', '')
         if password:
             args.append(f"-p{password}")
@@ -762,10 +764,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     return
 
         path = str(Path(text).expanduser())
-        if self._select_path(path):
-            self._refresh_file_list()
-            self._update_title()
-            self._sync_address_bar()
+        self._open_path_with_volume_check(path)
 
     def _open_folder_chooser_for_entry(self, entry, on_picked=None):
         chooser = Gtk.FileChooserNative.new(
@@ -813,6 +812,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         method_combo = builder.get_object('method_combo')
         dictionary_spin = builder.get_object('dictionary_spin')
         threads_spin = builder.get_object('threads_spin')
+        volume_spin = builder.get_object('volume_spin')
         password_entry = builder.get_object('password_entry')
         encrypt_names_check = builder.get_object('encrypt_names_check')
         suggest_btn = builder.get_object('suggest_btn')
@@ -838,6 +838,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         _populate_method_combo(default_options['format'], default_options['method'])
         dictionary_spin.set_value(default_options['dictionary_size'])
         threads_spin.set_value(default_options['threads'])
+        volume_spin.set_value(0)
         encrypt_names_check.set_active(default_options.get('encrypt_names', False))
 
         dialog = Adw.AlertDialog.new(_('Compress'), None)
@@ -959,6 +960,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             method_combo.set_sensitive(fmt in ('7z', 'tar', 'zip'))
             dictionary_spin.set_sensitive(fmt == '7z')
             threads_spin.set_sensitive(fmt in ('7z', 'zip'))
+            volume_spin.set_sensitive(fmt in ('7z', 'zip'))
             password_entry.set_sensitive(fmt != 'tar')
             encrypt_names_check.set_sensitive(fmt == '7z')
             if fmt != '7z':
@@ -1117,6 +1119,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                     'method': method_combo.get_active_id() or 'default',
                     'dictionary_size': dictionary_spin.get_value_as_int(),
                     'threads': threads_spin.get_value_as_int(),
+                    'volume_size': volume_spin.get_value_as_int(),
                     'password': password_entry.get_text(),
                     'encrypt_names': encrypt_names_check.get_active(),
                 }
@@ -1639,7 +1642,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._folder_set = set()
         self._current_internal_path = ''
         self._append_log(_('List failed'), str(error), _status.ERROR)
-        self.file_list_stack.set_visible_child_name('empty_archive')
+        self.file_list_stack.set_visible_child_name('open_failed')
 
     def _sync_address_bar(self):
         app = self.get_application()
@@ -1720,6 +1723,59 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if app is not None and hasattr(app, 'system'):
             app.system.cleanup_temp_dirs()
 
+    def _open_selected_path(self, path, display_path=None):
+        if self._select_path(path, display_path):
+            self._refresh_file_list()
+            self._update_title()
+            self._sync_address_bar()
+
+    def _open_path_with_volume_check(self, path, display_path=None):
+        name = Path(path).name
+        if not is_first_volume_name(name):
+            self._open_selected_path(path, display_path)
+            return
+        # Opening the first volume of a multi-volume archive requires access
+        # to its sibling volumes, so explain this to the user first, then ask
+        # them to authorize the folder that contains the volumes; afterwards
+        # open "folder path + file name".
+        dialog = Adw.AlertDialog.new(
+            _('Multi-volume archive'),
+            _('This file is the first volume of a multi-volume archive. To open it, authorize access to the folder containing all of its volumes.'),
+        )
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('authorize', _('_Authorize'))
+        dialog.set_response_appearance('authorize', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('authorize')
+        dialog.set_close_response('cancel')
+
+        def dialog_response(d, response):
+            if response != 'authorize':
+                return
+            chooser = Gtk.FileChooserNative.new(
+                _('Authorize the folder containing the volumes'),
+                self,
+                Gtk.FileChooserAction.SELECT_FOLDER,
+                _('_Authorize'),
+                _('_Cancel'),
+            )
+
+            def chooser_response(c, chooser_response_id):
+                if chooser_response_id == Gtk.ResponseType.ACCEPT:
+                    folder = c.get_file()
+                    if folder is not None and folder.get_path() is not None:
+                        folder_path = folder.get_path()
+                        self._open_selected_path(
+                            str(Path(folder_path) / name),
+                            str(Path(_host_path(folder_path)) / name),
+                        )
+                c.destroy()
+
+            chooser.connect('response', chooser_response)
+            chooser.show()
+
+        dialog.connect('response', dialog_response)
+        dialog.present(self)
+
     def _on_choose_file_response(self, dialog, response):
         if response == Gtk.ResponseType.ACCEPT:
             file = dialog.get_file()
@@ -1727,10 +1783,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 path = file.get_path()
                 if path is not None:
                     display_path = _host_path(path)
-                    if self._select_path(path, display_path):
-                        self._refresh_file_list()
-                        self._update_title()
-                        self._sync_address_bar()
+                    self._open_path_with_volume_check(path, display_path)
         dialog.destroy()
 
     def _selected_path_from_input(self):

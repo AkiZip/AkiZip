@@ -306,6 +306,17 @@
                         </child>
                         <child>
                           <object class="GtkStackPage">
+                            <property name="name">open_failed</property>
+                            <property name="child">
+                              <object class="AdwStatusPage">
+                                <property name="icon-name">dialog-error-symbolic</property>
+                                <property name="title" translatable="yes">Failed to open the archive</property>
+                              </object>
+                            </property>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkStackPage">
                             <property name="name">list</property>
                             <property name="child">
                               <object class="GtkScrolledWindow" id="file_list_scroller">

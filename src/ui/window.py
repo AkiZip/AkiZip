@@ -1212,7 +1212,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         entry.set_editable(not _IS_FLATPAK)
         browse_button = builder.get_object('browse_button')
         password_entry = builder.get_object('password_entry')
+        non_utf8_warning = builder.get_object('non_utf8_warning')
 
+        app = self.get_application()
+        non_utf8_warning.set_visible(
+            app is not None and hasattr(app, 'system') and app.system.is_non_utf8)
         dialog = Adw.AlertDialog.new(_('Extract'), None)
         dialog.set_extra_child(box)
         dialog.add_response('cancel', _('_Cancel'))

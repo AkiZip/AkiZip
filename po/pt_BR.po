@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-24 13:56+0800\n"
-"PO-Revision-Date: 2026-10-12 16:56+0000\n"
+"PO-Revision-Date: 2026-10-27 08:51+0000\n"
 "Last-Translator: teste celular "
 "<teste.aparelho.mail@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -506,24 +506,24 @@ msgid "List failed"
 msgstr "Falha ao listar"
 
 #: src/ui/window.py:1742
-#, fuzzy
-#| msgid "Output archive"
 msgid "Multi-volume archive"
-msgstr "Arquivo de destino"
+msgstr "Arquivo de multi-volume"
 
 #: src/ui/window.py:1743
 msgid ""
 "This file is the first volume of a multi-volume archive. To open it, "
 "authorize access to the folder containing all of its volumes."
 msgstr ""
+"Este arquivo é o primeiro volume de um arquivo multi-volume. Para abri-lo, "
+"autorize o acesso à pasta que contém todos os seus volumes."
 
 #: src/ui/window.py:1746 src/ui/window.py:1758
 msgid "_Authorize"
-msgstr ""
+msgstr "_Autorizar"
 
 #: src/ui/window.py:1755
 msgid "Authorize the folder containing the volumes"
-msgstr ""
+msgstr "Autorizar a pasta que contém os volumes"
 
 #: src/ui/window.py:1800 src/ui/window.py:1801
 msgid "File not found"
@@ -889,20 +889,22 @@ msgid ""
 "core developers. They rarely contain sensitive data, but you can review the "
 "details before sending."
 msgstr ""
+"O akizip encontrou um erro inesperado. Enviar este relatório de diagnóstico "
+"nos ajuda a corrigi-lo. Os relatórios são projetados para serem anônimos e "
+"acessíveis apenas aos desenvolvedores principais. Eles raramente contêm "
+"dados confidenciais, mas você pode revisar os detalhes antes de enviar."
 
 #: src/error_report.py:86
 msgid "Send Error Report?"
-msgstr ""
+msgstr "Enviar relatório de erros?"
 
 #: src/error_report.py:113
-#, fuzzy
-#| msgid "Close"
 msgid "_Close"
-msgstr "Fechar"
+msgstr "_Fechar"
 
 #: src/error_report.py:114
 msgid "_Upload Error Report"
-msgstr ""
+msgstr "_Enviar relatório de erros"
 
 #: src/add-dialog.ui:12 src/compress-dialog.ui:107
 msgid "Source items"
@@ -970,7 +972,7 @@ msgstr "Este formato não suporta visualização"
 
 #: src/window.ui:313
 msgid "Failed to open the archive"
-msgstr ""
+msgstr "Falha ao abrir o arquivo"
 
 #: src/window.ui:341
 msgid "_Language"
@@ -1083,7 +1085,7 @@ msgstr "Senha"
 
 #: src/compress-dialog.ui:312
 msgid "Leave empty for no password"
-msgstr "Deixar vazio se não houver senha"
+msgstr "Deixar vazio para não definir senha"
 
 #: src/compress-dialog.ui:327 src/preferences.ui:150
 msgid "Encrypt file names"
@@ -1094,14 +1096,12 @@ msgid "Only available for 7z format"
 msgstr "Disponível apenas para o formato 7z"
 
 #: src/compress-dialog.ui:356
-#, fuzzy
-#| msgid "Dictionary size (MB)"
 msgid "Volume size (MB)"
-msgstr "Tamanho do dicionário (MB)"
+msgstr "Tamanho do volume (MB)"
 
 #: src/compress-dialog.ui:368
 msgid "0 or a negative value disables splitting into volumes."
-msgstr ""
+msgstr "0 ou um valor negativo desabilita a divisão em volumes."
 
 #: src/compress-dialog.ui:394
 msgid "Auto Recommend"

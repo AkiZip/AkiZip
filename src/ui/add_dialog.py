@@ -20,7 +20,7 @@ import os
 from gettext import gettext as _
 from pathlib import Path
 
-from gi.repository import Adw, Gtk, Pango
+from gi.repository import Adw, GLib, Gtk, Pango
 
 from .move_folder_chooser import FolderChooserDialog
 
@@ -33,16 +33,17 @@ def _host_path(path):
     p = Path(path)
     try:
         value = os.getxattr(os.fsencode(str(p)), _HOST_PATH_XATTR)
-        return os.fsdecode(value) or str(p)
+        return GLib.filename_display_name(os.fsdecode(value) or str(p))
     except OSError:
         for parent in p.parents:
             try:
                 value = os.getxattr(os.fsencode(str(parent)), _HOST_PATH_XATTR)
                 host_parent = os.fsdecode(value) or str(parent)
-                return str(Path(host_parent) / p.relative_to(parent))
+                return GLib.filename_display_name(
+                    str(Path(host_parent) / p.relative_to(parent)))
             except OSError:
                 continue
-        return str(p)
+        return GLib.filename_display_name(str(p))
 
 
 class AddDialog:

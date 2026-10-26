@@ -16,11 +16,13 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
+from functools import partial
 from gettext import gettext as _
 
 from gi.repository import Gtk
 
 from ..plugins.password import is_password_error
+from ..plugins.sevenzip import NonUtf8ArchiveOutput
 from ..plugins.status import _status
 
 
@@ -47,6 +49,9 @@ class InfoDialogMixin:
             return
 
         def present_dialog(archive_output=None, error_msg=None):
+            if isinstance(archive_output, NonUtf8ArchiveOutput):
+                self._set_non_utf8_state(True)
+                archive_output = archive_output.display_output
             dialog, grid = self._create_info_dialog(info)
             if error_msg:
                 self._add_info_row(grid, _('Archive'), error_msg)
@@ -71,12 +76,12 @@ class InfoDialogMixin:
                 present_dialog(error_msg=str(error))
 
             job_queue.submit(
-                command,
+                partial(command, locale_name=self._get_archive_locale()),
                 info_args,
                 on_success=lambda output: present_dialog(archive_output=output),
                 on_error=on_error,
                 task_id='archive.info',
-                msg=_('Read archive information from ') + selected.name,
+                msg=_('Read archive information from ') + info['name'],
             )
 
         run_info(None)

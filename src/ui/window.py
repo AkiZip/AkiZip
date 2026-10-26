@@ -19,6 +19,7 @@
 
 import os
 import tempfile
+from functools import partial
 from pathlib import Path
 
 from gettext import gettext as _
@@ -32,6 +33,7 @@ from gi.repository import GObject
 from gi.repository import Pango
 from ..plugins.context_menu import context_menu_state
 from ..plugins.password import is_password_error
+from ..plugins.sevenzip import NonUtf8ArchiveOutput
 from ..plugins.status import _status
 from ..plugins.system import ARCHIVE_SUFFIXES, archive_suffix, is_first_volume_name
 from .info_dialog import InfoDialogMixin
@@ -48,16 +50,17 @@ def _host_path(path):
     p = Path(path)
     try:
         value = os.getxattr(os.fsencode(str(p)), _HOST_PATH_XATTR)
-        return os.fsdecode(value) or str(p)
+        return GLib.filename_display_name(os.fsdecode(value) or str(p))
     except OSError:
         for parent in p.parents:
             try:
                 value = os.getxattr(os.fsencode(str(parent)), _HOST_PATH_XATTR)
                 host_parent = os.fsdecode(value) or str(parent)
-                return str(Path(host_parent) / p.relative_to(parent))
+                return GLib.filename_display_name(
+                    str(Path(host_parent) / p.relative_to(parent)))
             except OSError:
                 continue
-        return str(p)
+        return GLib.filename_display_name(str(p))
 
 
 class ArchiveEntry(GObject.Object):
@@ -69,13 +72,15 @@ class ArchiveEntry(GObject.Object):
     is_folder = GObject.Property(type=bool, default=False)
     full_path = GObject.Property(type=str, default='')
 
-    def __init__(self, path='', size='', modified='', is_folder=False, full_path=''):
+    def __init__(self, path='', size='', modified='', is_folder=False, full_path='', operation_path=None):
         super().__init__()
         self.path = path
         self.size = size
         self.modified = modified
         self.is_folder = is_folder
         self.full_path = full_path
+        # Raw surrogateescaped values must not cross GObject/GTK string APIs.
+        self.operation_path = full_path if operation_path is None else operation_path
 
 
 def parse_archive_entries(output):
@@ -92,6 +97,16 @@ def parse_archive_entries(output):
         if entry.get('Path'):
             entries.append(entry)
     return entries
+
+
+def parse_non_utf8_archive_entries(display_output, operation_output):
+    display_entries = parse_archive_entries(display_output)
+    operation_entries = parse_archive_entries(operation_output)
+    if len(display_entries) != len(operation_entries):
+        raise ValueError('Archive display and operation records do not match')
+    for display_entry, operation_entry in zip(display_entries, operation_entries):
+        operation_entry['DisplayPath'] = display_entry['Path']
+    return operation_entries
 
 
 @Gtk.Template(resource_path='/top/akizip/akizip/window.ui')
@@ -723,11 +738,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._present_extract_dialog(run_extract)
 
     def butextract_one(self, button):
+        entries = self._selected_entries()
         names = self._selected_command_names()
         if not names:
             self._show_notification(_('No file selected'), _status.ERROR)
             return
-        self._on_extract_entry_clicked(names)
+        display_names = [self._entry_display_name(item) for item in entries]
+        self._on_extract_entry_clicked(names, display_names)
 
     @Gtk.Template.Callback()
     def on_choose_file(self, button):
@@ -758,8 +775,13 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 return
             if text.startswith(prefix):
                 internal = text[len(prefix):].strip('/')
-                if internal == '' or internal in self._folder_set:
-                    self._current_internal_path = (internal + '/') if internal else ''
+                operation_internal = internal
+                if app.system.is_non_utf8 and internal:
+                    operation_internal = self._operation_folder_for_display_path(internal)
+                    if operation_internal is None:
+                        return
+                if operation_internal == '' or operation_internal in self._folder_set:
+                    self._current_internal_path = (operation_internal + '/') if operation_internal else ''
                     self._render_current_folder()
                     return
 
@@ -1275,6 +1297,10 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _entry_command_name(self, item):
         """Normalize an entry to its 7zz operand form (no trailing slash)."""
+        path = getattr(item, 'operation_path', item.full_path)
+        return path.rstrip('/') if item.is_folder else path
+
+    def _entry_display_name(self, item):
         return item.full_path.rstrip('/') if item.is_folder else item.full_path
 
     def _selected_command_names(self):
@@ -1376,9 +1402,11 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         modified = list_item.get_item().modified.split('.', 1)[0]
         list_item.get_child().set_text(modified)
 
-    def _on_extract_entry_clicked(self, names):
+    def _on_extract_entry_clicked(self, names, display_names=None):
         if not names:
             return
+        if display_names is None:
+            display_names = names
 
         selected = self._selected_path_from_input()
         if selected is None:
@@ -1400,6 +1428,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 dest,
                 password,
                 on_error_extra=on_error,
+                display_args=(selected, display_names, dest),
             )
 
         self._present_extract_dialog(run_extract)
@@ -1409,7 +1438,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if item is None:
             return
         if item.is_folder:
-            self._current_internal_path = item.full_path
+            self._current_internal_path = getattr(item, 'operation_path', item.full_path)
             self._render_current_folder()
             return
         if item.path != '..' and archive_suffix(Path(item.path)) in ARCHIVE_SUFFIXES:
@@ -1431,7 +1460,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._show_notification(_('Failed to create temporary directory'), _status.ERROR)
             return
 
-        file_name = item.full_path.rstrip('/') if item.is_folder else item.full_path
+        file_name = self._entry_command_name(item)
         display_name = item.path.rstrip('/') if item.is_folder else item.path
 
         def run_extract(password):
@@ -1475,6 +1504,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _refresh_file_list(self):
         self._all_entries = []
+        self._display_path_map = {}
         self._folder_set = set()
         self._current_internal_path = ''
         self._file_list_store.remove_all()
@@ -1515,19 +1545,27 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 self._on_file_list_error(error)
 
             job_queue.submit(
-                command,
+                partial(command, locale_name=self._get_archive_locale()),
                 list_args,
                 on_success=lambda output: self._populate_file_list(output),
                 on_error=on_error,
                 task_id='archive.list',
-                msg=_('List ') + selected.name,
+                msg=_('List ') + Path(app.system.selected_path()).name,
             )
 
         run_list(None)
 
     def _populate_file_list(self, output):
-        self._all_entries = parse_archive_entries(output)
+        is_non_utf8 = isinstance(output, NonUtf8ArchiveOutput)
+        if is_non_utf8:
+            self._all_entries = parse_non_utf8_archive_entries(
+                output.display_output, output.operation_output)
+        else:
+            self._all_entries = parse_archive_entries(output)
+
         app = self.get_application()
+        if app is not None and hasattr(app, 'system'):
+            self._set_non_utf8_state(is_non_utf8)
         if app is not None and hasattr(app, 'system') and app.system.has_selected():
             suffix = archive_suffix(app.system.selected)
             if suffix in ('.tar.bz2', '.tar.xz'):
@@ -1546,14 +1584,26 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                         'Size': '',
                         'Modified': '',
                     })
+        self._display_path_map = (
+            self._build_non_utf8_display_path_map(self._all_entries)
+            if is_non_utf8 else {}
+        )
         self._folder_set = self._collect_folders(self._all_entries)
         self._current_internal_path = ''
         self._render_current_folder()
 
+    def _archive_entry_path(self, entry):
+        path = entry.get('Path', '')
+        if 'DisplayPath' in entry:
+            # A legacy multibyte character may contain byte 0x5c. Never
+            # normalize backslashes in a surrogateescaped operation path.
+            return path.rstrip('/')
+        return path.replace('\\', '/').rstrip('/')
+
     def _collect_folders(self, entries):
         folders = set()
         for entry in entries:
-            path = entry.get('Path', '').replace('\\', '/').rstrip('/')
+            path = self._archive_entry_path(entry)
             if not path:
                 continue
             if 'D' in entry.get('Attributes', '') or entry.get('Folder') == '+':
@@ -1562,6 +1612,38 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             for i in range(1, len(parts)):
                 folders.add('/'.join(parts[:i]))
         return folders
+
+    def _build_non_utf8_display_path_map(self, entries):
+        path_map = {}
+        for entry in entries:
+            operation = self._archive_entry_path(entry)
+            display = entry.get('DisplayPath', operation).rstrip('/')
+            if not operation:
+                continue
+            path_map[operation] = display
+            operation_parts = operation.split('/')
+            display_parts = display.split('/')
+            if len(operation_parts) == len(display_parts):
+                for index in range(1, len(operation_parts) + 1):
+                    path_map['/'.join(operation_parts[:index])] = \
+                        '/'.join(display_parts[:index])
+        return path_map
+
+    def _display_archive_path(self, path):
+        if not path:
+            return ''
+        trailing_slash = path.endswith('/')
+        display = self._display_path_map.get(path.rstrip('/'), path.rstrip('/'))
+        return display + '/' if trailing_slash and display else display
+
+    def _operation_folder_for_display_path(self, display_folder):
+        display_folder = display_folder.strip('/')
+        candidates = {
+            operation
+            for operation, display in self._display_path_map.items()
+            if display.strip('/') == display_folder and operation in self._folder_set
+        }
+        return candidates.pop() if len(candidates) == 1 else None
 
     def _parent_folder(self, internal_path):
         p = internal_path.rstrip('/')
@@ -1572,7 +1654,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _build_rows_for_folder(self, folder):
         children = {}
         for entry in self._all_entries:
-            path = entry.get('Path', '').replace('\\', '/').rstrip('/')
+            path = self._archive_entry_path(entry)
             if not path:
                 continue
             if folder:
@@ -1610,12 +1692,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         rows = []
         for name in sorted(children, key=lambda n: (not children[n]['is_folder'], n.lower())):
             child = children[name]
+            display_full_path = self._display_archive_path(child['full_path'])
+            display_name = display_full_path.rstrip('/').rsplit('/', 1)[-1]
             rows.append(ArchiveEntry(
-                path=name + ('/' if child['is_folder'] else ''),
+                path=display_name + ('/' if child['is_folder'] else ''),
                 size=child['size'],
                 modified=child['modified'],
                 is_folder=child['is_folder'],
-                full_path=child['full_path'],
+                full_path=display_full_path,
+                operation_path=child['full_path'],
             ))
         return rows
 
@@ -1626,7 +1711,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             self._file_list_store.append(ArchiveEntry(
                 path='..',
                 is_folder=True,
-                full_path=parent,
+                full_path=self._display_archive_path(parent),
+                operation_path=parent,
             ))
         for row in self._build_rows_for_folder(self._current_internal_path):
             self._file_list_store.append(row)
@@ -1639,6 +1725,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _on_file_list_error(self, error):
         self._all_entries = []
+        self._display_path_map = {}
         self._folder_set = set()
         self._current_internal_path = ''
         self._append_log(_('List failed'), str(error), _status.ERROR)
@@ -1653,7 +1740,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if app.system.is_archive() and self._current_internal_path:
             if not text.endswith('/'):
                 text = text + '/'
-            text = text + self._current_internal_path
+            text = text + self._display_archive_path(self._current_internal_path)
         self.address_entry.set_text(text)
 
     def __init__(self, **kwargs):
@@ -1661,6 +1748,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._pending_handles = {}
         self._pending_logs = {}
         self._all_entries = []
+        self._display_path_map = {}
         self._folder_set = set()
         self._current_internal_path = ''
         self._list_items = set()
@@ -1766,7 +1854,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                         folder_path = folder.get_path()
                         self._open_selected_path(
                             str(Path(folder_path) / name),
-                            str(Path(_host_path(folder_path)) / name),
+                            GLib.filename_display_name(
+                                str(Path(_host_path(folder_path)) / name)
+                            ),
                         )
                 c.destroy()
 
@@ -1850,6 +1940,25 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             dialog.set_close_response('ok')
             dialog.present(self)
         return True
+
+    def _set_non_utf8_state(self, enabled):
+        app = self.get_application()
+        if app is None or not hasattr(app, 'system'):
+            return
+        was_non_utf8 = app.system.is_non_utf8
+        app.system.set_non_utf8(enabled)
+        self._update_archive_buttons()
+        if not enabled or was_non_utf8:
+            return
+
+        dialog = Adw.AlertDialog.new(
+            _('Non-UTF-8 archive detected'),
+            _('This archive contains non-UTF-8 file names. It has been opened read-only.'),
+        )
+        dialog.add_response('ok', _('_OK'))
+        dialog.set_default_response('ok')
+        dialog.set_close_response('ok')
+        dialog.present(self)
 
     def _update_archive_buttons(self):
         app = self.get_application()
@@ -1949,7 +2058,16 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if dialog is not None:
             dialog.close()
 
-    def _run_command(self, name, *args, on_success_extra=None, on_error_extra=None):
+    def _command_log_args(self, args, display_args=None):
+        log_args = list(args if display_args is None else display_args)
+        app = self.get_application()
+        if (log_args and app is not None and hasattr(app, 'system')
+                and (app.system.is_non_utf8 or app.system.is_nested)
+                and str(log_args[0]) == app.system.operation_path()):
+            log_args[0] = app.system.selected_path()
+        return tuple(log_args)
+
+    def _run_command(self, name, *args, on_success_extra=None, on_error_extra=None, display_args=None):
         app = self.get_application()
         command = getattr(app, 'commands', {}).get(name)
         if command is None:
@@ -1962,14 +2080,15 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             return
 
         log_id = object()
-        summary = self._command_summary(name, args, _status.PENDING)
+        log_args = self._command_log_args(args, display_args)
+        summary = self._command_summary(name, log_args, _status.PENDING)
 
         has_progress = name in ('archive.compress_advance', 'archive.extract', 'archive.extract_file', 'archive.test', 'archive.delete', 'archive.move', 'archive.rename', 'archive.add', 'archive.mkdir')
         progress_dialog = None
 
         def on_success(output):
             self._close_progress_dialog(progress_dialog)
-            self._on_command_success(log_id, name, args, output)
+            self._on_command_success(log_id, name, log_args, output)
             if on_success_extra is not None:
                 on_success_extra(output)
 
@@ -1978,12 +2097,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if on_error_extra is not None and on_error_extra(error):
                 self._remove_pending_log(log_id)
                 return
-            self._on_command_error(log_id, name, args, error)
+            self._on_command_error(log_id, name, log_args, error)
 
         def on_status(task_status):
             if has_progress and task_status.progress is not None:
                 self._update_progress_dialog(progress_dialog, task_status.progress, getattr(task_status, 'eta', None))
-            self._on_command_status(log_id, name, args, task_status)
+            self._on_command_status(log_id, name, log_args, task_status)
 
         handle = job_queue.submit(
             command,
@@ -1999,7 +2118,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._pending_handles[log_id] = handle
         self._pending_logs[log_id] = self._append_log(
             summary,
-            self._command_preview(name, args),
+            self._command_preview(name, log_args),
             _status.PENDING,
             handle,
         )
@@ -2302,8 +2421,24 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         if app.system.is_archive() and self._current_internal_path:
             if not title.endswith('/'):
                 title = title + '/'
-            title = title + self._current_internal_path
+            title = title + self._display_archive_path(self._current_internal_path)
         self.set_title(title)
+
+    def _get_archive_locale(self):
+        """Return the full locale, preserving regions used by legacy encodings."""
+        app = self.get_application()
+        if app is not None and hasattr(app, 'settings'):
+            lang_setting = app.settings.get_string('language')
+            if lang_setting and lang_setting != 'auto':
+                return lang_setting
+
+        for env_var in ('LANGUAGE', 'LC_ALL', 'LC_MESSAGES', 'LANG'):
+            value = os.environ.get(env_var, '')
+            if value:
+                first_lang = value.split(':', 1)[0]
+                if first_lang and first_lang not in ('C', 'POSIX'):
+                    return first_lang
+        return ''
 
     def _get_effective_locale(self):
         app = self.get_application()

@@ -1239,6 +1239,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if response == 'confirm':
                 text = entry.get_text().strip()
                 if not text:
+                    self._show_notification(
+                        _('Please select a destination folder'), _status.WARNING)
                     return
                 password = password_entry.get_text() or None
                 dest = Path(last['op']) if (last['display'] == text and last['op']) else Path(text).expanduser()
@@ -2010,7 +2012,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
     def _create_progress_dialog(self, title, handle):
-        dialog = Adw.AlertDialog.new(title, '')
+        dialog = Adw.AlertDialog.new(GLib.filename_display_name(title), '')
         dialog.add_response('cancel', _('Cancel'))
         dialog.set_close_response('cancel')
 
@@ -2066,7 +2068,6 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         log_args = list(args if display_args is None else display_args)
         app = self.get_application()
         if (log_args and app is not None and hasattr(app, 'system')
-                and (app.system.is_non_utf8 or app.system.is_nested)
                 and str(log_args[0]) == app.system.operation_path()):
             log_args[0] = app.system.selected_path()
         return tuple(log_args)
@@ -2164,7 +2165,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
     def _show_notification(self, message, state=_status.FINISHED):
         if self.toast_overlay is None:
             return
-        toast = Adw.Toast.new(message)
+        toast = Adw.Toast.new(GLib.filename_display_name(message))
         toast.set_timeout(4)
         self.toast_overlay.add_toast(toast)
 

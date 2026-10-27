@@ -50,7 +50,6 @@ class InfoDialogMixin:
 
         def present_dialog(archive_output=None, error_msg=None):
             if isinstance(archive_output, NonUtf8ArchiveOutput):
-                self._set_non_utf8_state(True)
                 archive_output = archive_output.display_output
             dialog, grid = self._create_info_dialog(info)
             if error_msg:

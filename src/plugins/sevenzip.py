@@ -24,10 +24,36 @@ import subprocess
 import tempfile
 import threading
 import time
+from dataclasses import dataclass
 from pathlib import Path
 
 
 SEVENZIP_PATH = '/app/bin/7zz'
+
+
+@dataclass(frozen=True)
+class NonUtf8ArchiveOutput:
+    """Decoded display output paired with a lossless command-output value."""
+    display_output: str
+    operation_output: str
+    encoding: str
+
+
+# Only translated locales get a legacy-encoding attempt.
+_REGIONAL_LEGACY_ENCODINGS = {
+    'pt_br': 'cp1252',
+    'zh_cn': 'gbk',
+    'zh_hk': 'big5',
+}
+_BASE_LEGACY_ENCODINGS = {
+    'es': 'cp1252',
+    'fr': 'cp1252',
+    'id': 'cp1252',
+    'it': 'cp1252',
+    'pl': 'cp1250',
+    'ru': 'cp1251',
+    'tr': 'cp1254',
+}
 
 
 def _parse_progress(line):
@@ -52,6 +78,9 @@ def _run_7zip(args, timeout=-1, cancel_event=None, on_progress=None, cwd=None):
         stderr=subprocess.PIPE,
         stdin=subprocess.DEVNULL,
         text=True,
+        # Listing stays strict for detection; progress output must not lose
+        # later ASCII diagnostics after a non-UTF-8 file name.
+        errors='replace' if on_progress is not None else None,
         start_new_session=True,
         cwd=cwd,
     )
@@ -163,18 +192,90 @@ def _kill_process(process):
         pass
 
 
-def archive_info(archive_path, password=None, timeout=-1, cancel_event=None):
+def _run_7zip_bytes(args, timeout=-1, cancel_event=None):
+    """Byte-output counterpart used only after automatic decoding fails."""
+    started_at = time.monotonic()
+    process = subprocess.Popen(
+        [SEVENZIP_PATH, *args],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        stdin=subprocess.DEVNULL,
+        start_new_session=True,
+    )
+    while True:
+        try:
+            stdout, stderr = process.communicate(timeout=0.1)
+            break
+        except subprocess.TimeoutExpired:
+            if cancel_event is not None and cancel_event.is_set():
+                _kill_process(process)
+                stdout, stderr = process.communicate()
+                output = (stdout + stderr).strip().decode('utf-8', errors='replace')
+                raise RuntimeError(output or 'Cancelled')
+            if timeout is not None and timeout >= 0:
+                if time.monotonic() - started_at >= timeout:
+                    _kill_process(process)
+                    stdout, stderr = process.communicate()
+                    output = (stdout + stderr).strip().decode('utf-8', errors='replace')
+                    raise TimeoutError(output or f'7zz timed out after {timeout} seconds')
+
+    output = (stdout + stderr).strip()
+    if process.returncode != 0:
+        message = output.decode('utf-8', errors='replace')
+        raise RuntimeError(message or f'7zz exited with {process.returncode}')
+    return output
+
+
+def _legacy_encoding_for_locale(locale_name):
+    if not locale_name:
+        return None
+    normalized = locale_name.split(':', 1)[0].split('.', 1)[0].split('@', 1)[0]
+    normalized = normalized.replace('-', '_').lower()
+    if normalized in _REGIONAL_LEGACY_ENCODINGS:
+        return _REGIONAL_LEGACY_ENCODINGS[normalized]
+    return _BASE_LEGACY_ENCODINGS.get(normalized.split('_', 1)[0])
+
+
+def _decode_7zip_bytes(output, locale_name=None):
+    try:
+        return output.decode('utf-8')
+    except UnicodeDecodeError:
+        pass
+
+    encoding = _legacy_encoding_for_locale(locale_name)
+    if encoding is not None:
+        try:
+            display_output = output.decode(encoding)
+        except (LookupError, UnicodeDecodeError):
+            pass
+        else:
+            return NonUtf8ArchiveOutput(
+                display_output, os.fsdecode(output), encoding)
+
+    return NonUtf8ArchiveOutput(
+        output.decode('utf-8', errors='replace'), os.fsdecode(output), 'utf-8')
+
+
+def archive_info(archive_path, password=None, timeout=-1, cancel_event=None, locale_name=None):
     args = ['l', '-slt', str(archive_path)]
     if password:
         args.append(f'-p{password}')
-    return _run_7zip(args, timeout, cancel_event)
+    try:
+        return _run_7zip(args, timeout, cancel_event)
+    except UnicodeDecodeError:
+        output = _run_7zip_bytes(args, timeout, cancel_event)
+        return _decode_7zip_bytes(output, locale_name)
 
 
-def archive_list(archive_path, password=None, timeout=-1, cancel_event=None):
+def archive_list(archive_path, password=None, timeout=-1, cancel_event=None, locale_name=None):
     args = ['l', '-slt', '-ba', str(archive_path)]
     if password:
         args.append(f'-p{password}')
-    return _run_7zip(args, timeout, cancel_event)
+    try:
+        return _run_7zip(args, timeout, cancel_event)
+    except UnicodeDecodeError:
+        output = _run_7zip_bytes(args, timeout, cancel_event)
+        return _decode_7zip_bytes(output, locale_name)
 
 
 def archive_compress_advance(output_archive, source_paths, args, timeout=-1, cancel_event=None, task_status=None):

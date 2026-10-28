@@ -95,6 +95,7 @@ class sysop:
         self.success = False
         self.updated_at = time.time()
         self.is_nested = False
+        self.is_non_utf8 = False
         self._temp_dirs = []
 
     def _select_path(self, path, display_path=None):
@@ -109,6 +110,7 @@ class sysop:
 
         self.selected = selected
         self.display_path = str(display_path or selected)
+        self.is_non_utf8 = False
         self.success = True
         self.msg = f"Selected {selected.name}"
         self.updated_at = time.time()
@@ -165,8 +167,14 @@ class sysop:
         self.selected = None
         self.display_path = ""
         self.is_nested = False
+        self.is_non_utf8 = False
         self.success = False
         self.msg = "Selection cleared"
+        self.updated_at = time.time()
+        return self
+
+    def set_non_utf8(self, enabled=True):
+        self.is_non_utf8 = bool(enabled)
         self.updated_at = time.time()
         return self
 
@@ -221,6 +229,8 @@ class sysop:
             return None
         if self.is_nested:
             return 'nested'
+        if self.is_non_utf8:
+            return 'readonly'
         if is_first_volume_name(self.selected.name):
             # Multi-volume archives are opened read-only; modifications could
             # corrupt the whole volume set.
@@ -236,6 +246,7 @@ class sysop:
 
     def can_modify(self):
         return (self.is_archive() and not self.is_nested
+                and not self.is_non_utf8
                 and not is_first_volume_name(self.selected.name)
                 and archive_suffix(self.selected) in FULL_FEATURE_SUFFIXES)
 
@@ -270,6 +281,7 @@ class sysop:
                 "format_category": None,
                 "can_modify": False,
                 "is_nested": False,
+                "is_non_utf8": False,
                 "msg": self.msg,
                 "success": self.success,
                 "updated_at": self.updated_at,
@@ -285,7 +297,7 @@ class sysop:
             "destination_path": self.destination_path(),
             "destination_operation_path": self.destination_operation_path(),
             "has_destination": self.has_destination(),
-            "name": self.selected.name,
+            "name": Path(self.display_path).name if self.display_path else self.selected.name,
             "kind": "folder" if is_folder else "file",
             "size": self.selected.stat().st_size if is_file else 0,
             "is_file": is_file,
@@ -297,6 +309,7 @@ class sysop:
             "format_category": self.format_category(),
             "can_modify": self.can_modify(),
             "is_nested": self.is_nested,
+            "is_non_utf8": self.is_non_utf8,
             "msg": self.msg,
             "success": self.success,
             "updated_at": self.updated_at,

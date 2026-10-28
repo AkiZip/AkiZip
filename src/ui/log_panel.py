@@ -61,6 +61,9 @@ class LogPanelMixin:
 
     def _append_log(self, summary, content=None, state=_status.PENDING, handle=None):
         self._ensure_log_window()
+        summary = GLib.filename_display_name(str(summary))
+        if content:
+            content = GLib.filename_display_name(str(content))
 
         expander = Gtk.Expander()
         expander.set_margin_top(8)

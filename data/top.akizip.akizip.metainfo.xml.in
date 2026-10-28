@@ -43,6 +43,15 @@
   </screenshots>
 
   <releases>
+    <release version="0.4.3" date="2026-10-28">
+      <description translate="no">
+        <p>Non-UTF-8 archive support and extraction fix</p>
+        <ul>
+          <li>Added support for non-UTF-8 archives</li>
+          <li>Fixed silent failure with no error shown when extracting without selecting a destination directory</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.2" date="2026-10-24">
       <description translate="no">
         <p>Multi-volume archive support, error reporting, and 7-Zip update</p>

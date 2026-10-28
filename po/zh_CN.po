@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-24 13:56+0800\n"
-"PO-Revision-Date: 2026-10-23 11:51+0000\n"
+"PO-Revision-Date: 2026-10-27 08:51+0000\n"
 "Last-Translator: reducedradius "
 "<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -479,24 +479,22 @@ msgid "List failed"
 msgstr "列出失败"
 
 #: src/ui/window.py:1742
-#, fuzzy
-#| msgid "Output archive"
 msgid "Multi-volume archive"
-msgstr "输出压缩包"
+msgstr "多卷压缩包"
 
 #: src/ui/window.py:1743
 msgid ""
 "This file is the first volume of a multi-volume archive. To open it, "
 "authorize access to the folder containing all of its volumes."
-msgstr ""
+msgstr "该文件是多卷存档的第一分卷，若要打开它，请授予其他分卷所在文件夹的访问权限。"
 
 #: src/ui/window.py:1746 src/ui/window.py:1758
 msgid "_Authorize"
-msgstr ""
+msgstr "授权"
 
 #: src/ui/window.py:1755
 msgid "Authorize the folder containing the volumes"
-msgstr ""
+msgstr "授权访问含卷文件夹"
 
 #: src/ui/window.py:1800 src/ui/window.py:1801
 msgid "File not found"
@@ -857,20 +855,21 @@ msgid ""
 "core developers. They rarely contain sensitive data, but you can review the "
 "details before sending."
 msgstr ""
+"akizip 遇到了一个意外错误。发送此诊断报告有助于我们修复问题。报告设计为匿名形"
+"式，仅核心开发人员可以访问。报告中很少包含敏感数据，但您可以在发送前查看详细"
+"信息。"
 
 #: src/error_report.py:86
 msgid "Send Error Report?"
-msgstr ""
+msgstr "发送错误报告吗？"
 
 #: src/error_report.py:113
-#, fuzzy
-#| msgid "Close"
 msgid "_Close"
 msgstr "关闭"
 
 #: src/error_report.py:114
 msgid "_Upload Error Report"
-msgstr ""
+msgstr "上传错误报告"
 
 #: src/add-dialog.ui:12 src/compress-dialog.ui:107
 msgid "Source items"
@@ -938,7 +937,7 @@ msgstr "该类型不支持预览"
 
 #: src/window.ui:313
 msgid "Failed to open the archive"
-msgstr ""
+msgstr "未能打开压缩包"
 
 #: src/window.ui:341
 msgid "_Language"
@@ -969,10 +968,8 @@ msgid "Add File"
 msgstr "添加文件"
 
 #: src/compress-dialog.ui:19
-#, fuzzy
-#| msgid "folder"
 msgid "Output folder"
-msgstr "文件夹"
+msgstr "输出文件夹"
 
 #: src/compress-dialog.ui:31
 #, fuzzy
@@ -1079,7 +1076,7 @@ msgstr "字典大小 (MB)"
 
 #: src/compress-dialog.ui:368
 msgid "0 or a negative value disables splitting into volumes."
-msgstr ""
+msgstr "0 或负值将禁用分割成卷的功能。"
 
 #: src/compress-dialog.ui:394
 msgid "Auto Recommend"

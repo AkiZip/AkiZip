@@ -272,7 +272,7 @@ msgstr "Questo formato di archivio non supporta la modifica."
 msgid "No file selected"
 msgstr "Nessun file selezionato"
 
-#. #-#-#-#-#  python.pot (akizip 0.4.2)  #-#-#-#-#
+#. #-#-#-#-#  python.pot (akizip 0.4.3)  #-#-#-#-#
 #. TRANSLATORS: {} is the number of selected archive entries
 #: src/ui/window.py:279 src/ui/window.py:369 src/window.ui:166
 #: src/window.ui:180 src/window.ui:457

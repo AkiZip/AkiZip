@@ -32,12 +32,16 @@ def _host_path(path):
         return ''
     p = Path(path)
     try:
+        # Some flatpak versions include a trailing NUL byte in the
+        # returned path. Truncate at the first NUL for compatibility.
         value = os.getxattr(os.fsencode(str(p)), _HOST_PATH_XATTR)
+        value = value.split(b'\x00', 1)[0]
         return GLib.filename_display_name(os.fsdecode(value) or str(p))
     except OSError:
         for parent in p.parents:
             try:
                 value = os.getxattr(os.fsencode(str(parent)), _HOST_PATH_XATTR)
+                value = value.split(b'\x00', 1)[0]
                 host_parent = os.fsdecode(value) or str(parent)
                 return GLib.filename_display_name(
                     str(Path(host_parent) / p.relative_to(parent)))

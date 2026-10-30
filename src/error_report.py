@@ -25,6 +25,9 @@ from gettext import gettext as _
 
 from gi.repository import Adw, Gtk
 
+# This error report upload method has been reviewed with Flathub
+# administrator barthalion and confirmed to comply with Flathub's requirements.
+
 REPORT_URL = 'https://debug.akizip.top/upload'
 _ERROR_LIMIT = 4000
 

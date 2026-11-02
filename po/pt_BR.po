@@ -27,7 +27,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-30 21:36+0800\n"
-"PO-Revision-Date: 2026-10-27 08:51+0000\n"
+"PO-Revision-Date: 2026-11-03 20:51+0000\n"
 "Last-Translator: teste celular "
 "<teste.aparelho.mail@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
@@ -37,7 +37,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.11.dev0\n"
+"X-Generator: Weblate 2026.11.1.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -481,10 +481,8 @@ msgid "Extract"
 msgstr "Extrair"
 
 #: src/ui/window.py:1247
-#, fuzzy
-#| msgid "Select destination folder"
 msgid "Please select a destination folder"
-msgstr "Selecionar a pasta de destino"
+msgstr "Por favor selecione uma pasta de destino"
 
 #: src/ui/window.py:1272
 msgid "Modified"
@@ -578,12 +576,13 @@ msgstr ""
 
 #: src/ui/window.py:1965
 msgid "Non-UTF-8 archive detected"
-msgstr ""
+msgstr "Arquivo não UTF-8 detectado"
 
 #: src/ui/window.py:1966
 msgid ""
 "This archive contains non-UTF-8 file names. It has been opened read-only."
 msgstr ""
+"Este arquivo contém nomes de arquivos não UTF-8. Foi aberto somente leitura."
 
 #: src/ui/window.py:2010
 msgid "Language changed"
@@ -1137,6 +1136,8 @@ msgstr "Deixar vazio se não houver senha"
 #: src/extract-dialog.ui:50
 msgid "Extracted file names may appear garbled in the file manager."
 msgstr ""
+"Os nomes de arquivos extraídos podem parecer distorcidos no gerenciador de "
+"arquivos."
 
 #: src/preferences.ui:8
 msgid "General"

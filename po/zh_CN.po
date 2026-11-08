@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-30 21:36+0800\n"
-"PO-Revision-Date: 2026-11-05 12:51+0000\n"
+"PO-Revision-Date: 2026-11-09 06:51+0000\n"
 "Last-Translator: reducedradius "
 "<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -548,7 +548,7 @@ msgstr "检测到非UTF-8格式的压缩包"
 #: src/ui/window.py:1966
 msgid ""
 "This archive contains non-UTF-8 file names. It has been opened read-only."
-msgstr ""
+msgstr "此压缩包包含非 UTF-8 文件名。已用只读模式打开。"
 
 #: src/ui/window.py:2010
 msgid "Language changed"

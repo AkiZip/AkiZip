@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-30 21:36+0800\n"
-"PO-Revision-Date: 2026-10-27 08:51+0000\n"
+"PO-Revision-Date: 2026-11-09 06:51+0000\n"
 "Last-Translator: reducedradius "
 "<137701630+flytothehighest@users.noreply.github.com>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 2026.11.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -454,10 +454,8 @@ msgid "Extract"
 msgstr "提取"
 
 #: src/ui/window.py:1247
-#, fuzzy
-#| msgid "Select destination folder"
 msgid "Please select a destination folder"
-msgstr "选择目标文件夹"
+msgstr "请选择一个目标文件夹"
 
 #: src/ui/window.py:1272
 msgid "Modified"
@@ -545,12 +543,12 @@ msgstr "该压缩包从父压缩包中提取。移动和删除操作已被禁用
 
 #: src/ui/window.py:1965
 msgid "Non-UTF-8 archive detected"
-msgstr ""
+msgstr "检测到非UTF-8格式的压缩包"
 
 #: src/ui/window.py:1966
 msgid ""
 "This archive contains non-UTF-8 file names. It has been opened read-only."
-msgstr ""
+msgstr "此压缩包包含非 UTF-8 文件名。已用只读模式打开。"
 
 #: src/ui/window.py:2010
 msgid "Language changed"
@@ -988,28 +986,20 @@ msgid "Output folder"
 msgstr "输出文件夹"
 
 #: src/compress-dialog.ui:31
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select output folder"
-msgstr "选择文件夹"
+msgstr "选择输出文件夹"
 
 #: src/compress-dialog.ui:37
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select Output Folder"
-msgstr "选择文件夹"
+msgstr "选择输出文件夹"
 
 #: src/compress-dialog.ui:45
-#, fuzzy
-#| msgid "Rename"
 msgid "Filename"
-msgstr "重命名"
+msgstr "文件名"
 
 #: src/compress-dialog.ui:57
-#, fuzzy
-#| msgid "Archive file"
 msgid "Archive filename"
-msgstr "压缩包文件"
+msgstr "压缩包文件名称"
 
 #: src/compress-dialog.ui:87
 msgid ""
@@ -1085,10 +1075,8 @@ msgid "Only available for 7z format"
 msgstr "仅 7z 格式可用"
 
 #: src/compress-dialog.ui:356
-#, fuzzy
-#| msgid "Dictionary size (MB)"
 msgid "Volume size (MB)"
-msgstr "字典大小 (MB)"
+msgstr "卷大小 (MB)"
 
 #: src/compress-dialog.ui:368
 msgid "0 or a negative value disables splitting into volumes."
@@ -1112,7 +1100,7 @@ msgstr "如无密码请留空"
 
 #: src/extract-dialog.ui:50
 msgid "Extracted file names may appear garbled in the file manager."
-msgstr ""
+msgstr "提取文件的名称在文件管理器中可能显示为乱码。"
 
 #: src/preferences.ui:8
 msgid "General"

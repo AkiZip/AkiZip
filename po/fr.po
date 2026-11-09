@@ -27,16 +27,16 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-10-30 21:36+0800\n"
-"PO-Revision-Date: 2026-09-23 16:32+0000\n"
-"Last-Translator: Adolfo Jayme Barrientos <fito@libreoffice.org>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/akizip/akizip/fr/"
-">\n"
+"PO-Revision-Date: 2026-11-05 12:51+0000\n"
+"Last-Translator: lawatux <lawatux@users.noreply.hosted.weblate.org>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/akizip/akizip/fr/>"
+"\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 2026.10.dev0\n"
+"X-Generator: Weblate 2026.11.2.dev0\n"
 
 #: data/top.akizip.akizip.metainfo.xml.in:8
 msgid "A modern front-end for 7-Zip on GNOME"
@@ -75,16 +75,12 @@ msgstr ""
 "Fenêtre principale affichant le contenu des archives et la barre d'outils"
 
 #: src/ui/add_dialog.py:70
-#, fuzzy
-#| msgid "Archive"
 msgid "Add to Archive"
-msgstr "Archive"
+msgstr "Ajouter à l'archive"
 
 #: src/ui/add_dialog.py:70
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Add files and folders to the current archive."
-msgstr "Ajouter un fichier à l'archive actuelle."
+msgstr "Ajouter des fichiers et des dossiers à l'archive actuelle."
 
 #: src/ui/add_dialog.py:75 src/ui/add_dialog.py:159 src/ui/window.py:342
 #: src/ui/window.py:427 src/ui/window.py:508 src/ui/window.py:625
@@ -314,46 +310,44 @@ msgid ""
 "Manual destination paths cannot contain '..'. Choose an existing folder "
 "using the folder button."
 msgstr ""
+"Les chemins d'accès manuels ne peuvent pas contenir « .. ». Choisissez un "
+"dossier existant à l'aide du bouton « Dossier »."
 
 #: src/ui/window.py:368 src/ui/window.py:463
 msgid "Source and destination are the same"
-msgstr ""
+msgstr "La source et la destination sont identiques"
 
 #: src/ui/window.py:388
 msgid "Move {} items to folder:"
-msgstr ""
+msgstr "Déplacer {} éléments vers le dossier :"
 
 #: src/ui/window.py:455
 msgid "Cannot move a folder into itself"
-msgstr ""
+msgstr "Impossible de déplacer un dossier à l'intérieur de lui-même"
 
 #: src/ui/window.py:488 src/ui/window.py:491
-#, fuzzy
-#| msgid "Delete failed"
 msgid "Rename failed"
-msgstr "Échec de la suppression"
+msgstr "Renommage échoué"
 
 #: src/ui/window.py:496
 msgid "Select exactly one item to rename"
-msgstr ""
+msgstr "Sélectionnez uniquement un élément à renommer"
 
 #: src/ui/window.py:502 src/window.ui:461
 msgid "Rename"
-msgstr ""
+msgstr "Renommer"
 
 #: src/ui/window.py:502
-#, fuzzy
-#| msgid "Move \"{}\" to:"
 msgid "Rename \"{}\" to:"
-msgstr "Déplacer « {} » vers :"
+msgstr "Renommer « {} » en :"
 
 #: src/ui/window.py:509
 msgid "_Rename"
-msgstr ""
+msgstr "_Renommer"
 
 #: src/ui/window.py:525 src/ui/window.py:1133
 msgid "Invalid name"
-msgstr ""
+msgstr "Nom non valide"
 
 #: src/ui/window.py:554 src/ui/window.py:558
 msgid "Add failed"
@@ -370,10 +364,8 @@ msgstr "Êtes-vous sûr de vouloir supprimer « {} » ?"
 
 #. TRANSLATORS: {} is the number of selected archive entries
 #: src/ui/window.py:623
-#, fuzzy
-#| msgid "Are you sure you want to delete \"{}\"?"
 msgid "Are you sure you want to delete {} items?"
-msgstr "Êtes-vous sûr de vouloir supprimer « {} » ?"
+msgstr "Êtes-vous sûr de vouloir supprimer « {} » éléments ?"
 
 #: src/ui/window.py:624 src/window.ui:190 src/window.ui:204 src/window.ui:465
 msgid "Delete"
@@ -384,33 +376,25 @@ msgid "_Delete"
 msgstr "_Supprimer"
 
 #: src/ui/window.py:664 src/ui/window.py:667
-#, fuzzy
-#| msgid "Delete failed"
 msgid "New folder failed"
-msgstr "Échec de la suppression"
+msgstr "Échec de la création du nouveau dossier"
 
 #: src/ui/window.py:670 src/ui/window.py:672 src/window.ui:473
 #: src/window.ui:485
-#, fuzzy
-#| msgid "Folder"
 msgid "New Folder"
-msgstr "Dossier"
+msgstr "Nouveau dossier"
 
 #: src/ui/window.py:670
-#, fuzzy
-#| msgid "Add a file to the current archive."
 msgid "Create a new folder in the current archive."
-msgstr "Ajouter un fichier à l'archive actuelle."
+msgstr "Créer un nouveau dossier dans l'archive actuelle."
 
 #: src/ui/window.py:677
-#, fuzzy
-#| msgid "Create "
 msgid "_Create"
-msgstr "Création "
+msgstr "_Créer"
 
 #: src/ui/window.py:693
 msgid "Invalid folder name"
-msgstr ""
+msgstr "Nom de dossier non valide"
 
 #: src/ui/window.py:722
 msgid "Extract failed"
@@ -450,11 +434,11 @@ msgstr "Échec Recommandation"
 
 #: src/ui/window.py:1061
 msgid "Compression recommendation failed"
-msgstr "Échec de la recommandation de compression"
+msgstr "Échec de la compression recommandée"
 
 #: src/ui/window.py:1111
 msgid "Compression recommendation"
-msgstr "Recommandation de compression"
+msgstr "Compression recommandée"
 
 #: src/ui/window.py:1116
 msgid "Recommendation reason"
@@ -462,7 +446,7 @@ msgstr "Motif de la recommandation"
 
 #: src/ui/window.py:1161
 msgid "Replace existing file?"
-msgstr ""
+msgstr "Remplacer le fichier existant ?"
 
 #. TRANSLATORS: {} is the archive filename
 #: src/ui/window.py:1163
@@ -470,10 +454,12 @@ msgid ""
 "A file named \"{}\" already exists. It will be permanently deleted and "
 "replaced."
 msgstr ""
+"Un fichier nommé « {} » existe déjà. Il sera définitivement supprimé et "
+"remplacé."
 
 #: src/ui/window.py:1166
 msgid "_Replace"
-msgstr ""
+msgstr "_Remplacer"
 
 #: src/ui/window.py:1189
 msgid "Password Required"
@@ -494,10 +480,8 @@ msgid "Extract"
 msgstr "Extraire"
 
 #: src/ui/window.py:1247
-#, fuzzy
-#| msgid "Select destination folder"
 msgid "Please select a destination folder"
-msgstr "Sélectionner le dossier de destination"
+msgstr "Sélectionner un dossier de destination"
 
 #: src/ui/window.py:1272
 msgid "Modified"
@@ -525,24 +509,25 @@ msgid "List failed"
 msgstr "Échec de la liste"
 
 #: src/ui/window.py:1840
-#, fuzzy
-#| msgid "Output archive"
 msgid "Multi-volume archive"
-msgstr "Fichier d'archive"
+msgstr "Archives en plusieurs volumes"
 
 #: src/ui/window.py:1841
 msgid ""
 "This file is the first volume of a multi-volume archive. To open it, "
 "authorize access to the folder containing all of its volumes."
 msgstr ""
+"Ce fichier constitue le premier volume d'une archive composée de plusieurs "
+"volumes. Pour l'ouvrir, autorisez l'accès au dossier contenant tous ses "
+"volumes."
 
 #: src/ui/window.py:1844 src/ui/window.py:1856
 msgid "_Authorize"
-msgstr ""
+msgstr "_Autoriser"
 
 #: src/ui/window.py:1853
 msgid "Authorize the folder containing the volumes"
-msgstr ""
+msgstr "Autoriser l'accès au dossier contenant les volumes"
 
 #: src/ui/window.py:1900 src/ui/window.py:1901
 msgid "File not found"
@@ -573,10 +558,9 @@ msgid "Preview not supported"
 msgstr "Aperçu non pris en charge"
 
 #: src/ui/window.py:1937
-#, fuzzy
 msgid "This format does not support preview. Only extract is available."
 msgstr ""
-"Ce format ne prend pas en charge l'aperçu. Seul l'extrait est disponible."
+"Ce format ne prend pas en charge l'aperçu. Seul l'extraction est disponible."
 
 #: src/ui/window.py:1945
 msgid "Nested archive opened"
@@ -592,12 +576,14 @@ msgstr ""
 
 #: src/ui/window.py:1965
 msgid "Non-UTF-8 archive detected"
-msgstr ""
+msgstr "archive Non-UTF-8 détectée"
 
 #: src/ui/window.py:1966
 msgid ""
 "This archive contains non-UTF-8 file names. It has been opened read-only."
 msgstr ""
+"Cette archive contient des noms de fichiers non codés en UTF-8. Elle a été "
+"ouverte en lecture seule."
 
 #: src/ui/window.py:2010
 msgid "Language changed"
@@ -767,29 +753,23 @@ msgstr "Échec déplacement : "
 
 #: src/ui/window.py:2302 src/ui/window.py:2304
 msgid "Rename "
-msgstr ""
+msgstr "Renommer "
 
 #: src/ui/window.py:2306
 msgid "Renamed "
-msgstr ""
+msgstr "Renommé "
 
 #: src/ui/window.py:2308
-#, fuzzy
-#| msgid "Open timed out: "
 msgid "Rename timed out: "
-msgstr "Délai d'ouverture expiré : "
+msgstr "Délai d'attente dépassé lors du changement de nom : "
 
 #: src/ui/window.py:2310
-#, fuzzy
-#| msgid "Open cancelled: "
 msgid "Rename cancelled: "
-msgstr "Ouverture annulée : "
+msgstr "Renommage annulé : "
 
 #: src/ui/window.py:2311
-#, fuzzy
-#| msgid "Open failed: "
 msgid "Rename failed: "
-msgstr "Ouverture échouée : "
+msgstr "Renommage échoué : "
 
 #: src/ui/window.py:2316 src/ui/window.py:2318
 msgid "Add "
@@ -800,10 +780,8 @@ msgid "Added "
 msgstr "Ajouté "
 
 #: src/ui/window.py:2322
-#, fuzzy
-#| msgid "Open timed out: "
 msgid "Add timed out: "
-msgstr "Délai d'ouverture expiré : "
+msgstr "Délai d'ajout expiré : "
 
 #: src/ui/window.py:2324
 msgid "Add cancelled: "
@@ -811,7 +789,7 @@ msgstr "Ajout annulé : "
 
 #: src/ui/window.py:2325
 msgid "Add failed: "
-msgstr "Échec de l'ajout "
+msgstr "Échec de l'ajout : "
 
 #: src/ui/window.py:2328 src/ui/window.py:2365 src/ui/window.py:2377
 #: src/ui/window.py:2418
@@ -819,34 +797,24 @@ msgid "folder"
 msgstr "dossier"
 
 #: src/ui/window.py:2330 src/ui/window.py:2332
-#, fuzzy
-#| msgid "Create "
 msgid "Create folder "
-msgstr "Création "
+msgstr "Créer un dossier "
 
 #: src/ui/window.py:2334
-#, fuzzy
-#| msgid "Create "
 msgid "Created folder "
-msgstr "Création "
+msgstr "Dossier créé "
 
 #: src/ui/window.py:2336
-#, fuzzy
-#| msgid "Delete timed out: "
 msgid "Create folder timed out: "
-msgstr "Échec suppression délai expiré : "
+msgstr "Échec de la création du dossier délai dépassé : "
 
 #: src/ui/window.py:2338
-#, fuzzy
-#| msgid "Delete cancelled: "
 msgid "Create folder cancelled: "
-msgstr "Suppression annulée : "
+msgstr "Création du dossier annulée : "
 
 #: src/ui/window.py:2339
-#, fuzzy
-#| msgid "Delete failed: "
 msgid "Create folder failed: "
-msgstr "Échec de la suppression : "
+msgstr "Échec de la création du dossier : "
 
 #. TRANSLATORS: {output} is the archive name, {source} is the source file or folder name
 #: src/ui/window.py:2352
@@ -858,7 +826,7 @@ msgstr "Créer {output} à partir de {source}"
 #: src/ui/window.py:2355
 #, python-brace-format
 msgid "Parameters: {params}"
-msgstr "Paramètres: {params}"
+msgstr "Paramètres : {params}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:2361
@@ -874,8 +842,7 @@ msgstr "Extraire {archive} vers {folder}"
 
 #. TRANSLATORS: {archive} is the name of the archive file
 #: src/ui/window.py:2372
-#, fuzzy, python-brace-format
-#| msgid "archive"
+#, python-brace-format
 msgid "Test {archive}"
 msgstr "Test {archive}"
 
@@ -907,14 +874,13 @@ msgstr "Déplacer {file} vers {destination} dans {archive}"
 
 #: src/ui/window.py:2405
 msgid "new name"
-msgstr ""
+msgstr "nouveau nom"
 
 #. TRANSLATORS: {file} is the file inside the archive, {new_name} is the new file name, {archive} is the archive name
 #: src/ui/window.py:2407
-#, fuzzy, python-brace-format
-#| msgid "Move {file} to {destination} in {archive}"
+#, python-brace-format
 msgid "Rename {file} to {new_name} in {archive}"
-msgstr "Déplacer {file} vers {destination} dans {archive}"
+msgstr "Déplacer {file} vers {new_name} dans {archive}"
 
 #. TRANSLATORS: {file} is the file to add, {destination} is the path inside the archive (or "root"), {archive} is the archive name
 #: src/ui/window.py:2414
@@ -924,14 +890,13 @@ msgstr "Ajouter {file} à {destination} dans {archive}"
 
 #. TRANSLATORS: {folder} is the new folder path inside the archive, {archive} is the archive name
 #: src/ui/window.py:2420
-#, fuzzy, python-brace-format
-#| msgid "Delete {file} from {archive}"
+#, python-brace-format
 msgid "Create folder {folder} in {archive}"
-msgstr "Supprimer {file} de {archive}"
+msgstr "Créer dossier {folder} dans {archive}"
 
 #: src/ui/move_folder_chooser.py:109
 msgid "(root)"
-msgstr ""
+msgstr "(racine)"
 
 #: src/error_report.py:83
 msgid ""
@@ -940,20 +905,23 @@ msgid ""
 "core developers. They rarely contain sensitive data, but you can review the "
 "details before sending."
 msgstr ""
+"akizip a rencontré une erreur inattendue. L'envoi de ce rapport de "
+"diagnostic nous aide à résoudre le problème. Ces rapports sont conçus pour "
+"rester anonymes et ne sont accessibles qu'aux développeurs principaux. Ils "
+"contiennent rarement des données sensibles, mais vous pouvez en vérifier le "
+"contenu avant de les envoyer."
 
 #: src/error_report.py:89
 msgid "Send Error Report?"
-msgstr ""
+msgstr "Envoyer un rapport d'erreur ?"
 
 #: src/error_report.py:116
-#, fuzzy
-#| msgid "Close"
 msgid "_Close"
-msgstr "Fermer"
+msgstr "_Fermer"
 
 #: src/error_report.py:117
 msgid "_Upload Error Report"
-msgstr ""
+msgstr "_Envoyer un rapport d'erreur"
 
 #: src/add-dialog.ui:12 src/compress-dialog.ui:107
 msgid "Source items"
@@ -976,10 +944,8 @@ msgid "Destination"
 msgstr "Destination"
 
 #: src/add-dialog.ui:74
-#, fuzzy
-#| msgid "Destination folder"
 msgid "Destination folder in archive"
-msgstr "Dossier de destination"
+msgstr "Dossier de destination dans l'archive"
 
 #: src/window.ui:19
 msgid "Main Menu"
@@ -1023,7 +989,7 @@ msgstr "Ce format ne prend pas en charge l'aperçu"
 
 #: src/window.ui:313
 msgid "Failed to open the archive"
-msgstr ""
+msgstr "Impossible d'ouvrir l'archive"
 
 #: src/window.ui:341
 msgid "_Language"
@@ -1054,40 +1020,33 @@ msgid "Add File"
 msgstr "Ajouter un fichier"
 
 #: src/compress-dialog.ui:19
-#, fuzzy
-#| msgid "folder"
 msgid "Output folder"
-msgstr "dossier"
+msgstr "Dossier de sortie"
 
 #: src/compress-dialog.ui:31
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select output folder"
-msgstr "Sélectionner un Dossier"
+msgstr "Sélectionner le dossier de sortie"
 
 #: src/compress-dialog.ui:37
-#, fuzzy
-#| msgid "Select Folder"
 msgid "Select Output Folder"
-msgstr "Sélectionner un Dossier"
+msgstr "Sélectionner un dossier de sortie"
 
 #: src/compress-dialog.ui:45
-#, fuzzy
-#| msgid "File"
 msgid "Filename"
-msgstr "Fichier"
+msgstr "Nom du fichier"
 
 #: src/compress-dialog.ui:57
-#, fuzzy
-#| msgid "Archive file"
 msgid "Archive filename"
-msgstr "Fichier archive"
+msgstr "Nom du fichier d'archive"
 
 #: src/compress-dialog.ui:87
 msgid ""
 "This filename starts with \".\" and will be hidden. In your file manager, "
 "enable \"Show Hidden Files\" (usually Ctrl+H)."
 msgstr ""
+"Ce nom de fichier commence par « . » et sera masqué. Dans votre gestionnaire "
+"de fichiers, activez l'option « Afficher les fichiers masqués » "
+"(généralement Ctrl+H)."
 
 #: src/compress-dialog.ui:167
 msgid "Advanced options"
@@ -1135,7 +1094,6 @@ msgid "0 uses the 7-Zip default."
 msgstr "0 utilise les paramètres par défaut de 7-Zip."
 
 #: src/compress-dialog.ui:270 src/preferences.ui:131
-#, fuzzy
 msgid "Threads"
 msgstr "Processus"
 
@@ -1156,14 +1114,13 @@ msgid "Only available for 7z format"
 msgstr "Disponible uniquement au format 7z"
 
 #: src/compress-dialog.ui:356
-#, fuzzy
-#| msgid "Dictionary size (MB)"
 msgid "Volume size (MB)"
-msgstr "Taille du dictionnaire (MB)"
+msgstr "Taille du volume (Mo)"
 
 #: src/compress-dialog.ui:368
 msgid "0 or a negative value disables splitting into volumes."
 msgstr ""
+"La valeur 0 ou une valeur négative désactive le fractionnement en volumes."
 
 #: src/compress-dialog.ui:394
 msgid "Auto Recommend"
@@ -1185,6 +1142,8 @@ msgstr "Ne rien indiquer s'il n'y a pas de mot de passe"
 #: src/extract-dialog.ui:50
 msgid "Extracted file names may appear garbled in the file manager."
 msgstr ""
+"Les noms des fichiers extraits peuvent apparaître déformés dans le "
+"gestionnaire de fichiers."
 
 #: src/preferences.ui:8
 msgid "General"

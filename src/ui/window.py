@@ -1215,6 +1215,9 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
         password_entry = Gtk.PasswordEntry()
         password_entry.set_show_peek_icon(True)
+        # GtkPasswordEntry has no set_activates_default() method; only the
+        # property is exposed.
+        password_entry.set_property('activates-default', True)
         password_entry.set_hexpand(True)
         password_entry.set_margin_top(12)
         password_entry.set_margin_bottom(12)
@@ -1233,6 +1236,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
                 on_cancel()
 
         dialog.connect('response', on_response)
+        dialog.set_focus(password_entry)
         dialog.present(self)
 
     def _present_extract_dialog(self, on_chosen):

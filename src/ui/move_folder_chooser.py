@@ -40,7 +40,7 @@ class FolderChooserDialog:
 
         self.folder_list.connect('row-selected', self._on_row_selected)
         click_gesture = Gtk.GestureClick()
-        click_gesture.set_button(0)
+        click_gesture.set_button(Gdk.BUTTON_PRIMARY)
         click_gesture.connect('pressed', self._on_list_pressed)
         self.folder_list.add_controller(click_gesture)
         key_controller = Gtk.EventControllerKey()

@@ -132,6 +132,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butadd(self, button):
+        if self._block_if_loading():
+            return
         self._present_compress_dialog()
 
 
@@ -235,6 +237,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butinfo(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -242,6 +246,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def buttest(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -271,6 +277,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butmove(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -479,6 +487,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
     def butrename(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -545,6 +555,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
     def butadd_file(self, button, prefill_paths=None):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -599,6 +611,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butdelete(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -655,6 +669,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.present(self)
 
     def butnew_folder(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -713,6 +729,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def butextract(self, button):
+        if self._block_if_loading():
+            return
         selected = self._selected_path_from_input()
         if selected is None:
             return
@@ -742,6 +760,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._present_extract_dialog(run_extract)
 
     def butextract_one(self, button):
+        if self._block_if_loading():
+            return
         entries = self._selected_entries()
         names = self._selected_command_names()
         if not names:
@@ -752,6 +772,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_choose_file(self, button):
+        if self._block_if_loading():
+            return
         dialog = Gtk.FileChooserNative.new(
             _('Select File'),
             self,
@@ -764,6 +786,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     @Gtk.Template.Callback()
     def on_address_activate(self, entry):
+        if self._block_if_loading():
+            return
         text = entry.get_text().strip()
         if not text:
             return
@@ -1185,7 +1209,7 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         dialog.connect('response', on_response)
         dialog.present(self)
 
-    def _present_password_dialog(self, on_password_entered):
+    def _present_password_dialog(self, on_password_entered, on_cancel=None):
         dialog = Adw.AlertDialog.new(_('Password Required'), None)
         dialog.set_body(_('This archive is encrypted. Please enter the password.'))
 
@@ -1205,6 +1229,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             if response == 'confirm':
                 password = password_entry.get_text()
                 on_password_entered(password)
+            elif on_cancel is not None:
+                on_cancel()
 
         dialog.connect('response', on_response)
         dialog.present(self)
@@ -1356,6 +1382,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._list_items.add(list_item)
 
     def _on_list_right_click(self, gesture, _n_press, x, y):
+        if self._block_if_loading():
+            return
         view = self._file_list_view
         position = Gtk.INVALID_LIST_POSITION
         for list_item in self._list_items:
@@ -1444,6 +1472,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._present_extract_dialog(run_extract)
 
     def _on_row_activate(self, view, position):
+        if self._block_if_loading():
+            return
         item = self._file_list_store.get_item(position)
         if item is None:
             return
@@ -1549,7 +1579,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
             def on_error(error):
                 if is_password_error(error):
                     self._present_password_dialog(
-                        lambda new_password: run_list(new_password)
+                        lambda new_password: run_list(new_password),
+                        on_cancel=self._on_file_list_cancel,
                     )
                     return
                 self._on_file_list_error(error)
@@ -1741,6 +1772,14 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self._append_log(_('List failed'), str(error), _status.ERROR)
         self.file_list_stack.set_visible_child_name('open_failed')
 
+    def _on_file_list_cancel(self):
+        self._all_entries = []
+        self._display_path_map = {}
+        self._folder_set = set()
+        self._current_internal_path = ''
+        self._append_log(_('List cancelled'), None, _status.CANCELLED)
+        self.file_list_stack.set_visible_child_name('open_failed')
+
     def _sync_address_bar(self):
         app = self.get_application()
         if app is None or not hasattr(app, 'system') or not app.system.has_selected():
@@ -1810,6 +1849,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         self.add_controller(drop_target)
 
     def _on_files_dropped(self, _target, value, _x, _y):
+        if self._block_if_loading():
+            return False
         paths = [f.get_path() for f in value.get_files() if f.get_path()]
         if not paths:
             return False
@@ -2165,6 +2206,12 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         summary = self._command_summary(name, args, state)
         self._append_log(summary, str(error), state)
         self._show_notification(summary, state)
+
+    def _block_if_loading(self):
+        if self.file_list_stack.get_visible_child_name() != 'loading':
+            return False
+        self._show_notification(_('Loading, please wait...'), _status.WARNING)
+        return True
 
     def _show_notification(self, message, state=_status.FINISHED):
         if self.toast_overlay is None:

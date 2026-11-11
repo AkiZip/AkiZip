@@ -194,22 +194,41 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
         except Exception:
             return fallback
 
-    def _run_default_compress_multi(self, output_path, source_paths):
-        options = self._default_compress_options()
-        self._run_command(
-            'archive.compress_advance',
-            output_path,
-            source_paths,
-            self._advanced_compress_args(options),
-        )
-
     def _run_advanced_compress_multi(self, output_path, source_paths, options):
         self._run_command(
             'archive.compress_advance',
             output_path,
             source_paths,
             self._advanced_compress_args(options),
+            on_success_extra=lambda _output: self._ask_open_new_archive(output_path, options),
         )
+
+    def _ask_open_new_archive(self, output_path, options):
+        # Multi-volume output produces '<name>.001' as its first volume.
+        if options.get('volume_size', 0) > 0:
+            target = Path(str(output_path) + '.001')
+        else:
+            target = Path(output_path)
+        if not target.exists():
+            return
+
+        dialog = Adw.AlertDialog.new(
+            _('Compression finished'),
+            # TRANSLATORS: {} is the archive filename
+            _('Do you want to open the new archive "{}"?').format(target.name),
+        )
+        dialog.add_response('cancel', _('_Cancel'))
+        dialog.add_response('open', _('_Open'))
+        dialog.set_response_appearance('open', Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_default_response('open')
+        dialog.set_close_response('cancel')
+
+        def on_response(_d, response):
+            if response == 'open':
+                self._open_path_with_volume_check(str(target), _host_path(str(target)))
+
+        dialog.connect('response', on_response)
+        dialog.present(self)
 
     def _advanced_compress_args(self, options):
         fmt = options['format']

@@ -205,7 +205,8 @@ class AkizipWindow(LogPanelMixin, InfoDialogMixin, Adw.ApplicationWindow):
 
     def _ask_open_new_archive(self, output_path, options):
         # Multi-volume output produces '<name>.001' as its first volume.
-        if options.get('volume_size', 0) > 0:
+        if (options.get('format') in ('7z', 'zip')
+                and options.get('volume_size', 0) > 0):
             target = Path(str(output_path) + '.001')
         else:
             target = Path(output_path)
